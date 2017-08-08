@@ -1,0 +1,233 @@
+\chapter{Ehrenfeucht-{\Fraisse} Comonad}
+\section{Introduction}
+The Ehrenfeucht-{\Fraisse} (EF) game was the first case of a two-player game used to prove equivalence between structures in fragments of first-order logic. In particular, the EF game is used to prove equivalence between structures in the $k$-rank fragments of first order logic. Other games, such as the pebbling game and bisimulation game, are essentially modifications of the EF game. Given two structures $A,B$, the Ehrenfreuct-{\Fraisse} game has two players, Spoiler and Duplicator. A $k$-round (symmetric) EF game is played as follows: for every $i \in [k]$, 
+\begin{itemize}
+\item Spoiler chooses an element in either structure $a_{i} \in A$ or $b_{i} \in B$. 
+\item Duplicator chooses an element in the other structure $b_{i} \in B$ or $a_{i} \in A$  
+\end{itemize}
+At the end of the $k$-round game, $k$-tuples $(a_{1},\dots,a_{k})$ and $(b_{1},\dots,b_{k})$ have been chosen. Duplicator wins the $k$-round game if the map $\chi:a_{i} \longmapsto b_{i}$ is a partial $\sigma$-isomorphism from $A$ to $B$. Otherwise, Spoiler wins. The asymmetric (or existential positive) game from $A$ to $B$, is the same game with the additional restriction that Spoiler must always play an element in $A$ and the map $\chi$ obtained is a partial $\sigma$-morphism. Hence, Duplicator must always respond in $B$. The following result is standard in any model theory text:
+\begin{prop}
+The following are equivalent:
+\begin{itemize}
+\item Duplicator has a winning strategy in the symmetric $k$-round EF game 
+\item $A \equiv^{\mathcal{L}_{\omega,k}} B$, i.e. for every sentence $\phi \in \mathcal{L}_{\omega,k}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$
+\end{itemize}
+\end{prop}
+The goal of the EF comonad is to construct a $\sigma$-structure $\efcomonad{k}{A}$ from a $\sigma$-structure $A$, that ``internalizes'' the asymmetric and symmetric $k$-round EF games into the category $\mathcal{R}(\sigma)$.  
+\section{Comonad laws}
+Let $A$ be a $\sigma$-structure over relational signature $\sigma$, then for every $k \in \omega$ we define a $\sigma$-structure $\efcomonad{k}{A}$. Intuitively, $\efcomonad{k}{A}$ is the structure of Spoiler's strategies in the Ehrenfreuct-{\Fraisse} $k$-round asymmetric game from $A$ to any $\sigma$-structure. A function $f:\efcomonad{k}{A} \longrightarrow B$, then represents Duplicator's strategy (i.e. responses) to Spoiler's plays in the $k$-round asymmetric game from $A$ to $B$. For every $i \in \omega$, let $A^{i}$ be the set of $i$-length sequences of elements in $A$. Let the domain of the structure be $|\efcomonad{k}{A}| = \bigcup_{i \leq k} A^{i}$. 
+\begin{defn}
+Define, for every $\sigma$-structure $A$, $\epsilon_{A}:\efcomonad{k}{A} \longrightarrow A$ by $[a_{1},\dots,a_{n}] \mapsto a_{n}$ (i.e. the last move of the play). 
+\label{defn:epsilon}
+\end{defn}
+With this definitions in place, we can define a $\sigma$-structure on $\efcomonad{k}{A}$. Suppose $R \in \sigma$ is a $m$-ary relation, the we define the interpretation of $R^{\efcomonad{k}{A}}$ such that for every $s_{1},\dots,s_{m} \in |\efcomonad{k}{A}|$,
+\begin{align}
+(s_{1},\dots,s_{m}) \in R^{\efcomonad{k}{A}} &\Leftrightarrow \text{ for every $i,j \leq m$, } s_{i} \sqsubseteq s_{j} \text{ or } s_{j} \sqsubseteq s_{i} & \label{eq:R1st} \\ 
+&\text{ and } R^{A}(\epsilon_{A}(s_{1}),\dots,\epsilon_{A}(s_{m})) & \label{eq:R2nd}
+\end{align}
+\begin{defn}
+Given a morphism $f:A \longrightarrow B$, define the morphism $\efcomonad{k}{f}:\efcomonad{k}{A} \longrightarrow \efcomonad{k}{B}$ by $[a_{1},\dots,a_{n}] \mapsto [f(a_{1}),\dots,f(a_{n})]$
+\label{defn:efComonadMorphism}
+\end{defn}
+\begin{prop}
+The definition (\ref{defn:efComonadMorphism}) of $\efcomonad{k}{f}:\efcomonad{k}{A} \longrightarrow \efcomonad{k}{B}$ given above is indeed a morphism of $\sigma$-structures. 
+\begin{proof}
+Suppose $R \in \sigma$, then we want to show that if $(s_{1},\dots,s_{m}) \in R^{\efcomonad{k}{A}}$, then \linebreak $(\efcomonad{k}{f}(s_{1}),\dots,\efcomonad{k}{f}(s_{m})) \in R^{\efcomonad{k}{B}}$. For brevity, assume that $R$ is a binary relation (the proof for a general $m$-ary relation is a straightforward generalization). Suppose $s,s' \in \efcomonad{k}{A}$ such that $(s,s') \in R^{\efcomonad{k}{A}}$. Let $s = [a_{1},\dots,a_{n}]$ and $s' = [a_{1},\dots,a'_{m}]$. We aim to show that $(\efcomonad{k}{f}(s),\efcomonad{k}{f}(s')) \in R^{\efcomonad{k}{B}}$ \\
+\begin{enumerate}
+\item  Since $(s,s') \in R^{\efcomonad{k}{A}}$, by condition (\ref{eq:R1st}), $s \sqsubseteq s'$ or $s' \sqsubseteq s$. Without loss of generality, assume $s \sqsubseteq s'$. Since $s \sqsubseteq s'$.
+$$s' = [a_{1},\dots,a_{n},a'_{n+1},\dots,a'_{m}]$$ 
+(noting that for $i \leq n$, $a_{i} = a'_{i}$). Therefore $$\efcomonad{k}{f}(s) = [f(a_{1})),\dots,f(a_{n})]$$ 
+$$\efcomonad{k}{f}(s') =[f(a_{1}),\dots,f(a_{n}),f(a'_{n+1}),\dots,f(a'_{m})]$$ 
+Hence, $\efcomonad{k}{f}(s) \sqsubseteq \efcomonad{k}{f}(s')$ and (\ref{eq:R1st}) is satisfied. 
+\item  By condition (\ref{eq:R2nd}) and $(s,s') \in R^{\efcomonad{k}{f}}$, $(\epsilon_{A}(s),\epsilon_{A}(s')) = (a_{n},a'_{m}) \in R^{A}$. Since $f:A \rightarrow B$ is a morphism of $\sigma$-structures, $(f(a_{n}),f(a'_{m})) \in R^{B}$. That is, $(\epsilon_{B}\circ \efcomonad{k}{f}(s),\epsilon_{B} \circ \efcomonad{k}{f}(s')) \in R^{B}$. Hence, (\ref{eq:R2nd}) is satisfied.
+\end{enumerate}
+Therefore, $(\efcomonad{k}{f}(s),\efcomonad{k}{f}(s')) \in R^{\efcomonad{k}{B}}$ and $\efcomonad{k}{f}$ is indeed a morphism of $\sigma$-structures. 
+\end{proof}
+\end{prop}
+\begin{prop}
+$\epsilon:\efcomonad{k}{} \longrightarrow 1_{\mathcal{R}(\sigma)}$ is a natural transformation.
+\begin{proof}
+For every $A,B \in \mathcal{R}(\sigma)$ we want to show that:
+\begin{equation}
+\bfig \square[\efcomonad{k}{A}`A`\efcomonad{k}{B}`B;\epsilon_{A}`\efcomonad{k}{f}`f`\epsilon_{B}] \efig
+\label{eq:epsilonN}
+\end{equation}
+\begin{align*}
+f \circ \epsilon_{A}([a_{1},\dots,a_{n})])  &= f(a_{n}) & \text{by defn (\ref{defn:epsilon}) of $\epsilon_{A}$}\\
+&= \epsilon_{B}([f(a_{1}),\dots,f(a_{n})]) & \text{by defn (\ref{defn:epsilon}) of $\epsilon_{B}$}\\
+&= \epsilon_{B} \circ \efcomonad{k}{f}([a_{1},\dots,a_{n}]) & \text{by defn (\ref{defn:efComonadMorphism}) of $\efcomonad{k}{f}$}
+\end{align*}
+Hence, the above diagram (\ref{eq:epsilonN}) commutes.
+\end{proof}
+\label{prop:epsilonN}
+\end{prop}
+\begin{defn}
+Suppose $s \in \efcomonad{k}{A}$, then $s = [a_{1},\dots,a_{n}]$ for some $n \in \omega$ and for every $i = 1,\dots, n$, $a_{i} \in A$. Let $s_{i} = [a_{1},\dots,a_{i}] \in \efcomonad{k}{A}$. Define, for every $\sigma$-structure $A$, $\delta_{A}:\efcomonad{k}{A} \longrightarrow \efcomonad{k}{\efcomonad{k}{A}}$ by $s \mapsto [s_{1},\dots,s_{n}]$.
+\label{defn:delta}
+\end{defn}
+\begin{prop}
+$\delta:\efcomonad{k} \longrightarrow \efcomonad{k}{\efcomonad{k}{}}$ is a natural transformation.
+\begin{proof}
+For every $A,B \in \mathcal{R}(\sigma)$ we want to show that:
+\begin{equation}
+\bfig \square[\efcomonad{k}{A}`\efcomonad{k}{\efcomonad{k}{A}}`\efcomonad{k}{B}`\efcomonad{k}{\efcomonad{k}{B}};\delta_{A}`\efcomonad{k}{f}`\efcomonad{k}{\efcomonad{k}{f}}`\delta_{B}] \efig
+\label{eq:deltaN}
+\end{equation}
+\begin{align*}
+\efcomonad{k}{\efcomonad{k}{f}} \circ \delta_{A}([a_{1},\dots,a_{n}])   &= \efcomonad{k}{\efcomonad{k}{f}}([s_{1},\dots,s_{n}]) & \text{by defn (\ref{defn:delta}) of $\delta_{A}$} \\
+&= [\efcomonad{k}{f}(s_{1}),\dots,\efcomonad{k}{f}(s_{n})] & \text{by defn (\ref{defn:efComonadMorphism}) of $\efcomonad{k}{\efcomonad{k}{f}}$}\\
+&= [[f(a_{1})],\dots,[f(a_{1}),\dots,f(a_{n})]] & \text{by defn (\ref{defn:efComonadMorphism}) of $\efcomonad{k}{f}$}\\
+&= \delta_{B}([f(a_{1}),\dots,f(a_{n})]) & \text{by defn (\ref{defn:delta}) of $\delta_{B}$} \\
+&= \delta_{B} \circ \efcomonad{k}{f}([a_{1},\dots,a_{n}]) & \text{by defn (\ref{defn:efComonadMorphism}) of $\efcomonad{k}{f}$}
+\end{align*}
+Hence, the above diagram (\ref{eq:deltaN}) commutes.
+\end{proof}
+\label{prop:deltaN}
+\end{prop}
+\begin{thm}
+The triple $\langle \efcomonad{k}{},\delta,\epsilon \rangle$ is a comonad.
+\begin{proof}
+By proposition (\ref{prop:deltaN}) and (\ref{prop:epsilonN}), $\delta$ and $\epsilon$ are natural transformation. Hence, $\delta$ and $\epsilon$ are indeed the comultiplication and counit of $\efcomonad{k}{}$. The associative and identity laws remain to be shown. \\
+For associativity, for every $A \in \mathcal{R}(\sigma)$, the following diagram commutes:  
+\begin{equation}
+\bfig \Square[\efcomonad{k}{A}`\efcomonad{k}{\efcomonad{k}{A}}`\efcomonad{k}{\efcomonad{k}{A}}`\efcomonad{k}{\efcomonad{k}{\efcomonad{k}{A}}};\delta_{A}`\delta_{A}`\delta_{\efcomonad{k}{A}}`\efcomonad{k}{\delta_{A}}] \efig 
+\end{equation}
+\begin{align*}
+\delta_{\efcomonad{k}{A}} \circ \delta_{A}([a_{1},\dots,a_{n}])     &= \delta_{\efcomonad{k}{A}}([s_{1},\dots,s_{n}]) & \text{by defn (\ref{defn:delta}) of $\delta_{A}$} \\
+&= [[s_{1}],\dots,[s_{1},\dots,s_{n}]]  & \text{by defn (\ref{defn:delta}) of $\delta_{\efcomonad{k}{A}}$}\\
+&= [\delta_{A}(s_{1}),\dots,\delta_{A}(s_{n})] & \text{by defn (\ref{defn:delta}) of $\delta_{A}$}  \\
+&= \efcomonad{k}{\delta_{A}}([s_{1},\dots,s_{n}]) & \text{by defn (\ref{defn:efComonadMorphism}) of $\efcomonad{k}{\delta_{A}}$}  \\
+&= \efcomonad{k}{\delta_{A}} \circ \delta_{A}([a_{1},\dots,a_{n}]) & \text{by defn (\ref{defn:delta}) of $\delta_{A}$}\\
+\end{align*}
+For identity, for every $A \in \mathcal{R}(\sigma)$, the following diagram commutes:  
+\begin{equation}
+\bfig 
+    \square[\efcomonad{k}{A}`\efcomonad{k}{\efcomonad{k}{A}}`\efcomonad{k}{\efcomonad{k}{A}}`\efcomonad{k}{A};\delta_{A}`\delta_{A}`\efcomonad{k}{\epsilon_{A}}`\epsilon_{\efcomonad{k}{A}}] 
+    \morphism(0,500)/=/<500,-500>[\efcomonad{k}{A}`\efcomonad{k}{A};]
+\efig 
+\end{equation}
+\begin{align*}
+\efcomonad{k}{\epsilon_{A}} \circ \delta_{A}([a_{1},\dots,a_{n}]) &= \efcomonad{k}{\epsilon_{A}}([s_{1},\dots,s_{n}]) & \text{by defn (\ref{defn:delta}) of $\delta_{A}$}\\
+&= [\epsilon_{A}(s_{1}),\dots,\epsilon_{A}(s_{n})]  & \text{by defn (\ref{defn:efComonadMorphism}) of $\efcomonad{k}{\epsilon_{A}}$}  \\
+&= [a_{1},\dots,a_{n}] & \text{by defn (\ref{defn:epsilon}) of $\epsilon_{A}$}\\
+&= s_{n} & \text{by defn (\ref{defn:delta}) of $s_{n}$}\\
+&= \epsilon_{\efcomonad{k}{A}}([s_{1},\dots,s_{n}]) & \text{by defn (\ref{defn:epsilon}) of $\epsilon_{\efcomonad{k}{A}}$} \\
+&= \epsilon_{\efcomonad{k}{A}} \circ \delta_{A}([a_{1},\dots,,a_{n}]) & \text{by defn (\ref{defn:delta}) of $\delta_{A}$}
+\end{align*}
+By definition, $\efcomonad{k}{}$ is a comonad.
+\end{proof}
+\end{thm}
+For every $l,k \in \omega$ such that $l \leq k$ and $\sigma$-structure $A$, there exists an inclusion $i_{A}^{l,k}: \efcomonad{l}{A} \longrightarrow \efcomonad{k}{A}$. 
+\begin{prop}
+The inclusion maps form a natural transformation $i^{l,k}:\efcomonad{l}{} \longrightarrow \efcomonad{k}{}$. Further, each map preserves the counit and comultiplication (i.e. each map is a morphism of comonads). 
+\end{prop}
+\begin{proof}
+\begin{equation}
+\bfig \square[\efcomonad{l}{A}`\efcomonad{k}{A}`\efcomonad{l}{B}`\efcomonad{k}{B};i^{l,k}_{A}`\efcomonad{l}{f}`\efcomonad{k}{f}`i^{l,k}_{B}]\efig
+\end{equation}
+\begin{align*}
+\efcomonad{k}{f} \circ i^{l,k}_{A}([a_{1},\dots,a_{n}])     &= \efcomonad{k}{f}([a_{1},\dots,,a_{n}]) & \text{by defn of inclusion}\\
+&= [f(a_{1}),\dots,f(a_{n})] &\text{by defn (\ref{defn:efComonadMorphism}) of $\efcomonad{k}{f}$} \\
+&= i^{l,k}_{B}([f(a_{1}),\dots,f(a_{n})]) & \text{by defn of inclusion} \\ 
+&= i^{l,k}_{B} \circ \efcomonad{l}{f}([a_{1},\dots,a_{n}]) & \text{by defn (\ref{defn:efComonadMorphism}) of $\efcomonad{k}{f}$}\\
+\end{align*}
+\end{proof}
+The grading given by these inclusion maps seem to suggest that there is a colimit object capturing the information of $\efcomonad{k}{A}$ for every $k \in \omega$. This is indeed the case. Consider the structure $\efcomonad{\omega}{A}$ with domain $|\efcomonad{\omega}{A}| = \bigcup_{k \in \omega} A^{k}$ where $A^{k}$ is the set of $k$-length tuple of elements in $A$. The structure on $\efcomonad{\omega}{A}$ is similar to the structure given to $\efcomonad{k}{A}$. 
+\begin{prop}
+Let $\omega$ be considered as a poset category under the usual order. The object $\efcomonad{\omega}{A}$ is the $\omega$-colimit of the family $\{\efcomonad{k}{A}\}_{k \in \omega}$ with the above inclusion maps. 
+\begin{proof}
+For every $k \in \omega$, define $i^{k}_{A}:\efcomonad{k}{A} \rightarrow \efcomonad{\omega}{A}$ as the inclusion (i.e. $[a_{1},\dots,a_{n}] \mapsto [a_{1},\dots,a_{n}]$ where $n \leq k$). Clearly, the following diagram commutes for all $l,k \in \omega$ with $l \leq k$
+\begin{equation}
+\bfig \Vtriangle[\efcomonad{l}{A}`\efcomonad{k}{A}`\efcomonad{\omega}{A};i^{l,k}_{A}`i^{l}_{A}`i^{k}_{A}]\efig
+\label{eq:omegaColimit}
+\end{equation}
+Suppose that there exists a $\sigma$-structure $B$ and for every $l,k \in \omega$ with $l \leq k$, there exist morphisms $f^{l}:\efcomonad{l}{A} \longrightarrow B$, $f^{k}:\efcomonad{k}{A} \longrightarrow B$ such that $f^{l} = f^{k} \circ i^{l,k}$. Consider the morphism $u:\efcomonad{\omega}{A} \longrightarrow B$ given by $[a_{1},\dots,a_{n}] \mapsto f^{n}([a_{1},\dots,a_{n}])$. The following diagram commutes:
+\begin{equation}
+\bfig 
+    \Vtriangle[\efcomonad{l}{A}`\efcomonad{k}{A}`\efcomonad{\omega}{A};i^{l,k}_{A}`i^{l}_{A}`i^{k}_{A}]
+    \morphism(0,500)|l|/{@{>}@/^-7pt/}/<500,-1000>[\efcomonad{l}{A}`B;f^{l}]
+    \morphism(1000,500)|r|/{@{>}@/^7pt/}/<-500,-1000>[\efcomonad{k}{A}`B;f^{k}]
+    \morphism(500,0)|m|/.>/<0,-500>[\efcomonad{\omega}{A}`B;u]
+\efig
+\label{eq:omegaColimitU}
+\end{equation}
+Moreover, given the conditions on $f^{j}$ for all $j \in \omega$, $u$ is unique. Namely, suppose there exists a morphism $u':\efcomonad{\omega}{A} \longrightarrow B$ such that for all $j \in \omega$, $f^{j} = u' \circ i^{j}_{A}$. Suppose $s = [a_{1},\dots,a_{k}] \in \efcomonad{\omega}{A}$ then for all $j \geq k, s \in \efcomonad{j}{A}$.  
+\begin{align*}
+u(s)    &= f^{k}(s)  & \text{by defn of $u$}\\
+        &= f^{j} \circ i^{k,j}_{A}(s) & \text{by (\ref{eq:omegaColimitU})} \\
+        &= u' \circ i^{j}_{A} \circ i^{k,j}_{A}(s) & \text{by hypothesis on $u'$}  \\
+        &= u' \circ i^{k}_{A}(s) & \text{by (\ref{eq:omegaColimit})} \\
+        &= u'(s) & \text{by defn of inclusion} 
+\end{align*}
+Since $u(s) = u'(s)$ for all $s \in \efcomonad{\omega}{A}$, $u = u'$ so $u$ is unique as desired.  
+\end{proof}
+\end{prop}
+\section{Positional Form and Equivalences}
+In order to solidify the connection between the construction $\efcomonad{k}{}$ and the Ehrenfreuct-{\Fraisse} game, we have to encode the strategies in the game into ``positional form''. This positional form is similar to the constructions of graded ``back-and-forth systems'' that are used in model theory texts to prove that the $k$-round symmetric EF game characterizes $A \equiv^{\mathcal{L}_{\omega,k}} B$. \\~\\
+Let $\Gamma_{k}(A,B) = (A \times B)^{\leq k}$ (i.e. sequences in pairs of elements in $A,B$ with length $\leq k$). Recall that for a $\sigma$-morphism $f:\efcomonad{k}{A} \longrightarrow B$, there exists the Klesli coextension $f^{*}:\efcomonad{k}{A} \longrightarrow \efcomonad{k}{B}$. Define the set function $\theta_{f}:|\efcomonad{k}{A}| \longrightarrow \Gamma_{k}(A,B)$ by $s = [a_{1},\dots,a_{n}] \mapsto [(a_{1},b_{1}),\dots,(a_{n},b_{n})]$ where $f^{*}(s) = [b_{1},\dots,b_{n}]$. Rephrasing, $\theta_{f} = z \circ <\text{id}_{\efcomonad{k}{A}},f^{*}>$ where $z$ is the `zipper' function sending two sequences of equal length to the natural sequence of pairs.  
+\begin{defn}
+$S \subseteq \Gamma_{k}(A,B)$ is a \textit{strategy in positional form} if $S$ satisfies the following conditions:
+\begin{enumerate}[label=(S\arabic*),ref=S\arabic*,start=0]
+\item $[] \in S$ \label{eq:S1st}
+\item For all $\chi \in S$ with $|\chi| < k$, $a \in A$, there exists $b \in B$ such that $\chi[(a,b)] \in S$ \label{eq:S2nd}
+\item $S$ is reachable: For all $X \in S$, there is a chain \label{eq:S3rd}
+$$\chi_{0} \longrightarrow \dots \longrightarrow \chi_{n}$$
+such that $\chi_{0} = []$, $\chi_{n} = $ and $X_{i} \in S$ with $|X_{i}| = i$ for all $i = 0,\dots,n$. 
+\end{enumerate}
+\end{defn}
+\subsection{Equivalence $\exists^{+}\mathcal{L}_{\omega,k}$}
+\subsection{Equivalence $\mathcal{L}_{\omega,k}$}
+\subsection{Equivalence $\mathcal{L}_{\infty,k}(Cnt)$}
+\section{Coalgebras and Tree-Depth}
+An advantage of the comonad perspective is exploring the structure of the category of coalgebras over $\efcomonad{k}{}$ to give a categorical characterization of combinatorial properties of structures. In particular, we use the coalgebra category of $\efcomonad{k}{}$ to give a categorical definition for tree-depth of a $\sigma$-structure $A$. Recall a coalgebra for $\efcomonad{k}{}$ is an object $A$ and morphism $\alpha:A \longrightarrow \efcomonad{k}{A}$ such that the following diagrams commute:
+\begin{equation}
+\bfig 
+    \square[A`\efcomonad{k}{A}`\efcomonad{k}{A}`\efcomonad{k}{\efcomonad{k}{A}};\alpha`\alpha`\delta_{A}`\efcomonad{k}{\alpha}]
+\efig 
+\bfig
+    \qtriangle[A`\efcomonad{k}{A}`A;\alpha`\text{id}_{A}`\epsilon_{A}]
+\efig
+\label{eq:coalgebraLaw}
+\end{equation}
+There are many equivalent ways to define the notion of tree-depth of a $\sigma$-structure $A$. We use the one given in (\cite{Rossman2008}) and is stated in definition (\ref{defn:treeDepth}). 
+\begin{defn}
+A \textit{forest} $\mathcal{F}$ is a disjoint union of finitely-many finite rooted trees. The \textit{height} of the forest is the longest path between two vertices in $\mathcal{F}$
+\end{defn}
+\begin{defn}
+Given an undirected graph $G$, a \textit{forest cover of $G$} is a forest $\mathcal{F}$ such that $G$ is a subgraph of $\overline{\mathcal{F}}$ where $\overline{\mathcal{F}}$ is the transitive closure of $\mathcal{F}$
+\end{defn}
+\begin{defn}
+Given a $\sigma$-structure $A$, the \textit{Gaifman Graph of $A$}, denoted $\mathcal{G}(A)$, is the undirected graph with vertices as elements of $A$ and $a,a'$ are connected by edge if there exists some $R \in \sigma$ with $a,a'$ appearing in the same tuple in $R^{A}$. 
+\end{defn}
+\begin{defn}
+Given a $\sigma$-structure $A$, the \textit{tree-depth} of $A$, denoted $\text{td}(A)$, is the least height of a forest cover $\mathcal{F}$ for $\mathcal{G}(A)$. 
+\label{defn:treeDepth}
+\end{defn}
+\begin{prop}
+Let $A$ be a finite $\sigma$-structure. There is bijective correspondence between:
+\begin{enumerate}[label=(\arabic*)]
+\item coalgebras $\alpha:A \longrightarrow \efcomonad{k}{A}$
+\item Forest covers $\mathcal{F}$ of $\mathcal{G}(A)$ of height $k$ 
+\end{enumerate}
+\begin{proof}
+For the $(1) \Rightarrow (2)$ direction, suppose $\alpha:A \rightarrow \efcomonad{k}{A}$ is a coalgebra. Construct a forest $\mathcal{F}_{n}$ for every $n \leq k$ by recursion. Let $V(\mathcal{F})$ and $E(\mathcal{F})$ denote the vertices and edge relation of forest $\mathcal{F}$. \\
+\textit{Base Case:} $$V(\mathcal{F}_{1}) := \{a \in A \mid \alpha(a) = [a]\}, E(\mathcal{F}_{1}) = \varnothing$$
+\textit{Recursive Step:} Assume that $\mathcal{F}_{n}$ is a forest that has been constructed. From the counit coalgebra law (\ref{eq:coalgebraLaw} right), it must be the case that $\alpha(a) = s$ where the last move in $s$ is $a$ (i.e. $\epsilon_{A}(s) = a$). Let $a^{-}$ be the second-to-last move in $s$ (i.e $s = t[a^{-},a] = t[a^{-},\epsilon_{A}(s)]$ for some possibly empty sequence $t$). Define $\mathcal{F}_{n+1}$ as follows:  
+$$V(\mathcal{F}_{n+1}) := V(\mathcal{F}_{n}) \cup \{a \in A \mid a^{-} \in V(\mathcal{F}_{n})\}$$
+$$E(\mathcal{F}_{n+1}) := E(\mathcal{F}_{n}) \cup \{(a^{-},a) \mid a \in  V(\mathcal{F}_{n+1})\}$$ 
+Let $\mathcal{F} = \mathcal{F}_{k}$ be the forest constructed at the end of the recursion up to $k$. Suppose $(a,a')$ is an edge in $\mathcal{G}(A)$, the by the definition of Gaifman graph there exists an $R \in \sigma$ such that $a$ and $a'$ appear in a tuple of $R^{A}$. By $\alpha$ a $\sigma$-morphism, $\alpha(a)$ and $\alpha(a')$ appear in a tuple of $R^{\efcomonad{k}{A}}$. By condition (1) in the definition $R^{\efcomonad{k}{A}}$, $\alpha(a) \sqsubseteq \alpha(a')$ or $\alpha(a') \sqsubseteq \alpha(a)$. Without loss of generality, assume $\alpha(a) \sqsubseteq \alpha(a')$, and let $t$ be the suffix of $\alpha(a)$ in $\alpha(a')$. From the construction of $\mathcal{F}$, $[a]t$ describes a path between $a$ and $a'$ in $\mathcal{F}$. Hence, $(a,a') \in \overline{\mathcal{F}}$. Since $(a,a')$ was arbitrary in $\mathcal{G}(A)$, $\mathcal{G}(A)$ is a subgraph of $\overline{\mathcal{F}}$. Therefore, $\mathcal{F}$ is a forest cover of $\mathcal{G}(A)$ as desired. \\~\\
+For the $(2) \Rightarrow (1)$ direction, suppose $\mathcal{F}$ is a forest cover of $\mathcal{G}(A)$ of height $k$. Consider arbitrary $a \in A$. Since $\mathcal{F}$ is a cover of $\mathcal{G}(A)$, $a \in \mathcal{F}$. By definition of forest as a disjoint union finite trees, $a$ is in a unique tree $T \subseteq \mathcal{F}$. Let $a^{*}$ be the root of tree $T$. By $T$ being a tree, there exists a unique path $u = [a^{*},\dots,a]$ between $a^{*}$ and $a$. Let $\alpha(a) = u$ with $u$ considered as an element of $\efcomonad{k}{A}$. It is straightforward to see that $\alpha$ as defined satisfies the coalgebra laws (\ref{eq:coalgebraLaw}). 
+\end{proof}
+\label{prop:coalgebraForest}
+\begin{defn}
+Given a $\sigma$-structure $A$, define the \textit{coalgebra number of $A$}, denoted $\kappa(A)$, as the least $k$ such that there exists a coalgebra $\alpha:A \longrightarrow \efcomonad{k}{A}$. 
+\end{defn}
+\begin{cor}
+$\kappa(A) = \text{td}(A)$
+\begin{proof}
+By definition of coalgebra number $\kappa(A)$ there exists a coalgebra $\alpha:A \longrightarrow \efcomonad{\kappa(A)}{A}$. By proposition (\ref{prop:coalgebraForest}), there exists a corresponding forest cover $\mathcal{F}$ of $\mathcal{G}(A)$. The height of $\mathcal{F}$ is $\kappa(A)$. Hence, $\text{td}(A) \leq \kappa(A)$ by definition of tree-depth as the least height of forest covers. Similarly, by definition of tree-depth $\text{td}(A)$, there exists a forest cover $\mathcal{F}$ of $\mathcal{G}(A)$ of height $k = \text{td}(A)$. By proposition (\ref{prop:coalgebraForest}), there exists a corresponding coalgebra $\alpha:A \longrightarrow \efcomonad{k}{A}$. Hence, $\kappa(A) \leq k$ by definition of $\kappa(A)$. Therefore, $\text{td}(A) \leq \kappa(A)$ and $\text{td}(A) \geq \kappa(A)$, so $\kappa(A) = \text{td}(A)$.      
+\end{proof}
+\label{cor:treeDepth}
+\end{cor}
+\end{prop}
+Hence, as the above corollary (\ref{cor:treeDepth}) shows, the graded family of comonads $\{\efcomonad{k}\}_{k \in \omega}$ gives a purely categorical definition of tree-depth of a structure $A$. Namely, the tree-depth of $A$ is just the least $k$ such that a coalgebra $\alpha:A \longrightarrow \efcomonad{k}{A}$ exists. 

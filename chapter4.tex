@@ -1,0 +1,183 @@
+\chapter{Pebbling Comonad}
+\section{Introduction}
+The Pebbling game, similar in structure to the Ehrenfreuct-{\Fraisse} game, is used to prove equivalence between structures in the $k$-variable fragments of infinitary logic. Given two structures $A,B$, the $k$-pebble game is played with Spoiler and Duplicator both having a set of $k$-pebbles $[k] = \{1,\dots,k\}$.  
+\begin{itemize} 
+\item Spoiler places one of his pebbles $p \in [k]$ on an element in either strucure $a \in A$ or $b \in B$. If pebble $p$ is already placed on a different element, then Spoiler removes the pebble from this element and places the pebble on the new element he chose.  
+\item Duplicator places her corresponding pebble $p \in [k]$ on an element in the other structure $b \in B$ or $a \in A$. Just as with Spoiler, Duplicator may have to move her pebble from a previously pebbled element.
+\end{itemize} 
+The game is played for $\omega$ many rounds. At the end of the game, $(a_{1},\dots,a_{k})$ and $(b_{1},\dots,b_{k})$ are the pebbled elements. Duplicator wins the $k$-pebble game if the map $\gamma:a_{p} \longmapsto b_{p}$ is a partial $\sigma$-isomorphism from $A$ to $B$. Otherwise, Spoiler wins. Just as with the case with EF games, the asymmetric (or existential positive) game from $A$ to $B$, is the same game with the additional restriction that Spoiler must always pebble elements in $A$ and that the map obtained is a partial $\sigma$-morphism. The following result holds:
+\begin{prop}
+The following are equivalent:
+\begin{itemize}
+\item Duplicator has a winning strategy in the symmetric $k$-pebble game 
+\item $A \equiv^{\mathcal{L}^{k}_{\infty,\omega}} B$, i.e. for every $\phi \in \mathcal{L}^{k}_{\infty,\omega}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$
+\end{itemize}
+\end{prop}
+As was the goal with the EF game comonad, our goal is to construct a $\sigma$-structure $\pcomonad{k}{A}$ from a $\sigma$-structure $A$, that ``internalizes'' the asymmetric and symmetric $k$-pebble games in the category $\mathcal{R}(\sigma)$. The construction of $\pcomonad{k}{}$ and all of the results in this chapter were originally discovered in (\cite{Abramsky2017}). The paper \cite{Abramsky2017} was the inspiration to develop the other game comonads in this dissertation. We reproduce the proofs here to demonstrate the connections and differences with these other comonads.  
+\section{Comonad laws}
+Let $A$ be a $\sigma$-structure over relational signature $\sigma$, then for every $k \in \mathbb{N}$ we define a $\sigma$-structure $\pcomonad{k}{A}$. Intuitively, $\pcomonad{k}{A}$ is the structure of the finite $k$-pebblings on $A$. Let the domain of this structure be $|\pcomonad{k}{A}| = (\{1,\dots,k\} \times A)^{<\omega}$ (i.e. the set of finite sequence of elements in product $\{1,\dots,k\} \times A$). In order, to define the $\sigma$-structure on $\pcomonad{k}{A}$, a bit more notation is necessary:\\
+\begin{defn}
+Suppose $s,s' \in |\pcomonad{k}{A}|$ such that $s = [s_{1},\dots,s_{n}]$ and $s' = [s'_{1},\dots,s'_{m}]$, then define $ss' = [s_{1},
+\dots,s_{n},s'_{1},\dots,s'_{m}]$ (i.e. the concatenation of these two sequences).
+\end{defn}
+\begin{defn}
+For $s,t \in |\pcomonad{k}{A}|$, say $s \sqsubseteq t$ if there exists an $s' \in |\pcomonad{k}{A}|$ such that $ss' = t$; such an $s'$ is called the suffix of $s$ in $t$. $\sqsubseteq$ preorders $|\pcomonad{k}{A}|$. 
+\end{defn}
+\begin{defn}
+Define, for every $\sigma$-structure $A$, $\epsilon_{A}:\pcomonad{k}{A} \longrightarrow A$ by $[(p_{1},a_{1}),\dots,(p_{n},a_{n})] \mapsto a_{n}$ (i.e. the element of the last move of the play). Further, define $\pi_{A}:\pcomonad{k}{A} \longrightarrow \{1,\dots,k\}$ by $[(p_{1},a_{1}),\dots,(p_{n},a_{n})] \mapsto p_{n}$ (i.e. the pebble index of the last move of the play).
+\label{defn:epsilon}
+\end{defn}
+With these definitions in place, we can define the $\sigma$-structure on $\pcomonad{k}{A}$. Suppose $R \in \sigma$ is an $m$-ary relation, then we define the interpretation $R^{\pcomonad{k}{A}}$ such that for every $s_{1},\dots,s_{m} \in |\pcomonad{k}{A}|$, 
+\begin{align}
+(s_{1},\dots,s_{m}) \in R^{\pcomonad{k}{A}}  &\Leftrightarrow    \text{ for every $i,j$, } s_{i} \sqsubseteq s_{j} \text{ or } s_{j} \sqsubseteq s_{i} \text{(i.e. exists $\sqsubseteq$-greatest $s_{*}$)} & \label{eq:R1st}\\
+&\text{ and for every $i$, } \pi_{A}(s_{i}) \text{ does not appear in suffix of $s_{i}$ in $s_{*}$ } & \label{eq:R2nd} \\
+&\text{ and} R^{A}(\epsilon_{A}(s_{1}),\dots,\epsilon_{A}(s_{m})) & \label{eq:R3rd}
+\end{align}
+The definition of $\pcomonad{k}{A}$ can be extended to morphisms of $\sigma$-structures. 
+\begin{defn}
+Given a morphism $f:A \longrightarrow B$, define the morphism $\pcomonad{k}{f}:\pcomonad{k}{A} \longrightarrow \pcomonad{k}{B}$ by $[(p_{1},a_{1}),\dots,(p_{n},a_{n})] \mapsto [(p_{1},f(a_{1})),\dots,(p_{n},f(a_{n}))]$
+\label{defn:comonadMorphism}
+\end{defn}
+\begin{prop}
+The definition (\ref{defn:comonadMorphism}) of $\pcomonad{k}{f}:\pcomonad{k}{A} \longrightarrow \pcomonad{k}{B}$ given above is indeed a morphism of $\sigma$-structures. 
+\begin{proof}
+Suppose $R \in \sigma$, then we want to show that if $(s_{1},\dots,s_{m}) \in R^{\pcomonad{k}{A}}$, then \linebreak $(\pcomonad{k}{f}(s_{1}),\dots,\pcomonad{k}{f}(s_{m})) \in R^{\pcomonad{k}{B}}$. For brevity, assume that $R$ is a binary relation (the proof for a general $m$-ary relation is a straightforward generalization). Suppose $s,s' \in \pcomonad{k}{A}$ such that $(s,s') \in R^{\pcomonad{k}{A}}$. Let $s = [(p_{1},a_{1}),\dots,(p_{n},a_{n})]$ and $s' = [(q_{1},a_{1}),\dots,(q_{m},a'_{m})]$. We aim to show that $(\pcomonad{k}{f}(s),\pcomonad{k}{f}(s')) \in R^{\pcomonad{k}{B}}$ \\
+\begin{enumerate}
+\item  Since $(s,s') \in R^{\pcomonad{k}{A}}$, by condition (\ref{eq:R1st}), $s \sqsubseteq s'$ or $s' \sqsubseteq s$. Without loss of generality, assume $s \sqsubseteq s'$. Since $s \sqsubseteq s'$.
+$$s' = [(p_{1},a_{1}),\dots,(p_{n},a_{n}),(q_{n+1},a'_{n+1}),\dots,(q_{m},a'_{m})]$$ 
+(noting that for $i \leq n$, $p_{i} = q_{i}$ and $a_{i} = a'_{i}$). Therefore $$\pcomonad{k}{f}(s) = [(p_{1},f(a_{1})),\dots,(p_{n},f(a_{n}))]$$ 
+and 
+$$\pcomonad{k}{f}(s') =[(p_{1},f(a_{1})),\dots,(p_{n},f(a_{n})),(q_{n+1},f(a'_{n+1})), \dots,(q_{m},f(a'_{m}))]$$ 
+Hence, $\pcomonad{k}{f}(s) \sqsubseteq \pcomonad{k}{f}(s')$ and (\ref{eq:R1st}) is satisfied. 
+\item By condition (\ref{eq:R2nd}) and $(s,s') \in R^{\pcomonad{k}{f}}$, for $n < i \leq m$, $p_{n} \not= q_{i}$. Since $\pcomonad{k}{f}$ does not affect pebble indices, (\ref{eq:R2nd}) is satisfied.
+\item  By condition (\ref{eq:R3rd}) and $(s,s') \in R^{\pcomonad{k}{f}}$, $(\epsilon_{A}(s),\epsilon_{A}(s')) = (a_{n},a'_{m}) \in R^{A}$. Since $f:A \rightarrow B$ is a morphism of $\sigma$-structures, $(f(a_{n}),f(a'_{m})) \in R^{B}$. That is, $(\epsilon_{B}\circ \pcomonad{k}{f}(s),\epsilon_{B} \circ \pcomonad{k}{f}(s')) \in R^{B}$. Hence, (\ref{eq:R3rd}) is satisfied.
+\end{enumerate}
+Therefore, $(\pcomonad{k}{f}(s),\pcomonad{k}{f}(s')) \in R^{\pcomonad{k}{B}}$ and $\pcomonad{k}{f}$ is indeed a morphism of $\sigma$-structures. 
+\end{proof}
+\end{prop}
+\begin{prop}
+$\epsilon:\pcomonad{k}{} \longrightarrow 1_{\mathcal{R}(\sigma)}$ is a natural transformation.
+\begin{proof}
+For every $A,B \in \mathcal{R}(\sigma)$ we want to show that:
+\begin{equation}
+\bfig \square[\pcomonad{k}{A}`A`\pcomonad{k}{B}`B;\epsilon_{A}`\pcomonad{k}{f}`f`\epsilon_{B}] \efig
+\label{eq:epsilonN}
+\end{equation}
+\begin{align*}
+f \circ \epsilon_{A}([(p_{1},a_{1}),\dots,(p_{n},a_{n})])   &= f(a_{n}) & \text{by defn (\ref{defn:epsilon}) of $\epsilon_{A}$}\\
+&= \epsilon_{B}([(p_{1},f(a_{1})),\dots,(p_{n},f(a_{n}))]) & \text{by defn (\ref{defn:epsilon}) of $\epsilon_{B}$}\\
+&= \epsilon_{B} \circ \pcomonad{k}{f}([(p_{1},a_{1}),\dots,(p_{n},a_{n})]) & \text{by defn (\ref{defn:comonadMorphism}) of $\pcomonad{k}{f}$}
+\end{align*}
+Hence, the above diagram (\ref{eq:epsilonN}) commutes.
+\end{proof}
+\label{prop:epsilonN}
+\end{prop}
+\begin{defn}
+Suppose $s \in \pcomonad{k}{A}$, then $s = [(p_{1},a_{1}),\dots,(p_{n},a_{n})]$ for some $n \in \omega$ and for every $i = 1,\dots, n$, $p_{i} \in \{1,\dots,k\}$, $a_{i} \in A$. Let $s_{i} = [(p_{1},a_{1}),\dots,(p_{i},a_{i})] \in \pcomonad{k}{A}$. Define, for every $\sigma$-structure $A$, $\delta_{A}:\pcomonad{k}{A} \longrightarrow \pcomonad{k}{\pcomonad{k}{A}}$ by $s \mapsto [(p_{1},s_{1}),\dots,(p_{n},s_{n})]$.
+\label{defn:delta}
+\end{defn}
+\begin{prop}
+$\delta:\pcomonad{k} \longrightarrow \pcomonad{k}{\pcomonad{k}{}}$ is a natural transformation.
+\begin{proof}
+For every $A,B \in \mathcal{R}(\sigma)$ we want to show that:
+\begin{equation}
+\bfig \square[\pcomonad{k}{A}`\pcomonad{k}{\pcomonad{k}{A}}`\pcomonad{k}{B}`\pcomonad{k}{\pcomonad{k}{B}};\delta_{A}`\pcomonad{k}{f}`\pcomonad{k}{\pcomonad{k}{f}}`\delta_{B}] \efig
+\label{eq:deltaN}
+\end{equation}
+\begin{alignat*}{2}
+\pcomonad{k}{\pcomonad{k}{f}} \circ \delta_{A}([(p_{1},a_{1}),\dots,(p_{n},a_{n})])   &= \pcomonad{k}{\pcomonad{k}{f}}([(p_{1},s_{1}),\dots,(p_{n},s_{n})]) & \text{by defn (\ref{defn:delta}) of $\delta_{A}$} \\
+&= [(p_{1},\pcomonad{k}{f}(s_{1})),\dots,(p_{n},\pcomonad{k}{f}(s_{n}))] & \text{by defn (\ref{defn:comonadMorphism}) of $\pcomonad{k}{\pcomonad{k}{f}}$}\\
+&= [(p_{1},[(p_{1},f(a_{1}))]),\dots,(p_{n},[(p_{1},f(a_{1})),\dots,(p_{n},f(a_{n}))])] & \text{by defn (\ref{defn:comonadMorphism}) of $\pcomonad{k}{f}$}\\
+&= \delta_{B}([(p_{1},f(a_{1})),\dots,(p_{n},f(a_{n}))]) & \text{by defn (\ref{defn:delta}) of $\delta_{B}$} \\
+&= \delta_{B} \circ \pcomonad{k}{f}([(p_{1},a_{1}),\dots,(p_{n},a_{n})]) & \text{by defn (\ref{defn:comonadMorphism}) of $\pcomonad{k}{f}$}
+\end{alignat*}
+Hence, the above diagram (\ref{eq:deltaN}) commutes.
+\end{proof}
+\label{prop:deltaN}
+\end{prop}
+\begin{thm}
+The triple $\langle \pcomonad{k}{},\delta,\epsilon \rangle$ is a comonad.
+\begin{proof}
+By proposition (\ref{prop:deltaN}) and (\ref{prop:epsilonN}), $\delta$ and $\epsilon$ are natural transformation. Hence, $\delta$ and $\epsilon$ are indeed the comultiplication and counit of $\pcomonad{k}{}$. The associative and identity laws remain to be shown. \\
+For associativity, for every $A \in \mathcal{R}(\sigma)$, the following diagram commutes:  
+\begin{equation}
+\bfig \Square[\pcomonad{k}{A}`\pcomonad{k}{\pcomonad{k}{A}}`\pcomonad{k}{\pcomonad{k}{A}}`\pcomonad{k}{\pcomonad{k}{\pcomonad{k}{A}}};\delta_{A}`\delta_{A}`\delta_{\pcomonad{k}{A}}`\pcomonad{k}{\delta_{A}}] \efig 
+\end{equation}
+\begin{center}
+\begin{alignat*}{2}
+\delta_{\pcomonad{k}{A}} \circ \delta_{A}([(p_{1},a_{1}),\dots,(p_{n},a_{n})])   &= \delta_{\pcomonad{k}{A}}([(p_{1},s_{1}),\dots,(p_{n},s_{n})]) & \text{by defn (\ref{defn:delta}) of $\delta_{A}$} \\
+&= [(p_{1},[(p_{1},s_{1})]),\dots,(p_{n},[(p_{1},s_{1}),\dots,(p_{n},s_{n})])]  & \text{by defn (\ref{defn:delta}) of $\delta_{\pcomonad{k}{A}}$}\\
+&= [(p_{1},\delta_{A}(s_{1})),\dots,(p_{n},\delta_{A}(s_{n}))] & \text{by defn (\ref{defn:delta}) of $\delta_{A}$}  \\
+&= \pcomonad{k}{\delta_{A}}([(p_{1},s_{1}),\dots,(p_{n},s_{n})]) & \text{by defn (\ref{defn:comonadMorphism}) of $\pcomonad{k}{\delta_{A}}$}  \\
+&= \pcomonad{k}{\delta_{A}} \circ \delta_{A}([(p_{1},a_{1}),\dots,(p_{n},a_{n})]) & \text{by defn (\ref{defn:delta}) of $\delta_{A}$}\\
+\end{alignat*}
+\end{center}
+For identity, for every $A \in \mathcal{R}(\sigma)$, the following diagram commutes:  
+\begin{equation}
+\bfig 
+    \square[\pcomonad{k}{A}`\pcomonad{k}{\pcomonad{k}{A}}`\pcomonad{k}{\pcomonad{k}{A}}`\pcomonad{k}{A};\delta_{A}`\delta_{A}`\pcomonad{k}{\epsilon_{A}}`\epsilon_{\pcomonad{k}{A}}] 
+    \morphism(0,500)/=/<500,-500>[\pcomonad{k}{A}`\pcomonad{k}{A};]
+\efig 
+\end{equation}
+\begin{align*}
+\pcomonad{k}{\epsilon_{A}} \circ \delta_{A}([(p_{1},a_{1}),\dots,(p_{n},a_{n})]) &= \pcomonad{k}{\epsilon_{A}}([(p_{1},s_{1}),\dots,(p_{n},s_{n})]) & \text{by defn (\ref{defn:delta}) of $\delta_{A}$}\\
+&= [(p_{1},\epsilon_{A}(s_{1})),\dots,(p_{n},\epsilon_{A}(s_{n}))]  & \text{by defn (\ref{defn:comonadMorphism}) of $\pcomonad{k}{\epsilon_{A}}$}  \\
+&= [(p_{1},a_{1}),\dots,(p_{n},a_{n})] & \text{by defn (\ref{defn:epsilon}) of $\epsilon_{A}$}\\
+\hspace{1pt}\\
+&= s_{n} & \text{by defn (\ref{defn:delta}) of $s_{n}$}\\
+&= \epsilon_{\pcomonad{k}{A}}([(p_{1},s_{1}),\dots,(p_{n},s_{n})]) & \text{by defn (\ref{defn:epsilon}) of $\epsilon_{\pcomonad{k}{A}}$} \\
+&= \epsilon_{\pcomonad{k}{A}} \circ \delta_{A}([(p_{1},a_{1}),\dots,(p_{n},a_{n})]) & \text{by defn (\ref{defn:delta}) of $\delta_{A}$}
+\end{align*}
+By definition, $\pcomonad{k}{}$ is a comonad.
+\end{proof}
+\end{thm}
+For every $l,k \in \omega$ such that $l \leq k$ and $\sigma$-structure $A$, there exists an inclusion $i_{A}^{l,k}: \pcomonad{l}{A} \longrightarrow \pcomonad{k}{A}$. 
+\begin{prop}
+The inclusion maps form a natural transformation $i^{l,k}:\pcomonad{l}{} \longrightarrow \pcomonad{k}{}$. Further, each map preserves the counit and comultiplication (i.e. each map is a morphism of comonads). 
+\end{prop}
+\begin{proof}
+\begin{equation}
+\bfig \square[\pcomonad{l}{A}`\pcomonad{k}{A}`\pcomonad{l}{B}`\pcomonad{k}{B};i^{l,k}_{A}`\pcomonad{l}{f}`\pcomonad{k}{f}`i^{l,k}_{B}]\efig
+\end{equation}
+\begin{align*}
+\pcomonad{k}{f} \circ i^{l,k}_{A}([(p_{1},a_{1}),\dots,(p_{n},a_{n})])   &= \pcomonad{k}{f}([(p_{1},a_{1}),\dots,(p_{n},a_{n})]) & p_{i} \in \{1,\dots, l\} \subseteq \{1,\dots,k\}\\
+&= [(p_{1},f(a_{1})),\dots,(p_{n},f(a_{n}))] &\text{by defn (\ref{defn:comonadMorphism}) of $\pcomonad{k}{f}$} \\
+&= i^{l,k}_{B}([(p_{1},f(a_{1})),\dots,(p_{n},f(a_{n}))]) & p_{i} \in \{1,\dots, l\} \subseteq \{1,\dots,k\}\\
+&= i^{l,k}_{B} \circ \pcomonad{l}{f}([(p_{1},a_{1}),\dots,(p_{n},a_{n})]) & \text{by defn (\ref{defn:comonadMorphism}) of $\pcomonad{k}{f}$}\\
+\end{align*}
+\end{proof}
+The grading given by these inclusion maps seem to suggest that there is a colimit object capturing the information of $\pcomonad{k}{A}$ for every $k \in \omega$. This is indeed the case. Consider the structure $\pcomonad{\omega}{A}$ with domain $|\pcomonad{\omega}{A}| = (\omega \times A)^{\omega}$. The structure on $\pcomonad{\omega}{A}$ is similar to the structure given to $\pcomonad{k}{A}$. 
+\begin{prop}
+Let $\omega$ be considered as a poset category under the usual order. The object $\pcomonad{\omega}{A}$ is the $\omega$-colimit of the family $\{\pcomonad{k}{A}\}_{k \in \omega}$ with the above inclusion maps. 
+\begin{proof}
+For every $k \in \omega$, define $i^{k}_{A}:\pcomonad{k}{A} \rightarrow \pcomonad{\omega}{A}$ as the inclusion (i.e. $[(p_{1},a_{1}),\dots,(p_{n},a_{n})] \mapsto [(p_{1},a_{1}),\dots,(p_{n},a_{n})]$). Clearly, the following diagram commutes for all $l,k \in \omega$ with $l \leq k$
+\begin{equation}
+\bfig \Vtriangle[\pcomonad{l}{A}`\pcomonad{k}{A}`\pcomonad{\omega}{A};i^{l,k}_{A}`i^{l}_{A}`i^{k}_{A}]\efig
+\label{eq:omegaColimit}
+\end{equation}
+Suppose that there exists a $\sigma$-structure $B$ and for every $l,k \in \omega$ with $l \leq k$, there exist morphisms $f^{l}:\pcomonad{l}{A} \longrightarrow B$, $f^{k}:\pcomonad{k}{A} \longrightarrow B$ such that $f^{l} = f^{k} \circ i^{l,k}$. Consider the morphism $u:\pcomonad{\omega}{A} \longrightarrow B$ given by $[(p_{1},a_{1}),\dots,(p_{n},a_{n})] \mapsto f^{j}([(p_{1},a_{1}),\dots,(p_{n},a_{n})])$ where $j = \max(p_{1},\dots,p_{n})$ 
+\begin{equation}
+\bfig 
+    \Vtriangle[\pcomonad{l}{A}`\pcomonad{k}{A}`\pcomonad{\omega}{A};i^{l,k}_{A}`i^{l}_{A}`i^{k}_{A}]
+    \morphism(0,500)|l|/{@{>}@/^-7pt/}/<500,-1000>[\pcomonad{l}{A}`B;f^{l}]
+    \morphism(1000,500)|r|/{@{>}@/^7pt/}/<-500,-1000>[\pcomonad{k}{A}`B;f^{k}]
+    \morphism(500,0)|m|/.>/<0,-500>[\pcomonad{\omega}{A}`B;u]
+\efig
+\label{eq:omegaColimitU}
+\end{equation}
+Moreover, given the conditions on $f^{j}$ for all $j \in \omega$, $u$ is unique. Namely, suppose there exists a morphism $u':\pcomonad{\omega}{A} \longrightarrow B$ such that for all $j \in \omega$, $f^{j} = u' \circ i^{j}_{A}$. Suppose $s = [(p_{1},a_{1}),\dots,(p_{n},a_{n})] \in \pcomonad{\omega}{A}$ and $k = \max(p_{1},\dots,p_{n})$, then for all $j \geq k, s \in \pcomonad{j}{A}$.  
+\begin{align*}
+u(s)    &= f^{k}(s) & \text{by defn of $u$} \\
+        &= f^{j} \circ i^{k,j}_{A}(s) & \text{by (\ref{eq:omegaColimitU})} \\
+        &= u' \circ i^{j}_{A} \circ i^{k,j}_{A}(s) & \text{by hypothesis on $u'$} \\
+        &= u' \circ i^{k}_{A}(s) & \text{by (\ref{eq:omegaColimit})}\\
+        &= u'(s) & \text{by defn of inclusion} 
+\end{align*}
+Since $u(s) = u'(s)$ for all $s \in \pcomonad{\omega}{A}$, $u = u'$ so $u$ is unique as desired.  
+\end{proof}
+\end{prop}
+\section{Positional Form and Equivalences}
+\subsection{Equivalence $\exists^{+}\mathcal{L}^{k}_{\infty,\omega}$}
+\subsection{Equivalence $\mathcal{L}^{k}_{\infty,\omega}$}
+\subsection{Equivalence $\mathcal{L}^{k}_{\infty,\omega}(Cnt)$}
+\section{Coalgebras and Tree-Width}
