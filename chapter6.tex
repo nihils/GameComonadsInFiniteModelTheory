@@ -1,6 +1,106 @@
 \chapter{Generalizations and Relationships}
+The aim of this chapter is to generalize some of the arguments used in previous chapters and to explain connections between the different comonads. We also discuss how to the relationships between the different comonads can used to prove results about the relationship between the corresponding logics. In particular, the first section gives an general arrow-theoretic development of (\ref{thm:backForthEF}), (\ref{thm:backForthPebble}), and (\ref{thm:backForthModal}) which transfer equivalence in $\exists^{+}\mathcal{L}$, under the right conditions, to equivalence in $\mathcal{L}$. 
 \section{Arrow-Theoretic from $\exists^{+}\mathcal{L}$ to $\mathcal{L}$}
 \section{Relationship between $\pcomonad{k}{}$ and $\efcomonad{k}{}$}
-\subsection{$\pcomonad{\omega}{}$ and $\efcomonad{k}{}$}
+\subsection{$\pcomonad{\omega}{}$ and $\efcomonad{\omega}{}$}
+Since full first-order logic is the set of formulas that have rank $< \omega$ and contain countably infinite number of variables, the colimit comoands $\pcomonad{\omega}{}$ and $\efcomonad{\omega}{}$ both capture equivalence in $\exists^{+}\mathcal{L}^{\omega}_{\omega,\omega}$. Hence, they would be ``equivalent'' in some sense. The following proposition and corollary captures this intuition.
+\begin{prop}
+$\efcomonad{\omega}{}$ is a retract of $\pcomonad{\omega}{}$
+\begin{proof}
+Consider the natural transformation $\rho$ with components $\rho_{A}:\pcomonad{\omega}{A} \longrightarrow \efcomonad{\omega}{A}$ given by $[(p_{1},a_{1}),\dots,(p_{n},a_{n})] \mapsto [a_{1},\dots,a_{n}]$. The map $\rho_{A}$ is indeed a $\sigma$-morphism, since the conditions for $R^{\efcomonad{k}{A}}$ to hold are nearly the same (just forget the pebbles) as the first and third condition for $R^{\pcomonad{k}{A}}$ to hold. 
+uppose $A$,$B$ are $\sigma$-structures and $f:A \longrightarrow B$ is a morphism, then:the 
+\begin{equation}
+\bfig \square[\pcomonad{\omega}{A}`\efcomonad{\omega}{A}`\pcomonad{\omega}{B}`\efcomonad{\omega}{B};\rho_{A}`\pcomonad{\omega}{f}`\efcomonad{\omega}{f}`\rho_{B}]\efig
+\end{equation}
+\begin{align*}
+\efcomonad{\omega}{f} \circ \rho_{A}([(p_{1},a_{1}),\dots,(p_{n},a_{n})])   &= \efcomonad{\omega}{f}([a_{1},\dots,a_{n}]) \\
+&= [f(a_{1}),\dots,f(a_{n})] \\
+&= \rho_{B}([(p_{1},f(a_{1})),\dots,(p_{n},f(a_{n}))]) \\
+&= \rho_{B} \circ \pcomonad{\omega}{f}([(p_{1},a_{1}),\dots,(p_{n},a_{n})])
+\end{align*}
+Hence, $\rho:\pcomonad{\omega}{} \longrightarrow \efcomonad{\omega}{}$ is indeed a natural transformation. Consider the natural transformation $\iota$ with components $\iota_{A}:\efcomonad{\omega}{A} \longrightarrow \pcomonad{\omega}{A}$ given by $[a_{1},\dots,a_{n}] \mapsto [(1,a_{1}),\dots,(n,a_{n})]$. Suppose $R \in \sigma$ is a $m$-ary relation and $s_{1},\dots,s_{m} \in \efcomonad{\omega}{A}$:
+Hence, $\iota_{A}$ is indeed a $\sigma$-homomorphism. 
+\begin{equation}
+\bfig \square[\efcomonad{\omega}{A}`\pcomonad{\omega}{A}`\efcomonad{\omega}{B}`\pcomonad{\omega}{B};\iota_{A}`\efcomonad{\omega}{f}`\pcomonad{\omega}{f}`\iota_{B}]\efig
+\end{equation}
+\begin{align*}
+\pcomonad{\omega}{f} \circ \iota_{A}([a_{1},\dots,a_{n}])   &= \pcomonad{\omega}{f}([(1,a_{1}),\dots,(n,a_{n})]) \\
+&= [(1,f(a_{1})),\dots,(n,f(a_{n}))] \\
+&= \iota_{B}([f(a_{1}),\dots,f(a_{n})]) \\
+&= \iota_{B} \circ \efcomonad{\omega}{f}([a_{1},\dots,a_{n}])
+\end{align*}
+Hence, $\iota:\efcomonad{\omega}{} \longrightarrow \pcomonad{\omega}{}$ is indeed a natural transformation. Suppose $A$ is a $\sigma$-structure and $[a_{1},\dots,a_{n}] \in \efcomonad{\omega}{A}$, then: 
+$$\rho_{A} \circ \iota_{A}([a_{1},\dots,a_{n}]) = \rho_{A}([(1,a_{1}),\dots,(n,a_{n})]) = [a_{1},\dots,a_{n}]$$
+Since $[a_{1},\dots,a_{n}] \in \efcomonad{\omega}{A}$ was arbitrary, $\rho_{A} \circ \iota_{A} = \text{id}_{\efcomonad{\omega}{A}}$. By $A$ being arbitrary and $\rho$,$\iota$ natural transformations, $\rho \circ \iota = \text{id}_{\efcomonad{\omega}{}}$. Therefore, there exists morphisms (in the endofunctor category on $\mathcal{R}(\sigma)$) $\rho:\pcomonad{\omega}{} \rightarrow \efcomonad{\omega}{}$ and $\iota:\efcomonad{\omega}{} \rightarrow \pcomonad{\omega}{}$ such that $\rho \circ \iota = \text{id}_{\efcomonad{\omega}{}}$. By definition, $\efcomonad{\omega}{}$ is a retract of $\pcomonad{\omega}{}$.
+\end{proof}
+\begin{cor}
+$\text{Hom}_{\mathcal{R}(\sigma)}(\pcomonad{\omega}{A},B) \cong \text{Hom}_{\mathcal{R}(\sigma)}(\efcomonad{\omega}{A},B)$.
+\begin{proof}
+For $\text{Hom}_{\mathcal{R}(\sigma)}(\pcomonad{\omega}{A},\_) \rightarrow \text{Hom}_{\mathcal{R}(\sigma)}(\efcomonad{\omega}{A},\_)$ precompose with $\rho$. Similarly, for the opposite direction, precompose with $\iota$.
+\end{proof}
+\end{cor}
+\end{prop}
 \subsection{Grading by both $\bcomonad{k}{n}{}$}
-\section{New proofs for Common Results}
+The family of comonads $\{\pcomonad{k}{}\}$ is graded by the number of variables in the formulas under consideration, so this family `internalizes' equivalence in the fragments $\mathcal{L}^{k}_{\infty,\omega}$. On the other hand, $\efcomonad{n}{}$ is graded by the quantifier rank, so this family `internalizes' equivalence in the fragments $\mathcal{L}^{\omega}_{\omega,n}$. A natural question is to consider fragments restricted both by number of variables and rank, i.e. $\mathcal{L}^{k}_{\omega,n}$ for $n,k \in \omega$. This comonad will be denoted $\bcomonad{k}{n}{}$. Intuitively, $\bcomonad{k}{n}{A}$ represents the structure of Spoiler plays for $k$-pebble games on a $\sigma$-structure $A$ played for at most $n$ rounds. Let the domain of the structure be $|\bcomonad{k}{n}{A}| = \{s \in \pcomonad{k}{A}: |s| = n\}$. The structure on $\bcomonad{k}{n}{A}$ is induced from $\pcomonad{k}{A}$. Namely, for $R \in \sigma$ an $m$-ary relation, $R^{\bcomonad{k}{n}{A}} = R^{\pcomonad{k}{A}} \cap |\bcomonad{k}{n}{A}|^{m}$. 
+\\~\\
+Fixing the number of rounds $n$, we have a directed system of inclusions maps. Namely, for $A$ a $\sigma$-structure and $l,k \in \omega$ with $l \leq k$, there is a canonical inclusion morphism $i^{l,k}_{A}:\bcomonad{l}{n}{A} \longrightarrow \bcomonad{k}{n}{A}$. \\  
+\begin{prop}
+$\efcomonad{n}{A}$ is the $\omega$-colimit of the system $\{\bcomonad{k}{n}{A}\}_{k \in \omega}$.
+\end{prop}
+Fixing the number of pebbles $k$, we have a directed system of inclusion maps. Namely, for $A$ a $\sigma$-structure and $m,n \in \omega$, withe $m \leq n$, there is a canonical inclusion morphism $i_{m,n}^{A}:\bcomonad{k}{m}{A} \longrightarrow \bcomonad{k}{n}{A}$. \\
+\begin{prop}
+$\pcomonad{k}{A}$ is the $\omega$-colimit of the system $\{\bcomonad{k}{n}{A}\}_{n \in \omega}$
+\begin{proof}
+For every $k \in \omega$, define $i_{n}^{A}:\bcomonad{k}{n}{A} \rightarrow \pcomonad{k}{A}$ as the inclusion (i.e. $[(p_{1},a_{1}),\dots,(p_{n},a_{n})] \mapsto [(p_{1},a_{1}),\dots,(p_{n},a_{n})]$). Clearly, the following diagram commutes for all $m,n \in \omega$ with $m \leq n$
+\begin{equation}
+\bfig \Vtriangle[\bcomonad{k}{m}{A}`\bcomonad{k}{n}{A}`\pcomonad{k}{A};i_{m,n}^{A}`i_{n}^{A}`i_{m}^{A}]\efig
+\label{eq:omegaColimit}
+\end{equation}
+Suppose that there exists a $\sigma$-structure $B$ and for every $m,n \in \omega$ with $m \leq n$, there exist morphisms $f_{m}:\bcomonad{k}{m}{A} \longrightarrow B$, $f_{n}:\bcomonad{k}{n}{A} \longrightarrow B$ such that $f_{m} = f_{n} \circ i_{m,n}^{A}$. Consider the morphism $u:\pcomonad{k}{A} \longrightarrow B$ given by $[(p_{1},a_{1}),\dots,(p_{n},a_{n})] \mapsto f_{n}([(p_{1},a_{1}),\dots,(p_{n},a_{n})])$ 
+\begin{equation}
+\bfig 
+    \Vtriangle[\bcomonad{k}{m}{A}`\bcomonad{k}{m}{A}`\pcomonad{k}{A};i_{m,n}^{A}`i_{m}^{A}`i_{n}^{A}]
+    \morphism(0,500)|l|/{@{>}@/^-7pt/}/<500,-1000>[\bcomonad{k}{m}{A}`B;f_{m}]
+    \morphism(1000,500)|r|/{@{>}@/^7pt/}/<-500,-1000>[\bcomonad{k}{n}{A}`B;f_{n}]
+    \morphism(500,0)|m|/.>/<0,-500>[\pcomonad{k}{A}`B;u]
+\efig
+\label{eq:omegaColimitU}
+\end{equation}
+Moreover, given the conditions on $f_{n}$ for all $n \in \omega$, $u$ is unique. Namely, suppose there exists a morphism $u':\pcomonad{k}{A} \longrightarrow B$ such that for all $n \in \omega$, $f_{n} = u' \circ i_{n}^{A}$. Suppose $s = [(p_{1},a_{1}),\dots,(p_{n},a_{n})] \in \bcomonad{n}{k}{A}$ then for all $j \geq n, s \in \bcomonad{k}{i}{A}$.  
+\begin{align*}
+u(s)    &= f_{n}(s) & \text{by defn of $u$} \\
+        &= f_{j} \circ i_{n,j}^{A}(s) & \text{by (\ref{eq:omegaColimitU})} \\
+        &= u' \circ i_{j}^{A} \circ i_{n,j}^{A}(s) & \text{by hypothesis on $u'$} \\
+        &= u' \circ i_{n}^{A}(s) & \text{by (\ref{eq:omegaColimit})}\\
+        &= u'(s) & \text{by defn of inclusion} 
+\end{align*}
+Since $u(s) = u'(s)$ for all $s \in \pcomonad{k}{A}$, $u = u'$ so $u$ is unique as desired.  
+\end{proof}
+\end{prop}    
+\section{New Proofs for Common Results}
+A natural question when given two different logics $\mathcal{L},\mathcal{L'}$ is whether $\mathcal{L}$ is more, less or equally expressive as $\mathcal{L'}$. The syntactic approach to show that $\mathcal{L'}$ is at least as expressive as $\mathcal{L}$ (denoted, $\mathcal{L} \subseteq \mathcal{L'}$) is to show that every sentence in $\mathcal{L}$ can be translated to a sentence $\mathcal{L'}$. The semantic approach is to show that a structure that can interpret sentences in $\mathcal{L'}$ can intrepret sentences in $\mathcal{L}$. Games, and more importantly the game comonads we developed, give a structural approach. The following proposition justifies this structural approach. 
+\begin{prop}
+$\mathcal{L} \subseteq \mathcal{L'}$ if and only if for all $\sigma$ and two $\sigma$-structures $A,B$, $A \equiv^{\mathcal{L'}} B \Rightarrow A \equiv^{\mathcal{L}} B$.
+\label{prop:inclusionToEquiv}
+\begin{proof}
+$\Rightarrow$ Suppose $A \equiv^{\mathcal{L'}} B$, then for all sentences $\phi \in \mathcal{L'}, A \vDash \phi \Leftrightarrow B \vDash \phi$. In particular, for all sentences $\psi \in \mathcal{L}$ (since $\mathcal{L} \subseteq \mathcal{L'}$, up to translation, by hypothesis), $A \vDash \psi \Leftrightarrow B \vDash \psi$. Hence, $A \equiv^{\mathcal{L}} B$.\\
+$\Leftarrow$ By contrapositive. Suppose that there exists $\sigma$-structures $A,B$ such that $A \equiv^{\mathcal{L'}} B$, but $A \not \equiv^{\mathcal{L}} B$. Since $A \not \equiv^{\mathcal{L}} B$, there exists some sentence $\phi \in \mathcal{L}$ such that $A \vDash \phi$ and $B \not\vDash \phi$. Clearly, $\phi \not\in \mathcal{L'}$ since $A \equiv^{\mathcal{L'}} B$. Therefore, $\mathcal{L} \not\subseteq \mathcal{L'}$.
+\end{proof}
+\end{prop}
+Since back-and-forth games characterize $\equiv^{\mathcal{L}}$, these games give a structural approach to proving $\mathcal{L} \subseteq \mathcal{L'}$ that does not make reference to cumbersome syntactic details or coordinate-heavy intrepretations. However, even with this game approach the details could get unwieldy. Namely, to show $\mathcal{L} \subseteq \mathcal{L'}$, i.e. $A \equiv^{\mathcal{L'}} B \Rightarrow A \equiv^{\mathcal{L}} B$, we would have to construct a winning strategy for Duplicator in the $\mathcal{L}$ back-and-forth game from a winning strategy in the $\mathcal{L'}$ back-and-forth game. The advantage of having internalized these strategies into the category $\mathcal{R}(\sigma)$ is that producing a Duplicator strategy in one game from a Duplicator strategy in another game just amounts to coming up with the correct morphisms. The following propositions illustrate this technique well. \\~\\
+A well-known result in finite model theory is that the $k$-variable fragment contains the $k$-rank fragment. Syntactically, this result is quite easy to see on sentences in prenex normal form. Namely, a prenex normal form sentence with quantifier rank $\leq k$ has at most $k$ many bound variables. For more general sentences, the proof can get a bit tricky. However, the proof using comonads makes this result easy. 
+\begin{prop} The following results hold for all $k \in \omega$:
+\begin{enumerate}[label=(\arabic*)]
+\item $\exists^{+}\mathcal{L}_{\omega,k} \subseteq \exists^{+}\mathcal{L}^{k}_{\infty,\omega}$
+\item $\mathcal{L}_{\omega,k} \subseteq \mathcal{L}^{k}_{\infty,\omega}$
+\item $\mathcal{L}_{\omega,k}(\mathsf{Cnt}) \subseteq \mathcal{L}^{k}_{\infty,\omega}(\mathsf{Cnt})$
+\end{enumerate}
+\begin{proof}
+By proposition (\ref{prop:inclusionToEquiv}), it suffices to show that for two $\sigma$-structures $A,B$, $A {}^{+}\equiv^{\mathcal{L}^{k}_{\infty,\omega}} B \Rightarrow A {}^{+}\equiv^{\mathcal{L}_{\omega,k}} B$. Suppose $A \equiv^{\mathcal{L}^{k}_{\infty,\omega}} B$, then by (\ref{thm:forthPebble}), there exists morphisms $f:\pcomonad{k}{A} \longrightarrow B$ and $g:\pcomonad{k}{B} \longrightarrow A$. Recall the natural transformation $\iota:\efcomonad{k}{} \longrightarrow \pcomonad{k}{}$ used in (\ref{prop:}). Hence, there exists morphisms $f \circ \iota_{A}:\efcomonad{k}{A} \longrightarrow B$ and $g \circ \iota_{B}:\efcomonad{k}{B} \longrightarrow A$. Therefore, by (\ref{thm:forthEF}),   
+\end{proof}
+\end{prop}
+A result by \cite{Barwise} showed that the full modal fragment of infinitary logic is contained within the two-variable fragment of infinitary logic. We prove the same result, using our comonadic formulation.
+\begin{prop}
+$\mathcal{M}_{\infty,\omega} \subseteq \mathcal{L}^{2}_{\infty,\omega}$.
+\end{prop}
+

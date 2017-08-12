@@ -1,4 +1,4 @@
-\documentclass[12pt]{ociamthesis}
+\documentclass{ociamthesis}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -8,6 +8,7 @@
 \usepackage{fullpage}
 \usepackage{enumitem}
 \usepackage{natbib}
+\usepackage{extarrows}
 \input diagxy
 
 \theoremstyle{plain}
@@ -18,17 +19,20 @@
 \newtheorem{clm}{Claim}[thm]
 
 \theoremstyle{definition}
-\newtheorem{defn}{Definition}
+\newtheorem{defn}{Definition}[section]
 
 \theoremstyle{remark}
 \newtheorem*{fact}{Fact}
-\newtheorem{rmrk}{Remark}
+\newtheorem{rmrk}{Remark}[section]
+\newtheorem{exmpl}{Example}[section]
 
 \newcommand{\pcomonad}[2]{{\mathbb{T}_{#1}#2}}
 \newcommand{\efcomonad}[2]{{\mathbb{E}_{#1}#2}}
 \newcommand{\mcomonad}[2]{{\mathbb{M}_{#1}#2}}
 \newcommand{\gcomonad}[2]{{\mathbb{G}_{#1}#2}}
-\newcommand{\bcomonad}[3]{{\mathbb{B}_{#1,#2}#3}}
+\newcommand{\bcomonad}[3]{{\mathbb{O}_{#1,#2}#3}}
+
+\newcommand{\Fraisse}{Fra{\"i}ss{\'e}}
 
 \title{Game Comonads in Finite Model Theory}
 \author{Nihil Shah\\ Supervisor: Dr. Samson Abramsky}
@@ -38,4 +42,11 @@
 
 \begin{document}
 \maketitle
+\input{chapter2}
+\input{chapter3}
+\input{chapter4}
+\input{chapter5}
+\input{chapter6}
+\bibliographystyle{plainnat} 
+\bibliography{main}
 \end{document}

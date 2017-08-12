@@ -170,14 +170,72 @@ $S \subseteq \Gamma_{k}(A,B)$ is a \textit{strategy in positional form} if $S$ s
 \begin{enumerate}[label=(S\arabic*),ref=S\arabic*,start=0]
 \item $[] \in S$ \label{eq:S1st}
 \item For all $\chi \in S$ with $|\chi| < k$, $a \in A$, there exists $b \in B$ such that $\chi[(a,b)] \in S$ \label{eq:S2nd}
-\item $S$ is reachable: For all $X \in S$, there is a chain \label{eq:S3rd}
+\item $S$ is reachable: For all $\chi \in S$, there is a chain \label{eq:S3rd}
 $$\chi_{0} \longrightarrow \dots \longrightarrow \chi_{n}$$
-such that $\chi_{0} = []$, $\chi_{n} = $ and $X_{i} \in S$ with $|X_{i}| = i$ for all $i = 0,\dots,n$. 
+such that $\chi_{0} = []$, $\chi_{n} = \chi$ and $\chi_{i} \in S$ with $|\chi_{i}| = i$ for all $i = 0,\dots,n$. 
 \end{enumerate}
 \end{defn}
+\begin{prop}
+If $f:\efcomonad{k}{A} \longrightarrow B$ is a $\sigma$-morphism, then there exists a strategy in positional form $S_{f}$.
+\begin{proof}
+Define
+$$S_{f} = \{\theta_{f}(s) \mid s \in \efcomonad{k}{A}\} \cup \{[]\}$$
+\begin{itemize}
+\item $[] \in S_{f}$, so (\ref{eq:S1st}) is satisfied.
+\item Suppose $\chi \in S_{f}$ with $|\chi| < k$ and $a \in A$. By definition of $S_{f}$ either $\chi = []$ or $\chi = \theta_{f}(s)$ for some $s \in \efcomonad{k}{A}$. In the first case, consider $\theta_{f}([a]) = [(a,b)] \in S$ with $b = f([a])$. In the second case, consider $\chi' = \theta_{f}(s[a])$. Since $|\chi| < k$, the length $|s| = j$ and the length $|s[a]| = j+1 \leq k$. Hence, $s[a]$ is indeed in $\efcomonad{k}{A}$. Therefore, $\chi' \in S_{f}$ and $\chi' = \chi[(a,b)]$ where $b = f(s[a])$.  
+\item Suppose $\chi \in S_{f}$, then $\chi = \theta_{f}(s)$ (the $\chi = []$ case is trivial) for some $s \in \efcomonad{k}{A}$. Since $s \in \efcomonad{k}{A}$ for some $n \leq k$, $s = [a_{1},\dots,a_{n}]$ with $a_{i} \in A$ by definition of $\efcomonad{k}{A}$. Let $s_{i} = [a_{1}.\dots,a_{i}]$ for all $i \leq n$, then
+$$ [] \longrightarrow \theta_{f}(s_{1}) \longrightarrow \dots \longrightarrow \theta_{f}(s_{n}) = \chi$$
+\end{itemize}
+Hence, $S_{f}$ is reachable
+\end{proof}
+\label{prop:fToPosFormEF}
+\end{prop}
+\begin{prop}
+Conversely, for every strategy in positional form $S$ there exists a $f:\efcomonad{k}{A} \rightarrow B$ such that $S = S_{f}$
+\begin{proof}
+Fix a linear order $<$ of $B$. \\
+$S_{f} \subseteq S$ The strategy is to construct an appropriate $f$. Define $\pi_{1}:\Gamma_{k}(A,B) \longrightarrow \efcomonad{k}{A}$ by $\pi_{1}:[(a_{1},b_{1}),\dots,(a_{n},b_{n})] \longrightarrow [a_{1},\dots,a_{n}]$ and $\pi_{2}:\Gamma_{k}(A,B) \longrightarrow \efcomonad{k}{B}$ by $\pi_{2}:[(a_{1},b_{1}),\dots,(a_{n},b_{n})] \longrightarrow [b_{1},\dots,b_{n}]$. Suppose $s = [a_{1},\dots,a_{n}] \in \efcomonad{k}{A}$, consider the subset $Z = \{\chi \in \Gamma_{k}(A,B):\pi_{1}(\chi) = s\}$. By (\ref{eq:S1st}) and applying (\ref{eq:S2nd}) $n$ times (i.e. for each $a_{i}$), there exists a $\chi \in S$ such that $\pi_{1}(\chi) = s$. Therefore, $Z$ is non-empty and $\epsilon_{B}(\pi_{2}(Z)) = \{b \in B: \exists \chi \in Z \text{ with } \epsilon_{B}(\pi_{2}(\chi)) = b\} \subseteq B$ is non-empty. Let $f(s) = b'$ where $b'$ is the $<$-least element of this set. Clearly, by construction, $S_{f} = S$ \\
+$S \subseteq S_{f}$ For every $\chi$, we need to show that there exists an $s \in \efcomonad{k}{A}$ such that $\theta_{f}(s) = \chi$ for the $f$ constructed above. Consider $s = \pi_{1}(\chi)$. By construction, $\theta_{f}(s) = \theta_{f}(\pi_{1}(\chi)) = \chi$.    
+\end{proof}
+\end{prop}
 \subsection{Equivalence $\exists^{+}\mathcal{L}_{\omega,k}$}
+\begin{defn}
+A position $\chi = [(a_{1},b_{1}),\dots,(a_{n},b_{n})] \in \Gamma_{k}(A,B)$ is \textit{winning for Duplicator} if the map $\chi:a_{i} \longmapsto b_{i}$ is a paritial $\sigma$-morphism from $A$ to $B$.  
+Naturally, we can extend the definition to say that a strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ is \textit{winning for Duplicator} if for all $\chi \in S$, $\chi$ is winning for Duplicator. 
+\end{defn}
+Consider the expanded signature $\sigma' = \sigma \cup \{I\}$ with $I$ a binary relation. In order to prove the theorem, it is necessary to lift $\sigma$-structures to $\sigma'$-structures. We say a $\sigma$-structure $A$ is a \textit{pure $\sigma'$-structure} if $I$ is interpreted as the identity relation on $A$. Note that if $A$ is a pure $\sigma'$-structure, then by the definition of $\efcomonad{k}{A}$ as a $\sigma'$-structure, $\efcomonad{k}{A}$ is not a pure $\sigma'$-structure. However, two prefix comparable plays in $\efcomonad{k}{A}$ are $I$-related if their last elements are the same. This ensures that $S_{f}$ contains well-defined partial functions.
+\begin{thm}
+If $A,B$ are pure $\sigma'$-structures and $f:\efcomonad{k}{A} \rightarrow B$ is a function, then 
+\center{$f:\efcomonad{k}{A} \longrightarrow B$ is a $\sigma'$-morphism if and only if  $S_{f}$ is winning for Duplicator}
+\begin{proof}
+$\Rightarrow$ Suppose $\chi \in S_{f}$, then by definition of $S_{f}$, $\chi = []$ or $\chi = \theta_{f}(s)$ for some $s \in \efcomonad{k}{A}$. If $\chi = []$, then it is vacuously true that $\chi$ is a partial homomorphism (i.e. winning for Duplicator). If $\chi = \theta_{f}(s)$, then there exists some $s \in \efcomonad{k}{A}$ such that $s = [a_{1},\dots,a_{n}]$ where $f([a_{1},\dots,a_{i}]) = b_{i}$ and $\chi = [(a_{1},b_{1}),\dots,(a_{n},b_{n})]$ for all $i = 1,\dots,n$. For brevity, let $s_{i} = [a_{1},\dots,a_{i}] \sqsubseteq s$ (i.e. $s_{i}$ is the $i$-th component of $\delta_{A}(s)$). \\
+Suppose $R \in \sigma$ is a $m$-ary relation symbol, and $i_{1},\dots,i_{m} \in \{1,\dots,n\}$ and $R^{A}(a_{i_{1}},\dots,a_{i_{m}})$, then:
+\begin{align*}
+R^{A}(a_{i_{1}},\dots,a_{i_{m}}) &\Rightarrow R^{A}(\epsilon_{A}(s_{i_{1}}),\dots,\epsilon_{A}(s_{i_{m}})) & \text{by defn of $\epsilon_{A}$} \\
+\text{(and } s_{i_{\mu}} \sqsubseteq s_{i_{\nu}} \text{ or } s_{i_{\nu}} \sqsubseteq s_{i_{\mu}} &\text{ for all } \nu,\mu = 1,\dots,m\text{)} &\text{by each } s_{i_{*}} \sqsubseteq s \\
+&\Rightarrow R^{\efcomonad{k}{A}}(s_{i_{1}},\dots,s_{i_{m}}) & \text{by interpretation of $R$ on $\efcomonad{k}{A}$} \\
+&\Rightarrow R^{B}(f(s_{i_{1}}),\dots,f(s_{i_{m}})) & \text{by hypothesis $f$ is $\sigma$-morphism}\\
+&\Rightarrow R^{B}(b_{i_{1}},\dots,b_{i_{m}}) 
+\end{align*}
+Hence, $\chi$ preserves relations.
+Moreover, for $a_{i}$ and $a_{j}$ appearing in $s$ with $a_{i} = a_{j}$, then:
+\begin{align*}
+a_{i} = a_{j}       &\Rightarrow I^{A}(a_{i},a_{j}) & \text{by $A$ a pure $\sigma'$-structure} \\
+&\Rightarrow I^{A}(\epsilon_{A}(s_{i}),\epsilon_{A}(s_{j})) & \text{by defn of $\epsilon_{A}$} \\
+\text{(and } s_{i} \sqsubseteq s_{j} &\text{ or } s_{j} \sqsubseteq s_{i}\text{)} &\text{by each } s_{*} \sqsubseteq s \\
+&\Rightarrow I^{\efcomonad{k}{A}}(s_{i},s_{j}) & \text{by interpretation of $I$ on $\efcomonad{k}{A}$} \\
+&\Rightarrow I^{B}(f(s_{i}),f(s_{j})) & \text{by hypothesis $f$ is a $\sigma'$-morphism} \\
+&\Rightarrow I^{B}(b_{i},b_{j}) \\
+&\Rightarrow b_{i} = b_{j} & \text{by $B$ a pure $\sigma'$-structure} \\
+\end{align*}
+Hence, $\chi$ is a well-defined partial function.
+Therefore, $\chi$ is indeed a partial homomorphism. Hence, for all $\chi \in S_{f}$, $\chi$ is winning for Duplicator. Therefore, by definition, $S_{f}$ is winning for Duplicator.
+\\~\\
+$\Leftarrow$ Suppose $(s_{1},\dots,s_{m}) \in R^{\efcomonad{k}{A}}$ for $R \in \sigma'$ (including $I$), then by the interpretation of $R$ on $\efcomonad{k}{A}$, there exists some prefix order greatest element $s \in \{s_{1},\dots,s_{m}\}$ such that for all $i$, $s_{i} \sqsubseteq s$. Consider $\chi = \theta_{f}(s) \in S_{f}$. By $s_{i} \sqsubseteq s$ and definition of $\theta_{f}$, $[(\epsilon_{A}(s_{1}),f(s_{1})),\dots, (\epsilon_{A}(s_{m}),f(s_{m}))] \subseteq \chi$. Since $R^{A}(\epsilon_{A}(s_{1}),\dots,\epsilon_{A}(s_{m}))$ and $\chi$ is a partial homomorphism (i.e. winning for Duplicator), $R^{B}(f(s_{1}),\dots,f(s_{m}))$. Hence, $f$ is a $\sigma'$-morphism.
+\end{proof}
+\end{thm}
 \subsection{Equivalence $\mathcal{L}_{\omega,k}$}
-\subsection{Equivalence $\mathcal{L}_{\infty,k}(Cnt)$}
+\subsection{Equivalence $\mathcal{L}_{\infty,k}(\mathsf{Cnt})$}
 \section{Coalgebras and Tree-Depth}
 An advantage of the comonad perspective is exploring the structure of the category of coalgebras over $\efcomonad{k}{}$ to give a categorical characterization of combinatorial properties of structures. In particular, we use the coalgebra category of $\efcomonad{k}{}$ to give a categorical definition for tree-depth of a $\sigma$-structure $A$. Recall a coalgebra for $\efcomonad{k}{}$ is an object $A$ and morphism $\alpha:A \longrightarrow \efcomonad{k}{A}$ such that the following diagrams commute:
 \begin{equation}
@@ -223,9 +281,9 @@ For the $(2) \Rightarrow (1)$ direction, suppose $\mathcal{F}$ is a forest cover
 Given a $\sigma$-structure $A$, define the \textit{coalgebra number of $A$}, denoted $\kappa(A)$, as the least $k$ such that there exists a coalgebra $\alpha:A \longrightarrow \efcomonad{k}{A}$. 
 \end{defn}
 \begin{cor}
-$\kappa(A) = \text{td}(A)$
+$\kappa(A) = \mathsf{td}(A)$
 \begin{proof}
-By definition of coalgebra number $\kappa(A)$ there exists a coalgebra $\alpha:A \longrightarrow \efcomonad{\kappa(A)}{A}$. By proposition (\ref{prop:coalgebraForest}), there exists a corresponding forest cover $\mathcal{F}$ of $\mathcal{G}(A)$. The height of $\mathcal{F}$ is $\kappa(A)$. Hence, $\text{td}(A) \leq \kappa(A)$ by definition of tree-depth as the least height of forest covers. Similarly, by definition of tree-depth $\text{td}(A)$, there exists a forest cover $\mathcal{F}$ of $\mathcal{G}(A)$ of height $k = \text{td}(A)$. By proposition (\ref{prop:coalgebraForest}), there exists a corresponding coalgebra $\alpha:A \longrightarrow \efcomonad{k}{A}$. Hence, $\kappa(A) \leq k$ by definition of $\kappa(A)$. Therefore, $\text{td}(A) \leq \kappa(A)$ and $\text{td}(A) \geq \kappa(A)$, so $\kappa(A) = \text{td}(A)$.      
+By definition of coalgebra number $\kappa(A)$ there exists a coalgebra $\alpha:A \longrightarrow \efcomonad{\kappa(A)}{A}$. By proposition (\ref{prop:coalgebraForest}), there exists a corresponding forest cover $\mathcal{F}$ of $\mathcal{G}(A)$. The height of $\mathcal{F}$ is $\kappa(A)$. Hence, $\mathsf{td}(A) \leq \kappa(A)$ by definition of tree-depth as the least height of forest covers. Similarly, by definition of tree-depth $\mathsf{td}(A)$, there exists a forest cover $\mathcal{F}$ of $\mathcal{G}(A)$ of height $k = \mathsf{td}(A)$. By proposition (\ref{prop:coalgebraForest}), there exists a corresponding coalgebra $\alpha:A \longrightarrow \efcomonad{k}{A}$. Hence, $\kappa(A) \leq k$ by definition of $\kappa(A)$. Therefore, $\mathsf{td}(A) \leq \kappa(A)$ and $\mathsf{td}(A) \geq \kappa(A)$, so $\kappa(A) = \mathsf{td}(A)$.      
 \end{proof}
 \label{cor:treeDepth}
 \end{cor}

@@ -1,14 +1,23 @@
 \chapter{Background}
-The primary purpose of this chapter is to recall the basic definitions, constructions and results that will be used in the subsequent chapters. This chapter also serves to fix the notation for the standard constructions employed in finite model theory and category theory. For a category-theorist, the first section is an introduction to finite model theory. Similarly, for a finite model-theorist, the second section is an introduction to category theory and in particular, comonads.   
+The primary purpose of this chapter is to recall the basic definitions, constructions and results that will be used in the subsequent chapters. This chapter also serves to fix the notation for the standard constructions employed in finite model theory and category theory. For a category-theorist, the first section is an introduction to finite model theory. For a finite model-theorist, the second section is an introduction to category theory and in particular, comonads.   
 \section{Finite Model Theory}
-Model theory studies the relationship between sentences in a logic $\mathcal{L}$ and classes of mathematical structures $\mathcal{C}$ that satisfy these sentences. Sentences are built from non-logical symbols (specified by a signature) and the familar logical symbols (e.g. $\neg,\vee,\wedge,\exists,\forall$). Structures are built from sets that specifiy a domain of objects and interpretations for the symbols in a signature. 
+Model theory studies the relationship between sentences in a logic $\mathcal{L}$ and classes of mathematical structures $\mathcal{C}$ that satisfy these sentences. Sentences are built from non-logical symbols (specified by a signature) and the familar logical symbols (e.g. $\neg,\vee,\wedge,\exists,\forall$). Structures are built from sets that specifiy a domain of objects and interpretations for the symbols in a signature. Finite model theory concerns itself only with structures built from finite sets.  
 \subsection{Definitions}
 \begin{defn}
-A \textit{signature} or \textit{vocabulary}, denoted with lowercase greek letters like $\sigma$, is a set of constant symbols $c_{1},c_{2},\dots$, function symbols $f_{1},f_{2},\dots$, and relation symbols $R_{1},R_{2},\dots$ where every function symbol and relation symbol has an associated arity. 
+A \textit{signature} or \textit{vocabulary}, denoted usually with lowercase greek letter $\sigma$, is a set of constant symbols $c_{1},c_{2},\dots$, function symbols $f_{1},f_{2},\dots$, and relation symbols $R_{1},R_{2},\dots$ where every function symbol and relation symbol has an associated arity. 
 \end{defn}
+\begin{exmpl}
+The signature for groups can be $\sigma = \{*,^{-1},e\}$ where $*$ is the binary group operation, $^{-1}$ is the unary inverse operation, and $e$ is the constant denoting the idenity in the group. 
+\end{exmpl}
 \begin{defn}
 A signature $\sigma$ is a \textit{relational signature} if it only has relation symbols.
 \end{defn}
+\begin{exmpl}
+A coloured graph has relational signature $\sigma = \{E,R,G,B\}$ where $E$ is the symbol for the binary edge relation. The $R$, $G$, and $B$ are unary relations symbols picking out the red, green, and blue (respectively) coloured vertices. 
+\end{exmpl}
+\begin{exmpl}
+A $m$-uniform hypergraph has signature $\sigma = \{E\}$ where $E$ is an $m$-ary relation symbol for hyperedges.
+\end{exmpl}
 \begin{defn}
 Given a signature $\sigma$, a \textit{$\sigma$-structure} 
 $$A = \langle |A|, \{c_{i}^{A}\}, \{f_{i}^{A}\}, \{R_{i}^{A}\} \rangle$$ 
@@ -29,9 +38,9 @@ Given a signature $\sigma$, and two $\sigma$-structures, $A,B$. function $g:|A| 
     \item for relation symbol $R_{i} \in \sigma$ with arity $k$, $(a_{1},\dots,a_{k}) \in R_{i}^{A} \Rightarrow (g(a_{1}),\dots,g(a_{k})) \in R_{i}^{B}$
 \end{itemize}
 \end{defn}
-This also leads to very fine notion of equivalence between two $\sigma$-structures. 
+This also leads to a very fine notion of equivalence between two $\sigma$-structures. 
 \begin{defn}
-A bijective $\sigma$-morphism $f:A \longrightarrow B$ whose inverse $g:B \longrightarrow A$ is also a $\sigma$-morphism is a \textit{isomorphism}. Two $\sigma$-structures $A,B$ are \textit{isomorphic}, denoted $A \cong B$, if there exists an isomorphism between them. 
+A bijective $\sigma$-morphism $f:A \longrightarrow B$ whose inverse $g:B \longrightarrow A$ is also a $\sigma$-morphism is called an \textit{isomorphism}. Two $\sigma$-structures $A,B$ are \textit{isomorphic}, denoted $A \cong B$, if there exists an isomorphism between them. 
 \end{defn}
 A common simplification in finite model theory texts is to only consider relational signatures. This is a resonable assumption since any function symbol $f$ of arity $k$ can be replaced with relation symbol $R_{f}$ of arity $k+1$ whose intrepretation $R^{A}_{f}$ is the graph of the intrepretation $f^{A}$. Any constant symbol $c$ can be replaced with relation symbol $P_{c}$ of arity $1$ whose interpretation is the singleton $\{c^{A}\}$. Hence, for the rest of this paper we will consider $\sigma$ to be a relational signature.  It should be noted that translations to a relational signature do not preserve measures of formula complexity, such as quantifier rank or number of variables. \\~\\
  The logics we will consider will have countably many variables. Namely, for every $j \in \omega$, there is symbol $x_{j}$ representing a variable. For clarity of presentation, we may use lowercase latin letters (possibly with subscripts) $z,y,w,\dots$ also as variables in our logic, but these can always be replaced with the more formal $x_{j}$ for some $j \in \omega$. Define $[n] := \{1,\dots,n\}$, i.e. the finite segment of the natural numbers.   
@@ -81,13 +90,13 @@ Hence, ordinary first-order logic is $\mathcal{L}^{\omega}_{\omega,\omega} = \ma
 Given a $k \in \omega$, the \textit{$k$-rank logic} is $\mathcal{L}_{\omega,k}$. 
 \end{defn}
 Ostensibly, it may seem odd to study the finite rank fragments of first-order logic, rather than the more general infinitary logic. However, the $k$-rank fragment of first order logic is in fact equivalent to the $k$-rank fragment of infinitary logic (from the perspective of finite model theory). This clearly follows from a standard result in finite model theory:
-\begin{prop}
+\begin{prop}[{\cite[Lemma 3.13]{Libkin2004}}]
 Given a finite signature $\sigma$, then up to logical equivalence, there are only finite many formulae $\phi$ over $\sigma$ with $\text{qr}(\phi)\leq k$ and $m$ free variables.
 \end{prop}
 \begin{defn}
 Given a $k \in \omega$, the \textit{$k$-variable logic} is $\mathcal{L}^{k}_{\infty,\omega}$.
 \end{defn}
-Note that, unlike with the case of $k$-rank logic, there are in general, infinitely many formulas, up to logical equivalence, that use $k$ distinct variables. Two other fragments that we will be studying are the modal and guarded fragments of first-order logic. These fragments are obtained by altering the $\exists$ and $\forall$ clauses in definition (\ref{defn:formula}) with a relation $R_{w} \in \sigma$ with arity $\not= 1$. More precisely,  
+Note that, unlike with the case of $k$-rank logic, there are in general, infinitely many formulas, up to logical equivalence, that use $k$ distinct variables. Two other fragments that we will be studying are the modal and guarded fragments of first-order logic. These fragments are obtained by altering the $\exists$ and $\forall$ clauses in definition (\ref{defn:formula}) to be guarded by a relation $R_{w} \in \sigma$ with arity $\not= 1$. More precisely,  
 \begin{defn}
 A formula $\phi(\mathbf{x})$ with free variables among $\mathbf{x} = (x_{1},\dots,x_{n})$ in the \textit{guarded fragment} is recursively defined just as in (\ref{defn:formula}) but with the $\exists$ and $\forall$ clauses altered to:  
 $$ \exists \mathbf{y} (R_{w}(\mathbf{x},\mathbf{y}) \wedge \phi(\mathbf{y},\mathbf{x})) \mid \forall \mathbf{y}(R_{w}(\mathbf{x},\mathbf{y}) \rightarrow \phi(\mathbf{y},\mathbf{x}))$$
@@ -109,12 +118,15 @@ The primary question, once a logic $\mathcal{L}$ is defined, is to understand wh
 \begin{defn}
 Given a signature $\sigma$, a \textit{property} $P$ of $\sigma$-structures, is a (possibly, proper class) function:
 $$P:\mathcal{C} \longrightarrow \{0,1\}$$
-such that for $A,B \in C$:
+such that for $A,B \in \mathcal{C}$:
 $$A \cong B \Rightarrow P(A) = P(B)$$ 
 where $\mathcal{C}$ is a class of all finite $\sigma$-structures.
 \end{defn}
-Morally, $P(A) = 1$ asserts that some property is true of the structure $A$. \\ 
-A ``back-and-forth'' game between two structures $A,B$ is a two-player, conventionally called Spoiler and Duplicator, perfect-information game. A round of the game is first a move by Spoiler chooses an element of $A$ or $B$, and Duplicator must respond with a ``corresponding'' element in the other structure. For a given a logic. 
+Intuitively, $P(A) = 1$ asserts that some property is true of the structure $A$. To prove a property $P$ is not expressible in signature $\sigma$, we need to exhibit two $\sigma$-structures $A$,$B$ which from the perspective of the logic $\mathcal{L}$ are ``equivalent'', but differ by property $P$ (i.e. $P(A) = 1$ and $P(B) = 0$). Of course, by the definiton of property given, $\cong$ is too strong of an equivalence to show inexpressiblity. For a given logic, we define what it means to be equivalent from the perspective of $\mathcal{L}$.  
+\begin{defn}
+Two $\sigma$ structures $A,B$ are \textit{equivalent in logic $\mathcal{L}$}, denoted $A \equiv^{\mathcal{L}} B$ if for all sentences $\phi \in \mathcal{L}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$.  
+\end{defn}
+Hence, for a property $\mathcal{P}$ to inexpressible in signature $\sigma$ and logic $\mathcal{L}$, we must find two $\sigma$-structures $A,B$ such that $P(A) = 1$ and $P(B) = 0$ while $A \equiv^{\mathcal{L}} B$. The purpose of ``back-and-forth'' style games in finite and classical model theory is to provide a methodology to prove equivalence in a logic $\mathcal{L}$.  
 \section{Category Theory}
 Category theory is the general theory of mathematical structures and structure-preserving relationships between theses structures. 
 \subsection{Definitions}
@@ -127,30 +139,49 @@ A \textit{category} $\mathcal{C}$ is:
         such that: 
 \begin{enumerate}[label=(\arabic*)]
     \item For morphisms $f:A \longrightarrow B$, $g:B \longrightarrow C$, there exists a morphism $g \circ f:A \longrightarrow C$.  
-    \item For every object $A \in \mathcal{C}$, there exists a morphism $id_{A}:A \longrightarrow A$ such that $id_{A} \circ f = f$ and $g \circ id_{A} = g$ for every $f:B \longrightarrow A$, $g:A \longrightarrow C$. 
+    \item For every object $A \in \mathcal{C}$, there exists a morphism $\mathsf{id}_{A}:A \longrightarrow A$ such that $\mathsf{id}_{A} \circ f = f$ and $g \circ \mathsf{id}_{A} = g$ for every $f:B \longrightarrow A$, $g:A \longrightarrow C$. 
     \item For morphisms $f:A \longrightarrow B$, $g:B \longrightarrow C$ and $h:C \longrightarrow D$, $h \circ (g \circ f) = (h \circ g) \circ f$. 
 \end{enumerate}
-We can rephrase the condition on $id_{A}:A \longrightarrow A$ by stating that the following diagrams commute for all $A \in \mathcal{C}$:
+We can rephrase the condition on $\mathsf{id}_{A}:A \longrightarrow A$ by stating that the following diagrams commute for all $A \in \mathcal{C}$:
 \begin{equation*}
 \bfig
-    \ptriangle[B`A`A;f`f`id_{A}]
+    \ptriangle[B`A`A;f`f`\mathsf{id}_{A}]
 \efig
 \bfig
-    \dtriangle[A`A`C;id_{A}`g`g]
+    \dtriangle[A`A`C;\mathsf{id}_{A}`g`g]
 \efig
 \end{equation*}
 We will make use of \textit{commutative diagrams}, like the ones above, to express relationships between morphisms in a category. In fact, many of our proofs can be reduced to verifying a certain diagram commutes. This method is called \textit{diagram chasing}.
 \end{defn}
+\begin{exmpl}
+The category of sets with morphisms ordinary functions, denoted $\textbf{Set}$.
+\end{exmpl}
+\begin{exmpl}
+The category of groups with group homomorphism.  
+\end{exmpl}
+\begin{exmpl}
+The category of preorders with monotone functions, denoted $\textbf{Pos}$. 
+\end{exmpl}
+The most important categories will be the ones that appear within finite model theory. Which are:
+\begin{exmpl}
+Given a signature $\sigma$, the category of $\sigma$-structures with $\sigma$-morphisms will be denoted $\mathcal{R}(\sigma)$. The subcategory of finite structures in $\mathcal{R}(\sigma)$ will be denoted $\mathcal{R}_{f}(\sigma)$.
+\end{exmpl}
 Modulo some set-theoretic issues, the collection of categories themselves $\textbf{Cat}$ can itself be considered a category with morphisms called functors.
 \begin{defn}
 A \textit{functor} $F:\mathcal{C} \longrightarrow \mathcal{D}$ is a map from the objects and morphisms of $\mathcal{C}$ to the objects and morphims of $\mathcal{D}$ such that:
 \begin{enumerate}[label=(\arabic*)]
-    \item  For every object $A \in \mathcal{C}$, $F(id_{A}) = id_{F(A)}$ 
+    \item  For every object $A \in \mathcal{C}$, $F(\mathsf{id}_{A}) = \mathsf{id}_{F(A)}$ 
     \item  For morphisms $f:A \longrightarrow B$ and $g:B \longrightarrow C$, $F(g \circ f) = F(g) \circ F(f)$.  
 \end{enumerate}
 \end{defn}
+\begin{exmpl}
+Forgetful functors, such as $F:\textbf{Grp} \longrightarrow \textbf{Set}$ sending a group to it's underlying set.
+\end{exmpl}
+\begin{exmpl}
+Free functors in algebra, such as $F:\textbf{Set} \longrightarrow \textbf{Grp}$ sending a set $X$ to the free group on the letters in $X$. 
+\end{exmpl}
 \begin{defn}
-A functor $F:\mathcal{C} \longrightarrow \mathcal{C}$ from a category to itself is callend an \textit{endofunctor} 
+A functor $F:\mathcal{C} \longrightarrow \mathcal{C}$ from a category to itself is called an \textit{endofunctor} 
 \end{defn}
 Given two categories $\mathcal{C}$ and $\mathcal{D}$, we can consider the collection of all functors $F:\mathcal{C} \longrightarrow \mathcal{D}$ as a category itself with morphisms called natural transformations. 
 \begin{defn}
@@ -178,11 +209,25 @@ An endofunctor $\mathbb{F}:\mathcal{C} \rightarrow \mathcal{C}$ is called \texti
 \end{equation}
 The two diagrams are analogous to the axioms of a monoid. Namely, the diagram (\ref{eq:comultiplication}) expresses the comultiplication is ``coassociative'. The diagram (\ref{eq:counit}) is analogous to the left and right identity laws of monoids.
 \end{defn}
+\begin{exmpl}
+For a fixed set $Z$, there is the comonad on $\textbf{Set}$ given by $A \mapsto Z \times A$ (on objects) and $f \mapsto <\mathsf{id}_{Z},f>$. The counit $\epsilon_{A}:Z \times A \longrightarrow A$ is given by $(z,a) \mapsto a$ and the comultiplication $\delta_{A}:Z \times A \longrightarrow Z \times (Z \times A)$ is given by $(z,a) \mapsto (z,(z,a))$.
+\label{exmpl:fixedSetComonad}
+\end{exmpl}
+\begin{exmpl}
+There is the sequences, or list comonad, on $\textbf{Set}$ given by sending $A \mapsto A^{\omega}$ (on objects) where $A^{\omega}$ is the set of finite sequences of elements in $A$ (i.e $[a_{1},\dots,a_{n}]$ with $n \in \omega$ and $a_{i} \in A$) and $f \mapsto ([a_{1},\dots,a_{n}] \mapsto [f(a_{1}),\dots,f(a_{n})]$). The counit is the last operation given by $[a_{1},\dots,a_{n}] \mapsto a_{n}$ and the comultiplication is given by the prefixes operation $[a_{1},\dots,a_{n}] \mapsto [[a_{1}],[a_{1},a_{2}],\dots,[a_{1},\dots,a_{n}]]$.
+\label{exmpl:listComonad}
+\end{exmpl}
 We will be studying infinite families of comonads with an additional ``grading'' relating the comonads in the family.
 \begin{defn}
 Given $(I,\leq)$ an indexing partially-ordered set, \textit{an $I$-graded family of comonads} is a set $\{\mathbb{F}_{i}\}_{i \in I}$ such that each $\mathbb{F}_{i}$ is a comonad and for every $i, j \in I$ with $i \leq j$, there exists a natural transformation $i^{i,j}:\mathbb{F}_{i} \longrightarrow \mathbb{F}_{j}$.  
 \end{defn}
-In most cases, the indexing set is the ordinal $\omega$ with its usual total order. 
+In most cases, the indexing set is the ordinal $\omega$ with its usual total order.  
+\begin{exmpl}
+For every $k \in \omega$, there is the fixed set comonad $F_{[k]}$ where $A \mapsto [k] \times A$, as in example (\ref{exmpl:fixedSetComonad}). Since $[l] \subseteq [k]$ for $l \leq k$, the components of the grading natural transformation $i^{l,k}:F_{[l]} \longrightarrow F_{[k]}$ is given by the inclusion maps $i^{l,k}_{A}:(i,a) \mapsto (i,a)$ where $i \in [l] \subseteq [k]$. 
+\end{exmpl}
+\begin{exmpl}
+For every $k \in \omega$, there is the sequences of length $\leq k$ comonad analogous to the example (\ref{exmpl:listComonad}). 
+\end{exmpl}
 \subsection{Co-Kleisli Category and Eilenberg-Moore Category}
 For every comonad $\mathbb{F}:\mathcal{C} \longrightarrow \mathcal{C}$, there exist two important categories associated with $\mathbb{F}$. The coKleisli category of $\mathbb{F}$ and the category of coalgebras, or Eilenberg-Moore category, of $\mathbb{F}$. 
 \begin{defn}
@@ -218,7 +263,7 @@ The \textit{category of coalgebras of $\mathbb{F}$} or \textit{Eilenberg-Moore c
             \square[A`\mathbb{F}A`\mathbb{F}A`\mathbb{F}\mathbb{F}A;\alpha`\alpha`\delta_{A}`\mathbb{F}\alpha]
         \efig 
         \bfig
-            \qtriangle[A`\efcomonad{k}{A}`A;\alpha`\text{id}_{A}`\epsilon_{A}]
+            \qtriangle[A`\mathbb{F}A`A;\alpha`\text{id}_{A}`\epsilon_{A}]
         \efig
         \label{eq:coalgebraLaw}
     \end{equation}
@@ -229,6 +274,6 @@ The \textit{category of coalgebras of $\mathbb{F}$} or \textit{Eilenberg-Moore c
         \efig
     \end{equation}
 \end{itemize}
-The composition law is the same as in $\mathcal{C}$ and the identity on $(A,\alpha)$ is just the $\mathcal{C}$-morphism $id_{A}:A \longrightarrow A$.
+The composition law is the same as in $\mathcal{C}$ and the identity on $(A,\alpha)$ is just the $\mathcal{C}$-morphism $\mathsf{id}_{A}:A \longrightarrow A$.
 \end{defn}
 The diagrams (\ref{eq:coalgebraLaw}) are analogous to the presentation of group actions. Namely, the diagram on the right is analogous to the action commuting with the group operation. While the diagram on the left is analogous to the identity in the group acting trivially on a set.
