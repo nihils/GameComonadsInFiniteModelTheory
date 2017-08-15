@@ -7,7 +7,7 @@
 \usepackage{amsthm}
 \usepackage{fullpage}
 \usepackage{enumitem}
-\usepackage{natbib}
+\usepackage[square,numbers]{natbib}
 \usepackage{extarrows}
 \input diagxy
 
@@ -34,6 +34,9 @@
 
 \newcommand{\Fraisse}{Fra{\"i}ss{\'e}}
 
+\let\oldiota\iota
+\renewcommand{\iota}{\dot{\oldiota}}
+
 \title{Game Comonads in Finite Model Theory}
 \author{Nihil Shah\\ Supervisor: Dr. Samson Abramsky}
 \college{Lady Margaret Hall}
@@ -42,6 +45,7 @@
 
 \begin{document}
 \maketitle
+\input{chapter1}
 \input{chapter2}
 \input{chapter3}
 \input{chapter4}
