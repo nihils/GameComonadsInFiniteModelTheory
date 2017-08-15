@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+The style file: plainnat.bst
+Database file #1: main.bib
+Warning--I didn't find a database entry for ""
+Warning--I didn't find a database entry for "Barwise"
+Warning--empty journal in Abramsky2017
+Warning--empty journal in Gradel2014
+Warning--empty journal in Rossman2008
+You've used 11 entries,
+            2773 wiz_defined-function locations,
+            667 strings with 6209 characters,
+and the built_in function-call counts, 4066 in all, are:
+= -- 355
+> -- 172
+< -- 11
++ -- 61
+- -- 50
+* -- 261
+:= -- 648
+add.period$ -- 38
+call.type$ -- 11
+change.case$ -- 45
+chr.to.int$ -- 11
+cite$ -- 25
+duplicate$ -- 229
+empty$ -- 384
+format.name$ -- 67
+if$ -- 851
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 14
+newline$ -- 67
+num.names$ -- 47
+pop$ -- 116
+preamble$ -- 1
+purify$ -- 38
+quote$ -- 0
+skip$ -- 156
+stack$ -- 0
+substring$ -- 95
+swap$ -- 14
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 101
+warning$ -- 3
+while$ -- 43
+width$ -- 0
+write$ -- 149
+(There were 5 warnings)
