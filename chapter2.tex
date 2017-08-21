@@ -18,6 +18,11 @@ A coloured graph has relational signature $\sigma = \{E,R,G,B\}$ where $E$ is th
 \begin{exmpl}
 A $m$-uniform hypergraph has signature $\sigma = \{E\}$ where $E$ is an $m$-ary relation symbol for hyperedges.
 \end{exmpl}
+For every $\sigma$-structure in a relational signature $\sigma$, we can associate a graph that will be useful for some combinatorial parameters of the structure.
+\begin{defn}
+Given a $\sigma$-structure $A$ in a relational signature $\sigma$, the \textit{Gaifman Graph of $A$}, denoted $\mathcal{G}(A)$, is the undirected graph with vertices being elements of $A$. The vertices $a,a' \in A$ are connected by edge if there exists some $R \in \sigma$ with $a,a'$ appearing in the same tuple of $R^{A}$. 
+\label{defn:gaifmanGraph}
+\end{defn}
 \begin{defn}
 Given a signature $\sigma$, a \textit{$\sigma$-structure} 
 $$A = \langle |A|, \{c_{i}^{A}\}, \{f_{i}^{A}\}, \{R_{i}^{A}\} \rangle$$ 
@@ -66,7 +71,7 @@ A,\mathbf{a} &\vDash x_{i} = x_{j} \Leftrightarrow a_{i} = a_{j} \\
  &\vDash \forall y \phi(y,\mathbf{x}) \Leftrightarrow \text{for every } a \in A,  A,a\mathbf{a} \vDash \phi(y,\mathbf{x}) 
 \end{align*}
 \end{defn}
-For every formula, $\text{var}(\phi)$ denotes the number of distinct variables, free and bound, in $\phi$. For every formula, $\text{qr}(\phi)$ denotes the quantifier rank of $\phi$. Inductively defined as:
+For every formula, $\text{var}(\phi)$ denotes the number of distinct variables, free and bound, in $\phi$. For every formula, $\text{qr}(\phi)$ denotes the quantifier rank of $\phi$. This is inductively defined as:
 \begin{eqnarray*}
 \text{qr}(x_{i} = x_{j}) = \text{qr}(R_{i}(x_{i_{1}},\dots,x_{i_{k}})) = 0 \\
 \text{qr}(\bigvee_{j \in J} \phi_{j}(\mathbf{x})) = \text{qr}(\bigwedge_{j \in J} \phi_{j}(\mathbf{x}))  = \sup_{j \in J} \text{qr}(\phi_{j}(\mathbf{x})) \\
@@ -96,13 +101,13 @@ Given a finite signature $\sigma$, then up to logical equivalence, there are onl
 \begin{defn}
 Given a $k \in \omega$, the \textit{$k$-variable logic} is $\mathcal{L}^{k}_{\infty,\omega}$.
 \end{defn}
-Note that, unlike with the case of $k$-rank logic, there are in general, infinitely many formulas, up to logical equivalence, that use $k$ distinct variables. Two other fragments that we will be studying are the modal and guarded fragments of first-order logic. These fragments are obtained by altering the $\exists$ and $\forall$ clauses in definition (\ref{defn:formula}) to be guarded by a relation $R_{w} \in \sigma$ with arity $\not= 1$. More precisely,  
+Note that, unlike with the case of $k$-rank logic, there are in general, infinitely many formulas, up to logical equivalence, that use $k$ distinct variables. Two other fragments that we will be studying are the modal and guarded fragments of first-order logic. These fragments are obtained by altering the $\exists$ and $\forall$ clauses in definition (\ref{defn:formula}) to be guarded by a relation $R_{w} \in \sigma$ with arity $\not= 1$. We can define this more precisely: 
 \begin{defn}
 A formula $\phi(\mathbf{x})$ with free variables among $\mathbf{x} = (x_{1},\dots,x_{n})$ in the \textit{guarded fragment} is recursively defined just as in (\ref{defn:formula}) but with the $\exists$ and $\forall$ clauses altered to:  
 $$ \exists \mathbf{y} (R_{w}(\mathbf{x},\mathbf{y}) \wedge \phi(\mathbf{y},\mathbf{x})) \mid \forall \mathbf{y}(R_{w}(\mathbf{x},\mathbf{y}) \rightarrow \phi(\mathbf{y},\mathbf{x}))$$
 $\{R_{w}\}$ the relation symbols in signature $\sigma$ with arity $\not= 1$, $i_{1},\dots,i_{k} \in [n]$. The $\rightarrow$ is an abbreviation, i.e. $\phi \rightarrow \psi := \neg \phi \vee \psi$ and represents `implication'. The notation $\exists \mathbf{y}$ abbreviates $\exists y_{l} \exists y_{l-1} \dots \exists y_{1}$ for $\mathbf{y} = (y_{1},\dots,y_{l})$.
 \end{defn}
-For the guarded fragment, we will a the notion of complexity, similar to quantifier rank, called guarded depth. For a guarded formula $\phi(\mathbf{x})$, $\text{gd}(\phi)$ denotes the guarded depth of $\phi$. Inductively defined as:   
+For the guarded fragment, we will a the notion of complexity, similar to quantifier rank, called guarded depth. For a guarded formula $\phi(\mathbf{x})$, $\text{gd}(\phi)$ denotes the guarded depth of $\phi$. This is inductively defined as:   
 \begin{eqnarray*}
 \text{gd}(x_{i} = x_{j}) = \text{qd}(R_{i}(x_{i_{1}},\dots,x_{i_{k}})) = 0 \\
 \text{gd}(\bigvee_{j \in J} \phi_{j}(\mathbf{x})) = \text{gd}(\bigwedge_{j \in J} \phi_{j}(\mathbf{x}))  = \sup_{j \in J} \text{gd}(\phi_{j}(\mathbf{x})) \\
@@ -113,6 +118,8 @@ Note that guarded depth $\phi$ is less than the quantifier rank of $\phi$ since 
 The \textit{modal fragment} is the guarded fragment restricted to signatures $\sigma$ with relations that have arity at most $2$. 
 \end{defn}
 We will denote the modal fragment of guarded depth $k$ of $\mathcal{L}_{\infty,\omega}$ as $\mathcal{M}^{k}_{\infty,\omega}$.
+The modal fragment is the image of translating modal logic (i.e. propositional logic enriched with modal operators $\amssquare_{i}$ and $\lozenge_{i}$). The semantics of modal logic is a transition system or Kripke structure, where each pair of modal operators (e.g. $\amssquare_{i}$ and $\lozenge_{i}$) has an associated binary accessibility relation and each node in the transition system satisfies a certain set of propositions. In the translation to the modal fragment, the binary relations in $\sigma$ are the accessibilty relations and the unary relations are the propositions. Modal logic, due to it's nice decidability properties and possible worlds interpretation, have found application in many fields of computer science and philosophy. The guarded fragment is the image of translating polymodal logic. Polymodal logic is an generalization of modal logic where accessibility relations are not just binary, but pick out accessibility regions represented by hyperredges. \\~\\    
+In addition to fragments of $\mathcal{L}_{\infty,\omega}$, we will also consider fragments of a extended logic $\mathcal{L}_{\infty,\omega}(\mathsf{Cnt})$. This logic $\mathcal{L}_{\infty,\omega}(\mathsf{Cnt})$ adds counting quantifiers $\exists_{\leq n}x_{j}$, $\exists_{\geq n}x_{j}$ for every $n \in \mathbb{N}$ and variable $x_{j}$. The semantics of $\exists_{\leq n}\phi(x)$ is $A \vDash \exists_{\leq n}x \phi(x)$ if and only if there are at least $n$ elements $a \in A$ such that $A,a \vDash \phi(x)$. We extend the notion of quantifier rank to include counting quantifiers, $\mathsf{qr}(\exists_{\leq n}x\phi(x)) = \mathsf{qr}(\exists_{\geq n}x\phi(x)) = \mathsf{qr}(x) + 1$.  
 \subsection{Inexpressiblity and Games}
 The primary question, once a logic $\mathcal{L}$ is defined, is to understand what properties of structures can be expressed in $\mathcal{L}$ and what properties are impossible to express in $\mathcal{L}$. In particular, finite model theory is concerned with what properties of \textit{finite} structures can be expressed in a given logic. Although mathematicians have intuitive idea of what `property' means, we will be more explicit:
 \begin{defn}
@@ -122,9 +129,15 @@ such that for $A,B \in \mathcal{C}$:
 $$A \cong B \Rightarrow P(A) = P(B)$$ 
 where $\mathcal{C}$ is a class of all finite $\sigma$-structures.
 \end{defn}
-Intuitively, $P(A) = 1$ asserts that some property is true of the structure $A$. To prove a property $P$ is not expressible in signature $\sigma$, we need to exhibit two $\sigma$-structures $A$,$B$ which from the perspective of the logic $\mathcal{L}$ are ``equivalent'', but differ by property $P$ (i.e. $P(A) = 1$ and $P(B) = 0$). Of course, by the definiton of property given, $\cong$ is too strong of an equivalence to show inexpressiblity. For a given logic, we define what it means to be equivalent from the perspective of $\mathcal{L}$.  
+Intuitively, $P(A) = 1$ asserts that some property is true of the structure $A$. A logic can express a property when there exists a sentence in the logic that captures all of the structures where the propety holds. 
+\begin{defn}
+Given a logic $\mathcal{L}$, signature $\sigma$ and property $P$ \textit{$P$ is expressible in $\mathcal{L}$ with signature $\sigma$} if there exists a sentence $\phi_{P} \in \mathcal{L}$ such that for all $\sigma$-structures $A$,
+$$A \vDash \phi_{P} \Leftrightarrow P(A) = 1$$
+\end{defn}
+To prove a property $P$ is not expressible in signature $\sigma$, we need to exhibit two $\sigma$-structures $A$,$B$ which from the perspective of the logic $\mathcal{L}$ are ``equivalent'', but differ by property $P$ (i.e. $P(A) = 1$ and $P(B) = 0$). Of course, by the definiton of property given, $\cong$ is too strong of an equivalence to show inexpressiblity. For a given logic, we define what it means to be equivalent from the perspective of $\mathcal{L}$.  
 \begin{defn}
 Two $\sigma$ structures $A,B$ are \textit{equivalent in logic $\mathcal{L}$}, denoted $A \equiv^{\mathcal{L}} B$ if for all sentences $\phi \in \mathcal{L}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$.  
+\label{defn:equivLogic}
 \end{defn}
 Hence, for a property $\mathcal{P}$ to inexpressible in signature $\sigma$ and logic $\mathcal{L}$, we must find two $\sigma$-structures $A,B$ such that $P(A) = 1$ and $P(B) = 0$ while $A \equiv^{\mathcal{L}} B$. The purpose of ``back-and-forth'' style games in finite and classical model theory is to provide a methodology to prove equivalence in a logic $\mathcal{L}$.  
 \section{Category Theory}
@@ -133,7 +146,7 @@ Category theory is the general theory of mathematical structures and structure-p
 \begin{defn}
 A \textit{category} $\mathcal{C}$ is:
 \begin{itemize}
-    \item a class of objects, denoted (somewhat ambigously) as $\mathcal{C}$
+    \item a class of objects, denoted (somewhat ambiguously) as $\mathcal{C}$
     \item a class of $\mathcal{C}$-morphisms (or arrows) $f:A \longrightarrow B$ for every object $A,B \in \mathcal{C}$, denoted $\text{Hom}_{\mathcal{C}}(A,B)$.
 \end{itemize}
         such that: 
@@ -201,16 +214,16 @@ An endofunctor $\mathbb{F}:\mathcal{C} \rightarrow \mathcal{C}$ is called \texti
 \label{eq:comultiplication}
 \end{equation}
 \begin{equation}
-\bfig
-    \square[\mathbb{F}A`\mathbb{F}\mathbb{F}A`\mathbb{F}\mathbb{F}A`\mathbb{F}A;\delta_{A}`\delta_{A}`\mathbb{F}\epsilon_{A}`\epsilon_{\mathbb{F}A}]
+\bfig 
+    \square[\mathbb{F}A`\efcomonad{k}{\mathbb{F}A}`\efcomonad{k}{\mathbb{F}A}`\mathbb{F}A;\delta_{A}`\delta_{A}`\efcomonad{k}{\epsilon_{A}}`\epsilon_{\mathbb{F}A}] 
     \morphism(0,500)/=/<500,-500>[\mathbb{F}A`\mathbb{F}A;]
-\efig
+\efig 
 \label{eq:counit}
 \end{equation}
 The two diagrams are analogous to the axioms of a monoid. Namely, the diagram (\ref{eq:comultiplication}) expresses the comultiplication is ``coassociative'. The diagram (\ref{eq:counit}) is analogous to the left and right identity laws of monoids.
 \end{defn}
 \begin{exmpl}
-For a fixed set $Z$, there is the comonad on $\textbf{Set}$ given by $A \mapsto Z \times A$ (on objects) and $f \mapsto <\mathsf{id}_{Z},f>$. The counit $\epsilon_{A}:Z \times A \longrightarrow A$ is given by $(z,a) \mapsto a$ and the comultiplication $\delta_{A}:Z \times A \longrightarrow Z \times (Z \times A)$ is given by $(z,a) \mapsto (z,(z,a))$.
+For a fixed set $Z$, there is the comonad on $\textbf{Set}$ given by $A \mapsto Z \times A$ (on objects) and $f \mapsto \langle \mathsf{id}_{Z},f\rangle$. The counit $\epsilon_{A}:Z \times A \longrightarrow A$ is given by $(z,a) \mapsto a$ and the comultiplication $\delta_{A}:Z \times A \longrightarrow Z \times (Z \times A)$ is given by $(z,a) \mapsto (z,(z,a))$.
 \label{exmpl:fixedSetComonad}
 \end{exmpl}
 \begin{exmpl}
@@ -223,10 +236,10 @@ Given $(I,\leq)$ an indexing partially-ordered set, \textit{an $I$-graded family
 \end{defn}
 In most cases, the indexing set is the ordinal $\omega$ with its usual total order.  
 \begin{exmpl}
-For every $k \in \omega$, there is the fixed set comonad $F_{[k]}$ where $A \mapsto [k] \times A$, as in example (\ref{exmpl:fixedSetComonad}). Since $[l] \subseteq [k]$ for $l \leq k$, the components of the grading natural transformation $i^{l,k}:F_{[l]} \longrightarrow F_{[k]}$ is given by the inclusion maps $i^{l,k}_{A}:(i,a) \mapsto (i,a)$ where $i \in [l] \subseteq [k]$. 
+For every $k \in \omega$, there is the fixed set comonad $F_{[k]}$ where $A \mapsto [k] \times A$, as in example (\ref{exmpl:fixedSetComonad}). Since $[l] \subseteq [k]$ for $l \leq k$, the components of the grading natural transformation are given by the inclusion maps. 
 \end{exmpl}
 \begin{exmpl}
-For every $k \in \omega$, there is the sequences of length $\leq k$ comonad analogous to the example (\ref{exmpl:listComonad}). 
+For every $k \in \omega$, there is the sequences of length $\leq k$ comonad analogous to the example (\ref{exmpl:listComonad}). The components of the grading natural transformation are given by the inclusion maps. 
 \end{exmpl}
 \subsection{Co-Kleisli Category and Eilenberg-Moore Category}
 For every comonad $\mathbb{F}:\mathcal{C} \longrightarrow \mathcal{C}$, there exist two important categories associated with $\mathbb{F}$. The coKleisli category of $\mathbb{F}$ and the category of coalgebras, or Eilenberg-Moore category, of $\mathbb{F}$. 
@@ -242,14 +255,14 @@ such that
     \begin{equation}
         \epsilon_{A}:\mathbb{F}A \longrightarrow A
     \end{equation}
-    \item For two $\mathcal{C}$-morphisms $f:\mathbb{F}A \longrightarrow B$ and $g:\mathbb{F}B \longrightarrow C$ (i.e. two $\mathcal{K}(F)$ morphisms) we use the comonad structure to compose them to produce a morphism $\mathbb{F}A \longrightarrow C$:
+    \item For two $\mathcal{C}$-morphisms $f:\mathbb{F}A \longrightarrow B$ and $g:\mathbb{F}B \longrightarrow C$ (i.e. two $\mathcal{K}(F)$ morphisms) we use the comonad structure to compose them to produce a morphism $g \circ_{\mathcal{K}} f:\mathbb{F}A \longrightarrow C$:
     \begin{equation} 
         \mathbb{F}A \xlongrightarrow{\delta_{A}} \mathbb{F}\mathbb{F}A \xlongrightarrow{\mathbb{F}f} \mathbb{F}B \xlongrightarrow{g} C 
     \label{eq:coextension}
     \end{equation}
 \end{enumerate}
 \end{defn}
-The definition (\ref{eq:coextension}) makes use of the morphism $\mathbb{F}f \circ \delta_{A}$ to define the composition law in $\mathcal{K}(\mathbb{F})$. This operation is used often and even provides an alternative set of axioms of for the coKleisli category. 
+The definition (\ref{eq:coextension}) makes use of the morphism $\mathbb{F}f \circ \delta_{A}$ to define the composition law in $\mathcal{K}(\mathbb{F})$. This operation is used often and even provides an alternative set of axioms of for the coKleisli category \cite{Moggi1991}. 
 \begin{defn}
 The operation $f \mapsto \mathbb{F}f \circ \delta_{A}$ which sends $f:\mathbb{F}A \longrightarrow B$ to $f^{*}: \mathbb{F}A \longrightarrow \mathbb{F}B$ is called the \textit{Kleisli coextension}. 
 \end{defn}
@@ -276,4 +289,10 @@ The \textit{category of coalgebras of $\mathbb{F}$} or \textit{Eilenberg-Moore c
 \end{itemize}
 The composition law is the same as in $\mathcal{C}$ and the identity on $(A,\alpha)$ is just the $\mathcal{C}$-morphism $\mathsf{id}_{A}:A \longrightarrow A$.
 \end{defn}
+\begin{exmpl}
+For the fixed set comonad $F_{Z}$ in example (\ref{exmpl:fixedSetComonad}), the coalgebras correspond to functions $f:A \longrightarrow Z$. The colgebra $\alpha_{f}:A \longrightarrow Z \times A$, for a function $f:A \longrightarrow Z$, is given by $a \mapsto (f(a),a)$.  
+\end{exmpl}
+\begin{exmpl}
+For the list comonad in example (\ref{exmpl:listComonad}), the coalgebras correspond to tree orders $\leq$ on $A$. The coalgebra $\alpha:A \longrightarrow A^{\omega}$, for a tree order $\leq$, is given by sending $a \in A$ to it's list of $\leq$-predecessers.  
+\end{exmpl}
 The diagrams (\ref{eq:coalgebraLaw}) are analogous to the presentation of group actions. Namely, the diagram on the right is analogous to the action commuting with the group operation. While the diagram on the left is analogous to the identity in the group acting trivially on a set.

@@ -1,4 +1,4 @@
-\begin{thebibliography}{11}
+\begin{thebibliography}{13}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -17,6 +17,12 @@ S.~Brookes and S.~Geva.
 \newblock In P.J.M.P. Fourman and A.~Pitts, editors, \emph{Applications of
   Categories in Computer Science}, pages 1--40. Cambridge University Press,
   1992.
+
+\bibitem[Gabbay(1981)]{Gabbay1981}
+D.~Gabbay.
+\newblock {Expressive functional completeness in tense logic}.
+\newblock In U.M. B{\"o}nnich, editor, \emph{Aspects of Philosophical Logic},
+  pages 91--117. D. Reidel Publishing Company, 1981.
 
 \bibitem[Gr{\"{a}}del and Otto(2014)]{Gradel2014}
 Erich Gr{\"{a}}del and Martin Otto.
@@ -45,6 +51,11 @@ Neil Immerman.
 Neil Immerman.
 \newblock \emph{{Descriptive Complexity}}.
 \newblock Springer-Verlag, 1998.
+
+\bibitem[Landry(2017)]{Landry2017}
+E.~Landry, editor.
+\newblock \emph{{Category Theory for the Working Philosopher}}.
+\newblock Oxford University Press, 2017.
 
 \bibitem[Libkin(2004)]{Libkin2004}
 Leonid Libkin.
