@@ -10,7 +10,7 @@ At the end of the $k$-round game, $k$-tuples $(a_{1},\dots,a_{k})$ and $(b_{1},\
 The following are equivalent:
 \begin{itemize}
 \item Duplicator has a winning strategy in the symmetric $k$-round EF game 
-\item $A \equiv^{\mathcal{L}_{\omega,k}} B$, i.e. for every sentence $\phi \in \mathcal{L}_{\omega,k}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$
+\item $\equivL{A}{B}{\mathcal{L}_{\omega,k}}$, i.e. for every sentence $\phi \in \mathcal{L}_{\omega,k}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$
 \end{itemize}
 \end{prop}
 The goal of the EF comonad is to construct a $\sigma$-structure $\efcomonad{k}{A}$ from a $\sigma$-structure $A$, that ``internalizes'' the asymmetric and symmetric $k$-round EF games into the category $\mathcal{R}(\sigma)$.  
@@ -23,7 +23,7 @@ Define, for every $\sigma$-structure $A$, $\epsilon_{A}:\efcomonad{k}{A} \longri
 With this definitions in place, we can define a $\sigma$-structure on $\efcomonad{k}{A}$. Suppose $R \in \sigma$ is a $m$-ary relation, the we define the interpretation of $R^{\efcomonad{k}{A}}$ such that for every $s_{1},\dots,s_{m} \in |\efcomonad{k}{A}|$,
 \begin{align}
 (s_{1},\dots,s_{m}) \in R^{\efcomonad{k}{A}} &\Leftrightarrow \text{ for every $i,j \leq m$, } s_{i} \sqsubseteq s_{j} \text{ or } s_{j} \sqsubseteq s_{i} & \label{eq:R1st} \\ 
-&\text{ and } R^{A}(\epsilon_{A}(s_{1}),\dots,\epsilon_{A}(s_{m})) & \label{eq:R2nd}
+&\text{ and } (\epsilon_{A}(s_{1}),\dots,\epsilon_{A}(s_{m})) \in R^{A} & \label{eq:R2nd}
 \end{align}
 \begin{defn}
 Given a morphism $f:A \longrightarrow B$, define the morphism $\efcomonad{k}{f}:\efcomonad{k}{A} \longrightarrow \efcomonad{k}{B}$ by $[a_{1},\dots,a_{n}] \mapsto [f(a_{1}),\dots,f(a_{n})]$
@@ -163,7 +163,7 @@ Since $u(s) = u'(s)$ for all $s \in \efcomonad{\omega}{A}$, $u = u'$ so $u$ is u
 \end{proof}
 \end{prop}
 \section{Positional Form and Equivalences}\label{sec:positionalFormEF}
-In order to solidify the connection between the construction $\efcomonad{k}{}$ and the Ehrenfreuct-{\Fraisse} game, we have to encode the strategies in the game into ``positional form''. Intuitively, the positional form represents the set of positions of Spoiler and Duplicators' choices after a fixed number of rounds. This positional form is similar to the forth part of graded ``back-and-forth systems'' that are used in model theory texts to prove that the $k$-round symmetric EF game characterizes $A \equiv^{\mathcal{L}_{\omega,k}} B$. \\~\\
+In order to solidify the connection between the construction $\efcomonad{k}{}$ and the Ehrenfreuct-{\Fraisse} game, we have to encode the strategies in the game into ``positional form''. Intuitively, the positional form represents the set of positions of Spoiler and Duplicators' choices after a fixed number of rounds. This positional form is similar to the forth part of graded ``back-and-forth systems'' that are used in model theory texts to prove that the $k$-round symmetric EF game characterizes $\equivL{A}{B}{\mathcal{L}_{\omega,k}}$. \\~\\
 Let $\Gamma_{k}(A,B) = (A \times B)^{\leq k}$ (i.e. sequences in pairs of elements in $A,B$ with length $\leq k$). Recall that for a $\sigma$-morphism $f:\efcomonad{k}{A} \longrightarrow B$, there exists the Klesli coextension $f^{*}:\efcomonad{k}{A} \longrightarrow \efcomonad{k}{B}$. Define the set function $\theta_{f}:|\efcomonad{k}{A}| \longrightarrow \Gamma_{k}(A,B)$ by $s = [a_{1},\dots,a_{n}] \mapsto [(a_{1},b_{1}),\dots,(a_{n},b_{n})]$ where $f^{*}(s) = [b_{1},\dots,b_{n}]$. Rephrasing, $\theta_{f} = z \circ \langle \text{id}_{\efcomonad{k}{A}},f^{*} \rangle \circ \Delta_{A}$ where $z$ is the `zipper' function sending two sequences of equal length to the natural sequence of pairs, and $\Delta_{A}:A \longrightarrow A \times A$ is the natural diagonal function.  
 \begin{defn}
 $S \subseteq \Gamma_{k}(A,B)$ is a \textit{strategy in positional form} if $S$ satisfies the following conditions:
@@ -183,20 +183,20 @@ $$S_{f} = \{\theta_{f}(s) \mid s \in \efcomonad{k}{A}\} \cup \{[]\}$$
 \begin{itemize}
 \item $[] \in S_{f}$, so (\ref{eq:S1st}) is satisfied.
 \item Suppose $\chi \in S_{f}$ with $|\chi| < k$ and $a \in A$. By definition of $S_{f}$ either $\chi = []$ or $\chi = \theta_{f}(s)$ for some $s \in \efcomonad{k}{A}$. In the first case, consider $\theta_{f}([a]) = [(a,b)] \in S$ with $b = f([a])$. In the second case, consider $\chi' = \theta_{f}(s[a])$. Since $|\chi| < k$, the length $|s| = j$ and the length $|s[a]| = j+1 \leq k$. Hence, $s[a]$ is indeed in $\efcomonad{k}{A}$. Therefore, $\chi' \in S_{f}$ and $\chi' = \chi[(a,b)]$ where $b = f(s[a])$.  
-\item Suppose $\chi \in S_{f}$, then $\chi = \theta_{f}(s)$ (the $\chi = []$ case is trivial) for some $s \in \efcomonad{k}{A}$. Since $s \in \efcomonad{k}{A}$ for some $n \leq k$, $s = [a_{1},\dots,a_{n}]$ with $a_{i} \in A$ by definition of $\efcomonad{k}{A}$. Let $s_{i} = [a_{1}.\dots,a_{i}]$ for all $i \leq n$, then
+\item Suppose $\chi \in S_{f}$, then $\chi = \theta_{f}(s)$ (the $\chi = []$ case is trivial) for some $s = [a_{1},\dots,a_{n}] \in \efcomonad{k}{A}$. Let $s_{i} = [a_{1}.\dots,a_{i}]$ be the $i$-th element of $\delta_{A}(s) \in \efcomonad{k}{\efcomonad{k}{A}}$, then
 $$ [] \longrightarrow \theta_{f}(s_{1}) \longrightarrow \dots \longrightarrow \theta_{f}(s_{n}) = \chi$$
-\end{itemize}
 Hence, $S_{f}$ is reachable
+\end{itemize}
 \end{proof}
 \label{prop:fToPosFormEF}
 \end{prop}
 \begin{prop}
 Conversely, for every strategy in positional form $S$ there exists a $f:\efcomonad{k}{A} \rightarrow B$ such that $S = S_{f}$
 \begin{proof}
-$S_{f} \subseteq S$ The strategy is to construct an appropriate $f$. Define $\pi_{1}:\Gamma_{k}(A,B) \longrightarrow \efcomonad{k}{A}$ by $\pi_{1}:[(a_{1},b_{1}),\dots,(a_{n},b_{n})] \longrightarrow [a_{1},\dots,a_{n}]$ and $\pi_{2}:\Gamma_{k}(A,B) \longrightarrow \efcomonad{k}{B}$ by $\pi_{2}:[(a_{1},b_{1}),\dots,(a_{n},b_{n})] \longrightarrow [b_{1},\dots,b_{n}]$. We construct $f$ by recursion, up to $k$, on the length of a play $s \in \efcomonad{k}{A}$. \\ 
+$S_{f} \subseteq S$ The approach is to construct an appropriate $f$. Define $\pi_{1}:\Gamma_{k}(A,B) \longrightarrow \efcomonad{k}{A}$ by $\pi_{1}:[(a_{1},b_{1}),\dots,(a_{n},b_{n})] \longrightarrow [a_{1},\dots,a_{n}]$ and $\pi_{2}:\Gamma_{k}(A,B) \longrightarrow \efcomonad{k}{B}$ by $\pi_{2}:[(a_{1},b_{1}),\dots,(a_{n},b_{n})] \longrightarrow [b_{1},\dots,b_{n}]$. We construct $f$ by recursion, up to $k$, on the length of a play $s \in \efcomonad{k}{A}$. \\ 
 \textit{Base Case:} Suppose $s = [a]$ for $a \in A$. By (\ref{eq:S1st}) and (\ref{eq:S2nd}), there exists a unique $b$ such that $[a,b] \in S$. Let $f(s) = b$. \\    
 \textit{Recursive Step:} Assume for the recursion, that $f(s)$ is defined for $|s| = n < k$ and that $\theta_{f}(s) \in S$. Consider $s' = s[a]$. By (\ref{eq:S2nd}), there exists a unique $b \in B$ such that $\chi' = \theta_{f}(s)[a,b]$. Let $f(s') = b$. \\      
-$S \subseteq S_{f}$ For every $\chi$, we need to show that there exists an $s \in \efcomonad{k}{A}$ such that $\theta_{f}(s) = \chi$ for the $f$ constructed above. Consider $s = \pi_{1}(\chi)$. By construction, $\theta_{f}(s) = \theta_{f}(\pi_{1}(\chi)) = \chi$.    
+$S \subseteq S_{f}$ For every $\chi$, we need to show that there exists an $s \in \efcomonad{k}{A}$ such that $\theta_{f}(s) = \chi$ for the $f$ constructed above. Consider $s = \pi_{1}(\chi)$. By construction, $\theta_{f}(s) = \theta_{f}(\pi_{1}(\chi)) = \chi$.
 \end{proof}
 \label{prop:posFormToFEF}
 \end{prop}
@@ -213,27 +213,27 @@ If $A,B$ are pure $\sigma'$-structures and $f:\efcomonad{k}{A} \rightarrow B$ is
 $\Rightarrow$ Suppose $\chi \in S_{f}$, then by definition of $S_{f}$, $\chi = []$ or $\chi = \theta_{f}(s)$ for some $s \in \efcomonad{k}{A}$. If $\chi = []$, then it is vacuously true that $\chi$ is a partial homomorphism (i.e. winning for Duplicator). If $\chi = \theta_{f}(s)$, then there exists some $s \in \efcomonad{k}{A}$ such that $s = [a_{1},\dots,a_{n}]$ where $f([a_{1},\dots,a_{i}]) = b_{i}$ and $\chi = [(a_{1},b_{1}),\dots,(a_{n},b_{n})]$ for all $i = 1,\dots,n$. For brevity, let $s_{i} = [a_{1},\dots,a_{i}] \sqsubseteq s$ (i.e. $s_{i}$ is the $i$-th component of $\delta_{A}(s)$). \\
 Suppose $R \in \sigma$ is a $m$-ary relation symbol, and $i_{1},\dots,i_{m} \in \{1,\dots,n\}$ and $R^{A}(a_{i_{1}},\dots,a_{i_{m}})$, then:
 \begin{align*}
-R^{A}(a_{i_{1}},\dots,a_{i_{m}}) &\Rightarrow R^{A}(\epsilon_{A}(s_{i_{1}}),\dots,\epsilon_{A}(s_{i_{m}})) & \text{by defn of $\epsilon_{A}$} \\
+(a_{i_{1}},\dots,a_{i_{m}}) \in R^{A} &\Rightarrow (\epsilon_{A}(s_{i_{1}}),\dots,\epsilon_{A}(s_{i_{m}})) \in R^{A} & \text{by defn of $\epsilon_{A}$} \\
 \text{(and } s_{i_{\mu}} \sqsubseteq s_{i_{\nu}} \text{ or } s_{i_{\nu}} \sqsubseteq s_{i_{\mu}} &\text{ for all } \nu,\mu = 1,\dots,m\text{)} &\text{by each } s_{i_{*}} \sqsubseteq s \\
-&\Rightarrow R^{\efcomonad{k}{A}}(s_{i_{1}},\dots,s_{i_{m}}) & \text{by interpretation of $R$ on $\efcomonad{k}{A}$} \\
-&\Rightarrow R^{B}(f(s_{i_{1}}),\dots,f(s_{i_{m}})) & \text{by hypothesis $f$ is $\sigma$-morphism}\\
-&\Rightarrow R^{B}(b_{i_{1}},\dots,b_{i_{m}}) 
+&\Rightarrow (s_{i_{1}},\dots,s_{i_{m}}) \in R^{\efcomonad{k}{A}} & \text{by interpretation of $R$ on $\efcomonad{k}{A}$} \\
+&\Rightarrow (f(s_{i_{1}}),\dots,f(s_{i_{m}})) \in R^{B} & \text{by hypothesis $f$ is $\sigma$-morphism}\\
+&\Rightarrow (b_{i_{1}},\dots,b_{i_{m}}) \in R^{B}
 \end{align*}
 Hence, $\chi$ preserves relations.
 Moreover, for $a_{i}$ and $a_{j}$ appearing in $s$ with $a_{i} = a_{j}$, then:
 \begin{align*}
-a_{i} = a_{j}       &\Rightarrow I^{A}(a_{i},a_{j}) & \text{by $A$ a pure $\sigma'$-structure} \\
-&\Rightarrow I^{A}(\epsilon_{A}(s_{i}),\epsilon_{A}(s_{j})) & \text{by defn of $\epsilon_{A}$} \\
+a_{i} = a_{j}       &\Rightarrow (a_{i},a_{j}) \in I^{A} & \text{by $A$ a pure $\sigma'$-structure} \\
+&\Rightarrow (\epsilon_{A}(s_{i}),\epsilon_{A}(s_{j})) \in I^{A} & \text{by defn of $\epsilon_{A}$} \\
 \text{(and } s_{i} \sqsubseteq s_{j} &\text{ or } s_{j} \sqsubseteq s_{i}\text{)} &\text{by each } s_{*} \sqsubseteq s \\
-&\Rightarrow I^{\efcomonad{k}{A}}(s_{i},s_{j}) & \text{by interpretation of $I$ on $\efcomonad{k}{A}$} \\
-&\Rightarrow I^{B}(f(s_{i}),f(s_{j})) & \text{by hypothesis $f$ is a $\sigma'$-morphism} \\
-&\Rightarrow I^{B}(b_{i},b_{j}) \\
+&\Rightarrow (s_{i},s_{j}) \in I^{\efcomonad{k}{A}} & \text{by interpretation of $I$ on $\efcomonad{k}{A}$} \\
+&\Rightarrow (f(s_{i}),f(s_{j})) \in I^{B} & \text{by hypothesis $f$ is a $\sigma'$-morphism} \\
+&\Rightarrow (b_{i},b_{j}) \in I^{B}\\
 &\Rightarrow b_{i} = b_{j} & \text{by $B$ a pure $\sigma'$-structure}
 \end{align*}
 Hence, $\chi$ is a well-defined partial function.
 Therefore, $\chi$ is indeed a partial homomorphism. Hence, for all $\chi \in S_{f}$, $\chi$ is winning for Duplicator. Therefore, by definition, $S_{f}$ is winning for Duplicator.
 \\~\\
-$\Leftarrow$ Suppose $(s_{1},\dots,s_{m}) \in R^{\efcomonad{k}{A}}$ for $R \in \sigma'$ (including $I$), then by the interpretation of $R$ on $\efcomonad{k}{A}$, there exists some prefix order greatest element $s \in \{s_{1},\dots,s_{m}\}$ such that for all $i$, $s_{i} \sqsubseteq s$. Consider $\chi = \theta_{f}(s) \in S_{f}$. By $s_{i} \sqsubseteq s$ and definition of $\theta_{f}$, $(\epsilon_{A}(s_{1}),f(s_{1})),\dots, (\epsilon_{A}(s_{m}),f(s_{m}))$ appear in $\chi$. Since $R^{A}(\epsilon_{A}(s_{1}),\dots,\epsilon_{A}(s_{m}))$ and $\chi$ is a partial homomorphism (i.e. winning for Duplicator), $R^{B}(f(s_{1}),\dots,f(s_{m}))$. Hence, $f$ is a $\sigma'$-morphism.
+$\Leftarrow$ Suppose $(s_{1},\dots,s_{m}) \in R^{\efcomonad{k}{A}}$ for $R \in \sigma'$ (including $I$), then by the interpretation of $R$ on $\efcomonad{k}{A}$, there exists some prefix order greatest element $s \in \{s_{1},\dots,s_{m}\}$ such that for all $i$, $s_{i} \sqsubseteq s$. Consider $\chi = \theta_{f}(s) \in S_{f}$. By $s_{i} \sqsubseteq s$ and definition of $\theta_{f}$, $(\epsilon_{A}(s_{1}),f(s_{1})),\dots, (\epsilon_{A}(s_{m}),f(s_{m}))$ appear in $\chi$. Since $(\epsilon_{A}(s_{1}),\dots,\epsilon_{A}(s_{m})) \in R^{A}$ and $\chi$ is a partial homomorphism (i.e. winning for Duplicator), $(f(s_{1}),\dots,f(s_{m})) \in R^{B}$. Hence, $f$ is a $\sigma'$-morphism.
 \end{proof}
 \label{thm:toPositionalFormEF}
 \end{thm}
@@ -285,7 +285,7 @@ Straightforward from theorem (\ref{thm:toPositionalFormEF}) and proposition (\re
 \label{cor:forthOneEF}
 \end{cor}
 \begin{cor}
-There exists $\sigma'$-morphisms $f:\efcomonad{k}{A} \longrightarrow B$, $g:\efcomonad{k}{B} \longrightarrow B$ if and only if $A \equiv^{\exists^{+}\mathcal{L}_{\omega,k}} B$. 
+There exists $\sigma'$-morphisms $f:\efcomonad{k}{A} \longrightarrow B$, $g:\efcomonad{k}{B} \longrightarrow B$ if and only if $\equivL{A}{B}{\exists^{+}\mathcal{L}_{\omega,k}}$. 
 \begin{proof}
 Recall definition (\ref{defn:equivLogic}) and apply above corollary (\ref{cor:forthOneEF}) to $f$ and $g$.  
 \end{proof}
@@ -294,29 +294,45 @@ Recall definition (\ref{defn:equivLogic}) and apply above corollary (\ref{cor:fo
 \label{prop:toSyntaxEF}
 \end{prop}
 \subsection{Equivalence $\mathcal{L}_{\omega,k}$}
-The comonad $\efcomonad{k}{}$ also captures equivalence $\equiv^{\mathcal{L}_{\omega,k}}$ in the full $k$-rank fragment of first-order logic. Equivalence in this logic is given by a winning strategy for Duplicator in the symmetric $k$-round EF game. To formalize this in terms of $\sigma$-morphisms, we need winning strategies for Duplicator in the asymmetric game from $A$ to $B$, $f:\efcomonad{k}{A} \longrightarrow B$, and the asymmetric game from $B$ to $A$, $g:\efcomonad{k}{B} \longrightarrow A$, that are `sufficiently compatible', in positional form.  That is, these morphisms must form a back-and-forth system of partial isomorphisms. More precisely, for every pair of pure $\sigma'$-structures $A,B$, the positional forms are posets $\Gamma_{k}(A,B)$ and $\Gamma_{k}(B,A)$ ordered by $\sqsubseteq$. There is a canonical monotone function $\mathsf{swap}:\Gamma_{k}(A,B) \longrightarrow \Gamma_{k}(B,A)$ given by $[(a_{i},b_{i})] \longmapsto [(b_{i},a_{i})]$. The condition that $f$ and $g$ are compatible, in positional form, can be phrased as $\mathsf{swap}(S_{f}) = S_{g}$ and $\mathsf(S_{g}) = S_{f}$. \\ 
+The comonad $\efcomonad{k}{}$ also captures equivalence $\equivL{A}{B}{\mathcal{L}_{\omega,k}}$ in the full $k$-rank fragment of first-order logic. Equivalence in this logic is given by a winning strategy for Duplicator in the symmetric $k$-round EF game. To formalize this in terms of $\sigma$-morphisms, we need winning strategies for Duplicator in the asymmetric game from $A$ to $B$, $f:\efcomonad{k}{A} \longrightarrow B$, and the asymmetric game from $B$ to $A$, $g:\efcomonad{k}{B} \longrightarrow A$, that are `sufficiently compatible', in positional form.  That is, these morphisms must form a back-and-forth system of partial isomorphisms. More precisely, for every pair of pure $\sigma'$-structures $A,B$, the positional forms are posets $\Gamma_{k}(A,B)$ and $\Gamma_{k}(B,A)$ ordered by $\sqsubseteq$. There is a canonical `swap' monotone function $()^{-}:\Gamma_{k}(A,B) \longrightarrow \Gamma_{k}(B,A)$ given by $[(a_{i},b_{i})]^{-} = [(b_{i},a_{i})]$. The condition that $f$ and $g$ are compatible, in positional form, can be phrased as $(S_{f})^{-} = S_{g}$ and $(S_{g})^{-} = S_{f}$. \\ 
 %This can also be phrased in terms of $f$ and $g$ directly. For $f:\efcomonad{k}{A} \longrightarrow B$, the map $\theta_{f}:\efcomonad{k}{A} \rightarrow \Gamma_{k}(A,B)$ is a monotone function (i.e. $s \sqsubseteq s' \Rightarrow \theta_{f}(s) \subseteq \theta_{f}(s')$) and similarly for $\theta_{g}$. The $\sigma'$-morphisms are compatible if $f^{*} \circ \theta_{g} = \mathsf{swap} \circ \theta_{f}$ and $g^{*} \circ \theta_{f} = \mathsf{swap} \circ \theta_{g}$. 
 To show this result, we modify the proof for (\ref{prop:toSyntaxEF}).  
 \begin{prop}
 For all $k \in \omega$, the following are equivalent:
 \begin{enumerate}[label=(\arabic*)$_{k}$]
-\item $A \equiv^{\mathcal{L}_{\omega,k}} B$, i.e. for every $\phi \in \mathcal{L}_{\omega,k}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$
-\item There exists a strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ such that $S$ is winning for Duplicator and $\mathsf{swap}(S)$ is  winning for Duplicator. 
+\item $\equivL{A}{B}{\mathcal{L}_{\omega,k}}$, i.e. for every $\phi \in \mathcal{L}_{\omega,k}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$
+\item There exists a strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ such that $S$ is winning for Duplicator and $(S)^{-}$ is winning for Duplicator. 
 \end{enumerate}
 \begin{proof}
 $\Rightarrow$ Repeat the proof for the $\Rightarrow$-direction of proposition (\ref{prop:toSyntaxEF}), but consider the full rank-$k$ 1-type of $a \in A$:
 $$\text{tp}^{k}_{1}(a) := \{\psi(x) \in \mathcal{L}_{\omega,k}: A,a \vDash \psi(x) \} $$ 
 This type is still isolated by a formula $\alpha(x)$ and proceed with the proof using this $\alpha(x)$. \\
-$\Leftarrow$ Repeat the proof for the $\Leftarrow$-direction of proposition (\ref{prop:toSyntaxEF}), but with the additional $\neg$ and $\forall$ cases. For the $\neg$-case, assume for the inductive hypothesis that given formula $\psi(\mathbf{x})$ with free variables among $\mathbf{x}$ in $\mathcal{L}_{\omega,k+1}$, there exists $\mathbf{a} = (a_{1},\dots,a_{n}) \in A^{n}$ such that $A,\mathbf{a} \vDash \psi(\mathbf{x}) \Leftrightarrow B,\mathbf{b} \vDash \psi(\mathbf{x})$ for some $\chi = [(a_{1},b_{1}),\dots,(a_{n},b_{n})] \in S$ and $\mathbf{b} = (b_{1},\dots,b_{n})$, then:
+$\Leftarrow$ Repeat the proof for the $\Leftarrow$-direction of proposition (\ref{prop:toSyntaxEF}), but with the additional $\neg$ and $\forall$ cases and modified base case. For the base case, by (\ref{eq:S2nd}) and $S,S^{-}$ winning for Duplicator there exists a partial isomorphism $\chi:a_{i} \mapsto b_{i}$ for $\mathbf{a} = (a_{1},\dots,a_{n})$ and $\mathbf{b} = (b_{1},\dots,b_{n})$. Suppose $R \in \sigma$, then: 
+\begin{align*}
+A,\mathbf{a} \vDash R(x_{i_{1}},\dots,x_{i_{m}}) &\Leftrightarrow (a_{i_{1}},\dots,a_{i_{m}}) \in R^{A} \\
+&\Leftrightarrow (b_{i_{1}},\dots,b_{i_{m}}) \in R^{B} & \text{by $\chi$ a partial isomorphism} \\
+&\Leftrightarrow B,\mathbf{b} \vDash R(x_{i_{1}},\dots,x_{i_{m}})
+\end{align*}
+The proof for equality $=$ is similar. For the $\neg$-case, assume for the inductive hypothesis that given formula $\psi(\mathbf{x})$ with free variables among $\mathbf{x}$ in $\mathcal{L}_{\omega,k+1}$, there exists $\mathbf{a} = (a_{1},\dots,a_{n}) \in A^{n}$ such that $A,\mathbf{a} \vDash \psi(\mathbf{x}) \Leftrightarrow B,\mathbf{b} \vDash \psi(\mathbf{x})$ for some $\chi = [(a_{1},b_{1}),\dots,(a_{n},b_{n})] \in S$ and $\mathbf{b} = (b_{1},\dots,b_{n})$, then:
 \begin{align*}
 A,\mathbf{a} \vDash \neg\psi(\mathbf{x}) &\Leftrightarrow A,\mathbf{a} \not\vDash \psi(\mathbf{x}) \\
 &\Leftrightarrow B,\mathbf{b} \not\vDash \psi(\mathbf{x})  & \text{contrapositive of inductive hypothesis}\\
 &\Leftrightarrow B,\mathbf{b} \vDash \neg\psi(\mathbf{x}) 
 \end{align*}
-For the $\forall$-case, assume for the inductive hypothesis that given formula $\psi(y,\mathbf{x})$ with free variables $y$ and among $\mathbf{x}$ in $\mathcal{L}_{\omega,k+1}$, 
+For the $\forall$-case, suppose $b \in B$, then by (\ref{eq:S2nd}) and $\chi^{-} \in S^{-}$ winning for Duplicator, there exists an $a \in A$ such that $\chi:a \mapsto b$. 
+\begin{align*}
+A,\mathbf{a} \vDash \psi(\mathbf{x})  &\Rightarrow A,\mathbf{a} \vDash \forall y \varphi(y,\mathbf{x}) \\
+&\Rightarrow \text{ for all $c \in A$, } A,c\mathbf{a} \vDash \varphi(y,\mathbf{x}) \\
+\text{In particular, for $c = a$,} &\Rightarrow A,a\mathbf{a} \vDash \varphi(y,\mathbf{x})\\
+&\Rightarrow B,b\mathbf{b} \vDash \varphi(y,\mathbf{x}) & \text{by inductive hypothesis}\\
+\text{Since $b \in B$ was arbitrary,} &\Rightarrow \text{ for all $b \in B$ }, B,b\mathbf{b} \vDash \varphi(y,\mathbf{x}) \\
+&\Rightarrow B,\mathbf{b} \vDash \forall y \varphi(y,\mathbf{x}) \\ 
+&\Rightarrow B,\mathbf{b} \vDash \psi(\mathbf{x}) 
+\end{align*}
+The $\Leftarrow$-direction is similar. Therefore, for all $\psi(\mathbf{x}) \in \mathcal{L}_{\omega,k+1}$ with $n \leq k+1$, there exists $\mathbf{a} \in A^{n}$ and $\mathbf{b} \in B^{n}$ such that $A,\mathbf{a} \vDash \psi(\mathbf{x}) \Leftrightarrow B,\mathbf{b} \vDash \psi(\mathbf{x})$. In particular, for sentences $\phi \in \mathcal{L}_{\omega,k+1}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$, so $\equivL{A}{B}{\mathcal{L}_{\omega,k+1}}$. 
 \end{proof}
 \begin{cor}
-$A \equiv^{\mathcal{L}_{\omega,k}} B$ if and only if there exist $f:\efcomonad{k}{A} \longrightarrow B$, $g:\efcomonad{k}{B} \longrightarrow A$ such that $S_{f} = \mathsf{swap}(S_{g})$ and $S_{g} = \mathsf{swap}(S_{f})$ 
+$\equivL{A}{B}{\mathcal{L}_{\omega,k}}$ if and only if there exist $f:\efcomonad{k}{A} \longrightarrow B$, $g:\efcomonad{k}{B} \longrightarrow A$ such that $S_{f} = (S_{g})^{-}$ and $S_{g} = (S_{f})^{-}$ 
 \label{cor:backForthEF}
 \end{cor}
 \end{prop}

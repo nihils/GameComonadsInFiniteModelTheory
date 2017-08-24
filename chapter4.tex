@@ -10,10 +10,10 @@ The game is played for $\omega$ many rounds. At the end of the game, $(a_{1},\do
 The following are equivalent:
 \begin{itemize}
 \item Duplicator has a winning strategy in the symmetric $k$-pebble game 
-\item $A \equiv^{\mathcal{L}^{k}_{\infty,\omega}} B$, i.e. for every $\phi \in \mathcal{L}^{k}_{\infty,\omega}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$
+\item $\equivL{A}{B}{\mathcal{L}^{k}_{\infty,\omega}}$, i.e. for every $\phi \in \mathcal{L}^{k}_{\infty,\omega}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$
 \end{itemize}
 \end{prop}
-As was the goal with the EF game comonad, our goal is to construct a $\sigma$-structure $\pcomonad{k}{A}$ from a $\sigma$-structure $A$, that ``internalizes'' the asymmetric and symmetric $k$-pebble games in the category $\mathcal{R}(\sigma)$. The construction of $\pcomonad{k}{}$ and all of the results in this chapter were originally discovered in (\cite{Abramsky2017}). The paper \cite{Abramsky2017} was the inspiration to develop the other game comonads in this dissertation. We reproduce the proofs here to demonstrate the connections and differences with these other comonads.  
+As was the goal with the EF game comonad, our goal is to construct a $\sigma$-structure $\pcomonad{k}{A}$ from a $\sigma$-structure $A$, that ``internalizes'' the asymmetric and symmetric $k$-pebble games in the category $\mathcal{R}(\sigma)$. The construction of $\pcomonad{k}{}$ and all of the results in this chapter were originally discovered in \cite{Abramsky2017}. The paper \cite{Abramsky2017} was the inspiration to develop the other game comonads in this dissertation. We reproduce the proofs here to demonstrate the connections and differences with these other comonads.  
 \section{Comonad laws}
 Let $A$ be a $\sigma$-structure over relational signature $\sigma$, then for every $k \in \mathbb{N}$ we define a $\sigma$-structure $\pcomonad{k}{A}$. Intuitively, $\pcomonad{k}{A}$ is the structure of the finite $k$-pebblings on $A$. Let the domain of this structure be $|\pcomonad{k}{A}| = (\{1,\dots,k\} \times A)^{<\omega}$ (i.e. the set of finite sequence of elements in product $\{1,\dots,k\} \times A$). In order, to define the $\sigma$-structure on $\pcomonad{k}{A}$, a bit more notation is necessary:\\
 \begin{defn}
@@ -178,6 +178,11 @@ Since $u(s) = u'(s)$ for all $s \in \pcomonad{\omega}{A}$, $u = u'$ so $u$ is un
 \end{prop}
 \section{Positional Form and Equivalences}
 \subsection{Equivalence $\exists^{+}\mathcal{L}^{k}_{\infty,\omega}$}
+\begin{thm}[{}]
+\end{thm}
 \subsection{Equivalence $\mathcal{L}^{k}_{\infty,\omega}$}
 \subsection{Equivalence $\mathcal{L}^{k}_{\infty,\omega}(Cnt)$}
+\begin{prop}[{\cite[Theorem 15]{Abramsky2017}}]
+$f:\pcomonad{k}{A} \longrightarrow B$ is an isomorphism if and only if $f$ is winning in the bijective pebble game.
+\end{prop}
 \section{Coalgebras and Tree-Width}

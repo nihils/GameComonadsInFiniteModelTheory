@@ -9,7 +9,11 @@
 \usepackage{enumitem}
 \usepackage[square,numbers]{natbib}
 \usepackage{extarrows}
+%\usepackage{parskip}
 \input diagxy
+
+\setlength{\parindent}{0pt}
+%\setlength{\parskip}{\baselineskip}
 
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[section]
@@ -31,6 +35,23 @@
 \newcommand{\mcomonad}[2]{{\mathbb{M}_{#1}#2}}
 \newcommand{\gcomonad}[2]{{\mathbb{G}_{#1}#2}}
 \newcommand{\bcomonad}[3]{{\mathbb{O}_{#1,#2}#3}}
+
+\newcommand{\pgame}[2]{{\mathsf{P}(#1 \rightarrow #2)}}
+\newcommand{\efgame}[2]{{\mathsf{EF}(#1 \rightarrow #2)}}
+\newcommand{\mgame}[2]{{\mathsf{M}(#1 \rightarrow #2)}}
+\newcommand{\ggame}[2]{{\mathsf{G}(#1 \rightarrow #2)}}
+
+\newcommand{\pgameSym}[2]{{\mathsf{P}(#1,#2)}}
+\newcommand{\efgameSym}[2]{{\mathsf{EF}(#1,#2)}}
+\newcommand{\mgameSym}[2]{{\mathsf{M}(#1,#2)}}
+\newcommand{\ggameSym}[2]{{\mathsf{G}(#1,#2)}}
+
+\newcommand{\pgameBij}[2]{{\mathsf{P}^{bij}(#1,#2)}}
+\newcommand{\efgameBij}[2]{{\mathsf{EF}^{bij}(#1,#2)}}
+\newcommand{\mgameBij}[2]{{\mathsf{M}^{bij}(#1,#2)}}
+\newcommand{\ggameBij}[2]{{\mathsf{G}^{bij}(#1,#2)}}
+
+\newcommand{\equivL}[3]{{#1 \equiv #2 \ \mathsf{in}\: #3}} 
 
 \newcommand{\Fraisse}{Fra{\"i}ss{\'e}}
 

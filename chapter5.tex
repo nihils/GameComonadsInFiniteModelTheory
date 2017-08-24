@@ -7,29 +7,26 @@ Two transitions systems, or Kripke structures, $A,B$ are bisimilar if every tran
 \item In a subsequent $i$-th round, Spoiler chooses a binary relation $R_{z} \in \sigma$ and $a_{i} \in A$ or $b_{i} \in B$ such that $(a_{i-1},a_{i}) \in R_{z}^{A}$ or $(b_{i-1},b_{i}) \in R_{z}^{B}$
 \item Duplicator responds by choosing an element in the other structure $b_{i} \in B$ or $a_{i} \in A$. If $(a_{i-1},a_{i}) \in R_{z}^{A} \Leftrightarrow (b_{i-1},b_{i}) \in R_{z}^{B}$ for the $R_{z} \in \sigma$ that was picked by Spoiler, then Duplicator wins the $i$-th round.  
 \end{itemize}
-At the end of the $k$-round game, $k$-tuples $(a_{1},\dots,a_{k})$ and $(b_{1},\dots,b_{k}$ have be chosen. Duplicator wins the $k$-round game if Duplicator won every $i$-th round for $i \in [k]$ and for all $j \in [k]$ and predicates $P \in \sigma$, $a_{j} \in P^{A} \Leftrightarrow b_{j} \in P^{B}$. Otherwise, Spoiler wins. The asymmetric (or $\lozenge$-game) from $A$ to $B$, is the same game with the additional restriction that Spoiler must always play an element in $A$. Hence, Duplicator must always respond in $B$ and the winning conditions alter to one-sided implications. The following result is standard in any modal logic text: 
+At the end of the $k$-round game, $k$-tuples $(a_{1},\dots,a_{k})$ and $(b_{1},\dots,b_{k}$ have be chosen. Duplicator wins the $k$-round game if Duplicator won every $i$-th round for $i \in [k]$ and for all $j \in [k]$ and predicates $P \in \sigma$, $a_{j} \in P^{A} \Leftrightarrow b_{j} \in P^{B}$. Otherwise, Spoiler wins. The simulation game (or $\lozenge$-game) from $A$ to $B$, is the same game with the additional restriction that Spoiler must always play an element in $A$. Hence, Duplicator must always respond in $B$ and the winning conditions alter to one-sided implications. The following result is standard in any modal logic text: 
 \begin{prop}
 The following are equivalent:
 \begin{itemize}
 \item Duplicator has a winning strategy in the $k$-round bisimulation game 
-\item $A \equiv^{\mathcal{M}_{\omega,k}} B$, i.e. for every sentence $\phi \in \mathcal{M}_{\omega,k}, A \vDash \phi \Leftrightarrow B \vDash \phi$
+\item $\equivL{A}{B}{\mathcal{M}_{\omega,k}}$, i.e. for every sentence $\phi \in \mathcal{M}_{\omega,k}, A \vDash \phi \Leftrightarrow B \vDash \phi$
 \end{itemize}
 \end{prop}
-As was the goal with the EF game comonad, our goal is to construct a $\sigma$-structure $\mcomonad{k}{A}$ that ``internalizes'' the $k$-round simulation and bisimulation games in the category $\mathcal{R}(\sigma)$. The tree unfolding construction of depth $k$ for pointed transition systems, detailed in \cite{Gradel2014}, turns out to be the correct candidate for $\mcomonad{k}{A}$. This construction is typically empolyed to show the tree-model property which yields a proof of the decidability of modal logic. We use this construction, instead, to show that it captures the modal simimulation an bisimulation game (i.e. analogous to corollaries \ref{cor:forthEF} and \ref{cor:backForthEF}) as a comonad.
+As was the goal with the EF game comonad, our goal is to construct a $\sigma$-structure $\mcomonad{k}{A}$ that ``internalizes'' the $k$-round simulation and bisimulation games in the category $\mathcal{R}(\sigma)$. The tree unfolding construction of depth $k$ for pointed transition systems, detailed in \cite{Gradel2014}, turns out to be the correct candidate for $\mcomonad{k}{A}$. This construction is typically empolyed to show the tree-model property which yields a proof of the decidability of modal logic. We use this construction, instead, to show that it captures the modal simulation and bisimulation game (i.e. analogous to corollaries \ref{cor:forthEF} and \ref{cor:backForthEF}) as a comonad.
 \section{Comonad laws}
 \section{Positional Form and Equivalences}
-\subsection{Equivalence $\exists^{+}\mathcal{M}_{\infty,\omega}$}
-The positional form representation for the simulation and bisimulation games involving $A,B$ are, just as with, the EF game sequences of pairs of elements in $A,B$ of length $\leq k$. However, the choice of each pair must be local (i.e. only one transition away from the previous pair). Our definitions will reflect this modification. \\~\\
-
-Recall, from \ref{sec:positionalFormEF}, that $\Gamma_{k}(A,B) = (A \times B)^{\leq k}$ and for a $\sigma$-morphism $f:\mcomonad{k}{A} \longrightarrow B$ there exists the Klesli coextension $f^{*}:\mcomonad{k}{A} \longrightarrow \mcomonad{k}{B}$. Define the set function $\theta_{f}:|\mcomonad{k}{A}| \longrightarrow \Gamma_{k}(A,B)$ by $s = [a_{1},i_{1},\dots,i_{n-1},a_{n}] \mapsto [(a_{1},b_{1}),\dots,(a_{n},b_{n})]$ where $f^{*}(s) = [b_{1},i_{1},\dots,i_{n-1},b_{n}]$. 
+The positional form representation for the simulation and bisimulation games involving $A,B$ are, just as with the EF game, sequences of pairs of elements in $A,B$ of length $\leq k$. However, the choice of each pair must be local (i.e. only one transition away from the previous pair). Our definitions will reflect this modification. Recall, from \ref{sec:positionalFormEF}, that $\Gamma_{k}(A,B) = (A \times B)^{\leq k}$ and for a $\sigma$-morphism $f:\mcomonad{k}{A} \longrightarrow B$ there exists the Klesli coextension $f^{*}:\mcomonad{k}{A} \longrightarrow \mcomonad{k}{B}$. Define the set function $\theta_{f}:|\mcomonad{k}{A}| \longrightarrow \Gamma_{k}(A,B)$ by $s = [a_{1},i_{1},\dots,i_{n-1},a_{n}] \mapsto [(a_{1},b_{1}),\dots,(a_{n},b_{n})]$ where $f^{*}(s) = [b_{1},i_{1},\dots,i_{n-1},b_{n}]$. 
 \begin{defn}
 $S \subseteq \Gamma_{k}(A,B)$ is a strategy in positional form if $S$ satisfies the following conditions:
 \begin{enumerate}[label=(S\arabic*),ref=S\arabic*,start=0]
 \item For every $a \in A$, there exists a unique $b \in B$ such that $[(a,b)] \in S$ \label{eq:S1st}
 \item For all $\zeta \in S$ with last position $(a,b)$ and $i \in [m]$ with $(a,a') \in R_{i}^{A}$, there exists a unique $b' \in B$ such that $\zeta[(a',b')] \in S$ \label{eq:S2nd}
 \item $S$ is reachable: For all $\zeta \in S$, there is a chain \label{eq:S3rd}
-$$\zeta_{0} \longrightarrow \dots \longrightarrow \zeta_{n}$$
-such that $\zeta_{n} = \zeta$ and $\zeta_{i} \in S$ with $|\zeta_{i}| = i$ for all $i = 0,\dots,n$. 
+$$\zeta_{1} \longrightarrow \dots \longrightarrow \zeta_{n}$$
+such that $\zeta_{n} = \zeta$ and $\zeta_{i} \in S$ with $|\zeta_{i}| = i$ for all $i = 1,\dots,n$. 
 \end{enumerate}
 \end{defn}
 \begin{prop}
@@ -38,9 +35,11 @@ If $f:\mcomonad{k}{A} \longrightarrow B$ is a $\sigma$-morphism, then there exis
 Define: 
 $$S_{f} = \{\theta_{f}(w) \mid w \in \mcomonad{k}{A}\}$$
 \begin{itemize}
-\item Suppose $a \in A$, then $f([a]) = b$ and by definition of $\theta_{f}$, $[(a,b)] \in S_{f}$. 
-\item Suppose $\zeta \in S_{f}$ with $|\zeta| < k$ and last postion $(a,b)$, then there exists some $w \in \mcomonad{k}{A}$ such that $\zeta = \theta_{f}(w)$. Consider arbitrary $i \in [m]$ with $(a,a') R_{i}^{A}$, then there a unqiue exists a unique $b' \in B$ $f(w[i,a']) = b'$. Hence, $\theta_{f}(w[i,a']) = \zeta[(a',b')] \in S_{f}$.
-\item Suppose $\zeta \in S_{f}$
+\item Suppose $a \in A$, then there exists a unique $b$ such that $f([a]) = b$. By definition of $\theta_{f}$, $[(a,b)] \in S_{f}$. 
+\item Suppose $\zeta \in S_{f}$ with $|\zeta| < k$ and last position $(a,b)$, then there exists some $w \in \mcomonad{k}{A}$ such that $\zeta = \theta_{f}(w)$. Consider arbitrary $i \in [m]$ with $(a,a') \in  R_{i}^{A}$, then there exists a unique $b' \in B$ such that $f(w[i,a']) = b'$. Hence, $\theta_{f}(w[i,a']) = \zeta[(a',b')] \in S_{f}$.
+\item Suppose $\zeta \in S_{f}$, then $\zeta = \theta_{f}(w)$ for some $w \in \mcomonad{k}{A}$. Let $w_{i}$ be the $i$-th element in the sequence $\delta_{A}(w) \in \mcomonad{k}{\mcomonad{k}{A}}$, then:  
+$$\theta_{f}(w_{1}) \longrightarrow \dots \longrightarrow \theta_{f}(w_{n}) = \zeta$$ 
+Hence, $S_{f}$ is reachable.
 \end{itemize}
 \end{proof}
 \label{prop:fToPosFormM}
@@ -48,8 +47,52 @@ $$S_{f} = \{\theta_{f}(w) \mid w \in \mcomonad{k}{A}\}$$
 \begin{prop}
 Conversely, for every strategy in positional form $S$ there exists a $f:\efcomonad{k}{A} \rightarrow B$ such that $S = S_{f}$
 \begin{proof}
+$S_{f} \subseteq S$ The approach is to construct an appropriate $f$. We construct $f$ by recursion, up to $k$, on the length of a play $w \in \efcomonad{k}{A}$. \\ 
+\textit{Base Case:} Suppose $w = [a]$ for $a \in A$. By (\ref{eq:S1st}), there exists a unique $b$ such that $[(a,b)] \in S$. Let $f(w) = b$. \\
+\textit{Recursive Step:} Assume for the recursion, that $f(w)$ is defined for $|w| = n < 2k+1$ and that $\theta_{f}(w) \in S$. Consider $w' = w[i,a]$ for $(\epsilon_{A}(w),a) \in R_{i}$. By (\ref{eq:S2nd}), there exists a unique $b \in B$ such that $\zeta' = \theta_{f}(w)[(a,b)]$. Let $f(w') = b$. \\
+$S \subseteq S_{f}$ We must show that for every $\zeta \in S$, there exists a $w \in \mcomonad{k}{A}$ such that $\zeta = \theta_{f}(w)$. By induction on reachability sequence of $\zeta$ (obtained via \ref{eq:S3rd}). \\
+\textit{Base Case:} Suppose $\zeta = [(a,b)]$. By the construction of $f$ above, $f([a]) = b$, so $\zeta = \theta_{f}([a])$. 
+\textit{Inductive Step:} Assume for the inductive hypothesis that $\zeta = \theta_{f}(w)$ for some $w \in \mcomonad{k}{A}$. Suppose $\zeta \xlongrightarrow{(i,a):b} \zeta'$. Consider $w' = w[i,a]$, then $\theta_{f}(w') = \zeta'$.
 \end{proof}
 \label{prop:posFormToFM}
 \end{prop}
-\subsection{Equivalence $\mathcal{M}_{\infty,\omega}$}
+\subsection{Equivalence $\exists^{+}\mathcal{M}_{\omega,k}$}
+\begin{defn}
+A position $\zeta = [(a_{1},b_{1}),\dots,(a_{n},b_{n})] \in \Gamma_{k}(A,B)$ is \textit{winning for Duplicator} if $\zeta$ a is simulation. That is, for all $i = 2,\dots,n$, $(a_{i-1},a_{i}) \in R_{z}^{A} \Rightarrow (b_{i-1},b_{i}) \in R_{z}^{B}$ for some $R_{z} \in \sigma$ binary and for all $P \in \sigma$ unary $a_{i} \in P_{j} \Rightarrow b_{i} \in P_{j}$. Naturally, we can extend the definition to say that a strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ is \textit{winning for Duplicator} if for all $\zeta \in S$, $\zeta$ is winning for Duplicator. 
+\end{defn}
+Intuitively, condition (\ref{eq:S2nd}) and winning for Duplicator together form the forth requirement in the back-and-forth definition of bisimulation. With the definition of positional form for the modal fragment in place, the main theorem relating the comonad and equivalence in $\mathcal{M}_{\infty,k}$ can be proved.  
+\begin{thm}
+If $A,B$ are Kripke structures and $f:\mcomonad{k}{A} \rightarrow B$ is a function, then 
+\center{$f:\mcomonad{k}{A} \longrightarrow B$ is a $\sigma$-morphism if and only if  $S_{f}$ is winning for Duplicator}
+\begin{proof}
+$\Leftarrow$ Suppose $\zeta \in S_{f}$, the by definition of $S_{f}$, $\zeta = \theta_{f}(w)$ for some $w \in \mcomonad{k}{A}$. If $w = [a]$, then it is trivally true that $\zeta = [(a,b)]$ is a simulation (i.e. winning for Duplicator). If $w = v[i,a']$ (i.e. $\zeta = \theta_{f}(v)[(a',b')]$) and suppose the last position of $\theta_{f}(v)$ is $(a,b)$, then by interpretation of $R_{i}$ on $\mcomonad{k}{A}$, $(v,w) \in R_{i}^{\mcomonad{k}{A}}$. By $f$ a $\sigma$-morphism, $(f(v),f(w)) \in R_{i}^{B}$. By the definition of $\theta_{f}$, $f(v) = b$ and $f(w) = b'$, so $(b,b') \in R_{i}^{B}$. Moreover, for predicate $P \in \sigma$, if $a' \in P^{A}$, then $w \in P^{\mcomonad{k}{A}}$ by $a$ being the last element of $w$, so $f(w) = b' \in P^{B}$ by $f$ a $\sigma$-morphism. Therefore, $\zeta$ is a simulation and winning for Duplicator. Hence, $S_{f}$ is winning for Duplicator.\\
+$\Rightarrow$ Suppose $(v,w) \in R_{i}^{\mcomonad{k}{A}}$ for $R_{i} \in \sigma$ binary relation, then by intepretation of $R_{i}$ on $\mcomonad{k}{A}$, $v = w[i,a]$ or $w = v[i,a]$. Without loss of generality, assume $w = v[i,a]$. Consider $\zeta \in \theta_{f}(w) \in S_{f}$. By $w = v[i,a']$ and definition of $\theta_{f}$, $\theta_{f}(w) = \theta_{f}(v)[(a',f(w))]$ where $\theta_{f}(v) = u[(\epsilon(v),f(v))]$ for some (possibly empty) sequence $u$. Since $\zeta$ is a simulation (i.e. winning for Duplicator), $(f(v),f(w)) \in R^{B}$. Hence, $f$ is a $\sigma$-morphism.
+\end{proof}
+\label{thm:toPositionalFormM}
+\end{thm}
+\begin{prop}
+For all $k \in \omega$, the following are equivalent:
+\begin{enumerate}[label=(\arabic*)$_{k}$]
+\item For every $\phi \in \exists^{+}\mathcal{M}_{\omega,k}$, $A \vDash \phi \Rightarrow B \vDash \phi$
+\item There exists a strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ that is winning for Duplicator 
+\end{enumerate}
+\begin{cor}
+There exists a $\sigma$-morphism $f:\mcomonad{k}{A} \longrightarrow B$ if and only if for all $\phi \in \exists^{+}\mathcal{M}_{\omega,k}, A \vDash \phi \Rightarrow B \vDash \phi$
+\begin{proof}
+Straightforward from theorem (\ref{thm:toPositionalFormM}) and proposition (\ref{prop:toSyntaxM}).
+\end{proof}
+\label{cor:forthOneM}
+\end{cor}
+\begin{cor}
+There exists $\sigma$-morphisms $f:\mcomonad{k}{A} \longrightarrow B$, $g:\mcomonad{k}{B} \longrightarrow B$ if and only if $\equivL{A}{B}{\exists^{+}\mathcal{M}_{\omega,k}}$. 
+\begin{proof}
+Recall definition (\ref{defn:equivLogic}) and apply above corollary (\ref{cor:forthOneM}) to $f$ and $g$.  
+\end{proof}
+\label{cor:forthM}
+\end{cor}
+\label{prop:toSyntaxM}
+\end{prop}
+\subsection{Equivalence $\mathcal{M}_{\omega,k}$}
+
+
 \section{Guarded Unfolding}

@@ -136,10 +136,10 @@ $$A \vDash \phi_{P} \Leftrightarrow P(A) = 1$$
 \end{defn}
 To prove a property $P$ is not expressible in signature $\sigma$, we need to exhibit two $\sigma$-structures $A$,$B$ which from the perspective of the logic $\mathcal{L}$ are ``equivalent'', but differ by property $P$ (i.e. $P(A) = 1$ and $P(B) = 0$). Of course, by the definiton of property given, $\cong$ is too strong of an equivalence to show inexpressiblity. For a given logic, we define what it means to be equivalent from the perspective of $\mathcal{L}$.  
 \begin{defn}
-Two $\sigma$ structures $A,B$ are \textit{equivalent in logic $\mathcal{L}$}, denoted $A \equiv^{\mathcal{L}} B$ if for all sentences $\phi \in \mathcal{L}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$.  
+Two $\sigma$ structures $A,B$ are \textit{equivalent in logic $\mathcal{L}$}, denoted $\equivL{A}{B}{\mathcal{L}}$ if for all sentences $\phi \in \mathcal{L}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$.  
 \label{defn:equivLogic}
 \end{defn}
-Hence, for a property $\mathcal{P}$ to inexpressible in signature $\sigma$ and logic $\mathcal{L}$, we must find two $\sigma$-structures $A,B$ such that $P(A) = 1$ and $P(B) = 0$ while $A \equiv^{\mathcal{L}} B$. The purpose of ``back-and-forth'' style games in finite and classical model theory is to provide a methodology to prove equivalence in a logic $\mathcal{L}$.  
+Hence, for a property $\mathcal{P}$ to inexpressible in signature $\sigma$ and logic $\mathcal{L}$, we must find two $\sigma$-structures $A,B$ such that $P(A) = 1$ and $P(B) = 0$ while $\equivL{A}{B}{\mathcal{L}}$. The purpose of ``back-and-forth'' style games in finite and classical model theory is to provide a methodology to prove equivalence in a logic $\mathcal{L}$.  
 \section{Category Theory}
 Category theory is the general theory of mathematical structures and structure-preserving relationships between theses structures. 
 \subsection{Definitions}

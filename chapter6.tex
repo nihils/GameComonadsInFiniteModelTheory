@@ -47,10 +47,6 @@ The natural transformation $\iota:\efcomonad{\omega}{} \longrightarrow \pcomonad
 \subsection{Grading by both $\bcomonad{k}{n}{}$}\label{sec:grading}
 The family of comonads $\{\pcomonad{k}{}\}$ is graded by the number of variables in the formulas under consideration, so this family `internalizes' equivalence in the fragments $\mathcal{L}^{k}_{\infty,\omega}$. On the other hand, $\efcomonad{n}{}$ is graded by the quantifier rank, so this family `internalizes' equivalence in the fragments $\mathcal{L}^{\omega}_{\omega,n}$. A natural question is to consider fragments restricted both by number of variables and rank, i.e. $\mathcal{L}^{k}_{\omega,n}$ for $n,k \in \omega$. This comonad will be denoted $\bcomonad{k}{n}{}$. Intuitively, $\bcomonad{k}{n}{A}$ represents the structure of Spoiler plays for $k$-pebble games on a $\sigma$-structure $A$ played for at most $n$ rounds. Let the domain of the structure be $|\bcomonad{k}{n}{A}| = \{s \in \pcomonad{k}{A}: |s| = n\}$. The structure on $\bcomonad{k}{n}{A}$ is induced from $\pcomonad{k}{A}$. Namely, for $R \in \sigma$ an $m$-ary relation, $R^{\bcomonad{k}{n}{A}} = R^{\pcomonad{k}{A}} \cap |\bcomonad{k}{n}{A}|^{m}$. 
 \\~\\
-Fixing the number of rounds $n$, we have a directed system of inclusions maps. Namely, for $A$ a $\sigma$-structure and $l,k \in \omega$ with $l \leq k$, there is a canonical inclusion morphism $i^{l,k}_{A}:\bcomonad{l}{n}{A} \longrightarrow \bcomonad{k}{n}{A}$. \\  
-\begin{prop}
-$\efcomonad{n}{A}$ is the $\omega$-colimit of the system $\{\bcomonad{k}{n}{A}\}_{k \in \omega}$.
-\end{prop}
 Fixing the number of pebbles $k$, we have a directed system of inclusion maps. Namely, for $A$ a $\sigma$-structure and $m,n \in \omega$, with $m \leq n$, there is a canonical inclusion morphism $i_{m,n}^{A}:\bcomonad{k}{m}{A} \longrightarrow \bcomonad{k}{n}{A}$. \\
 \begin{prop}
 $\pcomonad{k}{A}$ is the $\omega$-colimit of the system $\{\bcomonad{k}{n}{A}\}_{n \in \omega}$
@@ -68,30 +64,47 @@ Suppose that there exists a $\sigma$-structure $B$ and for every $m,n \in \omega
     \morphism(1000,500)|r|/{@{>}@/^7pt/}/<-500,-1000>[\bcomonad{k}{n}{A}`B;f_{n}]
     \morphism(500,0)|m|/.>/<0,-500>[\pcomonad{k}{A}`B;u]
 \efig
-\label{eq:omegaColimitU}
+\label{eq:omegaColimitUP}
 \end{equation}
 Moreover, given the conditions on $f_{n}$ for all $n \in \omega$, $u$ is unique. Namely, suppose there exists a morphism $u':\pcomonad{k}{A} \longrightarrow B$ such that for all $n \in \omega$, $f_{n} = u' \circ i_{n}^{A}$. Suppose $s = [(p_{1},a_{1}),\dots,(p_{n},a_{n})] \in \bcomonad{n}{k}{A}$ then for all $j \geq n, s \in \bcomonad{k}{i}{A}$.  
 \begin{align*}
 u(s)    &= f_{n}(s) & \text{by defn of $u$} \\
-        &= f_{j} \circ i_{n,j}^{A}(s) & \text{by (\ref{eq:omegaColimitU})} \\
+        &= f_{j} \circ i_{n,j}^{A}(s) & \text{by (\ref{eq:omegaColimitUP})} \\
         &= u' \circ i_{j}^{A} \circ i_{n,j}^{A}(s) & \text{by hypothesis on $u'$} \\
         &= u' \circ i_{n}^{A}(s) & \text{by (\ref{eq:omegaColimit})}\\
         &= u'(s) & \text{by defn of inclusion} 
 \end{align*}
 Since $u(s) = u'(s)$ for all $s \in \pcomonad{k}{A}$, $u = u'$ so $u$ is unique as desired.  
 \end{proof}
+\label{prop:oToPcolimit}
 \end{prop}    
+Fixing the number of rounds $n$, we have a directed system of inclusions maps. Namely, for $A$ a $\sigma$-structure and $l,k \in \omega$ with $l \leq k$, there is a canonical inclusion morphism $i^{l,k}_{A}:\bcomonad{l}{n}{A} \longrightarrow \bcomonad{k}{n}{A}$. \\  
+\begin{prop}
+$\efcomonad{n}{A}$ is the $\omega$-colimit of the system $\{\bcomonad{k}{n}{A}\}_{k \in \omega}$.
+\begin{proof}
+Suppose there are morphisms $f^{k}:\bcomonad{k}{n} \longrightarrow B$, $u:\efcomonad{n}{} \longrightarrow B$ is defined by $[a_{1},\dots,a_{j}] = f^{j}([(1,a_{1}),\dots,(j,a_{j})])$ where $j \leq n$. The coprojection maps $\rho^{k}:\bcomonad{k}{n}{A} \longrightarrow \efcomonad{n}{A}$ are just given by the `forget the pebbles map' (i.e. $[(p_{1},a_{1}),\dots,(p_{j},a_{j})] \mapsto [a_{1},\dots,a_{j}])$). It is similar to proof of \ref{prop:oToPcolimit}, to show that the following diagram commutes and that $u$ is unique: 
+\begin{equation}
+\bfig 
+    \Vtriangle[\bcomonad{l}{n}{A}`\bcomonad{k}{n}{A}`\efcomonad{n}{A};i^{k,l}_{A}`\rho^{l}_{A}`\rho^{k}_{A}]
+    \morphism(0,500)|l|/{@{>}@/^-7pt/}/<500,-1000>[\bcomonad{l}{n}{A}`B;f^{l}]
+    \morphism(1000,500)|r|/{@{>}@/^7pt/}/<-500,-1000>[\bcomonad{k}{n}{A}`B;f^{k}]
+    \morphism(500,0)|m|/.>/<0,-500>[\efcomonad{n}{A}`B;u]
+\efig
+\label{eq:omegaColimitUE}
+\end{equation}
+\end{proof}
+\end{prop}
 \section{New Proofs for Common Results}\label{sec:commonResults}
 A natural question when given two different logics $\mathcal{L},\mathcal{L'}$ is whether $\mathcal{L}$ is more, less or equally expressive as $\mathcal{L'}$. The syntactic approach to show that $\mathcal{L'}$ is at least as expressive as $\mathcal{L}$ (denoted, $\mathcal{L} \subseteq \mathcal{L'}$) is to show that every sentence in $\mathcal{L}$ can be translated to a sentence $\mathcal{L'}$. The semantic approach is to show that a structure that can interpret sentences in $\mathcal{L'}$ can intrepret sentences in $\mathcal{L}$. Games, and more importantly the game comonads we developed, give a structural approach. The following proposition justifies this structural approach. 
 \begin{prop}
-$\mathcal{L} \subseteq \mathcal{L'}$ if and only if for all $\sigma$ and two $\sigma$-structures $A,B$, $A \equiv^{\mathcal{L'}} B \Rightarrow A \equiv^{\mathcal{L}} B$.
-\label{prop:inclusionToEquiv}
+$\mathcal{L} \subseteq \mathcal{L'}$ if and only if for all $\sigma$ and two $\sigma$-structures $A,B$, $\equivL{A}{B}{\mathcal{L'}} \Rightarrow \equivL{A}{B}{\mathcal{L}}$.
 \begin{proof}
-$\Rightarrow$ Suppose $A \equiv^{\mathcal{L'}} B$, then for all sentences $\phi \in \mathcal{L'}, A \vDash \phi \Leftrightarrow B \vDash \phi$. In particular, for all sentences $\psi \in \mathcal{L}$ (since $\mathcal{L} \subseteq \mathcal{L'}$, up to translation, by hypothesis), $A \vDash \psi \Leftrightarrow B \vDash \psi$. Hence, $A \equiv^{\mathcal{L}} B$.\\
-$\Leftarrow$ By contrapositive. Suppose that there exists $\sigma$-structures $A,B$ such that $A \equiv^{\mathcal{L'}} B$, but $A \not \equiv^{\mathcal{L}} B$. Since $A \not \equiv^{\mathcal{L}} B$, there exists some sentence $\phi \in \mathcal{L}$ such that $A \vDash \phi$ and $B \not\vDash \phi$. Clearly, $\phi \not\in \mathcal{L'}$ since $A \equiv^{\mathcal{L'}} B$. Therefore, $\mathcal{L} \not\subseteq \mathcal{L'}$.
+$\Rightarrow$ Suppose $\equivL{A}{B}{\mathcal{L'}}$, then for all sentences $\phi \in \mathcal{L'}, A \vDash \phi \Leftrightarrow B \vDash \phi$. In particular, for all sentences $\psi \in \mathcal{L}$ (since $\mathcal{L} \subseteq \mathcal{L'}$, up to translation, by hypothesis), $A \vDash \psi \Leftrightarrow B \vDash \psi$. Hence, $\equivL{A}{B}{\mathcal{L}}$.\\
+$\Leftarrow$ By contrapositive. Suppose that there exists $\sigma$-structures $A,B$ such that $\equivL{A}{B}{\mathcal{L'}}$, but $\not \equivL{A}{B}{\mathcal{L}}$. Since $\equivL{A}{B}{\mathcal{L}}$, there exists some sentence $\phi \in \mathcal{L}$ such that $A \vDash \phi$ and $B \not\vDash \phi$. Clearly, $\phi \not\in \mathcal{L'}$ since $\equivL{A}{B}{\mathcal{L'}}$. Therefore, $\mathcal{L} \not\subseteq \mathcal{L'}$.
 \end{proof}
+\label{prop:inclusionToEquiv}
 \end{prop}
-Since back-and-forth games characterize $\equiv^{\mathcal{L}}$, these games give a structural approach to proving $\mathcal{L} \subseteq \mathcal{L'}$ that does not make reference to cumbersome syntactic details or coordinate-heavy intrepretations. However, even with this game approach the details could get unwieldy. Namely, to show $\mathcal{L} \subseteq \mathcal{L'}$, i.e. $A \equiv^{\mathcal{L'}} B \Rightarrow A \equiv^{\mathcal{L}} B$, we would have to construct a winning strategy for Duplicator in the $\mathcal{L}$ back-and-forth game from a winning strategy in the $\mathcal{L'}$ back-and-forth game. The advantage of having internalized these strategies into the category $\mathcal{R}(\sigma)$ is that producing a Duplicator strategy in one game from a Duplicator strategy in another game just amounts to coming up with the correct morphisms. The following propositions illustrate this technique well. \\~\\
+Since back-and-forth games characterize $\equivL{}{}{\mathcal{L}}$, these games give a structural approach to proving $\mathcal{L} \subseteq \mathcal{L'}$ that does not make reference to cumbersome syntactic details or coordinate-heavy intrepretations. However, even with this game approach the details could get unwieldy. Namely, to show $\mathcal{L} \subseteq \mathcal{L'}$, i.e. $\equivL{A}{B}{\mathcal{L'}} \Rightarrow \equivL{A}{B}{\mathcal{L}}$, we would have to construct a winning strategy for Duplicator in the $\mathcal{L}$ back-and-forth game from a winning strategy in the $\mathcal{L'}$ back-and-forth game. The advantage of having internalized these strategies into the category $\mathcal{R}(\sigma)$ is that producing a Duplicator strategy in one game from a Duplicator strategy in another game just amounts to coming up with the correct morphisms. The following propositions illustrate this technique well. \\~\\
 A well-known result in finite model theory is that the $k$-variable fragment contains the $k$-rank fragment. Syntactically, this result is quite easy to see on sentences in prenex normal form. Namely, a prenex normal form sentence with quantifier rank $\leq k$ has at most $k$ many bound variables. For more general sentences, the proof can get a bit tricky. However, the proof using comonads makes this result easy. 
 \begin{prop} The following results hold for all $k \in \omega$:
 \begin{enumerate}[label=(\arabic*)]
@@ -101,7 +114,7 @@ A well-known result in finite model theory is that the $k$-variable fragment con
 \end{enumerate}
 \begin{proof}
 \begin{enumerate}[label=(\arabic*)]
-\item By proposition (\ref{prop:inclusionToEquiv}), it suffices to show that for two $\sigma$-structures $A,B$, $A \equiv^{\exists^{+}\mathcal{L}^{k}_{\infty,\omega}} B \Rightarrow A \equiv^{\exists^{+}\mathcal{L}_{\omega,k}} B$. Suppose $A \equiv^{\mathcal{L}^{k}_{\infty,\omega}} B$, then by (\ref{thm:forthPebble}), there exists morphisms $f:\pcomonad{k}{A} \longrightarrow B$ and $g:\pcomonad{k}{B} \longrightarrow A$. Recall the natural transformation $\iota:\efcomonad{k}{} \longrightarrow \pcomonad{k}{}$ used in (\ref{prop:}). Hence, there exists morphisms $f \circ \iota_{A}:\efcomonad{k}{A} \longrightarrow B$ and $g \circ \iota_{B}:\efcomonad{k}{B} \longrightarrow A$. Therefore, by corollary (\ref{cor:forthEF}), $A \equiv^{\exists^{+}\mathcal{L}_{\omega,k}} B$.    
+\item By proposition (\ref{prop:inclusionToEquiv}), it suffices to show that for two $\sigma$-structures $A,B$, $\equivL{A}{B}{\exists^{+}\mathcal{L}^{k}_{\infty,\omega}} \Rightarrow \equivL{A}{B}{\exists^{+}\mathcal{L}_{\omega,k}}$. Suppose $\equivL{A}{B}{\mathcal{L}^{k}_{\infty,\omega}} $, then by (\ref{thm:forthPebble}), there exists morphisms $f:\pcomonad{k}{A} \longrightarrow B$ and $g:\pcomonad{k}{B} \longrightarrow A$. Recall the natural transformation $\iota:\efcomonad{k}{} \longrightarrow \pcomonad{k}{}$ used in (\ref{prop:}). Hence, there exists morphisms $f \circ \iota_{A}:\efcomonad{k}{A} \longrightarrow B$ and $g \circ \iota_{B}:\efcomonad{k}{B} \longrightarrow A$. Therefore, by corollary (\ref{cor:forthEF}), $\equivL{A}{B}{\exists^{+}\mathcal{L}_{\omega,k}}$.
 \end{enumerate}
 \end{proof}
 \end{prop}
@@ -114,7 +127,7 @@ The following results hold:
 \end{enumerate}
 \begin{proof}
 \begin{enumerate}[label=(\arabic*)]
-\item By proposition (\ref{prop:inclusionToEquiv}), it suffices to show that for two $\sigma$-structures $A,B$, $A \equiv^{\mathcal{L}^{2}_{\infty,\omega}} B \Rightarrow A \equiv^{\mathcal{M}_{\infty,\omega}} B$. Suppose $A \equiv^{\mathcal{L}^{2}_{\infty,\omega}} B$, then there exist morphisms $f:\pcomonad{2}{A} \longrightarrow B$ and $g:\pcomonad{2}{B} \longrightarrow A$. Consider the natural transformation $j:\mcomonad{\omega}{} \longrightarrow \pcomonad{2}{}$ with components $j_{A}:\mcomonad{\omega}{A} \longrightarrow \pcomonad{2}{A}$ defined recursively. For the base case, suppose $s = [a_{1}] \in \mcomonad{\omega}{A}$, then let $j_{A}([a_{1}]) = [(1,a_{1})]$. For the recursive step, suppose $s = [a_{1},i_{1},\dots,i_{n-1},a_{n}]$ and there exists $(a_{n},a') \in R_{i_{n}}^{A}$, so $s' = s[i_{n},a']$. Let $z \in \{1,2\}$ be the last pebble in $j_{A}(s)$ and let $\bar{z}$ be the other pebble $\not= z$, then define $j_{A}(s') = j_{A}(s)[(\bar{z},a')]$.  Intuitively, this translation is the `hand-over-hand' method where Spoiler in the pebble game imitates Spoiler in the bisimulation game, by alternating the pebbles so that one pebble is the start of Spoiler's chosen transition and the other pebble is at the end of the transition. Suppose $R_{i} \in \sigma$ is a relation (must be binary, since we are dealing with Kripke structures) and $(w,w') \in R_{i}^{\mcomonad{\omega}{A}}$. By the interpretation of $R_{i}$ in $\mcomonad{\omega}{A}$, $w' = w[i,a]$ with $(\epsilon_{A}(w),a') \in R_{i}^{A}$. By definition of $j_{A}$, $j_{A}(w') = j_{A}(w)[(\bar{z},a')]$, so $j_{A}(w) \sqsubseteq j_{A}(w')$ and last pebble of $j_{A}(w)$ is different than the last pebble of $j_{A}(w')$. For this reason and $(\epsilon_{A}(w),a') \in R_{i}^{A}$, $R_{i}^{\pcomonad{2}{A}}(j_{A}(w),j_{A}(w')$ by the intrepretation of $R_{i}$ in $\pcomonad{2}{A}$. Hence, $j_{A}$ is indeed morphism. It is straightfoward to check $j$ is a natural transformation. Therefore, there exist morphisms $f \circ j_{A}: \mcomonad{\omega}{A} \longrightarrow B$ and $g \circ j_{B}:\mcomonad{\omega}{B} \longrightarrow A$. By corollary (\ref{cor:forthM}), $A \equiv^{\exists^{+}\mathcal{M}_{\infty,\omega}} B$. 
+\item By proposition (\ref{prop:inclusionToEquiv}), it suffices to show that for two $\sigma$-structures $A,B$, $\equivL{A}{B}{\exists^{+}\mathcal{L}^{2}_{\infty,\omega}} \Rightarrow \equivL{A}{B}{\exists^{+}\mathcal{M}_{\infty,\omega}}$. Suppose $\equivL{A}{B}{\mathcal{L}^{2}_{\infty,\omega}}$, then there exist morphisms $f:\pcomonad{2}{A} \longrightarrow B$ and $g:\pcomonad{2}{B} \longrightarrow A$. Consider the natural transformation $j:\mcomonad{\omega}{} \longrightarrow \pcomonad{2}{}$ with components $j_{A}:\mcomonad{\omega}{A} \longrightarrow \pcomonad{2}{A}$ defined recursively. For the base case, suppose $s = [a_{1}] \in \mcomonad{\omega}{A}$, then let $j_{A}([a_{1}]) = [(1,a_{1})]$. For the recursive step, suppose $s = [a_{1},i_{1},\dots,i_{n-1},a_{n}]$ and there exists $(a_{n},a') \in R_{i_{n}}^{A}$, so $s' = s[i_{n},a']$. Let $z \in \{1,2\}$ be the last pebble in $j_{A}(s)$ and let $\bar{z}$ be the other pebble $\not= z$, then define $j_{A}(s') = j_{A}(s)[(\bar{z},a')]$.  Intuitively, this translation is the `hand-over-hand' method where Spoiler in the pebble game imitates Spoiler in the bisimulation game, by alternating the pebbles so that one pebble is the start of Spoiler's chosen transition and the other pebble is at the end of the transition. Suppose $R_{i} \in \sigma$ is a relation (must be binary, since we are dealing with Kripke structures) and $(w,w') \in R_{i}^{\mcomonad{\omega}{A}}$. By the interpretation of $R_{i}$ in $\mcomonad{\omega}{A}$, $w' = w[i,a]$ with $(\epsilon_{A}(w),a') \in R_{i}^{A}$. By definition of $j_{A}$, $j_{A}(w') = j_{A}(w)[(\bar{z},a')]$, so $j_{A}(w) \sqsubseteq j_{A}(w')$ and last pebble of $j_{A}(w)$ is different than the last pebble of $j_{A}(w')$. For this reason and $(\epsilon_{A}(w),a') \in R_{i}^{A}$, $(j_{A}(w),j_{A}(w')) \in R_{i}^{\pcomonad{2}{A}}$ by the intrepretation of $R_{i}$ in $\pcomonad{2}{A}$. Hence, $j_{A}$ is indeed morphism. It is straightfoward to check $j$ is a natural transformation. Therefore, there exist morphisms $f \circ j_{A}: \mcomonad{\omega}{A} \longrightarrow B$ and $g \circ j_{B}:\mcomonad{\omega}{B} \longrightarrow A$. By corollary (\ref{cor:forthM}), $\equivL{A}{B}{\exists^{+}\mathcal{M}_{\infty,\omega}}$. 
 \item   
 \end{enumerate}
 \end{proof}
