@@ -164,7 +164,7 @@ Since $u(s) = u'(s)$ for all $s \in \efcomonad{\omega}{A}$, $u = u'$ so $u$ is u
 \end{prop}
 \section{Positional Form and Equivalences}\label{sec:positionalFormEF}
 In order to solidify the connection between the construction $\efcomonad{k}{}$ and the Ehrenfreuct-{\Fraisse} game, we have to encode the strategies in the game into ``positional form''. Intuitively, the positional form represents the set of positions of Spoiler and Duplicators' choices after a fixed number of rounds. This positional form is similar to the forth part of graded ``back-and-forth systems'' that are used in model theory texts to prove that the $k$-round symmetric EF game characterizes $\equivL{A}{B}{\mathcal{L}_{\omega,k}}$. \\~\\
-Let $\Gamma_{k}(A,B) = (A \times B)^{\leq k}$ (i.e. sequences in pairs of elements in $A,B$ with length $\leq k$). Recall that for a $\sigma$-morphism $f:\efcomonad{k}{A} \longrightarrow B$, there exists the Klesli coextension $f^{*}:\efcomonad{k}{A} \longrightarrow \efcomonad{k}{B}$. Define the set function $\theta_{f}:|\efcomonad{k}{A}| \longrightarrow \Gamma_{k}(A,B)$ by $s = [a_{1},\dots,a_{n}] \mapsto [(a_{1},b_{1}),\dots,(a_{n},b_{n})]$ where $f^{*}(s) = [b_{1},\dots,b_{n}]$. Rephrasing, $\theta_{f} = z \circ \langle \text{id}_{\efcomonad{k}{A}},f^{*} \rangle \circ \Delta_{A}$ where $z$ is the `zipper' function sending two sequences of equal length to the natural sequence of pairs, and $\Delta_{A}:A \longrightarrow A \times A$ is the natural diagonal function.  
+Let $\Gamma_{k}(A,B) = (A \times B)^{\leq k}$ (i.e. sequences in pairs of elements in $A,B$ with length $\leq k$). Recall that for a $\sigma$-morphism $f:\efcomonad{k}{A} \longrightarrow B$, there exists the Kleisli coextension $f^{*}:\efcomonad{k}{A} \longrightarrow \efcomonad{k}{B}$. Define the set function $\theta_{f}:|\efcomonad{k}{A}| \longrightarrow \Gamma_{k}(A,B)$ by $s = [a_{1},\dots,a_{n}] \mapsto [(a_{1},b_{1}),\dots,(a_{n},b_{n})]$ where $f^{*}(s) = [b_{1},\dots,b_{n}]$. Rephrasing, $\theta_{f} = z \circ \langle \mathsf{id}_{\efcomonad{k}{A}},f^{*} \rangle \circ \Delta_{A}$ where $z$ is the `zipper' function sending two sequences of equal length to the natural sequence of pairs, and $\Delta_{A}:A \longrightarrow A \times A$ is the natural diagonal function.  
 \begin{defn}
 $S \subseteq \Gamma_{k}(A,B)$ is a \textit{strategy in positional form} if $S$ satisfies the following conditions:
 \begin{enumerate}[label=(S\arabic*),ref=S\arabic*,start=0]
@@ -202,13 +202,13 @@ $S \subseteq S_{f}$ For every $\chi$, we need to show that there exists an $s \i
 \end{prop}
 \subsection{Equivalence $\exists^{+}\mathcal{L}_{\omega,k}$}
 \begin{defn}
-A position $\chi = [(a_{1},b_{1}),\dots,(a_{n},b_{n})] \in \Gamma_{k}(A,B)$ is \textit{winning for Duplicator} if the map $\chi:a_{i} \longmapsto b_{i}$ is a partial $\sigma$-morphism from $A$ to $B$.  
-Naturally, we can extend the definition to say that a strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ is \textit{winning for Duplicator} if for all $\chi \in S$, $\chi$ is winning for Duplicator. 
+A position $\chi = [(a_{1},b_{1}),\dots,(a_{n},b_{n})] \in \Gamma_{k}(A,B)$ is \textit{winning for Duplicator in $\efgame{k}{A}{B}$} if the map $\chi:a_{i} \longmapsto b_{i}$ is a partial $\sigma$-morphism from $A$ to $B$.  
+Naturally, we can extend the definition to say that a strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ is \textit{winning for Duplicator in $\efgame{k}{A}{B}$} if for all $\chi \in S$, $\chi$ is winning for Duplicator. Function $f:\efcomonad{k}{A} \longrightarrow B$ is \textit{winning for Duplicator in $\efgame{k}{A}{B}$} if $S_{f}$ is winning for Duplicator in $\efgame{k}{A}{B}$.
 \end{defn}
 Consider the expanded signature $\sigma' = \sigma \cup \{I\}$ with $I$ a binary relation. In order to prove the theorem, it is necessary to lift $\sigma$-structures to $\sigma'$-structures. We say a $\sigma$-structure $A$ is a \textit{pure $\sigma'$-structure} if $I$ is interpreted as the identity relation on $A$. Note that if $A$ is a pure $\sigma'$-structure, then by the definition of $\efcomonad{k}{A}$ as a $\sigma'$-structure, $\efcomonad{k}{A}$ is not a pure $\sigma'$-structure. However, two prefix comparable plays in $\efcomonad{k}{A}$ are $I$-related if their last elements are the same. This ensures that $S_{f}$ contains well-defined partial functions.
 \begin{thm}
 If $A,B$ are pure $\sigma'$-structures and $f:\efcomonad{k}{A} \rightarrow B$ is a function, then 
-\center{$f:\efcomonad{k}{A} \longrightarrow B$ is a $\sigma'$-morphism if and only if  $S_{f}$ is winning for Duplicator}
+\center{$f:\efcomonad{k}{A} \longrightarrow B$ is a $\sigma'$-morphism if and only if  $f$ is winning for Duplicator in $\efgame{k}{A}{B}$}
 \begin{proof}
 $\Rightarrow$ Suppose $\chi \in S_{f}$, then by definition of $S_{f}$, $\chi = []$ or $\chi = \theta_{f}(s)$ for some $s \in \efcomonad{k}{A}$. If $\chi = []$, then it is vacuously true that $\chi$ is a partial homomorphism (i.e. winning for Duplicator). If $\chi = \theta_{f}(s)$, then there exists some $s \in \efcomonad{k}{A}$ such that $s = [a_{1},\dots,a_{n}]$ where $f([a_{1},\dots,a_{i}]) = b_{i}$ and $\chi = [(a_{1},b_{1}),\dots,(a_{n},b_{n})]$ for all $i = 1,\dots,n$. For brevity, let $s_{i} = [a_{1},\dots,a_{i}] \sqsubseteq s$ (i.e. $s_{i}$ is the $i$-th component of $\delta_{A}(s)$). \\
 Suppose $R \in \sigma$ is a $m$-ary relation symbol, and $i_{1},\dots,i_{m} \in \{1,\dots,n\}$ and $R^{A}(a_{i_{1}},\dots,a_{i_{m}})$, then:
@@ -252,10 +252,10 @@ $$\text{tp}^{k}_{1}(a) := \{\psi(x) \in \exists^{+}\mathcal{L}_{\omega,k}: A,a \
 In model theory literature, this set is called the (existential-positive) rank-$k$ $1$-type of $a \in A$. Since there are only finitely many equivalence classes of formulas of rank-$k$, this type is isolated. That is, there exists a formula $\alpha(x) \in \text{tp}^{k}_{1}(a)$ such that for all $\psi(x) \in \text{tp}^{k}_{1}(a)$, $A,a \vDash \alpha(x) \Rightarrow A,a \vDash \psi(x)$. Consider the sentence $\phi = \exists x \alpha(x)$, clearly $A \vDash \phi$ as $a$ witnesses $x$. Since $\alpha$ is a rank-$k$ type, the sentence $\phi \in \exists^{+}\mathcal{L}_{\omega,k+1}$. By hypothesis (i.e (1)$_{k+1}$) and $A \vDash \phi$, $B \vDash \phi$. Hence, there exists a $b \in B$ corresponding to $a$, such that $B,b \vDash \alpha(x)$.  Let $\chi'_{a} = \chi[a,b]$ for every $\chi \in S$, $a \in A$.  Define
 $$S_{k+1} =  S_{k} \cup \{\chi'_{a} : \chi \in S_{k} \text{ and }  a \in A \} \subseteq \Gamma_{k+1}(A,B)$$
 It is clear by construction and the inductive hypothesis, that $S_{k+1}$ satisfies (\ref{eq:S1st})-(\ref{eq:S3rd}), so $S_{k+1}$ is a strategy in positional form. By the definition of the $\alpha$, for every $a \in A$, there exist $b \in B$ corresponding to $a$ such that for every $\psi(x) \in \exists^{+}\mathcal{L}_{\omega,k}, A \vDash \psi(a) \Rightarrow B \vDash \psi(b)$. Hence, $S_{k+1}$ is indeed winning for Duplicator. \\~\\
-$\Leftarrow$ By induction on complexity of formulas $\psi(x_{1},\dots,x_{n}) \in \exists^{+}\mathcal{L}_{\omega,k+1}$, we prove the stronger statement of (1)$_{k+1}$ where the sentence $\phi$ is replaced with the formula $\psi(x_{1},\dots,x_{n})$ with $n \leq k+1$. Let $S \subseteq \Gamma_{k+1}(A,B)$ be the strategy in positional form winning for Duplicator that exists by hypothesis (i.e. (2)$_{k+1}$). \\
+$\Leftarrow$ By induction on complexity of formulas $\psi(\mathbf{x}) \in \exists^{+}\mathcal{L}_{\omega,k+1}$, we prove the stronger statement of (1)$_{k+1}$ where the sentence $\phi$ is replaced with the formula $\psi(\mathbf{x})$ with free variables among $\mathbf{x}$ and $n \leq k+1$. Let $S \subseteq \Gamma_{k+1}(A,B)$ be the strategy in positional form winning for Duplicator that exists by hypothesis (i.e. (2)$_{k+1}$). \\
 \textit{Base Case:} Suppose $\psi(\mathbf{x})$ is an atomic formula with variables among $\mathbf{x} = (x_{1},\dots,x_{n})$ and $\mathbf{a} = (a_{1},\dots,a_{n})$, then there are two cases: \\
-$x_{i} = x_{j}$: Suppose $A \vDash a_{i} = a_{j}$. By (\ref{eq:S2nd}), there exists $\chi \in S$ with $\chi = [(a_{i},b_{i}),(a_{j},b_{j})]$. By $S$ winning for Duplicator, $a_{i} \mapsto b_{i}$ is a partial homomorphism, so $B \vDash b_{i} = b_{j}$\\
-$R(x_{i_{1}},\dots,x_{i_{m}})$: Suppose $A \vDash R(a_{i_{1}},\dots,a_{i_{n}})$. By (\ref{eq:S2nd}), there exists $\chi \in S$ with $\chi = [(a_{1},b_{1}),\dots,(a_{n},b_{n})]$. By $S$ winning for Duplicator, $\chi:a_{i} \mapsto b_{i}$ is a partial homomorphism, so $B \vDash R(b_{i_{1}},\dots,b_{i_{n}})$. \\
+$x_{i} = x_{j}$: Suppose $A,\mathbf{a} \vDash x_{i} = x_{j}$. By (\ref{eq:S2nd}), there exists $\chi \in S$ with $\chi = [(a_{i},b_{i}),(a_{j},b_{j})]$. By $S$ winning for Duplicator, $a_{i} \mapsto b_{i}$ is a partial $\sigma$-morphism, so $B,\mathbf{b} \vDash x_{i} = x_{j}$\\
+$R(x_{i_{1}},\dots,x_{i_{m}})$: Suppose $A,\mathbf{a} \vDash R(x_{i_{1}},\dots,x_{i_{n}})$, so $(a_{i_{1}},\dots,a_{i_{m}}) \in R^{A}$ By (\ref{eq:S2nd}), there exists $\chi \in S$ with $\chi = [(a_{1},b_{1}),\dots,(a_{n},b_{n})]$. By $S$ winning for Duplicator, $\chi:a_{i} \mapsto b_{i}$ is a partial $\sigma$-morphism. Hence, $(b_{i_{1}},\dots,b_{i_{m}}) \in R^{B}$, so $B,\mathbf{b} \vDash R(b_{i_{1}},\dots,b_{i_{n}})$. \\
 \textit{Inductive Step:} Assume for the inductive hypothesis that given formulas $\psi_{1}(\mathbf{x})$, $\psi_{2}(\mathbf{x})$ in $\exists^{+}\mathcal{L}_{\omega,k+1}$ there exists $\mathbf{a} = (a_{1},\dots,a_{n}) \in A^{n}$ such that $A,\mathbf{a} \vDash \psi_{j}(\mathbf{x}) \Rightarrow B,\mathbf{b} \vDash \psi_{j}(\mathbf{x})$ for some $\chi = [(a_{1},b_{1}),\dots,(a_{n},b_{n})] = z((\mathbf{a},\mathbf{b})) \in S$. There are three cases. For the $\psi(\mathbf{x}) = \psi_{1}(\mathbf{x}) \wedge \psi_{2}(\mathbf{x})$ case: 
 \begin{align*}
 A,\mathbf{a} \vDash \psi(\mathbf{x}) &\Rightarrow A,\mathbf{a} \vDash \psi_{1}(\mathbf{x}) \wedge \psi_{2}(\mathbf{x}) \\
@@ -294,14 +294,14 @@ Recall definition (\ref{defn:equivLogic}) and apply above corollary (\ref{cor:fo
 \label{prop:toSyntaxEF}
 \end{prop}
 \subsection{Equivalence $\mathcal{L}_{\omega,k}$}
-The comonad $\efcomonad{k}{}$ also captures equivalence $\equivL{A}{B}{\mathcal{L}_{\omega,k}}$ in the full $k$-rank fragment of first-order logic. Equivalence in this logic is given by a winning strategy for Duplicator in the symmetric $k$-round EF game. To formalize this in terms of $\sigma$-morphisms, we need winning strategies for Duplicator in the asymmetric game from $A$ to $B$, $f:\efcomonad{k}{A} \longrightarrow B$, and the asymmetric game from $B$ to $A$, $g:\efcomonad{k}{B} \longrightarrow A$, that are `sufficiently compatible', in positional form.  That is, these morphisms must form a back-and-forth system of partial isomorphisms. More precisely, for every pair of pure $\sigma'$-structures $A,B$, the positional forms are posets $\Gamma_{k}(A,B)$ and $\Gamma_{k}(B,A)$ ordered by $\sqsubseteq$. There is a canonical `swap' monotone function $()^{-}:\Gamma_{k}(A,B) \longrightarrow \Gamma_{k}(B,A)$ given by $[(a_{i},b_{i})]^{-} = [(b_{i},a_{i})]$. The condition that $f$ and $g$ are compatible, in positional form, can be phrased as $(S_{f})^{-} = S_{g}$ and $(S_{g})^{-} = S_{f}$. \\ 
+The comonad $\efcomonad{k}{}$ also captures equivalence $\equivL{A}{B}{\mathcal{L}_{\omega,k}}$ in the full $k$-rank fragment of first-order logic. Equivalence in this logic is given by a winning strategy for Duplicator in the symmetric $k$-round EF game. To formalize this in terms of $\sigma$-morphisms, we need winning strategies for Duplicator in the asymmetric game from $A$ to $B$, $f:\efcomonad{k}{A} \longrightarrow B$, and the asymmetric game from $B$ to $A$, $g:\efcomonad{k}{B} \longrightarrow A$, that are `sufficiently compatible', in positional form.  That is, these morphisms must form a back-and-forth system of partial isomorphisms. More precisely, for every pair of pure $\sigma'$-structures $A,B$, the positional forms are posets $\Gamma_{k}(A,B)$ and $\Gamma_{k}(B,A)$ ordered by $\sqsubseteq$. There is a canonical `swap' monotone function $()^{-}:\Gamma_{k}(A,B) \longrightarrow \Gamma_{k}(B,A)$ given by $[(a_{i},b_{i})]^{-} = [(b_{i},a_{i})]$. The condition that $f$ and $g$ are compatible, in positional form, can be phrased as $S_{f}^{-} = S_{g}$ and $S_{g}^{-} = S_{f}$. \\ 
 %This can also be phrased in terms of $f$ and $g$ directly. For $f:\efcomonad{k}{A} \longrightarrow B$, the map $\theta_{f}:\efcomonad{k}{A} \rightarrow \Gamma_{k}(A,B)$ is a monotone function (i.e. $s \sqsubseteq s' \Rightarrow \theta_{f}(s) \subseteq \theta_{f}(s')$) and similarly for $\theta_{g}$. The $\sigma'$-morphisms are compatible if $f^{*} \circ \theta_{g} = \mathsf{swap} \circ \theta_{f}$ and $g^{*} \circ \theta_{f} = \mathsf{swap} \circ \theta_{g}$. 
 To show this result, we modify the proof for (\ref{prop:toSyntaxEF}).  
 \begin{prop}
 For all $k \in \omega$, the following are equivalent:
 \begin{enumerate}[label=(\arabic*)$_{k}$]
 \item $\equivL{A}{B}{\mathcal{L}_{\omega,k}}$, i.e. for every $\phi \in \mathcal{L}_{\omega,k}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$
-\item There exists a strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ such that $S$ is winning for Duplicator and $(S)^{-}$ is winning for Duplicator. 
+\item There exists a strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ such that $S$ is winning for Duplicator and $S^{-}$ is winning for Duplicator. 
 \end{enumerate}
 \begin{proof}
 $\Rightarrow$ Repeat the proof for the $\Rightarrow$-direction of proposition (\ref{prop:toSyntaxEF}), but consider the full rank-$k$ 1-type of $a \in A$:
@@ -332,28 +332,46 @@ A,\mathbf{a} \vDash \psi(\mathbf{x})  &\Rightarrow A,\mathbf{a} \vDash \forall y
 The $\Leftarrow$-direction is similar. Therefore, for all $\psi(\mathbf{x}) \in \mathcal{L}_{\omega,k+1}$ with $n \leq k+1$, there exists $\mathbf{a} \in A^{n}$ and $\mathbf{b} \in B^{n}$ such that $A,\mathbf{a} \vDash \psi(\mathbf{x}) \Leftrightarrow B,\mathbf{b} \vDash \psi(\mathbf{x})$. In particular, for sentences $\phi \in \mathcal{L}_{\omega,k+1}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$, so $\equivL{A}{B}{\mathcal{L}_{\omega,k+1}}$. 
 \end{proof}
 \begin{cor}
-$\equivL{A}{B}{\mathcal{L}_{\omega,k}}$ if and only if there exist $f:\efcomonad{k}{A} \longrightarrow B$, $g:\efcomonad{k}{B} \longrightarrow A$ such that $S_{f} = (S_{g})^{-}$ and $S_{g} = (S_{f})^{-}$ 
+$\equivL{A}{B}{\mathcal{L}_{\omega,k}}$ if and only if there exist $f:\efcomonad{k}{A} \longrightarrow B$, $g:\efcomonad{k}{B} \longrightarrow A$ such that $S_{f} = S_{g}^{-}$ and $S_{g} = S_{f}^{-}$ 
 \label{cor:backForthEF}
 \end{cor}
 \end{prop}
 \subsection{Equivalence $\mathcal{L}_{\infty,k}(\mathsf{Cnt})$} 
-Suppose $f:\efcomonad{k}{A} \longrightarrow B$ is a $\sigma$-morphism. For all $s \in \efcomonad{k}{A} \cup \{[]\}$, define the function $\psi_{s}:A \longrightarrow B$ by $a \mapsto f(s[a])$. If for some $f:\efcomonad{k}{A} \longrightarrow B$, $\psi_{s}$ is bijective for all $s \in \efcomonad{k}{A} \cup \{[]\}$, we write $A \rightarrow_{k}^{b} B$.
+The $k$-round bijective Ehrenfreucht-{\Fraisse} game between two pure $\sigma'$-structures $A,B$, $\efgameBij{k}{A}{B}$ is played by Spoiler and Duplicator as follows:
+\begin{itemize}
+\item If cardinality of $A$ is not equal to the cardinality of $B$, then Spoiler wins the game.
+\item If cardinality of $A$ is equal to the cardinality of $B$, then for each round $i = 1,\dots,k$, Duplicator selects a bijection $\psi_{i}:A \longrightarrow B$ and Spoiler selects a point $a_{i} \in A$. 
+\item Duplicator wins if for $b_{i} = f_{i}(a_{i})$, the map $\chi:a_{i} \mapsto b_{i}$ is a partial isomorphism from $A$ to $B$. 
+\end{itemize}
+The game $\efgameBij{k}{A}{B}$ characterizes equivalence in the $k$-rank fragment of $\mathcal{L}_{\infty,\omega}(\mathsf{Cnt})$. Namely,
+\begin{prop}[{\cite{Hella1996}}]
+The following are equivalent: 
+\begin{itemize}
+\item Duplicator has a winning strategy in $\efgameBij{k}{A}{B}$ 
+\item $\equivL{A}{B}{\mathcal{L}_{\infty,k}(\mathsf{Cnt})}$ 
+\end{itemize}
+\label{prop:bijToSyntaxEF}
+\end{prop}
+Our goal is to show that isomorphism in the coKleisli category internalizes $\efgameBij{k}{A}{B}$. Suppose $f:\efcomonad{k}{A} \longrightarrow B$ is a $\sigma$-morphism. For all $s \in \efcomonad{k}{A} \cup \{[]\}$, define the function $\psi_{s}:A \longrightarrow B$ by $a \mapsto f(s[a])$. Using these functions and the following definition we can show that isomorphism in the coKleisli category characterizes the bijective EF game $\efgameBij{k}{A}{B}$ and equivalence in $\mathcal{L}_{\infty,k}(\mathsf{Cnt})$.
+\begin{defn}
+Given $f:\efcomonad{k}{A} \longrightarrow B$, $f$ is \textit{winning for Duplicator in $\efgameBij{k}{A}{B}$} if $\psi_{s}$ bijective for all $s \in \efcomonad{k}{A} \cup \{[]\}$ 
+\end{defn}
 \begin{prop}
-There exists $f:\efcomonad{k}{A} \longrightarrow B$ an isomorphism in $\mathcal{K}(\efcomonad{k}{})$ if and only if $A \rightarrow_{k}^{b} B$
+$f:\efcomonad{k}{A} \longrightarrow B$ an isomorphism in $\mathcal{K}(\efcomonad{k}{})$ if and only if $f$ is winning for Duplicator in $\efgameBij{k}{A}{B}$  
 \begin{proof}
-$\Rightarrow$ If $f:\efcomonad{k}{A} \longrightarrow B$ is an isomorphism in $\mathcal{K}(\efcomonad{k}{})$, then there exists a $g:\efcomonad{k}{B} \longrightarrow A$ such that $f \circ_{\mathcal{K}} g = \epsilon_{B}$ and $g \circ_{\mathcal{K}} f = \epsilon_{A}$. Consider $f$ as the witness of $A \rightarrow_{k}^{b} B$ and suppose $s \in \efcomonad{k}{A} \cup \{[]\}$, then we aim to show that $\psi_{s}:A \longrightarrow B$ is bijective:  
+$\Rightarrow$ If $f:\efcomonad{k}{A} \longrightarrow B$ is an isomorphism in $\mathcal{K}(\efcomonad{k}{})$, then there exists a $g:\efcomonad{k}{B} \longrightarrow A$ such that $f \circ_{\mathcal{K}} g = \epsilon_{B}$ and $g \circ_{\mathcal{K}} f = \epsilon_{A}$. Suppose $s \in \efcomonad{k}{A} \cup \{[]\}$, then we aim to show that $\psi_{s}:A \longrightarrow B$ is bijective:  
 \begin{align*}
 \psi_{s}(a) = \psi_{s}(a') &\Rightarrow f(s[a]) = f(s[a']) \\
-&\Rightarrow g \circ f(s[a]) = g \circ f(s[a']) \\
+&\Rightarrow g \circ_{\mathcal{K}} f(s[a]) = g \circ_{\mathcal{K}} f(s[a']) \\
 &\Rightarrow \epsilon_{A}(s[a]) = \epsilon_{A}(s[a']) \\
 &\Rightarrow a = a' 
 \end{align*}
 Hence, $\psi_{s}$ is injective for all $s$. It follows by $A$,$B$ finite, that $\psi_{s}$ is bijective. \\
-$\Leftarrow$ Let $f:\efcomonad{k}{A} \longrightarrow B$ be the $\sigma$-morphism witnessing $A \rightarrow_{k}^{b} B$. Define $g^{*}:\efcomonad{k}{B} \longrightarrow \efcomonad{k}{A}$ (i.e. the coextension of $g = \epsilon_{A} \circ g^{*}$) by recursion, up to $k$, on length of $t \in \efcomonad{k}{B}$. \\   
+$\Leftarrow$ Let $f:\efcomonad{k}{A} \longrightarrow B$ be the $\sigma$-morphism witnessing Duplicator winning in $\efgameBij{k}{A}{B}$. Define $g^{*}:\efcomonad{k}{B} \longrightarrow \efcomonad{k}{A}$ (i.e. the coextension of $g = \epsilon_{A} \circ g^{*}$) by recursion, up to $k$, on length of $t \in \efcomonad{k}{B}$. \\   
 \textit{Base Case:} Suppose $t = [b]$ for $b \in B$, let $g^{*}([b]) = [\psi_{[]}^{-1}(b)]$.
 \textit{Recursion Step:} Assume for $t \in B$ with length $|t| = n < k$ that $g^{*}(t)$ is already defined. Consider $t' = t[b]$ for $b \in B$. Let $g^{*}(t') = g^{*}(t)\psi_{s}^{-1}(b)$ where $s = g^{*}(t) \in \efcomonad{k}{A}$. To complete, the proof, we need to show that $f \circ_{\mathcal{K}} g = \epsilon_{B}$ and $g \circ_{\mathcal{K}} f = \epsilon_{A}$. Suppose $s' = s[a_{n}] = [a_{1},\dots,a_{n}] \in \efcomonad{k}{A}$ and $f(s') = b_{n}$ (i.e. it follows that $\psi_{s}(a_{n}) = b_{n}$) then: 
 \begin{align*}
-g \circ_{\mathcal{K}} f([a_{1},\dots,a_{n}]) &= \efcomonad{k}{f} \circ \delta_{A}([a_{1},\dots,a_{n}]) \\ 
+g \circ_{\mathcal{K}} f([a_{1},\dots,a_{n}]) &= g \circ \efcomonad{k}{f} \circ \delta_{A}([a_{1},\dots,a_{n}]) \\ 
 &= g \circ \efcomonad{k}{f}([[a_{1}],\dots,[a_{1},\dots,a_{n}]]) \\
 &= g(f([a_{1}]),\dots,f([a_{1},\dots,a_{n}])) \\
 &= g([b_{1},\dots,b_{n}]) \\
@@ -361,8 +379,15 @@ g \circ_{\mathcal{K}} f([a_{1},\dots,a_{n}]) &= \efcomonad{k}{f} \circ \delta_{A
 &= a_{n} \\ 
 &= \epsilon_{A}(s[a_{n}]) 
 \end{align*}
-The proof $f \circ_{\mathcal{K}} g = \epsilon_{B}$ is similar. By definition, $f: \efcomonad{k}{A} \longrightarrow B$ is an isomorphism in the coKlesli category.  
+The proof $f \circ_{\mathcal{K}} g = \epsilon_{B}$ is similar. By definition, $f: \efcomonad{k}{A} \longrightarrow B$ is an isomorphism in the coKleisli category.  
 \end{proof}
+\begin{cor}
+$A,B$ are isomorphic in $\mathcal{K}(\efcomonad{k}{})$ if and only if $\equivL{A}{B}{\mathcal{L}_{\infty,k}(\mathsf{Cnt})}$.
+\begin{proof}
+Follows from (\ref{prop:bijToSyntaxEF}) and (\ref{prop:bijEF})
+\end{proof}
+\end{cor}
+\label{prop:bijEF}
 \end{prop}
 \section{Coalgebras and Tree-Depth}
 An advantage of the comonad perspective is exploring the structure of the category of coalgebras over $\efcomonad{k}{}$ to give a categorical characterization of combinatorial properties of structures. In particular, we use the coalgebra category of $\efcomonad{k}{}$ to give a categorical definition for tree-depth of a $\sigma$-structure $A$. Recall a coalgebra for $\efcomonad{k}{}$ is an object $A$ and morphism $\alpha:A \longrightarrow \efcomonad{k}{A}$ such that the following diagrams commute:
@@ -371,7 +396,7 @@ An advantage of the comonad perspective is exploring the structure of the catego
     \square[A`\efcomonad{k}{A}`\efcomonad{k}{A}`\efcomonad{k}{\efcomonad{k}{A}};\alpha`\alpha`\delta_{A}`\efcomonad{k}{\alpha}]
 \efig 
 \bfig
-    \qtriangle[A`\efcomonad{k}{A}`A;\alpha`\text{id}_{A}`\epsilon_{A}]
+    \qtriangle[A`\efcomonad{k}{A}`A;\alpha`\mathsf{id}_{A}`\epsilon_{A}]
 \efig
 \label{eq:coalgebraLaw}
 \end{equation}
@@ -388,19 +413,19 @@ Given a $\sigma$-structure $A$, the \textit{tree-depth} of $A$, denoted $\mathsf
 \label{defn:treeDepth}
 \end{defn}
 \begin{prop}
-Let $A$ be a finite $\sigma$-structure. There is bijective correspondence between:
+Let $A$ be a finite $\sigma$-structure. There is a bijective correspondence between:
 \begin{enumerate}[label=(\arabic*)]
 \item coalgebras $\alpha:A \longrightarrow \efcomonad{k}{A}$
-\item Forest covers $\mathcal{F}$ of $\mathcal{G}(A)$ of height $k$ 
+\item Forest covers $\mathcal{F}$ of $\mathcal{G}(A)$ with height $k$ 
 \end{enumerate}
 \begin{proof}
-For the $(1) \Rightarrow (2)$ direction, suppose $\alpha:A \rightarrow \efcomonad{k}{A}$ is a coalgebra. Construct a forest $\mathcal{F}_{n}$ for every $n \leq k$ by recursion. Let $V(\mathcal{F})$ and $E(\mathcal{F})$ denote the vertices and edge relation of forest $\mathcal{F}$. \\
+For the $(1) \Rightarrow (2)$ correspondence, suppose $\alpha:A \rightarrow \efcomonad{k}{A}$ is a coalgebra. Construct a forest $\mathcal{F}_{n}$ for every $n \leq k$ by recursion. Let $V(\mathcal{F})$ and $E(\mathcal{F})$ denote the vertices and edge relation of forest $\mathcal{F}$. \\
 \textit{Base Case:} $$V(\mathcal{F}_{1}) := \{a \in A \mid \alpha(a) = [a]\}, E(\mathcal{F}_{1}) = \varnothing$$
 \textit{Recursive Step:} Assume that $\mathcal{F}_{n}$ is a forest that has been constructed. From the counit coalgebra law (\ref{eq:coalgebraLaw} right), it must be the case that $\alpha(a) = s$ where the last move in $s$ is $a$ (i.e. $\epsilon_{A}(s) = a$). Let $a^{-}$ be the second-to-last move in $s$ (i.e $s = t[a^{-},a] = t[a^{-},\epsilon_{A}(s)]$ for some possibly empty sequence $t$). Define $\mathcal{F}_{n+1}$ as follows:  
 $$V(\mathcal{F}_{n+1}) := V(\mathcal{F}_{n}) \cup \{a \in A \mid a^{-} \in V(\mathcal{F}_{n})\}$$
 $$E(\mathcal{F}_{n+1}) := E(\mathcal{F}_{n}) \cup \{(a^{-},a) \mid a \in  V(\mathcal{F}_{n+1})\}$$ 
 Let $\mathcal{F} = \mathcal{F}_{k}$ be the forest constructed at the end of the recursion up to $k$. Suppose $(a,a')$ is an edge in $\mathcal{G}(A)$, the by the definition of Gaifman graph there exists an $R \in \sigma$ such that $a$ and $a'$ appear in a tuple of $R^{A}$. By $\alpha$ a $\sigma$-morphism, $\alpha(a)$ and $\alpha(a')$ appear in a tuple of $R^{\efcomonad{k}{A}}$. By condition (1) in the definition $R^{\efcomonad{k}{A}}$, $\alpha(a) \sqsubseteq \alpha(a')$ or $\alpha(a') \sqsubseteq \alpha(a)$. Without loss of generality, assume $\alpha(a) \sqsubseteq \alpha(a')$, and let $t$ be the suffix of $\alpha(a)$ in $\alpha(a')$. From the construction of $\mathcal{F}$, $[a]t$ describes a path between $a$ and $a'$ in $\mathcal{F}$. Hence, $(a,a') \in \overline{\mathcal{F}}$. Since $(a,a')$ was arbitrary in $\mathcal{G}(A)$, $\mathcal{G}(A)$ is a subgraph of $\overline{\mathcal{F}}$. Therefore, $\mathcal{F}$ is a forest cover of $\mathcal{G}(A)$ as desired. \\~\\
-For the $(2) \Rightarrow (1)$ direction, suppose $\mathcal{F}$ is a forest cover of $\mathcal{G}(A)$ of height $k$. Consider arbitrary $a \in A$. Since $\mathcal{F}$ is a cover of $\mathcal{G}(A)$, $a \in \mathcal{F}$. By definition of forest as a disjoint union finite trees, $a$ is in a unique tree $T \subseteq \mathcal{F}$. Let $a^{*}$ be the root of tree $T$. By $T$ being a tree, there exists a unique path $u = [a^{*},\dots,a]$ between $a^{*}$ and $a$. Let $\alpha(a) = u$ with $u$ considered as an element of $\efcomonad{k}{A}$. It is straightforward to see that $\alpha$ as defined satisfies the coalgebra laws (\ref{eq:coalgebraLaw}). 
+For the $(2) \Rightarrow (1)$ correspondence, suppose $\mathcal{F}$ is a forest cover of $\mathcal{G}(A)$ of height $k$. Consider arbitrary $a \in A$. Since $\mathcal{F}$ is a cover of $\mathcal{G}(A)$, $a \in \mathcal{F}$. By definition of forest as a disjoint union finite trees, $a$ is in a unique tree $T \subseteq \mathcal{F}$. Let $a^{*}$ be the root of tree $T$. By $T$ being a tree, there exists a unique path $u = [a^{*},\dots,a]$ between $a^{*}$ and $a$. Let $\alpha(a) = u$ with $u$ considered as an element of $\efcomonad{k}{A}$. It is straightforward to see that $\alpha$ as defined satisfies the coalgebra laws (\ref{eq:coalgebraLaw}). 
 \end{proof}
 \label{prop:coalgebraForest}
 \begin{defn}

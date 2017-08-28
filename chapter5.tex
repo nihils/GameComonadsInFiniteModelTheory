@@ -2,7 +2,7 @@
 \section{Introduction}
 Two transitions systems, or Kripke structures, $A,B$ are bisimilar if every transition in $A$ can be matched with a transition in $B$ and vice-versa. To show two structures are bisimilar, we need to construct a bisimulation $Z \subseteq A \times B$ matching transitions in $A$ with transitions in $B$ (and vice-versa). Just as the EF game and pebbling game are used to obtain partial homormorphisms between structures, a bisimulation game can be used to obtain a bisimulation. In terms of logic, the $k$-round bisimulation game is used to prove equivalence between two Kripke structures in the $k$-depth modal fragment of first order logic. Given two Kripke structures $A,B$, the $k$-round bisimulation game is played with Spoiler and Duplicator as follows: 
 \begin{itemize} 
-\item In the first round, Spoiler picks an arbitrary element $a_{1} \in A$, and $b_{1} \in B$
+\item In the first round, Spoiler picks an arbitrary element $a_{1} \in A$ or $b_{1} \in B$
 \item Duplicator responds by picking an arbitrary element in the other structure $b_{1} \in B$ or $a_{1} \in A$.
 \item In a subsequent $i$-th round, Spoiler chooses a binary relation $R_{z} \in \sigma$ and $a_{i} \in A$ or $b_{i} \in B$ such that $(a_{i-1},a_{i}) \in R_{z}^{A}$ or $(b_{i-1},b_{i}) \in R_{z}^{B}$
 \item Duplicator responds by choosing an element in the other structure $b_{i} \in B$ or $a_{i} \in A$. If $(a_{i-1},a_{i}) \in R_{z}^{A} \Leftrightarrow (b_{i-1},b_{i}) \in R_{z}^{B}$ for the $R_{z} \in \sigma$ that was picked by Spoiler, then Duplicator wins the $i$-th round.  
@@ -17,16 +17,16 @@ The following are equivalent:
 \end{prop}
 As was the goal with the EF game comonad, our goal is to construct a $\sigma$-structure $\mcomonad{k}{A}$ that ``internalizes'' the $k$-round simulation and bisimulation games in the category $\mathcal{R}(\sigma)$. The tree unfolding construction of depth $k$ for pointed transition systems, detailed in \cite{Gradel2014}, turns out to be the correct candidate for $\mcomonad{k}{A}$. This construction is typically empolyed to show the tree-model property which yields a proof of the decidability of modal logic. We use this construction, instead, to show that it captures the modal simulation and bisimulation game (i.e. analogous to corollaries \ref{cor:forthEF} and \ref{cor:backForthEF}) as a comonad.
 \section{Comonad laws}
-\section{Positional Form and Equivalences}
-The positional form representation for the simulation and bisimulation games involving $A,B$ are, just as with the EF game, sequences of pairs of elements in $A,B$ of length $\leq k$. However, the choice of each pair must be local (i.e. only one transition away from the previous pair). Our definitions will reflect this modification. Recall, from \ref{sec:positionalFormEF}, that $\Gamma_{k}(A,B) = (A \times B)^{\leq k}$ and for a $\sigma$-morphism $f:\mcomonad{k}{A} \longrightarrow B$ there exists the Klesli coextension $f^{*}:\mcomonad{k}{A} \longrightarrow \mcomonad{k}{B}$. Define the set function $\theta_{f}:|\mcomonad{k}{A}| \longrightarrow \Gamma_{k}(A,B)$ by $s = [a_{1},i_{1},\dots,i_{n-1},a_{n}] \mapsto [(a_{1},b_{1}),\dots,(a_{n},b_{n})]$ where $f^{*}(s) = [b_{1},i_{1},\dots,i_{n-1},b_{n}]$. 
+\section{Positional Form and Equivalences}\label{sec:positionalFormM}
+The positional form representation for the simulation and bisimulation games involving $A,B$ are, just as with the EF game, sequences of pairs of elements in $A,B$ of length $\leq k$. However, the choice of each pair must be local (i.e. only one transition away from the previous pair). Our definitions will reflect this modification. Recall, from \ref{sec:positionalFormEF}, that $\Gamma_{k}(A,B) = (A \times B)^{\leq k}$ and for a $\sigma$-morphism $f:\mcomonad{k}{A} \longrightarrow B$ there exists the Kleisli coextension $f^{*}:\mcomonad{k}{A} \longrightarrow \mcomonad{k}{B}$. Define the set function $\theta_{f}:|\mcomonad{k}{A}| \longrightarrow \Gamma_{k}(A,B)$ by $s = [a_{1},i_{1},\dots,i_{n-1},a_{n}] \mapsto [(a_{1},b_{1}),\dots,(a_{n},b_{n})]$ where $f^{*}(s) = [b_{1},i_{1},\dots,i_{n-1},b_{n}]$. 
 \begin{defn}
 $S \subseteq \Gamma_{k}(A,B)$ is a strategy in positional form if $S$ satisfies the following conditions:
 \begin{enumerate}[label=(S\arabic*),ref=S\arabic*,start=0]
 \item For every $a \in A$, there exists a unique $b \in B$ such that $[(a,b)] \in S$ \label{eq:S1st}
-\item For all $\zeta \in S$ with last position $(a,b)$ and $i \in [m]$ with $(a,a') \in R_{i}^{A}$, there exists a unique $b' \in B$ such that $\zeta[(a',b')] \in S$ \label{eq:S2nd}
+\item For all $\zeta \in S$ with last position $(a,b)$ and $i \in [m]$ with $(a,a') \in R_{i}^{A}$, there exists a unique $b' \in B$ such that $\zeta' = \zeta[(a',b')] \in S$. Denote this update as $\zeta \xlongrightarrow{(i,a):b} \zeta'$ \label{eq:S2nd}
 \item $S$ is reachable: For all $\zeta \in S$, there is a chain \label{eq:S3rd}
 $$\zeta_{1} \longrightarrow \dots \longrightarrow \zeta_{n}$$
-such that $\zeta_{n} = \zeta$ and $\zeta_{i} \in S$ with $|\zeta_{i}| = i$ for all $i = 1,\dots,n$. 
+such that $\zeta_{n} = \zeta$ and $\zeta_{i} \in S$. 
 \end{enumerate}
 \end{defn}
 \begin{prop}
@@ -51,22 +51,22 @@ $S_{f} \subseteq S$ The approach is to construct an appropriate $f$. We construc
 \textit{Base Case:} Suppose $w = [a]$ for $a \in A$. By (\ref{eq:S1st}), there exists a unique $b$ such that $[(a,b)] \in S$. Let $f(w) = b$. \\
 \textit{Recursive Step:} Assume for the recursion, that $f(w)$ is defined for $|w| = n < 2k+1$ and that $\theta_{f}(w) \in S$. Consider $w' = w[i,a]$ for $(\epsilon_{A}(w),a) \in R_{i}$. By (\ref{eq:S2nd}), there exists a unique $b \in B$ such that $\zeta' = \theta_{f}(w)[(a,b)]$. Let $f(w') = b$. \\
 $S \subseteq S_{f}$ We must show that for every $\zeta \in S$, there exists a $w \in \mcomonad{k}{A}$ such that $\zeta = \theta_{f}(w)$. By induction on reachability sequence of $\zeta$ (obtained via \ref{eq:S3rd}). \\
-\textit{Base Case:} Suppose $\zeta = [(a,b)]$. By the construction of $f$ above, $f([a]) = b$, so $\zeta = \theta_{f}([a])$. 
+\textit{Base Case:} Suppose $\zeta = [(a,b)]$. By the construction of $f$ above, $f([a]) = b$, so $\zeta = \theta_{f}([a])$. \\
 \textit{Inductive Step:} Assume for the inductive hypothesis that $\zeta = \theta_{f}(w)$ for some $w \in \mcomonad{k}{A}$. Suppose $\zeta \xlongrightarrow{(i,a):b} \zeta'$. Consider $w' = w[i,a]$, then $\theta_{f}(w') = \zeta'$.
 \end{proof}
 \label{prop:posFormToFM}
 \end{prop}
 \subsection{Equivalence $\exists^{+}\mathcal{M}_{\omega,k}$}
 \begin{defn}
-A position $\zeta = [(a_{1},b_{1}),\dots,(a_{n},b_{n})] \in \Gamma_{k}(A,B)$ is \textit{winning for Duplicator} if $\zeta$ a is simulation. That is, for all $i = 2,\dots,n$, $(a_{i-1},a_{i}) \in R_{z}^{A} \Rightarrow (b_{i-1},b_{i}) \in R_{z}^{B}$ for some $R_{z} \in \sigma$ binary and for all $P \in \sigma$ unary $a_{i} \in P_{j} \Rightarrow b_{i} \in P_{j}$. Naturally, we can extend the definition to say that a strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ is \textit{winning for Duplicator} if for all $\zeta \in S$, $\zeta$ is winning for Duplicator. 
+A position $\zeta = [(a_{1},b_{1}),\dots,(a_{n},b_{n})] \in \Gamma_{k}(A,B)$ is \textit{winning for Duplicator in $\mgame{k}{A}{B}$} if $\zeta$ a is simulation. That is, for all $i = 2,\dots,n$, $(a_{i-1},a_{i}) \in R_{z}^{A} \Rightarrow (b_{i-1},b_{i}) \in R_{z}^{B}$ for some $R_{z} \in \sigma$ binary and for all $P \in \sigma$ unary $a_{i} \in P_{j} \Rightarrow b_{i} \in P_{j}$. Naturally, we can extend the definition to say that a strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ is \textit{winning for Duplicator in $\mgame{k}{A}{B}$} if for all $\zeta \in S$, $\zeta$ is winning for Duplicator $\mgame{k}{A}{B}$. Function $f:\mcomonad{k}{A} \longrightarrow B$ is \textit{winning for Duplicator $\mgame{k}{A}{B}$} if $S_{f}$ is winning for Duplicator in $\mgame{k}{A}{B}$ 
 \end{defn}
 Intuitively, condition (\ref{eq:S2nd}) and winning for Duplicator together form the forth requirement in the back-and-forth definition of bisimulation. With the definition of positional form for the modal fragment in place, the main theorem relating the comonad and equivalence in $\mathcal{M}_{\infty,k}$ can be proved.  
 \begin{thm}
 If $A,B$ are Kripke structures and $f:\mcomonad{k}{A} \rightarrow B$ is a function, then 
-\center{$f:\mcomonad{k}{A} \longrightarrow B$ is a $\sigma$-morphism if and only if  $S_{f}$ is winning for Duplicator}
+\center{$f:\mcomonad{k}{A} \longrightarrow B$ is a $\sigma$-morphism if and only if $f$ is winning for Duplicator $\mgame{k}{A}{B}$}
 \begin{proof}
 $\Leftarrow$ Suppose $\zeta \in S_{f}$, the by definition of $S_{f}$, $\zeta = \theta_{f}(w)$ for some $w \in \mcomonad{k}{A}$. If $w = [a]$, then it is trivally true that $\zeta = [(a,b)]$ is a simulation (i.e. winning for Duplicator). If $w = v[i,a']$ (i.e. $\zeta = \theta_{f}(v)[(a',b')]$) and suppose the last position of $\theta_{f}(v)$ is $(a,b)$, then by interpretation of $R_{i}$ on $\mcomonad{k}{A}$, $(v,w) \in R_{i}^{\mcomonad{k}{A}}$. By $f$ a $\sigma$-morphism, $(f(v),f(w)) \in R_{i}^{B}$. By the definition of $\theta_{f}$, $f(v) = b$ and $f(w) = b'$, so $(b,b') \in R_{i}^{B}$. Moreover, for predicate $P \in \sigma$, if $a' \in P^{A}$, then $w \in P^{\mcomonad{k}{A}}$ by $a$ being the last element of $w$, so $f(w) = b' \in P^{B}$ by $f$ a $\sigma$-morphism. Therefore, $\zeta$ is a simulation and winning for Duplicator. Hence, $S_{f}$ is winning for Duplicator.\\
-$\Rightarrow$ Suppose $(v,w) \in R_{i}^{\mcomonad{k}{A}}$ for $R_{i} \in \sigma$ binary relation, then by intepretation of $R_{i}$ on $\mcomonad{k}{A}$, $v = w[i,a]$ or $w = v[i,a]$. Without loss of generality, assume $w = v[i,a]$. Consider $\zeta \in \theta_{f}(w) \in S_{f}$. By $w = v[i,a']$ and definition of $\theta_{f}$, $\theta_{f}(w) = \theta_{f}(v)[(a',f(w))]$ where $\theta_{f}(v) = u[(\epsilon(v),f(v))]$ for some (possibly empty) sequence $u$. Since $\zeta$ is a simulation (i.e. winning for Duplicator), $(f(v),f(w)) \in R^{B}$. Hence, $f$ is a $\sigma$-morphism.
+$\Rightarrow$ Suppose $(v,w) \in R_{i}^{\mcomonad{k}{A}}$ for $R_{i} \in \sigma$ binary relation, then by intepretation of $R_{i}$ on $\mcomonad{k}{A}$, $v = w[i,a]$ or $w = v[i,a]$. Without loss of generality, assume $w = v[i,a]$. Consider $\zeta \in \theta_{f}(w) \in S_{f}$. By $w = v[i,a']$ and definition of $\theta_{f}$, $\theta_{f}(w) = \theta_{f}(v)[(a',f(w))]$ where $\theta_{f}(v) = u[(\epsilon_{A}(v),f(v))]$ for some (possibly empty) sequence $u$. Since $\zeta$ is a simulation (i.e. winning for Duplicator), $(f(v),f(w)) \in R^{B}$. Hence, $f$ is a $\sigma$-morphism.
 \end{proof}
 \label{thm:toPositionalFormM}
 \end{thm}
@@ -93,6 +93,13 @@ Recall definition (\ref{defn:equivLogic}) and apply above corollary (\ref{cor:fo
 \label{prop:toSyntaxM}
 \end{prop}
 \subsection{Equivalence $\mathcal{M}_{\omega,k}$}
-
-
+Just as with the $\efcomonad{k}{}$ comonad, $\mcomonad{k}{}$ can also internalize winning strategies in the bisimulation game $\mgameSym{k}{A}{B}$. That is, given two Kripke $\sigma$-structures $A,B$, with $\sigma$-morphisms $f:\mcomonad{k}{A} \longrightarrow B$ and $g:\mcomonad{k}{B} \longrightarrow A$, Duplicator has a winning strategy in $\mgameSym{k}{A}{B}$ if $f$ and $g$ are compatible in positional form. Namely, given the canonical swap function, if $S_{f} = S_{g}^{-}$ and $S_{g} = S_{f}^{-}$, then there exists a bisimulation between $A$ and $B$. To see this $f:\mcomonad{k}{A} \longrightarrow A$ implies that $S_{f}$ is winning $\mgame{k}{A}{B}$ and the forth condition in the simulation from $A$ to $B$ is satisfied. Likewise, $g:\mcomonad{k}{B} \longrightarrow A$ implies that $S_{g}$ is winning in $\mgame{k}{B}{A}$ and the forth condition in the simulation from $B$ to $A$ is satisfied. The condition that $S_{f} = S_{g}^{-}$ means that the forth condition in the simulation from $B$ to $A$ is equivalent to the back condition in the bisimulation from $A$ to $B$. 
+\begin{prop}
+For all $k \in \omega$, the following are equivalent:
+\begin{enumerate}[label=(\arabic*)$_{k}$]
+\item $\equivL{A}{B}{\mathcal{M}_{\omega,k}}$ 
+\item There exists a winning strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ such that $S$ is winning for Duplicator and $S
+^{-}$ is winning for Duplicator. 
+\end{enumerate}
+\end{prop}
 \section{Guarded Unfolding}

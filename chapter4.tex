@@ -15,23 +15,16 @@ The following are equivalent:
 \end{prop}
 As was the goal with the EF game comonad, our goal is to construct a $\sigma$-structure $\pcomonad{k}{A}$ from a $\sigma$-structure $A$, that ``internalizes'' the asymmetric and symmetric $k$-pebble games in the category $\mathcal{R}(\sigma)$. The construction of $\pcomonad{k}{}$ and all of the results in this chapter were originally discovered in \cite{Abramsky2017}. The paper \cite{Abramsky2017} was the inspiration to develop the other game comonads in this dissertation. We reproduce the proofs here to demonstrate the connections and differences with these other comonads.  
 \section{Comonad laws}
-Let $A$ be a $\sigma$-structure over relational signature $\sigma$, then for every $k \in \mathbb{N}$ we define a $\sigma$-structure $\pcomonad{k}{A}$. Intuitively, $\pcomonad{k}{A}$ is the structure of the finite $k$-pebblings on $A$. Let the domain of this structure be $|\pcomonad{k}{A}| = (\{1,\dots,k\} \times A)^{<\omega}$ (i.e. the set of finite sequence of elements in product $\{1,\dots,k\} \times A$). In order, to define the $\sigma$-structure on $\pcomonad{k}{A}$, a bit more notation is necessary:\\
-\begin{defn}
-Suppose $s,s' \in |\pcomonad{k}{A}|$ such that $s = [s_{1},\dots,s_{n}]$ and $s' = [s'_{1},\dots,s'_{m}]$, then define $ss' = [s_{1},
-\dots,s_{n},s'_{1},\dots,s'_{m}]$ (i.e. the concatenation of these two sequences).
-\end{defn}
-\begin{defn}
-For $s,t \in |\pcomonad{k}{A}|$, say $s \sqsubseteq t$ if there exists an $s' \in |\pcomonad{k}{A}|$ such that $ss' = t$; such an $s'$ is called the suffix of $s$ in $t$. $\sqsubseteq$ preorders $|\pcomonad{k}{A}|$. 
-\end{defn}
+Let $A$ be a $\sigma$-structure over relational signature $\sigma$, then for every $k \in \mathbb{N}$ we define a $\sigma$-structure $\pcomonad{k}{A}$. Intuitively, $\pcomonad{k}{A}$ is the structure of the finite $k$-pebblings on $A$. Let the domain of this structure be $|\pcomonad{k}{A}| = (\{1,\dots,k\} \times A)^{<\omega}$ (i.e. the set of finite sequence of elements in product $\{1,\dots,k\} \times A$). In order, to define the $\sigma$-structure on $\pcomonad{k}{A}$, a bit more notation is necessary:
 \begin{defn}
 Define, for every $\sigma$-structure $A$, $\epsilon_{A}:\pcomonad{k}{A} \longrightarrow A$ by $[(p_{1},a_{1}),\dots,(p_{n},a_{n})] \mapsto a_{n}$ (i.e. the element of the last move of the play). Further, define $\pi_{A}:\pcomonad{k}{A} \longrightarrow \{1,\dots,k\}$ by $[(p_{1},a_{1}),\dots,(p_{n},a_{n})] \mapsto p_{n}$ (i.e. the pebble index of the last move of the play).
 \label{defn:epsilon}
 \end{defn}
-With these definitions in place, we can define the $\sigma$-structure on $\pcomonad{k}{A}$. Suppose $R \in \sigma$ is an $m$-ary relation, then we define the interpretation $R^{\pcomonad{k}{A}}$ such that for every $s_{1},\dots,s_{m} \in |\pcomonad{k}{A}|$, 
+With ths definition in place, we can define the $\sigma$-structure on $\pcomonad{k}{A}$. Suppose $R \in \sigma$ is an $m$-ary relation, then we define the interpretation $R^{\pcomonad{k}{A}}$ such that for every $s_{1},\dots,s_{m} \in |\pcomonad{k}{A}|$, 
 \begin{align}
 (s_{1},\dots,s_{m}) \in R^{\pcomonad{k}{A}}  &\Leftrightarrow    \text{ for every $i,j$, } s_{i} \sqsubseteq s_{j} \text{ or } s_{j} \sqsubseteq s_{i} \text{(i.e. exists $\sqsubseteq$-greatest $s_{*}$)} & \label{eq:R1st}\\
 &\text{ and for every $i$, } \pi_{A}(s_{i}) \text{ does not appear in suffix of $s_{i}$ in $s_{*}$ } & \label{eq:R2nd} \\
-&\text{ and} R^{A}(\epsilon_{A}(s_{1}),\dots,\epsilon_{A}(s_{m})) & \label{eq:R3rd}
+&\text{ and} (\epsilon_{A}(s_{1}),\dots,\epsilon_{A}(s_{m})) \in R^{A} & \label{eq:R3rd}
 \end{align}
 The definition of $\pcomonad{k}{A}$ can be extended to morphisms of $\sigma$-structures. 
 \begin{defn}
@@ -176,13 +169,64 @@ u(s)    &= f^{k}(s) & \text{by defn of $u$} \\
 Since $u(s) = u'(s)$ for all $s \in \pcomonad{\omega}{A}$, $u = u'$ so $u$ is unique as desired.  
 \end{proof}
 \end{prop}
-\section{Positional Form and Equivalences}
+\section{Positional Form and Equivalences}\label{sec:positionalFormP}
+\begin{prop}[{\cite[Proposition 9]{Abramsky2017}}]
+If $f:\pcomonad{k}{A} \longrightarrow B$ is a $\sigma$-morphism, then there exists a strategy in positional form $S_{f}$.
+\begin{proof}
+\end{proof}
+\label{prop:fToPosFormP}
+\end{prop}
+\begin{prop}[{\cite[Proposition 9]{Abramsky2017}}]
+Conversely, every strategy in positional form $S$ there exists a $f:\pcomonad{k}{A} \rightarrow B$ such that $S = S_{f}$
+\begin{proof}
+\end{proof}
+\label{prop:posFormToFP}
+\end{prop}
 \subsection{Equivalence $\exists^{+}\mathcal{L}^{k}_{\infty,\omega}$}
-\begin{thm}[{}]
+\begin{thm}[{\cite[Proposition 10]{Abramsky2017}}]
+If $A,B$ are pure $\sigma'$-structures and $f:\pcomonad{k}{A} \rightarrow B$ is a function, then
+\center{$f:\pcomonad{k}{A} \longrightarrow B$ is a $\sigma'$-morphism if and only if $f$ is winning for Duplicator in $\pgame{k}{A}{B}$}
+\begin{proof}
+\end{proof}
+\label{thm:positionalFormP}
 \end{thm}
 \subsection{Equivalence $\mathcal{L}^{k}_{\infty,\omega}$}
 \subsection{Equivalence $\mathcal{L}^{k}_{\infty,\omega}(Cnt)$}
 \begin{prop}[{\cite[Theorem 15]{Abramsky2017}}]
-$f:\pcomonad{k}{A} \longrightarrow B$ is an isomorphism if and only if $f$ is winning in the bijective pebble game.
+$f:\pcomonad{k}{A} \longrightarrow B$ is an isomorphism in $\mathcal{K}(\pcomonad{k}{})$ if and only if $f$ is winning for Duplicator in $\pgameBij{k}{A}{B}$.
 \end{prop}
 \section{Coalgebras and Tree-Width}
+The are many equivalent ways to define the notion of tree-width of a $\sigma$-structure $A$. We use the one given \cite{} in terms of chordal completions.  
+\begin{defn}[{\cite{Fulkerson1965}}]
+A \textit{chordal graph} $\mathcal{C}$ is a undirected graph such thate there exists a linear order $<_{\mathcal{C}}$ on the vertices of $\mathcal{C}$ such that all $\leq_{\mathcal{C}}$-predecessors of $v \in \mathcal{C}$ form a clique. The ordering $<_{\mathcal{C}}$ is called a perfect elimination ordering of $\mathcal{C}$.   
+\end{defn}
+\begin{defn}
+Given a undirected graph $G$, a chordal completion of $G$ is a chordal graph $\mathcal{C}$ such that $G$ is a subgraph of $\mathcal{C}$ 
+\end{defn}
+\begin{defn}
+Given an undirected graph $G$, the \textit{clique number of $G$} is the maximum number of vertices of a clique in $G$.
+\end{defn}
+Recall the definition (\ref{defn:gaifmanGraph}) of the Gaifman graph $\mathcal{G}(A)$ of a $\sigma$-structure $A$.
+\begin{defn}[{\cite{Parra1997}}]
+Given a $\sigma$-structure $A$, the \textit{tree-width} of $A$, denoted $\mathsf{tw}(A)$, is one less than least clique number of a chordal completion $\mathcal{C}$ for $\mathcal{G}(A)$. 
+\label{defn:treeWidth}
+\end{defn}
+\begin{prop}
+Let $A$ be finite $\sigma$-structure. There is a bijective correspondence between:
+\begin{enumerate}[label=(\arabic*)]
+\item coalgebras $\alpha:A \longrightarrow \pcomonad{k}{A}$
+\item Chordal completions $\mathcal{C}$ of $\mathcal{G}(A)$ with clique number $k$
+\end{enumerate}
+\begin{proof}
+For the (1) $\Rightarrow$ (2) correspondence, suppose $\alpha:A \longrightarrwo \pcomonad{k}{A}$ is a coalgebra.  
+\end{proof}
+\label{prop:coalgebraChordal}
+\begin{cor}
+$\kappa(A) = \mathsf{tw}(A) + 1$
+\begin{proof}
+This follows directly from the proposition (\ref{prop:coalgebraChordal}) and definition (\ref{defn:treeWidth}). The proof has the exact same structure as the proof of (\ref{cor:treeDepth}).   
+\end{proof}
+\label{cor:treeWidth}
+\end{cor}
+\end{prop}
+Hence, as the above corollary (\ref{cor:treeWidth}) shows, the graded family of comonads $\{\pcomonad{k}{}\}_{k \in \omega}$ gives a purely categorical definition of tree-width of a structure. Namely, the tree-width of a structure $A$ is $k-1$ where $k$ is least number such that a coalgebra $\alpha:A \longrightarrow \pcomonad{k}{A}$ exists.

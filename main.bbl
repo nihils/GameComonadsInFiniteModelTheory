@@ -1,4 +1,4 @@
-\begin{thebibliography}{13}
+\begin{thebibliography}{17}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -17,6 +17,11 @@ S.~Brookes and S.~Geva.
 \newblock In P.J.M.P. Fourman and A.~Pitts, editors, \emph{Applications of
   Categories in Computer Science}, pages 1--40. Cambridge University Press,
   1992.
+
+\bibitem[Fulkerosn and Gross(1965)]{Fulkerson1965}
+D.R. Fulkerosn and O.~Gross.
+\newblock {Incidence matrices and interval graphs}.
+\newblock \emph{Pacific Journal of Mathematics}, 15.3:\penalty0 835--855, 1965.
 
 \bibitem[Gabbay(1981)]{Gabbay1981}
 D.~Gabbay.
@@ -73,6 +78,23 @@ P.~Mancosu, editor.
 E.~Moggi.
 \newblock {Notions of Computation and Monads}.
 \newblock \emph{Information and computation}, 93:\penalty0 55--92, 1991.
+
+\bibitem[Nesetril and Mendez(2013)]{Nesetril2013}
+J.~Nesetril and P.O.~De Mendez.
+\newblock {A unified approach to structural limits, and limits of graphs with
+  bounded tree-dpeth}.
+\newblock \emph{arXiv preprint}, page arXiv:1303.6471, 2013.
+
+\bibitem[Parra and Scheffler()]{Parra1997}
+A.~Parra and P.~Scheffler.
+\newblock {Characterization and algorithmic applications of chordal graph
+  embeddings}.
+\newblock \emph{Discrete Applied Mathematics}, 79.1-3:\penalty0 171--188.
+
+\bibitem[P.G.~Kolaitis(1995)]{Kolaitis1995}
+J.A.~V{\"a}{\"a}n{\"a}nen P.G.~Kolaitis.
+\newblock {Generalized quantifiers and pebble games on finite structures}.
+\newblock \emph{Annals of Pure and Applied Logic}, 74.1:\penalty0 23--75, 1995.
 
 \bibitem[Rossman(2008)]{Rossman2008}
 Benjamin Rossman.

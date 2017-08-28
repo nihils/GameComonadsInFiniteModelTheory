@@ -36,20 +36,20 @@
 \newcommand{\gcomonad}[2]{{\mathbb{G}_{#1}#2}}
 \newcommand{\bcomonad}[3]{{\mathbb{O}_{#1,#2}#3}}
 
-\newcommand{\pgame}[2]{{\mathsf{P}(#1 \rightarrow #2)}}
-\newcommand{\efgame}[2]{{\mathsf{EF}(#1 \rightarrow #2)}}
-\newcommand{\mgame}[2]{{\mathsf{M}(#1 \rightarrow #2)}}
-\newcommand{\ggame}[2]{{\mathsf{G}(#1 \rightarrow #2)}}
+\newcommand{\pgame}[3]{{\mathsf{P}_{#1}(#2 \rightarrow #3)}}
+\newcommand{\efgame}[3]{{\mathsf{EF}_{#1}(#2 \rightarrow #3)}}
+\newcommand{\mgame}[3]{{\mathsf{M}_{#1}(#2 \rightarrow #3)}}
+\newcommand{\ggame}[3]{{\mathsf{G}_{#1}(#2 \rightarrow #3)}}
 
-\newcommand{\pgameSym}[2]{{\mathsf{P}(#1,#2)}}
-\newcommand{\efgameSym}[2]{{\mathsf{EF}(#1,#2)}}
-\newcommand{\mgameSym}[2]{{\mathsf{M}(#1,#2)}}
-\newcommand{\ggameSym}[2]{{\mathsf{G}(#1,#2)}}
+\newcommand{\pgameSym}[3]{{\mathsf{P}_{#1}(#2,#3)}}
+\newcommand{\efgameSym}[3]{{\mathsf{EF}_{#1}(#2,#3)}}
+\newcommand{\mgameSym}[3]{{\mathsf{M}_{#1}(#2,#3)}}
+\newcommand{\ggameSym}[3]{{\mathsf{G}_{#1}(#2,#3)}}
 
-\newcommand{\pgameBij}[2]{{\mathsf{P}^{bij}(#1,#2)}}
-\newcommand{\efgameBij}[2]{{\mathsf{EF}^{bij}(#1,#2)}}
-\newcommand{\mgameBij}[2]{{\mathsf{M}^{bij}(#1,#2)}}
-\newcommand{\ggameBij}[2]{{\mathsf{G}^{bij}(#1,#2)}}
+\newcommand{\pgameBij}[3]{{\mathsf{P}^{bij}_{#1}(#2,#3)}}
+\newcommand{\efgameBij}[3]{{\mathsf{EF}^{bij}_{#1}(#2,#3)}}
+\newcommand{\mgameBij}[3]{{\mathsf{M}^{bij}_{#1}(#2,#3)}}
+\newcommand{\ggameBij}[3]{{\mathsf{G}^{bij}_{#1}(#2,#3)}}
 
 \newcommand{\equivL}[3]{{#1 \equiv #2 \ \mathsf{in}\: #3}} 
 
@@ -67,12 +67,14 @@
 \begin{document}
 \maketitle
 \input{abstract}
+\tableofcontents
 \input{chapter1}
 \input{chapter2}
 \input{chapter3}
 \input{chapter4}
 \input{chapter5}
 \input{chapter6}
+\input{chapter7}
 \bibliographystyle{plainnat} 
 \bibliography{main}
 \end{document}

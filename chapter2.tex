@@ -123,7 +123,7 @@ In addition to fragments of $\mathcal{L}_{\infty,\omega}$, we will also consider
 \subsection{Inexpressiblity and Games}
 The primary question, once a logic $\mathcal{L}$ is defined, is to understand what properties of structures can be expressed in $\mathcal{L}$ and what properties are impossible to express in $\mathcal{L}$. In particular, finite model theory is concerned with what properties of \textit{finite} structures can be expressed in a given logic. Although mathematicians have intuitive idea of what `property' means, we will be more explicit:
 \begin{defn}
-Given a signature $\sigma$, a \textit{property} $P$ of $\sigma$-structures, is a (possibly, proper class) function:
+Given a signature $\sigma$, a \textit{property} $P$ of $\sigma$-structures, is a (possibly, proper) class function:
 $$P:\mathcal{C} \longrightarrow \{0,1\}$$
 such that for $A,B \in \mathcal{C}$:
 $$A \cong B \Rightarrow P(A) = P(B)$$ 
@@ -134,12 +134,12 @@ Intuitively, $P(A) = 1$ asserts that some property is true of the structure $A$.
 Given a logic $\mathcal{L}$, signature $\sigma$ and property $P$ \textit{$P$ is expressible in $\mathcal{L}$ with signature $\sigma$} if there exists a sentence $\phi_{P} \in \mathcal{L}$ such that for all $\sigma$-structures $A$,
 $$A \vDash \phi_{P} \Leftrightarrow P(A) = 1$$
 \end{defn}
-To prove a property $P$ is not expressible in signature $\sigma$, we need to exhibit two $\sigma$-structures $A$,$B$ which from the perspective of the logic $\mathcal{L}$ are ``equivalent'', but differ by property $P$ (i.e. $P(A) = 1$ and $P(B) = 0$). Of course, by the definiton of property given, $\cong$ is too strong of an equivalence to show inexpressiblity. For a given logic, we define what it means to be equivalent from the perspective of $\mathcal{L}$.  
+To prove a property $P$ is not expressible in signature $\sigma$, we need to exhibit two $\sigma$-structures $A$,$B$ which from the perspective of the logic $\mathcal{L}$ are ``equivalent'', but differ by property $P$. Of course, by the definiton of property given, $\cong$ is too strong of an equivalence to show inexpressiblity. For a given logic, we define what it means to be equivalent from the perspective of $\mathcal{L}$.  
 \begin{defn}
 Two $\sigma$ structures $A,B$ are \textit{equivalent in logic $\mathcal{L}$}, denoted $\equivL{A}{B}{\mathcal{L}}$ if for all sentences $\phi \in \mathcal{L}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$.  
 \label{defn:equivLogic}
 \end{defn}
-Hence, for a property $\mathcal{P}$ to inexpressible in signature $\sigma$ and logic $\mathcal{L}$, we must find two $\sigma$-structures $A,B$ such that $P(A) = 1$ and $P(B) = 0$ while $\equivL{A}{B}{\mathcal{L}}$. The purpose of ``back-and-forth'' style games in finite and classical model theory is to provide a methodology to prove equivalence in a logic $\mathcal{L}$.  
+Hence, for a property $\mathcal{P}$ to be inexpressible in signature $\sigma$ and logic $\mathcal{L}$, we must find two $\sigma$-structures $A,B$ such that $P(A) = 1$ and $P(B) = 0$ while $\equivL{A}{B}{\mathcal{L}}$. The purpose of ``back-and-forth'' style games in finite and classical model theory is to provide a methodology to prove equivalence in a logic $\mathcal{L}$.  
 \section{Category Theory}
 Category theory is the general theory of mathematical structures and structure-preserving relationships between theses structures. 
 \subsection{Definitions}
@@ -215,7 +215,7 @@ An endofunctor $\mathbb{F}:\mathcal{C} \rightarrow \mathcal{C}$ is called \texti
 \end{equation}
 \begin{equation}
 \bfig 
-    \square[\mathbb{F}A`\efcomonad{k}{\mathbb{F}A}`\efcomonad{k}{\mathbb{F}A}`\mathbb{F}A;\delta_{A}`\delta_{A}`\efcomonad{k}{\epsilon_{A}}`\epsilon_{\mathbb{F}A}] 
+    \square[\mathbb{F}A`\mathbb{F}{\mathbb{F}A}`\mathbb{F}{\mathbb{F}A}`\mathbb{F}A;\delta_{A}`\delta_{A}`\mathbb{F}\epsilon_{A}`\epsilon_{\mathbb{F}A}] 
     \morphism(0,500)/=/<500,-500>[\mathbb{F}A`\mathbb{F}A;]
 \efig 
 \label{eq:counit}
@@ -240,7 +240,23 @@ For every $k \in \omega$, there is the fixed set comonad $F_{[k]}$ where $A \map
 \end{exmpl}
 \begin{exmpl}
 For every $k \in \omega$, there is the sequences of length $\leq k$ comonad analogous to the example (\ref{exmpl:listComonad}). The components of the grading natural transformation are given by the inclusion maps. 
+\label{exmpl:listComonadGraded}
 \end{exmpl}
+\begin{rmrk}
+The comonads we will be studying are similar to the sequences comonad of example (\ref{exmpl:listComonad}) and graded sequences comonad of example (\ref{exmpl:listComonadGraded}). In fact, the forgetful functor from the category of structures $\mathcal{R}(\sigma)$ to sets takes the comonads we will discuss to the sequences or graded sequences comonad. For this reason, we will need some notation for discussing sequences. 
+\end{rmrk}
+\subsection*{Notation for Sequences}
+\begin{defn}
+Suppose $s,s'$ are two sequences such that $s = [s_{1},\dots,s_{n}]$ and $s' = [s'_{1},\dots,s'_{m}]$, then define $ss' = [s_{1},
+\dots,s_{n},s'_{1},\dots,s'_{m}]$ (i.e. the concatenation of these two sequences).
+\end{defn}
+\begin{defn}
+For two sequences $s,t$, say $s \sqsubseteq t$ if there exists an $s'$ such that $ss' = t$; such an $s'$ is called the suffix of $s$ in $t$. $\sqsubseteq$ preorders sets of sequences.  
+\end{defn}
+For some types of sequence, we will need notation for a successor or update operation. 
+\begin{defn}
+Given two sequences $s,s'$, $s'$ is the \textit{$a$-successor} of $s$ if $s' = s[a]$. We denote this, $s \xlongrightarrow{a} s'$. If $s'$ is the successor of $s$ for some element $a$, then $s \longrightarrow s'$
+\end{defn}
 \subsection{Co-Kleisli Category and Eilenberg-Moore Category}
 For every comonad $\mathbb{F}:\mathcal{C} \longrightarrow \mathcal{C}$, there exist two important categories associated with $\mathbb{F}$. The coKleisli category of $\mathbb{F}$ and the category of coalgebras, or Eilenberg-Moore category, of $\mathbb{F}$. 
 \begin{defn}
