@@ -359,14 +359,17 @@ Given $f:\efcomonad{k}{A} \longrightarrow B$, $f$ is \textit{winning for Duplica
 \begin{prop}
 $f:\efcomonad{k}{A} \longrightarrow B$ an isomorphism in $\mathcal{K}(\efcomonad{k}{})$ if and only if $f$ is winning for Duplicator in $\efgameBij{k}{A}{B}$  
 \begin{proof}
-$\Rightarrow$ If $f:\efcomonad{k}{A} \longrightarrow B$ is an isomorphism in $\mathcal{K}(\efcomonad{k}{})$, then there exists a $g:\efcomonad{k}{B} \longrightarrow A$ such that $f \circ_{\mathcal{K}} g = \epsilon_{B}$ and $g \circ_{\mathcal{K}} f = \epsilon_{A}$. Suppose $s \in \efcomonad{k}{A} \cup \{[]\}$, then we aim to show that $\psi_{s}:A \longrightarrow B$ is bijective:  
+$\Rightarrow$ If $f:\efcomonad{k}{A} \longrightarrow B$ is an isomorphism in $\mathcal{K}(\efcomonad{k}{})$, then there exists a $g:\efcomonad{k}{B} \longrightarrow A$ such that $f \circ_{\mathcal{K}} g = \epsilon_{B}$ and $g \circ_{\mathcal{K}} f = \epsilon_{A}$. Suppose $s \in \efcomonad{k}{A} \cup \{[]\}$, then we aim to show that $\psi_{s}:A \longrightarrow B$ is bijective. Let $t = f^{*}(s)$ (or $t = []$ if $s = []$) and define $\phi_{t}:B \longrightarrow A$ by $\phi_{t}(b) = g(t[b])$.   
 \begin{align*}
-\psi_{s}(a) = \psi_{s}(a') &\Rightarrow f(s[a]) = f(s[a']) \\
-&\Rightarrow g \circ_{\mathcal{K}} f(s[a]) = g \circ_{\mathcal{K}} f(s[a']) \\
-&\Rightarrow \epsilon_{A}(s[a]) = \epsilon_{A}(s[a']) \\
-&\Rightarrow a = a' 
+\phi_{t} \circ \psi_{s}(a) &= \phi_{t}(f(s[a])) \\
+&= g(t[f(s[a]])) \\
+&= g(f^{*}(s)[f(s[a]])) \\
+&= g(f^{*}(s[a])) \\
+&= g \circ_{\mathcal{K}} f(s[a]) \\
+&= \epsilon_{A}(s[a]) \\
+&= a \\
 \end{align*}
-Hence, $\psi_{s}$ is injective for all $s$. It follows by $A$,$B$ finite, that $\psi_{s}$ is bijective. \\
+The proof that $\psi_{s} \circ \phi_{t}(b) = b$ is similar. Therefore, $\psi_{s}$ is bijective. \\
 $\Leftarrow$ Let $f:\efcomonad{k}{A} \longrightarrow B$ be the $\sigma$-morphism witnessing Duplicator winning in $\efgameBij{k}{A}{B}$. Define $g^{*}:\efcomonad{k}{B} \longrightarrow \efcomonad{k}{A}$ (i.e. the coextension of $g = \epsilon_{A} \circ g^{*}$) by recursion, up to $k$, on length of $t \in \efcomonad{k}{B}$. \\   
 \textit{Base Case:} Suppose $t = [b]$ for $b \in B$, let $g^{*}([b]) = [\psi_{[]}^{-1}(b)]$.
 \textit{Recursion Step:} Assume for $t \in B$ with length $|t| = n < k$ that $g^{*}(t)$ is already defined. Consider $t' = t[b]$ for $b \in B$. Let $g^{*}(t') = g^{*}(t)\psi_{s}^{-1}(b)$ where $s = g^{*}(t) \in \efcomonad{k}{A}$. To complete, the proof, we need to show that $f \circ_{\mathcal{K}} g = \epsilon_{B}$ and $g \circ_{\mathcal{K}} f = \epsilon_{A}$. Suppose $s' = s[a_{n}] = [a_{1},\dots,a_{n}] \in \efcomonad{k}{A}$ and $f(s') = b_{n}$ (i.e. it follows that $\psi_{s}(a_{n}) = b_{n}$) then: 
@@ -398,7 +401,7 @@ An advantage of the comonad perspective is exploring the structure of the catego
 \bfig
     \qtriangle[A`\efcomonad{k}{A}`A;\alpha`\mathsf{id}_{A}`\epsilon_{A}]
 \efig
-\label{eq:coalgebraLaw}
+\label{eq:coalgebraLawEF}
 \end{equation}
 There are many equivalent ways to define the notion of tree-depth of a $\sigma$-structure $A$. We use the one given in \cite{Rossman2008} and is stated in definition (\ref{defn:treeDepth}). 
 \begin{defn}

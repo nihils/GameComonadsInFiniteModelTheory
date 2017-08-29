@@ -17,6 +17,161 @@ The following are equivalent:
 \end{prop}
 As was the goal with the EF game comonad, our goal is to construct a $\sigma$-structure $\mcomonad{k}{A}$ that ``internalizes'' the $k$-round simulation and bisimulation games in the category $\mathcal{R}(\sigma)$. The tree unfolding construction of depth $k$ for pointed transition systems, detailed in \cite{Gradel2014}, turns out to be the correct candidate for $\mcomonad{k}{A}$. This construction is typically empolyed to show the tree-model property which yields a proof of the decidability of modal logic. We use this construction, instead, to show that it captures the modal simulation and bisimulation game (i.e. analogous to corollaries \ref{cor:forthEF} and \ref{cor:backForthEF}) as a comonad.
 \section{Comonad laws}
+A Kripke structure or transition system is a relational structure with a signature $\sigma = <R_{1},\dots,R_{m},P_{1},\dots,P_{n}>$ where every $R_{i}$ is a binary relation and every $P_{j}$ is a unary relation. Let $A$ be a $\sigma$-structure, then for every $k \in \omega$ we define a  $\sigma$-structure $\mcomonad{k}{A}$. Intuitively, $\mcomonad{k}{A}$ is the structure of the finite Spoiler plays in the bisimulation game of modal depth $k$. The purpose of studying such a structure is that it captures, in a manner analogous to the pebbling and Ehrenfeucht-{\Fraisse} comonads, bisimulation equivalence for models of modal propositional logic. This logic is equivalent to a fragment of first-order logic with quantifiers guarded by the binary relations $R_{1},\dots,R_{m}$. This development will be illustrative for introducing the more general guarded fragment of first-order logic where we consider sentences guarded by general $n$-ary relations. Let $|\mcomonad{k}{A}|$ be the set of sequences of the form $(a_{1},i_{1},a_{2},\dots,a_{n-1},i_{n-1},a_{n})$ where $n \leq k$, $a_{j} \in A, i_{j} \in \{1,\dots,m\}$, and for every $i = 1,\dots,k$, $(a_{j},a_{j+1}) \in R^{A}_{i_{j}}$.   
+\begin{defn}
+Suppose $w,w' \in |\mcomonad{k}{A}|$ such that $w = [a_{1},i_{1},\dots,i_{n-1},a_{n}]$, $s' = [a'_{1},i'_{1},\dots,i'_{m-1},a'_{m}]$, $m+n \leq k$ and $(a_{n},a'_{1}) \in R^{A}_{\nu}$, then define $ss' = [a_{1},i_{1}
+\dots,a_{n},\nu,a'_{1},i'_{1},\dots,i'_{m-1},a'_{m}]$ (i.e. the concatenation of these two tuples).
+\end{defn}
+\begin{defn}
+For $w,z \in |\mcomonad{k}{A}|$, say $w \sqsubseteq z$ if there exists an $w' \in |\mcomonad{k}{A}|$ such that $ww' = z$; such an $w'$ is called the suffix of $w$ in $z$. $\sqsubseteq$ preorders $|\mcomonad{k}{A}|$.
+\end{defn}
+\begin{defn}
+Define, for every $\sigma$-structure $A$, $\epsilon_{A}:\mcomonad{k}{A} \longrightarrow A$ by $[a_{1},i_{1},\dots,i_{n-1},a_{n}] \mapsto a_{n}$ (i.e. the last move of the play). 
+\label{defn:epsilon}
+\end{defn}
+With these definitions in place, we can define a $\sigma$-structure on $\mcomonad{k}{A}$. Suppose $R_{j}$ is a binary relation in $\sigma$, the we define the interpretation of $R^{\mcomonad{k}{A}}$ such that for every $w,w' \in |\mcomonad{k}{A}|$,
+\begin{equation}
+(w,w') \in R^{\mcomonad{k}{A}}_{j} \Leftrightarrow w' = w[(j,\epsilon_{A}(w'))] \label{eq:R}
+\end{equation}
+By the definition of the set $|\mcomonad{k}{A}|$, the above condition is equivalent to $(\epsilon_{A}(w),\epsilon_{A}(w')) \in R^{A}_{j}$. \\
+Similarly, for $P_{i}$ a unary relation in $\sigma$, we define the interpretation $P^{\mcomonad{k}{A}}(w) \Leftrightarrow P^{A}_{i}(\epsilon_{A}(w))$
+\begin{defn}
+Given a morphism $f:A \longrightarrow B$, define the morphism $\mcomonad{k}{f}:\mcomonad{k}{A} \longrightarrow \mcomonad{k}{B}$ by $[a_{1},i_{1}\dots,i_{n-1},a_{n}] \mapsto [f(a_{1}),i_{1},\dots,i_{n-1},f(a_{n})]$
+\label{defn:mComonadMorphism}
+\end{defn}
+\begin{prop}
+The definition (\ref{defn:mComonadMorphism}) of $\mcomonad{k}{f}:\mcomonad{k}{A} \longrightarrow \mcomonad{k}{B}$ given above is indeed a morphism of $\sigma$-structures. 
+\begin{proof}
+Suppose $w,w' \in \mcomonad{k}{A}$ such that $(w,w') \in R_{j}^{\mcomonad{k}{A}}$. Let $w = [a_{1},i_{1},\dots,i_{p-1},a_{p}]$ and $w' = [a'_{1},i_{1},\dots,i_{q-1},a'_{q}]$. We aim to show that $(\mcomonad{k}{f}(w),\mcomonad{k}{f}(w')) \in R_{j}^{\mcomonad{k}{B}}$ \\
+\begin{align*}
+(w,w') \in R_{j}^{\mcomonad{k}{A}} &\Leftrightarrow w' = w[(j,\epsilon_{A}(w'))] & \text{by (\ref{eq:R}) above} \\
+&\Leftrightarrow R_{j}^{A}(\epsilon_{A}(w),\epsilon_{A}(w')) & \text{by defn of } |\mcomonad{k}{A}| \\
+&\Rightarrow R_{j}^{B}(f(\epsilon_{A}(w)),f(\epsilon_{A}(w')) & \text{by hypothesis $f$ a $\sigma$-morphism} \\
+&\Rightarrow \mcomonad{k}{f}(w') = \mcomonad{k}{f}(w)[(j,f \circ \epsilon_{A}(w'))] & \text{by defn of } |\mcomonad{k}{A}| \\
+&\Rightarrow \mcomonad{k}{f}(w') = \mcomonad{k}{f}(w)[(j,\epsilon_{B} \circ \mcomonad{k}{f}(w'))] & \text{by proposition (\ref{prop:epsilonN})}\\
+&\Rightarrow (\mcomonad{k}{f}(w),\mcomonad{k}{f}(w')) \in R_{j}^{\mcomonad{k}{B}} & \text{by (\ref{eq:R}) above}
+\end{align*}
+Therefore, $(\mcomonad{k}{f}(w),\mcomonad{k}{f}(w')) \in R_{j}^{\mcomonad{k}{B}}$ and $\mcomonad{k}{f}$ is indeed a morphism of $\sigma$-structures. 
+\end{proof}
+\end{prop}
+\begin{prop}
+$\epsilon:\mcomonad{k}{} \longrightarrow 1_{\mathcal{R}(\sigma)}$ is a natural transformation.
+\begin{proof}
+For every $A,B \in \mathcal{R}(\sigma)$ we want to show that:
+\begin{equation}
+\bfig \square[\mcomonad{k}{A}`A`\mcomonad{k}{B}`B;\epsilon_{A}`\mcomonad{k}{f}`f`\epsilon_{B}] \efig
+\label{eq:epsilonN}
+\end{equation}
+\begin{align*}
+f \circ \epsilon_{A}([a_{1},i_{1},\dots,i_{n-1},a_{n})])    &= f(a_{n}) & \text{by defn (\ref{defn:epsilon}) of $\epsilon_{A}$}\\
+&= \epsilon_{B}([f(a_{1}),i_{1},\dots,i_{n-1},f(a_{n})]) & \text{by defn (\ref{defn:epsilon}) of $\epsilon_{B}$}\\
+&= \epsilon_{B} \circ \mcomonad{k}{f}([a_{1},i_{1},\dots,i_{n-1},a_{n}]) & \text{by defn (\ref{defn:mComonadMorphism}) of $\mcomonad{k}{f}$}
+\end{align*}
+Hence, the above diagram (\ref{eq:epsilonN}) commutes.
+\end{proof}
+\label{prop:epsilonN}
+\end{prop}
+\begin{defn}
+Suppose $w \in \mcomonad{k}{A}$, then $w = [a_{1},i_{1},\dots,i_{n-1},a_{n}]$ for some $n \in \omega$ and for every $i = 1,\dots,n$, $a_{i} \in A$. Let $w_{i} = [a_{1},i_{1},\dots,i_{i-1},a_{i}] \in \mcomonad{k}{A}$. Define, for every $\sigma$-structure $A$, $\delta_{A}:\mcomonad{k}{A} \longrightarrow \mcomonad{k}{\mcomonad{k}{A}}$ by $w \mapsto [w_{1},i_{1},\dots,i_{n-1},w_{n}]$.
+\label{defn:delta}
+\end{defn}
+\begin{prop}
+$\delta:\mcomonad{k} \longrightarrow \mcomonad{k}{\mcomonad{k}{}}$ is a natural transformation.
+\begin{proof}
+For every $A,B \in \mathcal{R}(\sigma)$ we want to show that:
+\begin{equation}
+\bfig \square[\mcomonad{k}{A}`\mcomonad{k}{\mcomonad{k}{A}}`\mcomonad{k}{B}`\mcomonad{k}{\mcomonad{k}{B}};\delta_{A}`\mcomonad{k}{f}`\mcomonad{k}{\mcomonad{k}{f}}`\delta_{B}] \efig
+\label{eq:deltaN}
+\end{equation}
+\begin{align*}
+\mcomonad{k}{\mcomonad{k}{f}} \circ \delta_{A}([a_{1},i_{1},\dots,i_{n-1},a_{n}])   &= \mcomonad{k}{\mcomonad{k}{f}}([w_{1},i_{1},\dots,i_{n-1},w_{n}]) & \text{by defn (\ref{defn:delta}) of $\delta_{A}$} \\
+&= [\mcomonad{k}{f}(w_{1}),i_{1},\dots,i_{n-1},\mcomonad{k}{f}(w_{n})] & \text{by defn (\ref{defn:mComonadMorphism}) of $\mcomonad{k}{\mcomonad{k}{f}}$}\\
+&= [[f(a_{1})],i_{1},\dots,i_{n-1},[f(a_{1}),i_{1},\dots,i_{n-1},f(a_{n})]] & \text{by defn (\ref{defn:mComonadMorphism}) of $\mcomonad{k}{f}$}\\
+&= \delta_{B}([f(a_{1}),i_{1},\dots,i_{n-1},f(a_{n})]) & \text{by defn (\ref{defn:delta}) of $\delta_{B}$} \\
+&= \delta_{B} \circ \mcomonad{k}{f}([a_{1},i_{1},\dots,i_{n-1},a_{n}]) & \text{by defn (\ref{defn:mComonadMorphism}) of $\mcomonad{k}{f}$}
+\end{align*}
+Hence, the above diagram (\ref{eq:deltaN}) commutes.
+\end{proof}
+\label{prop:deltaN}
+\end{prop}
+\begin{thm}
+The triple $\langle \mcomonad{k}{},\delta,\epsilon \rangle$ is a comonad.
+\begin{proof}
+By proposition (\ref{prop:deltaN}) and (\ref{prop:epsilonN}), $\delta$ and $\epsilon$ are natural transformation. Hence, $\delta$ and $\epsilon$ are indeed the comultiplication and counit of $\mcomonad{k}{}$. The associative and identity laws remain to be shown. \\
+For associativity, for every $A \in \mathcal{R}(\sigma)$, the following diagram commutes:  
+\begin{equation}
+\bfig \Square[\mcomonad{k}{A}`\mcomonad{k}{\mcomonad{k}{A}}`\mcomonad{k}{\mcomonad{k}{A}}`\mcomonad{k}{\mcomonad{k}{\mcomonad{k}{A}}};\delta_{A}`\delta_{A}`\delta_{\mcomonad{k}{A}}`\mcomonad{k}{\delta_{A}}] \efig 
+\end{equation}
+\begin{align*}
+\delta_{\mcomonad{k}{A}} \circ \delta_{A}([a_{1},i_{1},\dots,i_{n-1},a_{n}])    &= \delta_{\mcomonad{k}{A}}([w_{1},i_{1},\dots,i_{n-1},w_{n}]) & \text{by defn (\ref{defn:delta}) of $\delta_{A}$} \\
+&= [[w_{1}],i_{1},\dots,i_{n-1},[w_{1},i_{1},\dots,i_{n-1},w_{n}]]  & \text{by defn (\ref{defn:delta}) of $\delta_{\mcomonad{k}{A}}$}\\
+&= [\delta_{A}(w_{1}),i_{1},\dots,i_{n-1},\delta_{A}(w_{n})] & \text{by defn (\ref{defn:delta}) of $\delta_{A}$}  \\
+&= \mcomonad{k}{\delta_{A}}([w_{1},i_{1},\dots,i_{n-1},w_{n}]) & \text{by defn (\ref{defn:mComonadMorphism}) of $\mcomonad{k}{\delta_{A}}$}  \\
+&= \mcomonad{k}{\delta_{A}} \circ \delta_{A}([a_{1},i_{1},\dots,i_{n-1},a_{n}]) & \text{by defn (\ref{defn:delta}) of $\delta_{A}$}\\
+\end{align*}
+For identity, for every $A \in \mathcal{R}(\sigma)$, the following diagram commutes:  
+\begin{equation}
+\bfig 
+    \square[\mcomonad{k}{A}`\mcomonad{k}{\mcomonad{k}{A}}`\mcomonad{k}{\mcomonad{k}{A}}`\mcomonad{k}{A};\delta_{A}`\delta_{A}`\mcomonad{k}{\epsilon_{A}}`\epsilon_{\mcomonad{k}{A}}] 
+    \morphism(0,500)/=/<500,-500>[\mcomonad{k}{A}`\mcomonad{k}{A};]
+\efig 
+\end{equation}
+\begin{align*}
+\mcomonad{k}{\epsilon_{A}} \circ \delta_{A}([a_{1},i_{1},\dots,i_{n-1},a_{n}]) &= \mcomonad{k}{\epsilon_{A}}([w_{1},i_{1},\dots,i_{n-1},s_{n}]) & \text{by defn (\ref{defn:delta}) of $\delta_{A}$}\\
+&= [\epsilon_{A}(w_{1}),\dots,\epsilon_{A}(w_{n})]  & \text{by defn (\ref{defn:mComonadMorphism}) of $\mcomonad{k}{\epsilon_{A}}$}  \\
+&= [a_{1},i_{1},\dots,i_{n-1},a_{n}] & \text{by defn (\ref{defn:epsilon}) of $\epsilon_{A}$}\\
+&= w_{n} & \text{by defn (\ref{defn:delta}) of $s_{n}$}\\
+&= \epsilon_{\mcomonad{k}{A}}([w_{1},i_{1},\dots,i_{n-1},w_{n}]) & \text{by defn (\ref{defn:epsilon}) of $\epsilon_{\mcomonad{k}{A}}$} \\
+&= \epsilon_{\mcomonad{k}{A}} \circ \delta_{A}([a_{1},i_{1},\dots,i_{n-1},a_{n}]) & \text{by defn (\ref{defn:delta}) of $\delta_{A}$}
+\end{align*}
+By definition, $\mcomonad{k}{}$ is a comonad.
+\end{proof}
+\end{thm}
+For every $l,k \in \omega$ such that $l \leq k$ and $\sigma$-structure $A$, there exists an inclusion $i_{A}^{l,k}: \mcomonad{l}{A} \longrightarrow \mcomonad{k}{A}$. 
+\begin{prop}
+The inclusion maps form a natural transformation $i^{l,k}:\mcomonad{l}{} \longrightarrow \mcomonad{k}{}$. Further, each map preserves the counit and comultiplication (i.e. each map is a morphism of comonads). 
+\end{prop}
+\begin{proof}
+\begin{equation}
+\bfig \square[\mcomonad{l}{A}`\mcomonad{k}{A}`\mcomonad{l}{B}`\mcomonad{k}{B};i^{l,k}_{A}`\mcomonad{l}{f}`\mcomonad{k}{f}`i^{l,k}_{B}]\efig
+\end{equation}
+\begin{align*}
+\mcomonad{k}{f} \circ i^{l,k}_{A}([a_{1},i_{1},\dots,i_{n-1},a_{n}])    &= \mcomonad{k}{f}([a_{1},\dots,,a_{n}]) & \text{by defn of inclusion}\\
+&= [f(a_{1}),i_{1},\dots,i_{n-1},f(a_{n})] &\text{by defn (\ref{defn:mComonadMorphism}) of $\mcomonad{k}{f}$} \\
+&= i^{l,k}_{B}([f(a_{1}),i_{1},\dots,i_{n-1},f(a_{n})]) & \text{by defn of inclusion} \\ 
+&= i^{l,k}_{B} \circ \mcomonad{l}{f}([a_{1},i_{1},\dots,i_{n-1},a_{n}]) & \text{by defn (\ref{defn:mComonadMorphism}) of $\mcomonad{k}{f}$}\\
+\end{align*}
+\end{proof}
+The grading given by these inclusion maps seem to suggest that there is a colimit object capturing the information of $\mcomonad{k}{A}$ for every $k \in \omega$. This is indeed the case. Consider the structure $\mcomonad{\omega}{A}$ with domain $|\mcomonad{\omega}{A}|$ the set of sequences of the form $(a_{1},i_{1},\dots,i_{n-1},a_{n})$ for any $n \in \omega$. The structure on $\mcomonad{\omega}{A}$ is similar to the structure given to $\mcomonad{k}{A}$. 
+\begin{prop}
+Let $\omega$ be considered as a poset category under the usual order. The object $\mcomonad{\omega}{A}$ is the $\omega$-colimit of the family $\{\mcomonad{k}{A}\}_{k \in \omega}$ with the above inclusion maps. 
+\begin{proof}
+For every $k \in \omega$, define $i^{k}_{A}:\mcomonad{k}{A} \rightarrow \mcomonad{\omega}{A}$ as the inclusion (i.e. $[a_{1},i_{1},\dots,i_{n-1},a_{n}] \mapsto [a_{1},i_{1},\dots,i_{n-1},a_{n}]$ where $n \leq k$). Clearly, the following diagram commutes for all $l,k \in \omega$ with $l \leq k$
+\begin{equation}
+\bfig \Vtriangle[\mcomonad{l}{A}`\mcomonad{k}{A}`\mcomonad{\omega}{A};i^{l,k}_{A}`i^{l}_{A}`i^{k}_{A}]\efig
+\label{eq:omegaColimit}
+\end{equation}
+Suppose that there exists a $\sigma$-structure $B$ and for every $l,k \in \omega$ with $l \leq k$, there exist morphisms $f^{l}:\mcomonad{l}{A} \longrightarrow B$, $f^{k}:\mcomonad{k}{A} \longrightarrow B$ such that $f^{l} = f^{k} \circ i^{l,k}$. Consider the morphism $u:\mcomonad{\omega}{A} \longrightarrow B$ given by $[a_{1},i_{1},\dots,i_{n-1},a_{n}] \mapsto f^{n}([a_{1},i_{n},\dots,i_{n-1},a_{n}])$. The following diagram commutes:
+\begin{equation}
+\bfig 
+    \Vtriangle[\mcomonad{l}{A}`\mcomonad{k}{A}`\mcomonad{\omega}{A};i^{l,k}_{A}`i^{l}_{A}`i^{k}_{A}]
+    \morphism(0,500)|l|/{@{>}@/^-7pt/}/<500,-1000>[\mcomonad{l}{A}`B;f^{l}]
+    \morphism(1000,500)|r|/{@{>}@/^7pt/}/<-500,-1000>[\mcomonad{k}{A}`B;f^{k}]
+    \morphism(500,0)|m|/.>/<0,-500>[\mcomonad{\omega}{A}`B;u]
+\efig
+\label{eq:omegaColimitU}
+\end{equation}
+Moreover, given the conditions on $f^{j}$ for all $j \in \omega$, $u$ is unique. Namely, suppose there exists a morphism $u':\mcomonad{\omega}{A} \longrightarrow B$ such that for all $j \in \omega$, $f^{j} = u' \circ i^{j}_{A}$. Suppose $w = [a_{1},i_{1},\dots,i_{k-1},a_{k}] \in \mcomonad{\omega}{A}$ then for all $j \geq k, w \in \mcomonad{j}{A}$.  
+\begin{align*}
+u(w)    &= f^{k}(w)  & \text{by defn of $u$}\\
+        &= f^{j} \circ i^{k,j}_{A}(w) & \text{by (\ref{eq:omegaColimitU})} \\
+        &= u' \circ i^{j}_{A} \circ i^{k,j}_{A}(w) & \text{by hypothesis on $u'$}  \\
+        &= u' \circ i^{k}_{A}(w) & \text{by (\ref{eq:omegaColimit})} \\
+        &= u'(w) & \text{by defn of inclusion} 
+\end{align*}
+Since $u(w) = u'(w)$ for all $w \in \mcomonad{\omega}{A}$, $u = u'$ so $u$ is unique as desired.  
+\end{proof}
+\end{prop}
 \section{Positional Form and Equivalences}\label{sec:positionalFormM}
 The positional form representation for the simulation and bisimulation games involving $A,B$ are, just as with the EF game, sequences of pairs of elements in $A,B$ of length $\leq k$. However, the choice of each pair must be local (i.e. only one transition away from the previous pair). Our definitions will reflect this modification. Recall, from \ref{sec:positionalFormEF}, that $\Gamma_{k}(A,B) = (A \times B)^{\leq k}$ and for a $\sigma$-morphism $f:\mcomonad{k}{A} \longrightarrow B$ there exists the Kleisli coextension $f^{*}:\mcomonad{k}{A} \longrightarrow \mcomonad{k}{B}$. Define the set function $\theta_{f}:|\mcomonad{k}{A}| \longrightarrow \Gamma_{k}(A,B)$ by $s = [a_{1},i_{1},\dots,i_{n-1},a_{n}] \mapsto [(a_{1},b_{1}),\dots,(a_{n},b_{n})]$ where $f^{*}(s) = [b_{1},i_{1},\dots,i_{n-1},b_{n}]$. 
 \begin{defn}

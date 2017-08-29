@@ -188,7 +188,18 @@ If $A,B$ are pure $\sigma'$-structures and $f:\pcomonad{k}{A} \rightarrow B$ is 
 \center{$f:\pcomonad{k}{A} \longrightarrow B$ is a $\sigma'$-morphism if and only if $f$ is winning for Duplicator in $\pgame{k}{A}{B}$}
 \begin{proof}
 \end{proof}
-\label{thm:positionalFormP}
+\begin{cor}[{\cite{}}]
+There exists a $\sigma'$-morphism $f:\efcomonad{k}{A} \longrightarrow B$ if and only if for all $\phi \in \exists^{+}\mathcal{L}_{\omega,k}, A \vDash \phi \Rightarrow B \vDash \phi$
+\label{cor:forthOneP}
+\end{cor}
+\begin{cor}
+There exists $\sigma'$-morphisms $f:\efcomonad{k}{A} \longrightarrow B$, $g:\efcomonad{k}{B} \longrightarrow B$ if and only if $\equivL{A}{B}{\exists^{+}\mathcal{L}_{\omega,k}}$. 
+\begin{proof}
+Recall definition (\ref{defn:equivLogic}) and apply above corollary (\ref{cor:forthOneEF}) to $f$ and $g$.  
+\end{proof}
+\label{cor:forthP}
+\end{cor}
+\label{thm:toPositionalFormP}
 \end{thm}
 \subsection{Equivalence $\mathcal{L}^{k}_{\infty,\omega}$}
 \subsection{Equivalence $\mathcal{L}^{k}_{\infty,\omega}(Cnt)$}
@@ -196,9 +207,10 @@ If $A,B$ are pure $\sigma'$-structures and $f:\pcomonad{k}{A} \rightarrow B$ is 
 $f:\pcomonad{k}{A} \longrightarrow B$ is an isomorphism in $\mathcal{K}(\pcomonad{k}{})$ if and only if $f$ is winning for Duplicator in $\pgameBij{k}{A}{B}$.
 \end{prop}
 \section{Coalgebras and Tree-Width}
-The are many equivalent ways to define the notion of tree-width of a $\sigma$-structure $A$. We use the one given \cite{} in terms of chordal completions.  
+In this chapter, we give another proof of the result \cite[Theorem 23]{Abramsky2017} characterizing tree-width of a structure in terms of coalgebras $\alpha:A \longrightarrow \pcomonad{k}{A}$. The are many equivalent ways to define the notion of tree-width for a $\sigma$-structure $A$. We use the one given \cite{Parra1997} in terms of chordal completions. This proof combines basic facts about chordal graphs and the correspondence in \cite[Theorem 6]{Abramsky2017}. It has a very similar structure to the proof of (\ref{cor:treeDepth}) and exposes the similarity between $\efcomonad{k}{}$ and $\pcomonad{k}{}$.  
 \begin{defn}[{\cite{Fulkerson1965}}]
-A \textit{chordal graph} $\mathcal{C}$ is a undirected graph such thate there exists a linear order $<_{\mathcal{C}}$ on the vertices of $\mathcal{C}$ such that all $\leq_{\mathcal{C}}$-predecessors of $v \in \mathcal{C}$ form a clique. The ordering $<_{\mathcal{C}}$ is called a perfect elimination ordering of $\mathcal{C}$.   
+A \textit{chordal graph} $\mathcal{C}$ is a undirected graph such thate there exists a linear order $<_{\mathcal{C}}$ on the vertices of $\mathcal{C}$ such that all $\leq_{\mathcal{C}}$-predecessors of $v \in \mathcal{C}$ adjacent to $v$ form a clique. The ordering $<_{\mathcal{C}}$ is called a perfect elimination ordering of $\mathcal{C}$.   
+\label{defn:chordalGraph}
 \end{defn}
 \begin{defn}
 Given a undirected graph $G$, a chordal completion of $G$ is a chordal graph $\mathcal{C}$ such that $G$ is a subgraph of $\mathcal{C}$ 
@@ -218,7 +230,9 @@ Let $A$ be finite $\sigma$-structure. There is a bijective correspondence betwee
 \item Chordal completions $\mathcal{C}$ of $\mathcal{G}(A)$ with clique number $k$
 \end{enumerate}
 \begin{proof}
-For the (1) $\Rightarrow$ (2) correspondence, suppose $\alpha:A \longrightarrwo \pcomonad{k}{A}$ is a coalgebra.  
+For the $(1) \Rightarrow (2)$ correspondence, suppose $\alpha:A \longrightarrow \pcomonad{k}{A}$ is a coalgebra. Construct a chordal graph $\mathcal{C}$ with vertices being the elements of $A$. By unpacking (\ref{eq:coalgebraLaw}-left), $\alpha$ give a tree-order on $A$ where $a \leq a' \Leftrightarrow \alpha(a) \sqsubseteq \alpha(a')$. Choose a root for this tree and let $\leq_{\mathcal{C}}$ be the preorder traversal of the $\leq$-tree order. Let there be an edge $(a,a')$ in $\mathcal{C}$ if $\alpha(a) \sqsubseteq \alpha(a')$ or $\alpha(a) \sqsubseteq \alpha(a')$.   
+It is clear by construction of $\mathcal{C}$, that $\leq_{\mathcal{C}}$ is a perfect elimination ordering and $\mathcal{C}$ is a chordal graph. Suppose $(a,a')$ is an edge in $\mathcal{G}(A)$, then by the definition of Gaifman graph there exists an $R \in \sigma$ such that $a$ and $a'$ appear in a tuple of $R^{A}$. By $\alpha$ a $\sigma$-morphism, $\alpha(a)$ and $\alpha(a')$ appear in a tuple in $R^{\pcomonad{k}{A}}$. By the interpretation of $R$ on $\pcomonad{k}{A}$, $\alpha(a) \sqsubseteq \alpha(a')$ or $\alpha(a') \sqsubseteq \alpha(a)$. Without loss of generality, assume that $\alpha(a) \sqsubseteq \alpha(a')$. Hence, there is edge $(a,a')$ in $\mathcal{C}$. Therefore, $\mathcal{G}(A)$ is subgraph $\mathcal{C}$. Moreover, since $\alpha(a)$, $\alpha(a')$ appear in the same tuple of some $R^{\pcomonad{k}{A}}$, the pebble index of $a$ in $\alpha(a')$ must not occur in the suffix of $\alpha(a)$ in $\alpha(a')$. It follows that there at most $k$ elements adjacent to $a'$ in $\mathcal{C}$ that are $\leq_{\mathcal{C}}$-predeccessors of $a'$. Hence, $\mathcal{C}$ is a chordal completion of $\mathcal{G}(A)$ with clique number $k$. \\~\\
+For the $(2) \Rightarrow (1)$ correspondence, suppose $\mathcal{C}$ is a chordal completion of $\mathcal{G}(A)$ with clique number $k$. By chordal graphs, being perfect graphs, every induced subgraph has clique number equal to its chromatic number (i.e. least number of colours for a valid colouring). In particular, the subgraph $\mathcal{G}(A)$ has a $k$-colouring $i:A \longrightarrow [k]$. By the definition of chordal graph (\ref{defn:chordalGraph}), $\mathcal{C}$ has a perfect elimination ordering $<_{\mathcal{C}}$. Define $\alpha(a) = [(i(a_{1}),a_{1}),\dots,(i(a_{n}),a_{n})]$ where $a_{1},\dots,a_{n}$ are the $\leq_{\mathcal{C}}$-predecessors of $a$ (including $a = a_{n}$ itself). Clearly, by definition the counit law (\ref{eq:coalgebraLaw}-right) is satisfied. Since $\leq_{\mathcal{C}}$ is a linear order, the $\leq_{\mathcal{C}}$-predecessors are unique, so the other coalgebra law (\ref{eq:coalgebraLaw}-left) is satisfied.       
 \end{proof}
 \label{prop:coalgebraChordal}
 \begin{cor}
