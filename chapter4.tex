@@ -235,6 +235,9 @@ It is clear by construction of $\mathcal{C}$, that $\leq_{\mathcal{C}}$ is a per
 For the $(2) \Rightarrow (1)$ correspondence, suppose $\mathcal{C}$ is a chordal completion of $\mathcal{G}(A)$ with clique number $k$. By chordal graphs, being perfect graphs, every induced subgraph has clique number equal to its chromatic number (i.e. least number of colours for a valid colouring). In particular, the subgraph $\mathcal{G}(A)$ has a $k$-colouring $i:A \longrightarrow [k]$. By the definition of chordal graph (\ref{defn:chordalGraph}), $\mathcal{C}$ has a perfect elimination ordering $<_{\mathcal{C}}$. Define $\alpha(a) = [(i(a_{1}),a_{1}),\dots,(i(a_{n}),a_{n})]$ where $a_{1},\dots,a_{n}$ are the $\leq_{\mathcal{C}}$-predecessors of $a$ (including $a = a_{n}$ itself). Clearly, by definition the counit law (\ref{eq:coalgebraLaw}-right) is satisfied. Since $\leq_{\mathcal{C}}$ is a linear order, the $\leq_{\mathcal{C}}$-predecessors are unique, so the other coalgebra law (\ref{eq:coalgebraLaw}-left) is satisfied.       
 \end{proof}
 \label{prop:coalgebraChordal}
+\begin{defn}
+Given a $\sigma$-structure $A$, define the \textit{$\mathbb{T}$-coalgebra number of $A$}, denoted $\kappa(A)$, as the least $k$ such that there exists a coalgebra $\alpha:A \longrightarrow \pcomonad{k}{A}$. 
+\end{defn}
 \begin{cor}
 $\kappa(A) = \mathsf{tw}(A) + 1$
 \begin{proof}

@@ -249,6 +249,7 @@ The comonads we will be studying are similar to the sequences comonad of example
 \begin{defn}
 Suppose $s,s'$ are two sequences such that $s = [s_{1},\dots,s_{n}]$ and $s' = [s'_{1},\dots,s'_{m}]$, then define $ss' = [s_{1},
 \dots,s_{n},s'_{1},\dots,s'_{m}]$ (i.e. the concatenation of these two sequences).
+\label{defn:concat}
 \end{defn}
 \begin{defn}
 For two sequences $s,t$, say $s \sqsubseteq t$ if there exists an $s'$ such that $ss' = t$; such an $s'$ is called the suffix of $s$ in $t$. $\sqsubseteq$ preorders sets of sequences.  

@@ -17,13 +17,10 @@ The following are equivalent:
 \end{prop}
 As was the goal with the EF game comonad, our goal is to construct a $\sigma$-structure $\mcomonad{k}{A}$ that ``internalizes'' the $k$-round simulation and bisimulation games in the category $\mathcal{R}(\sigma)$. The tree unfolding construction of depth $k$ for pointed transition systems, detailed in \cite{Gradel2014}, turns out to be the correct candidate for $\mcomonad{k}{A}$. This construction is typically empolyed to show the tree-model property which yields a proof of the decidability of modal logic. We use this construction, instead, to show that it captures the modal simulation and bisimulation game (i.e. analogous to corollaries \ref{cor:forthEF} and \ref{cor:backForthEF}) as a comonad.
 \section{Comonad laws}
-A Kripke structure or transition system is a relational structure with a signature $\sigma = <R_{1},\dots,R_{m},P_{1},\dots,P_{n}>$ where every $R_{i}$ is a binary relation and every $P_{j}$ is a unary relation. Let $A$ be a $\sigma$-structure, then for every $k \in \omega$ we define a  $\sigma$-structure $\mcomonad{k}{A}$. Intuitively, $\mcomonad{k}{A}$ is the structure of the finite Spoiler plays in the bisimulation game of modal depth $k$. The purpose of studying such a structure is that it captures, in a manner analogous to the pebbling and Ehrenfeucht-{\Fraisse} comonads, bisimulation equivalence for models of modal propositional logic. This logic is equivalent to a fragment of first-order logic with quantifiers guarded by the binary relations $R_{1},\dots,R_{m}$. This development will be illustrative for introducing the more general guarded fragment of first-order logic where we consider sentences guarded by general $n$-ary relations. Let $|\mcomonad{k}{A}|$ be the set of sequences of the form $(a_{1},i_{1},a_{2},\dots,a_{n-1},i_{n-1},a_{n})$ where $n \leq k$, $a_{j} \in A, i_{j} \in \{1,\dots,m\}$, and for every $i = 1,\dots,k$, $(a_{j},a_{j+1}) \in R^{A}_{i_{j}}$.   
+Recall that a transition system is a relational structure with a signature $\sigma = <R_{1},\dots,R_{m},P_{1},\dots,P_{n}>$ where every $R_{i}$ is a binary relation and every $P_{j}$ is a unary relation. Let $A$ be a $\sigma$-structure, then for every $k \in \omega$ we define a  $\sigma$-structure $\mcomonad{k}{A}$. Intuitively, $\mcomonad{k}{A}$ is the structure of the finite Spoiler plays in the bisimulation game of modal depth $k$. Let $|\mcomonad{k}{A}|$ be the set of sequences of the form $(a_{1},i_{1},a_{2},\dots,a_{n-1},i_{n-1},a_{n})$ where $n \leq k$, $a_{j} \in A, i_{j} \in [m]$, and for every $i \in [k]$, $(a_{j},a_{j+1}) \in R^{A}_{i_{j}}$. Since the bisimulation game only allows choices to be local (i.e. one transition away), we have to modify the notion of concatentation from the definition (\ref{defn:concat}) 
 \begin{defn}
-Suppose $w,w' \in |\mcomonad{k}{A}|$ such that $w = [a_{1},i_{1},\dots,i_{n-1},a_{n}]$, $s' = [a'_{1},i'_{1},\dots,i'_{m-1},a'_{m}]$, $m+n \leq k$ and $(a_{n},a'_{1}) \in R^{A}_{\nu}$, then define $ss' = [a_{1},i_{1}
-\dots,a_{n},\nu,a'_{1},i'_{1},\dots,i'_{m-1},a'_{m}]$ (i.e. the concatenation of these two tuples).
-\end{defn}
-\begin{defn}
-For $w,z \in |\mcomonad{k}{A}|$, say $w \sqsubseteq z$ if there exists an $w' \in |\mcomonad{k}{A}|$ such that $ww' = z$; such an $w'$ is called the suffix of $w$ in $z$. $\sqsubseteq$ preorders $|\mcomonad{k}{A}|$.
+Suppose $w,w' \in |\mcomonad{k}{A}|$ such that $w = [a_{1},i_{1},\dots,i_{n-1},a_{n}]$, $w' = [a'_{1},i'_{1},\dots,i'_{m-1},a'_{m}]$, $m+n \leq k$ and $(a_{n},a'_{1}) \in R^{A}_{\nu}$ for $\nu \in [m]$, then define $ww' = [a_{1},i_{1}
+\dots,a_{n},\nu,a'_{1},i'_{1},\dots,i'_{m-1},a'_{m}]$ 
 \end{defn}
 \begin{defn}
 Define, for every $\sigma$-structure $A$, $\epsilon_{A}:\mcomonad{k}{A} \longrightarrow A$ by $[a_{1},i_{1},\dots,i_{n-1},a_{n}] \mapsto a_{n}$ (i.e. the last move of the play). 
@@ -34,7 +31,7 @@ With these definitions in place, we can define a $\sigma$-structure on $\mcomona
 (w,w') \in R^{\mcomonad{k}{A}}_{j} \Leftrightarrow w' = w[(j,\epsilon_{A}(w'))] \label{eq:R}
 \end{equation}
 By the definition of the set $|\mcomonad{k}{A}|$, the above condition is equivalent to $(\epsilon_{A}(w),\epsilon_{A}(w')) \in R^{A}_{j}$. \\
-Similarly, for $P_{i}$ a unary relation in $\sigma$, we define the interpretation $P^{\mcomonad{k}{A}}(w) \Leftrightarrow P^{A}_{i}(\epsilon_{A}(w))$
+Similarly, for $P_{i}$ a unary relation in $\sigma$, we define the interpretation $P^{\mcomonad{k}{A}}_{i}(w) \Leftrightarrow P^{A}_{i}(\epsilon_{A}(w))$
 \begin{defn}
 Given a morphism $f:A \longrightarrow B$, define the morphism $\mcomonad{k}{f}:\mcomonad{k}{A} \longrightarrow \mcomonad{k}{B}$ by $[a_{1},i_{1}\dots,i_{n-1},a_{n}] \mapsto [f(a_{1}),i_{1},\dots,i_{n-1},f(a_{n})]$
 \label{defn:mComonadMorphism}
