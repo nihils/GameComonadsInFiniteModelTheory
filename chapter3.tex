@@ -1,15 +1,15 @@
 \chapter{Ehrenfeucht-{\Fraisse} Comonad}
 \section{Introduction}
-The Ehrenfeucht-{\Fraisse} (EF) game was the first case of a two-player game used to prove equivalence between structures in fragments of first-order logic. In particular, the EF game is used to prove equivalence between structures in the $k$-rank fragments of first order logic. Other games, such as the pebbling game and bisimulation game, are essentially modifications of the EF game. Given two structures $A,B$, the Ehrenfreuct-{\Fraisse} game has two players, Spoiler and Duplicator. A $k$-round (symmetric) EF game is played as follows: for every $i \in [k]$, 
+The Ehrenfeucht-{\Fraisse} (EF) game was the first case of a two-player game used to prove equivalence between structures in fragments of first-order logic. In particular, the EF game is used to prove equivalence between structures in the $k$-rank fragments of first order logic. Other games, such as the pebbling game and bisimulation game, are essentially modifications of the EF game. Given two structures $A,B$, the Ehrenfreuct-{\Fraisse} game has two players, Spoiler and Duplicator. A $k$-round (symmetric) EF game, denoted $\efgameSym{k}{A}{B}$ is played as follows: for every $i \in [k]$, 
 \begin{itemize}
 \item Spoiler chooses an element in either structure $a_{i} \in A$ or $b_{i} \in B$. 
 \item Duplicator chooses an element in the other structure $b_{i} \in B$ or $a_{i} \in A$  
 \end{itemize}
-At the end of the $k$-round game, $k$-tuples $(a_{1},\dots,a_{k})$ and $(b_{1},\dots,b_{k})$ have been chosen. Duplicator wins the $k$-round game if the map $\chi:a_{i} \longmapsto b_{i}$ is a partial $\sigma$-isomorphism from $A$ to $B$. Otherwise, Spoiler wins. The asymmetric (or existential positive) game from $A$ to $B$, is the same game with the additional restriction that Spoiler must always play an element in $A$ and the map $\chi$ obtained is a partial $\sigma$-morphism. Hence, Duplicator must always respond in $B$. The following result is standard in any model theory text:
+At the end of the $k$-round game, $k$-tuples $(a_{1},\dots,a_{k})$ and $(b_{1},\dots,b_{k})$ have been chosen. Duplicator wins the $k$-round game if the map $\chi:a_{i} \longmapsto b_{i}$ is a partial $\sigma$-isomorphism from $A$ to $B$. Otherwise, Spoiler wins. The asymmetric (or existential positive) game from $A$ to $B$, denoted $\efgame{k}{A}{B}$, is the same game with the additional restriction that Spoiler must always play an element in $A$ and the map $\chi$ obtained is a partial $\sigma$-morphism. Hence, Duplicator must always respond in $B$. The following result is standard in any model theory text:
 \begin{prop}
 The following are equivalent:
 \begin{itemize}
-\item Duplicator has a winning strategy in the symmetric $k$-round EF game 
+\item Duplicator has a winning strategy $\efgameSym{k}{A}{B}$
 \item $\equivL{A}{B}{\mathcal{L}_{\omega,k}}$, i.e. for every sentence $\phi \in \mathcal{L}_{\omega,k}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$
 \end{itemize}
 \end{prop}
@@ -341,7 +341,7 @@ The $k$-round bijective Ehrenfreucht-{\Fraisse} game between two pure $\sigma'$-
 \begin{itemize}
 \item If cardinality of $A$ is not equal to the cardinality of $B$, then Spoiler wins the game.
 \item If cardinality of $A$ is equal to the cardinality of $B$, then for each round $i = 1,\dots,k$, Duplicator selects a bijection $\psi_{i}:A \longrightarrow B$ and Spoiler selects a point $a_{i} \in A$. 
-\item Duplicator wins if for $b_{i} = f_{i}(a_{i})$, the map $\chi:a_{i} \mapsto b_{i}$ is a partial isomorphism from $A$ to $B$. 
+\item Duplicator wins if for $b_{i} = \psi_{i}(a_{i})$, the map $\chi:a_{i} \mapsto b_{i}$ is a partial isomorphism from $A$ to $B$. 
 \end{itemize}
 The game $\efgameBij{k}{A}{B}$ characterizes equivalence in the $k$-rank fragment of $\mathcal{L}_{\infty,\omega}(\mathsf{Cnt})$. Namely,
 \begin{prop}[{\cite{Hella1996}}]
@@ -352,7 +352,7 @@ The following are equivalent:
 \end{itemize}
 \label{prop:bijToSyntaxEF}
 \end{prop}
-Our goal is to show that isomorphism in the coKleisli category internalizes $\efgameBij{k}{A}{B}$. Suppose $f:\efcomonad{k}{A} \longrightarrow B$ is a $\sigma$-morphism. For all $s \in \efcomonad{k}{A} \cup \{[]\}$, define the function $\psi_{s}:A \longrightarrow B$ by $a \mapsto f(s[a])$. Using these functions and the following definition we can show that isomorphism in the coKleisli category characterizes the bijective EF game $\efgameBij{k}{A}{B}$ and equivalence in $\mathcal{L}_{\infty,k}(\mathsf{Cnt})$.
+Our goal is to show that isomorphism in the coKleisli category internalizes $\efgameBij{k}{A}{B}$. Suppose $f:\efcomonad{k}{A} \longrightarrow B$ is a $\sigma$-morphism. For all $s \in \efcomonad{k}{A} \cup \{[]\}$, define the function $\psi_{s}:A \longrightarrow B$ by $a \mapsto f(s[a])$. Using these functions and the following definition we can show that isomorphism in the coKleisli category internalizes $\efgameBij{k}{A}{B}$ and characterizes equivalence in $\mathcal{L}_{\infty,k}(\mathsf{Cnt})$.
 \begin{defn}
 Given $f:\efcomonad{k}{A} \longrightarrow B$, $f$ is \textit{winning for Duplicator in $\efgameBij{k}{A}{B}$} if $\psi_{s}$ bijective for all $s \in \efcomonad{k}{A} \cup \{[]\}$ 
 \end{defn}

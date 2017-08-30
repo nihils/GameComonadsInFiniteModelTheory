@@ -1,15 +1,15 @@
 \chapter{Pebbling Comonad}
 \section{Introduction}
-The Pebbling game, similar in structure to the Ehrenfreuct-{\Fraisse} game, is used to prove equivalence between structures in the $k$-variable fragments of infinitary logic. Given two structures $A,B$, the $k$-pebble game is played with Spoiler and Duplicator both having a set of $k$-pebbles $[k] = \{1,\dots,k\}$.  
+The Pebbling game, similar in structure to the Ehrenfreuct-{\Fraisse} game, is used to prove equivalence between structures in the $k$-variable fragments of infinitary logic. Given two structures $A,B$, the $k$-pebble game, denoted $\pgameSym{k}{A}{B}$ is played with Spoiler and Duplicator both having a set of $k$-pebbles $[k] = \{1,\dots,k\}$.  
 \begin{itemize} 
 \item Spoiler places one of his pebbles $p \in [k]$ on an element in either strucure $a \in A$ or $b \in B$. If pebble $p$ is already placed on a different element, then Spoiler removes the pebble from this element and places the pebble on the new element he chose.  
 \item Duplicator places her corresponding pebble $p \in [k]$ on an element in the other structure $b \in B$ or $a \in A$. Just as with Spoiler, Duplicator may have to move her pebble from a previously pebbled element.
 \end{itemize} 
-The game is played for $\omega$ many rounds. At the end of the game, $(a_{1},\dots,a_{k})$ and $(b_{1},\dots,b_{k})$ are the pebbled elements. Duplicator wins the $k$-pebble game if the map $\gamma:a_{p} \longmapsto b_{p}$ is a partial $\sigma$-isomorphism from $A$ to $B$. Otherwise, Spoiler wins. Just as with the case with EF games, the asymmetric (or existential positive) game from $A$ to $B$, is the same game with the additional restriction that Spoiler must always pebble elements in $A$ and that the map obtained is a partial $\sigma$-morphism. The following result holds:
+The game is played for $\omega$ many rounds. At the end of the game, $(a_{1},\dots,a_{k})$ and $(b_{1},\dots,b_{k})$ are the pebbled elements. Duplicator wins the $k$-pebble game if the map $\gamma:a_{p} \longmapsto b_{p}$ is a partial $\sigma$-isomorphism from $A$ to $B$. Otherwise, Spoiler wins. Just as with the case with EF games, the asymmetric (or existential positive) game from $A$ to $B$, denoted $\pgame{k}{A}{B}$ is the same game with the additional restriction that Spoiler must always pebble elements in $A$ and that the map obtained is a partial $\sigma$-morphism. The following result holds:
 \begin{prop}
 The following are equivalent:
 \begin{itemize}
-\item Duplicator has a winning strategy in the symmetric $k$-pebble game 
+\item Duplicator has a winning strategy in $\pgameSym{k}{A}{B}$
 \item $\equivL{A}{B}{\mathcal{L}^{k}_{\infty,\omega}}$, i.e. for every $\phi \in \mathcal{L}^{k}_{\infty,\omega}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$
 \end{itemize}
 \end{prop}
@@ -203,8 +203,34 @@ Recall definition (\ref{defn:equivLogic}) and apply above corollary (\ref{cor:fo
 \end{thm}
 \subsection{Equivalence $\mathcal{L}^{k}_{\infty,\omega}$}
 \subsection{Equivalence $\mathcal{L}^{k}_{\infty,\omega}(Cnt)$}
+The $k$-variable bijective pebbling game between two pure $\sigma'$-strucutres $A,B$, $\pgameBij{k}{A}{B}$ is played by Spoiler and Duplicator as follows:
+\begin{itemize}
+\item If cardinality of $A$ is not equal to the cardinality of $B$, then Spoiler wins the game.
+\item If cardinality of $A$ is equal to the cardinality of $B$, then for each round $i$, Spoiler places a pebble $p$ on element $a_{p}$ and Duplicator selects a bijection $\psi_{i,p}:A \longrightarrow B$. 
+\item Duplicator wins the $i$-th round if for $b_{q} = \psi_{i,p}(a_{q})$ where $a_{q}$ is the element in $A$ with pebble $q$, the map $\gamma:a_{q} \mapsto b_{q}$ is a partial isomorphism form $A$ to $B$. 
+\end{itemize}
+Duplicator wins the game if Duplicator wins the $i$-th round for all $i \in \omega$. The game $\pgameBij{k}{A}{B}$ characterizes equivalence in the $k$-variable fragment of $\mathcal{L}_{\omega,\infty}(\mathsf{Cnt})$. Namely,
+\begin{prop}[{\cite{Hella1996}}]
+The following are equivalent:
+\begin{itemize}
+\item Duplicator has a winning strategy in $\pgameBij{k}{A}{B}$
+\item $\equivL{A}{B}{\mathcal{L}^{k}_{\infty,\omega}(\mathsf{Cnt})}$
+\end{itemize}
+\label{prop:bijToSyntaxP}
+\end{prop}
+Our goal is to show that isomorphism in the coKleisli category internalizes $\pgameBij{k}{A}{B}$. Suppose $f:\pcomonad{k}{A} \longrightarrow B$ is a $\sigma$-morphism. For all $s \in \pcomonad{k}{A} \cup \{[]\}$, define the function $\psi_{s,p}:A \longrightarrow B$ by $a \mapsto f(s[(p,a)])$. Using these functions and the following definition we can show that isomorphism in the coKleisli category internalizes $\pgameBij{k}{A}{B}$ and characterizes equivalence in $\mathcal{L}^{k}_{\infty,\omega}$   
+\begin{defn}
+Given $f:\pcomonad{k}{A} \longrightarrow B$, $f$ is \textit{winning for Duplicator in $\pgameBij{k}{A}{B}$} if $\psi_{s,p}$ bijective for all $s \in \pcomonad{k}{A} \cup \{[]\}$ and $p \in [k]$.  
+\end{defn}
 \begin{prop}[{\cite[Theorem 15]{Abramsky2017}}]
 $f:\pcomonad{k}{A} \longrightarrow B$ is an isomorphism in $\mathcal{K}(\pcomonad{k}{})$ if and only if $f$ is winning for Duplicator in $\pgameBij{k}{A}{B}$.
+\begin{cor}
+$A,B$ are isomorphic in $\mathcal{K}(\efcomonad{k}{})$ if and only if $\equivL{A}{B}{\mathcal{L}_{\infty,k}(\mathsf{Cnt})}$.
+\begin{proof}
+Follows from (\ref{prop:bijToSyntaxP}) and (\ref{prop:bijP})
+\end{proof}
+\end{cor}
+\label{prop:bijP}
 \end{prop}
 \section{Coalgebras and Tree-Width}
 In this chapter, we give another proof of the result \cite[Theorem 23]{Abramsky2017} characterizing tree-width of a structure in terms of coalgebras $\alpha:A \longrightarrow \pcomonad{k}{A}$. The are many equivalent ways to define the notion of tree-width for a $\sigma$-structure $A$. We use the one given \cite{Parra1997} in terms of chordal completions. This proof combines basic facts about chordal graphs and the correspondence in \cite[Theorem 6]{Abramsky2017}. It has a very similar structure to the proof of (\ref{cor:treeDepth}) and exposes the similarity between $\efcomonad{k}{}$ and $\pcomonad{k}{}$.  
@@ -232,7 +258,7 @@ Let $A$ be finite $\sigma$-structure. There is a bijective correspondence betwee
 \begin{proof}
 For the $(1) \Rightarrow (2)$ correspondence, suppose $\alpha:A \longrightarrow \pcomonad{k}{A}$ is a coalgebra. Construct a chordal graph $\mathcal{C}$ with vertices being the elements of $A$. By unpacking (\ref{eq:coalgebraLaw}-left), $\alpha$ give a tree-order on $A$ where $a \leq a' \Leftrightarrow \alpha(a) \sqsubseteq \alpha(a')$. Choose a root for this tree and let $\leq_{\mathcal{C}}$ be the preorder traversal of the $\leq$-tree order. Let there be an edge $(a,a')$ in $\mathcal{C}$ if $\alpha(a) \sqsubseteq \alpha(a')$ or $\alpha(a) \sqsubseteq \alpha(a')$.   
 It is clear by construction of $\mathcal{C}$, that $\leq_{\mathcal{C}}$ is a perfect elimination ordering and $\mathcal{C}$ is a chordal graph. Suppose $(a,a')$ is an edge in $\mathcal{G}(A)$, then by the definition of Gaifman graph there exists an $R \in \sigma$ such that $a$ and $a'$ appear in a tuple of $R^{A}$. By $\alpha$ a $\sigma$-morphism, $\alpha(a)$ and $\alpha(a')$ appear in a tuple in $R^{\pcomonad{k}{A}}$. By the interpretation of $R$ on $\pcomonad{k}{A}$, $\alpha(a) \sqsubseteq \alpha(a')$ or $\alpha(a') \sqsubseteq \alpha(a)$. Without loss of generality, assume that $\alpha(a) \sqsubseteq \alpha(a')$. Hence, there is edge $(a,a')$ in $\mathcal{C}$. Therefore, $\mathcal{G}(A)$ is subgraph $\mathcal{C}$. Moreover, since $\alpha(a)$, $\alpha(a')$ appear in the same tuple of some $R^{\pcomonad{k}{A}}$, the pebble index of $a$ in $\alpha(a')$ must not occur in the suffix of $\alpha(a)$ in $\alpha(a')$. It follows that there at most $k$ elements adjacent to $a'$ in $\mathcal{C}$ that are $\leq_{\mathcal{C}}$-predeccessors of $a'$. Hence, $\mathcal{C}$ is a chordal completion of $\mathcal{G}(A)$ with clique number $k$. \\~\\
-For the $(2) \Rightarrow (1)$ correspondence, suppose $\mathcal{C}$ is a chordal completion of $\mathcal{G}(A)$ with clique number $k$. By chordal graphs, being perfect graphs, every induced subgraph has clique number equal to its chromatic number (i.e. least number of colours for a valid colouring). In particular, the subgraph $\mathcal{G}(A)$ has a $k$-colouring $i:A \longrightarrow [k]$. By the definition of chordal graph (\ref{defn:chordalGraph}), $\mathcal{C}$ has a perfect elimination ordering $<_{\mathcal{C}}$. Define $\alpha(a) = [(i(a_{1}),a_{1}),\dots,(i(a_{n}),a_{n})]$ where $a_{1},\dots,a_{n}$ are the $\leq_{\mathcal{C}}$-predecessors of $a$ (including $a = a_{n}$ itself). Clearly, by definition the counit law (\ref{eq:coalgebraLaw}-right) is satisfied. Since $\leq_{\mathcal{C}}$ is a linear order, the $\leq_{\mathcal{C}}$-predecessors are unique, so the other coalgebra law (\ref{eq:coalgebraLaw}-left) is satisfied.       
+For the $(2) \Rightarrow (1)$ correspondence, suppose $\mathcal{C}$ is a chordal completion of $\mathcal{G}(A)$ with clique number $k$. By chordal graphs, being perfect graphs, every induced subgraph has clique number equal to its chromatic number (i.e. least number of colours for a valid colouring). In particular, the graph $\mathcal{C}$ itself has a $k$-colouring $i:A \longrightarrow [k]$. By the definition of chordal graph (\ref{defn:chordalGraph}), $\mathcal{C}$ has a perfect elimination ordering $<_{\mathcal{C}}$. Define $\alpha(a) = [(i(a_{1}),a_{1}),\dots,(i(a_{n}),a_{n})]$ where $a_{1},\dots,a_{n}$ are the $\leq_{\mathcal{C}}$-predecessors of $a$ (including $a = a_{n}$ itself) adjacent to $a$ in $\mathcal{C}$. Clearly, by definition the counit law (\ref{eq:coalgebraLaw}-right) is satisfied. Since $\leq_{\mathcal{C}}$ is a linear order, the $\leq_{\mathcal{C}}$-predecessors are unique, so the other coalgebra law (\ref{eq:coalgebraLaw}-left) is satisfied.       
 \end{proof}
 \label{prop:coalgebraChordal}
 \begin{defn}
