@@ -1,4 +1,4 @@
-\begin{thebibliography}{18}
+\begin{thebibliography}{19}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -25,8 +25,8 @@ S.~Brookes and S.~Geva.
   Categories in Computer Science}, pages 1--40. Cambridge University Press,
   1992.
 
-\bibitem[Fulkerosn and Gross(1965)]{Fulkerson1965}
-D.R. Fulkerosn and O.~Gross.
+\bibitem[Fulkerson and Gross(1965)]{Fulkerson1965}
+D.R. Fulkerson and O.~Gross.
 \newblock {Incidence matrices and interval graphs}.
 \newblock \emph{Pacific Journal of Mathematics}, 15.3:\penalty0 835--855, 1965.
 
@@ -102,6 +102,12 @@ A.~Parra and P.~Scheffler.
 J.A.~V{\"a}{\"a}n{\"a}nen P.G.~Kolaitis.
 \newblock {Generalized quantifiers and pebble games on finite structures}.
 \newblock \emph{Annals of Pure and Applied Logic}, 74.1:\penalty0 23--75, 1995.
+
+\bibitem[R.Fagin(1974)]{Fagin1974}
+R.Fagin.
+\newblock {Generalized First-Order Spectra and Polynomial-Time Recognizable
+  Sets}.
+\newblock \emph{SIAM-AMS Proceedings}, 7, 1974.
 
 \bibitem[Rossman(2008)]{Rossman2008}
 Benjamin Rossman.

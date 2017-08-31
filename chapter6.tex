@@ -1,11 +1,11 @@
 \chapter{Generalizations and Relationships}
 The aim of this chapter is to generalize some of the arguments used in previous chapters and to explain connections between the different comonads. We also discuss how to the relationships between the different comonads can used to prove results about the relationship between the corresponding logics. 
-\section{Arrow-Theoretic from $\exists^{+}\mathcal{L}$ to $\mathcal{L}$}
+\section{Arrow-Theoretic Transfer from $\exists^{+}\mathcal{L}$ to $\mathcal{L}$}
 This section gives an general arrow-theoretic development of sections (\ref{sec:positionalFormEF}), (\ref{sec:positionalFormP}), and (\ref{sec:positionalFormM}) which describe positional form and transfer strategies in the asymmetric game, under the right conditions, to strategies in the symmetric game. That is, positional forms are used to state an arrow-theoretic condition that articulates when equivalence in $\exists^{+}\mathcal{L}$ becomes equivalence in $\mathcal{L}$. We give a general defintion for the set of positions for an EF style game:
 \begin{defn}
 Given two structures $A,B$, the set of positions $\Gamma_{k}(A,B)$ is a partially-ordered set. 
 \end{defn}
-Each positional form we investigated could be seen as a graded functor $\Gamma_{k}:\mathcal{R}(\sigma) \times \mathcal{R}(\sigma) \longrightarrow \textbf{Pos}$. For the case of $\efcomonad{k}{}$, $\mcomonad{k}{}$, the order on positions was the $\sqsubseteq$-preorder of sequences. For the case of $\pcomonad{k}{}$, this was the preorder induced by the update operation $\gamma \xrightarrow{(p:a):b)} \gamma'$. Part of the definition of winning in the symmetric game, was the canonical swap function. This was the $\Gamma_{k}$ lifting of the natural endofunctor on $\mathcal{R}(\sigma) \times \mathcal{R}(\sigma)$ sending $(A,B) \mapsto (B,A)$. Strategies in positional form were subsets of $\Gamma_{k}(A,B)$ that satisfied certain conditions like (\ref{eq:S1st})-(\ref{eq:S3rd}). \\~\\
+Each positional form we investigated could be seen as a graded functor $\Gamma_{k}:\mathcal{R}(\sigma) \times \mathcal{R}(\sigma) \longrightarrow \textbf{Pos}$. For the case of $\efcomonad{k}{}$, $\mcomonad{k}{}$, the order on positions was the $\sqsubseteq$-preorder of sequences. For the case of $\pcomonad{k}{}$, this was the preorder induced by the update operation $\gamma \longrightarrow \gamma'$. Part of the definition of winning in the symmetric game, was the canonical swap function. This was the $\Gamma_{k}$ lifting of the natural endofunctor on $\mathcal{R}(\sigma) \times \mathcal{R}(\sigma)$ sending $(A,B) \mapsto (B,A)$. Strategies in positional form were subsets of $\Gamma_{k}(A,B)$ that satisfied certain conditions like (\ref{eq:S1st})-(\ref{eq:S3rd}). \\~\\
 Let $\mathbb{F}_{k}$ be one of the comonads, $\efcomonad{k}{}$, $\pcomonad{k}{}$, or $\mcomonad{k}{}$ we discussed. Given a function $\mathbb{F}_{k}A \longrightarrow B$, we note that the Kleisli coextension $f^{*}:\mathbb{F}_{k}A \longrightarrow \mathbb{F}_{k}B$ is a monotone function with respect to $\sqsubseteq$. Each function $f$, which intuitively represented a Duplicator strategy, had an associated set of postions which is given by the monotone function $\theta_{f}:\mathbb{F}_{k} \longrightarrow \Gamma_{k}(A,B)$ and was defined in terms of the graph of $f^{*}$. Namely, for the EF game, $\theta_{f}$ was given by $z \circ \langle \mathsf{id}_{\efcomonad{k}{A}}, f^{*} \rangle \circ \Delta$ where $z$ was the zipper function sending a pair of sequences of equal length to the sequence of pairs. For the modal bisimulation game, $\theta_{f}$ was defined similarly. For the pebbling game, $\theta_{f}$ was given by $p \circ \langle \mathsf{id}_{\pcomonad{k}{A}}, f^{*} \rangle \circ \Delta$ where $p(s,f^{*}(s))$ was the partial function $\gamma:[k] \longrightarrow A \times B$ from the set of pebbles mentioned in $s$ to the pairs of corresponding pebbled elements. The image of $\theta_{f}$ always gave a winning strategy in positional form and conversely, every winning strategy in positional form was the image of $\theta_{f}$ for some $\sigma$-morphism $f$, i.e. (\ref{thm:toPositionalFormEF}), (\ref{thm:toPositionalFormP}), and (\ref{thm:toPositionalFormM}). Given two functions $f:\mathbb{F}_{k}A \longrightarrow B$, $g:\mathbb{F}_{k}B \longrightarrow A$, that witness winning strategies for Duplicator in the asymmetric game (i.e. are $\sigma'$-morphisms by the corollaries (\ref{cor:forthEF}),(\ref{cor:forthP}), and (\ref{cor:forthM})), these give a winning strategy in the symmetric game if the following diagram commutes in $\textbf{Pos}$: 
 \begin{equation}
     \bfig 
@@ -21,7 +21,7 @@ Since full first-order logic is the set of formulas that have rank $< \omega$ an
 $\efcomonad{\omega}{}$ is a retract of $\pcomonad{\omega}{}$
 \begin{proof}
 Consider the natural transformation $\rho$ with components $\rho_{A}:\pcomonad{\omega}{A} \longrightarrow \efcomonad{\omega}{A}$ given by $[(p_{1},a_{1}),\dots,(p_{n},a_{n})] \mapsto [a_{1},\dots,a_{n}]$. The map $\rho_{A}$ is indeed a $\sigma$-morphism, since the conditions for $R^{\efcomonad{k}{A}}$ to hold are nearly the same (just forget the pebbles) as the first and third condition for $R^{\pcomonad{k}{A}}$ to hold. 
-uppose $A$,$B$ are $\sigma$-structures and $f:A \longrightarrow B$ is a morphism, then:the 
+Suppose $A$,$B$ are $\sigma$-structures and $f:A \longrightarrow B$ is a morphism, then 
 \begin{equation}
 \bfig \square[\pcomonad{\omega}{A}`\efcomonad{\omega}{A}`\pcomonad{\omega}{B}`\efcomonad{\omega}{B};\rho_{A}`\pcomonad{\omega}{f}`\efcomonad{\omega}{f}`\rho_{B}]\efig
 \end{equation}
@@ -31,8 +31,7 @@ uppose $A$,$B$ are $\sigma$-structures and $f:A \longrightarrow B$ is a morphism
 &= \rho_{B}([(p_{1},f(a_{1})),\dots,(p_{n},f(a_{n}))]) \\
 &= \rho_{B} \circ \pcomonad{\omega}{f}([(p_{1},a_{1}),\dots,(p_{n},a_{n})])
 \end{align*}
-Hence, $\rho:\pcomonad{\omega}{} \longrightarrow \efcomonad{\omega}{}$ is indeed a natural transformation. Consider the natural transformation $\iota$ with components $\iota_{A}:\efcomonad{\omega}{A} \longrightarrow \pcomonad{\omega}{A}$ given by $[a_{1},\dots,a_{n}] \mapsto [(1,a_{1}),\dots,(n,a_{n})]$. Suppose $R \in \sigma$ is a $m$-ary relation and $s_{1},\dots,s_{m} \in \efcomonad{\omega}{A}$:
-Hence, $\iota_{A}$ is indeed a $\sigma$-homomorphism. 
+Hence, $\rho:\pcomonad{\omega}{} \longrightarrow \efcomonad{\omega}{}$ is indeed a natural transformation. Consider the natural transformation $\iota$ with components $\iota_{A}:\efcomonad{\omega}{A} \longrightarrow \pcomonad{\omega}{A}$ given by $[a_{1},\dots,a_{n}] \mapsto [(1,a_{1}),\dots,(n,a_{n})]$. Since every subsequence of $\iota_{A}([a_{1},\dots,a_{n}]$ ends in a distinct pebble, the second condition for $R^{\pcomonad{k}{A}}$ holds. The first and third condition are identical to the conditions on $R^{\efcomonad{k}{A}}$. Hence, $\iota_{A}$ is indeed a $\sigma$-morphism. 
 \begin{equation}
 \bfig \square[\efcomonad{\omega}{A}`\pcomonad{\omega}{A}`\efcomonad{\omega}{B}`\pcomonad{\omega}{B};\iota_{A}`\efcomonad{\omega}{f}`\pcomonad{\omega}{f}`\iota_{B}]\efig
 \end{equation}
@@ -54,7 +53,7 @@ For $\mathsf{Hom}_{\mathcal{R}(\sigma)}(\pcomonad{\omega}{A},\_) \rightarrow \ma
 \end{cor}
 \end{prop}
 \begin{rmrk}
-The natural transformation $\iota:\efcomonad{\omega}{} \longrightarrow \pcomonad{\omega}{}$ preserves the grading. That is, for fixed $k \in \omega$, there exists natural transformations $\iota^{k}:\efcomonad{k}{} \longrightarrow \pcomonad{k}{}$ which is simply $\iota$ restricted to plays of length $k$. These $\iota^{k}$ natural transformations will be of use in section \ref{sec:commonResults}. On the other hand, there do not exist natural transformations $\rho^{k}:\pcomonad{k}{} \longrightarrow \efcomonad{k}{}$ that are equivalent to $\rho$ restricted to domains with $k$ many pebbles. This is because, $\pcomonad{k}{}$ has plays of aribitrary length. However, if we retrict both the pebbles and the length of play, then such natural transformations exist. 
+The natural transformation $\iota:\efcomonad{\omega}{} \longrightarrow \pcomonad{\omega}{}$ preserves the grading. That is, for fixed $k \in \omega$, there exists natural transformations $\iota^{k}:\efcomonad{k}{} \longrightarrow \pcomonad{k}{}$ which is simply $\iota$ restricted to plays of length $k$. These $\iota^{k}$ natural transformations will be of use in section \ref{sec:commonResults}. On the other hand, there do not exist natural transformations $\rho^{k}:\pcomonad{k}{} \longrightarrow \efcomonad{k}{}$ that are equivalent to $\rho$ restricted to domains with $k$ many pebbles. This is because, $\pcomonad{k}{}$ has plays of aribitrary length. However, if we restrict both the pebbles and the length of play, then such natural transformations exist. 
 \label{rmrk:omegaToK}
 \end{rmrk}
 \subsection{Grading by both $\bcomonad{k}{n}{}$}\label{sec:grading}
@@ -67,7 +66,7 @@ $\pcomonad{k}{A}$ is the $\omega$-colimit of the system $\{\bcomonad{k}{n}{A}\}_
 For every $k \in \omega$, define $i_{n}^{A}:\bcomonad{k}{n}{A} \rightarrow \pcomonad{k}{A}$ as the inclusion (i.e. $[(p_{1},a_{1}),\dots,(p_{n},a_{n})] \mapsto [(p_{1},a_{1}),\dots,(p_{n},a_{n})]$). Clearly, the following diagram commutes for all $m,n \in \omega$ with $m \leq n$
 \begin{equation}
 \bfig \Vtriangle[\bcomonad{k}{m}{A}`\bcomonad{k}{n}{A}`\pcomonad{k}{A};i_{m,n}^{A}`i_{n}^{A}`i_{m}^{A}]\efig
-\label{eq:omegaColimit}
+\label{eq:oColimit}
 \end{equation}
 Suppose that there exists a $\sigma$-structure $B$ and for every $m,n \in \omega$ with $m \leq n$, there exist morphisms $f_{m}:\bcomonad{k}{m}{A} \longrightarrow B$, $f_{n}:\bcomonad{k}{n}{A} \longrightarrow B$ such that $f_{m} = f_{n} \circ i_{m,n}^{A}$. Consider the morphism $u:\pcomonad{k}{A} \longrightarrow B$ given by $[(p_{1},a_{1}),\dots,(p_{n},a_{n})] \mapsto f_{n}([(p_{1},a_{1}),\dots,(p_{n},a_{n})])$ 
 \begin{equation}
@@ -77,14 +76,14 @@ Suppose that there exists a $\sigma$-structure $B$ and for every $m,n \in \omega
     \morphism(1000,500)|r|/{@{>}@/^7pt/}/<-500,-1000>[\bcomonad{k}{n}{A}`B;f_{n}]
     \morphism(500,0)|m|/.>/<0,-500>[\pcomonad{k}{A}`B;u]
 \efig
-\label{eq:omegaColimitUP}
+\label{eq:oColimitUP}
 \end{equation}
 Moreover, given the conditions on $f_{n}$ for all $n \in \omega$, $u$ is unique. Namely, suppose there exists a morphism $u':\pcomonad{k}{A} \longrightarrow B$ such that for all $n \in \omega$, $f_{n} = u' \circ i_{n}^{A}$. Suppose $s = [(p_{1},a_{1}),\dots,(p_{n},a_{n})] \in \bcomonad{n}{k}{A}$ then for all $j \geq n, s \in \bcomonad{k}{i}{A}$.  
 \begin{align*}
 u(s)    &= f_{n}(s) & \text{by defn of $u$} \\
-        &= f_{j} \circ i_{n,j}^{A}(s) & \text{by (\ref{eq:omegaColimitUP})} \\
+        &= f_{j} \circ i_{n,j}^{A}(s) & \text{fig (\ref{eq:oColimitUP})} \\
         &= u' \circ i_{j}^{A} \circ i_{n,j}^{A}(s) & \text{by hypothesis on $u'$} \\
-        &= u' \circ i_{n}^{A}(s) & \text{by (\ref{eq:omegaColimit})}\\
+        &= u' \circ i_{n}^{A}(s) & \text{by (\ref{eq:oColimit})}\\
         &= u'(s) & \text{by defn of inclusion} 
 \end{align*}
 Since $u(s) = u'(s)$ for all $s \in \pcomonad{k}{A}$, $u = u'$ so $u$ is unique as desired.  
@@ -103,7 +102,7 @@ Suppose there are morphisms $f^{k}:\bcomonad{k}{n} \longrightarrow B$, $u:\efcom
     \morphism(1000,500)|r|/{@{>}@/^7pt/}/<-500,-1000>[\bcomonad{k}{n}{A}`B;f^{k}]
     \morphism(500,0)|m|/.>/<0,-500>[\efcomonad{n}{A}`B;u]
 \efig
-\label{eq:omegaColimitUE}
+\label{eq:oColimitUE}
 \end{equation}
 \end{proof}
 \end{prop}

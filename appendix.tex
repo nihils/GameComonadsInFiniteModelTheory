@@ -1,0 +1,78 @@
+\chapter{Appendix}
+\appendix 
+\section{Idris Code Samples}
+The following is a typeclass (or interface to use Idris' terminology) for Comonads similar to the Monad typeclass integral to Haskell. The method $\mathsf{extract}$ is the counit, $\mathsf{duplicate}$ is the comultiplication, and $\mathsf{extend}$ is the Kleisli coextension. 
+\begin{verbatim}
+module Comonad
+-- Interface for Comonad functors 
+public export
+interface Functor m => Comonad (m : Type -> Type) where
+    -- counit map
+    extract : m a -> a
+
+    -- comultiplication map
+    duplicate : m a -> m (m a)
+    duplicate = extend id
+
+    -- coKlesli extension
+    extend : (m a -> b) -> m a -> m b
+    extend f = map f . duplicate
+\end{verbatim}
+\subsection{Pebbling Comonad}
+The polymorphic dependent type representing $\pcomonad{k}{}$. As the constructor $\mathsf{MkPebbling}$ indicates, an instance of this type is a list of tuples. Tuples with the first element in the finite set $[k] = \{1,\dots,k\}$ (i.e. type $\mathsf{Fin} \, \mathsf{k}$). The second element is an instance of the parameter type $a$. 
+\begin{verbatim}
+module Pebbling
+
+import Data.Fin
+import Prelude.List as L
+
+%access export
+-- Data type for Pebbling Comonad
+data Pebbling : (k : Nat) -> (a : Type) -> Type where
+    MkPebbling : (l : List (Fin k, a)) -> Pebbling k a
+    
+implementation Functor (Pebbling k) where
+    map f (MkPebbling z) = MkPebbling (map (apF) z)     
+    where apF : (Fin k,a) -> (Fin k,b)
+          apF (p,x) = (p, f x)
+
+implementation Comonad (Pebbling k) where
+    extract (MkPebbling z@(x::xs)) = snd $ (last z {ok=IsNonEmpty})
+    duplicate (MkPebbling z) = MkPebbling (zip pebbles prefixes) 
+    where pebbles = map (fst) z 
+          prefixes = map (MkPebbling) (tail (inits z)) 
+
+implementation Show a => Show (Pebbling k a) where
+    show (MkPebbling z) = "T_" ++ (show k) ++ " " ++ display 
+    where display = (show . map (\(p,x) => show (finToInteger p,x)) $ z)
+
+implementation Eq a => Eq (Pebbling k a) where
+    (MkPebbling z) == (MkPebbling w) = z == w
+\end{verbatim}
+
+\subsection{Ehrenfreucht-{\Fraisse} Comonad}
+The polymorphic dependent type representing $\efcomonad{k}{}$. As the constructor $\mathsf{MkEhrenFraisse}$ indicates, an instance of this type is a fixed length list of length $\leq k$ (i.e type $\mathsf{Vec} \, \mathsf{k}$) of instances of parameter type $a$.  
+\begin{verbatim}
+module EhrenFraisse
+
+import Data.Vec 
+
+%access export
+-- Data type for Ehrenfeucht-Fraisse Comonad
+data EhrenFraisse : (k : Nat) -> (a : Type) -> Type where
+    MkEhrenFraisse : (v : Vec k a) -> EhrenFraisse k a
+
+implementation Functor (EhrenFraisse k) where 
+    map f (MkEhrenFraisse v) = MkEhrenFraisse (map f v) 
+
+implementation Comonad (EhrenFraisse k) where 
+    extract (MkEhrenFraisse z) = last z {ok=IsNonEmpty}
+    duplicate (MkEhrenFraisse z) = MkEhrenFraisse (prefixes) 
+        where prefixes = map (MkEhrenFraisse) (tail (inits z))
+
+implementation Show a => Show (EhrenFraisse k a) where
+    show (MkEhrenFraisse z) = "E_" ++ (show k) ++ " " (show z) 
+
+implementation Eq a => Eq (EhrenFraisse k a) where 
+    (MkEhrenFraisse z) == (MkEhrenFraisse w) = z == w
+\end{verbatim}

@@ -1,6 +1,6 @@
 \chapter{Ehrenfeucht-{\Fraisse} Comonad}
 \section{Introduction}
-The Ehrenfeucht-{\Fraisse} (EF) game was the first case of a two-player game used to prove equivalence between structures in fragments of first-order logic. In particular, the EF game is used to prove equivalence between structures in the $k$-rank fragments of first order logic. Other games, such as the pebbling game and bisimulation game, are essentially modifications of the EF game. Given two structures $A,B$, the Ehrenfreuct-{\Fraisse} game has two players, Spoiler and Duplicator. A $k$-round (symmetric) EF game, denoted $\efgameSym{k}{A}{B}$ is played as follows: for every $i \in [k]$, 
+The Ehrenfeucht-{\Fraisse} (EF) game was the first case of a two-player game used to prove equivalence between structures in fragments of first-order logic. In particular, the EF game is used to prove equivalence between structures in the $k$-rank fragments of first order logic. Other games, such as the pebbling game and bisimulation game, are essentially modifications of the EF game. Given two structures $A,B$, the Ehrenfreuct-{\Fraisse} game has two players, Spoiler and Duplicator. A $k$-round (symmetric) EF game, denoted $\efgameSym{k}{A}{B}$, is played as follows: for every $i \in [k]$, 
 \begin{itemize}
 \item Spoiler chooses an element in either structure $a_{i} \in A$ or $b_{i} \in B$. 
 \item Duplicator chooses an element in the other structure $b_{i} \in B$ or $a_{i} \in A$  
@@ -13,12 +13,12 @@ The following are equivalent:
 \item $\equivL{A}{B}{\mathcal{L}_{\omega,k}}$, i.e. for every sentence $\phi \in \mathcal{L}_{\omega,k}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$
 \end{itemize}
 \end{prop}
-The goal of the EF comonad is to construct a $\sigma$-structure $\efcomonad{k}{A}$ from a $\sigma$-structure $A$, that ``internalizes'' the asymmetric and symmetric $k$-round EF games into the category $\mathcal{R}(\sigma)$.  
+The goal of the EF comonad is to construct a $\sigma$-structure $\efcomonad{k}{A}$ from a $\sigma$-structure $A$, that ``internalizes'' $\efgame{k}{A}{B}$ and $\efgameSym{k}{A}{B}$ into the category $\mathcal{R}(\sigma)$.  
 \section{Comonad laws}
 Let $A$ be a $\sigma$-structure over relational signature $\sigma$, then for every $k \in \omega$ we define a $\sigma$-structure $\efcomonad{k}{A}$. Intuitively, $\efcomonad{k}{A}$ is the structure of Spoiler's strategies in the Ehrenfreuct-{\Fraisse} $k$-round asymmetric game from $A$ to any $\sigma$-structure. A function $f:\efcomonad{k}{A} \longrightarrow B$, then represents Duplicator's strategy (i.e. responses) to Spoiler's plays in the $k$-round asymmetric game from $A$ to $B$. For every $i \in \omega$, let $A^{i}$ be the set of $i$-length sequences of elements in $A$. Let the domain of the structure be $|\efcomonad{k}{A}| = \bigcup_{i \leq k} A^{i}$. 
 \begin{defn}
 Define, for every $\sigma$-structure $A$, $\epsilon_{A}:\efcomonad{k}{A} \longrightarrow A$ by $[a_{1},\dots,a_{n}] \mapsto a_{n}$ (i.e. the last move of the play). 
-\label{defn:epsilon}
+\label{defn:epsilonEF}
 \end{defn}
 With this definitions in place, we can define a $\sigma$-structure on $\efcomonad{k}{A}$. Suppose $R \in \sigma$ is a $m$-ary relation, the we define the interpretation of $R^{\efcomonad{k}{A}}$ such that for every $s_{1},\dots,s_{m} \in |\efcomonad{k}{A}|$,
 \begin{align}
@@ -27,10 +27,10 @@ With this definitions in place, we can define a $\sigma$-structure on $\efcomona
 \end{align}
 \begin{defn}
 Given a morphism $f:A \longrightarrow B$, define the morphism $\efcomonad{k}{f}:\efcomonad{k}{A} \longrightarrow \efcomonad{k}{B}$ by $[a_{1},\dots,a_{n}] \mapsto [f(a_{1}),\dots,f(a_{n})]$
-\label{defn:efComonadMorphism}
+\label{defn:comonadMorphismEF}
 \end{defn}
 \begin{prop}
-The definition (\ref{defn:efComonadMorphism}) of $\efcomonad{k}{f}:\efcomonad{k}{A} \longrightarrow \efcomonad{k}{B}$ given above is indeed a morphism of $\sigma$-structures. 
+The definition (\ref{defn:comonadMorphismEF}) of $\efcomonad{k}{f}:\efcomonad{k}{A} \longrightarrow \efcomonad{k}{B}$ given above is indeed a morphism of $\sigma$-structures. 
 \begin{proof}
 Suppose $R \in \sigma$, then we want to show that if $(s_{1},\dots,s_{m}) \in R^{\efcomonad{k}{A}}$, then \linebreak $(\efcomonad{k}{f}(s_{1}),\dots,\efcomonad{k}{f}(s_{m})) \in R^{\efcomonad{k}{B}}$. For brevity, assume that $R$ is a binary relation (the proof for a general $m$-ary relation is a straightforward generalization). Suppose $s,s' \in \efcomonad{k}{A}$ such that $(s,s') \in R^{\efcomonad{k}{A}}$. Let $s = [a_{1},\dots,a_{n}]$ and $s' = [a_{1},\dots,a'_{m}]$. We aim to show that $(\efcomonad{k}{f}(s),\efcomonad{k}{f}(s')) \in R^{\efcomonad{k}{B}}$ \\
 \begin{enumerate}
@@ -50,20 +50,20 @@ $\epsilon:\efcomonad{k}{} \longrightarrow 1_{\mathcal{R}(\sigma)}$ is a natural 
 For every $A,B \in \mathcal{R}(\sigma)$ we want to show that:
 \begin{equation}
 \bfig \square[\efcomonad{k}{A}`A`\efcomonad{k}{B}`B;\epsilon_{A}`\efcomonad{k}{f}`f`\epsilon_{B}] \efig
-\label{eq:epsilonN}
+\label{eq:epsilonNEF}
 \end{equation}
 \begin{align*}
-f \circ \epsilon_{A}([a_{1},\dots,a_{n})])  &= f(a_{n}) & \text{by defn (\ref{defn:epsilon}) of $\epsilon_{A}$}\\
-&= \epsilon_{B}([f(a_{1}),\dots,f(a_{n})]) & \text{by defn (\ref{defn:epsilon}) of $\epsilon_{B}$}\\
-&= \epsilon_{B} \circ \efcomonad{k}{f}([a_{1},\dots,a_{n}]) & \text{by defn (\ref{defn:efComonadMorphism}) of $\efcomonad{k}{f}$}
+f \circ \epsilon_{A}([a_{1},\dots,a_{n})])  &= f(a_{n}) & \text{defn (\ref{defn:epsilonEF}) $\epsilon_{A}$}\\
+&= \epsilon_{B}([f(a_{1}),\dots,f(a_{n})]) & \text{defn (\ref{defn:epsilonEF}) $\epsilon_{B}$}\\
+&= \epsilon_{B} \circ \efcomonad{k}{f}([a_{1},\dots,a_{n}]) & \text{defn (\ref{defn:comonadMorphismEF}) $\efcomonad{k}{f}$}
 \end{align*}
-Hence, the above diagram (\ref{eq:epsilonN}) commutes.
+Hence, the above diagram (\ref{eq:epsilonNEF}) commutes.
 \end{proof}
-\label{prop:epsilonN}
+\label{prop:epsilonNEF}
 \end{prop}
 \begin{defn}
 Suppose $s \in \efcomonad{k}{A}$, then $s = [a_{1},\dots,a_{n}]$ for some $n \in \omega$ and for every $i = 1,\dots, n$, $a_{i} \in A$. Let $s_{i} = [a_{1},\dots,a_{i}] \in \efcomonad{k}{A}$. Define, for every $\sigma$-structure $A$, $\delta_{A}:\efcomonad{k}{A} \longrightarrow \efcomonad{k}{\efcomonad{k}{A}}$ by $s \mapsto [s_{1},\dots,s_{n}]$.
-\label{defn:delta}
+\label{defn:deltaEF}
 \end{defn}
 \begin{prop}
 $\delta:\efcomonad{k} \longrightarrow \efcomonad{k}{\efcomonad{k}{}}$ is a natural transformation.
@@ -71,33 +71,33 @@ $\delta:\efcomonad{k} \longrightarrow \efcomonad{k}{\efcomonad{k}{}}$ is a natur
 For every $A,B \in \mathcal{R}(\sigma)$ we want to show that:
 \begin{equation}
 \bfig \square[\efcomonad{k}{A}`\efcomonad{k}{\efcomonad{k}{A}}`\efcomonad{k}{B}`\efcomonad{k}{\efcomonad{k}{B}};\delta_{A}`\efcomonad{k}{f}`\efcomonad{k}{\efcomonad{k}{f}}`\delta_{B}] \efig
-\label{eq:deltaN}
+\label{eq:deltaNEF}
 \end{equation}
 \begin{align*}
-\efcomonad{k}{\efcomonad{k}{f}} \circ \delta_{A}([a_{1},\dots,a_{n}])   &= \efcomonad{k}{\efcomonad{k}{f}}([s_{1},\dots,s_{n}]) & \text{by defn (\ref{defn:delta}) of $\delta_{A}$} \\
-&= [\efcomonad{k}{f}(s_{1}),\dots,\efcomonad{k}{f}(s_{n})] & \text{by defn (\ref{defn:efComonadMorphism}) of $\efcomonad{k}{\efcomonad{k}{f}}$}\\
-&= [[f(a_{1})],\dots,[f(a_{1}),\dots,f(a_{n})]] & \text{by defn (\ref{defn:efComonadMorphism}) of $\efcomonad{k}{f}$}\\
-&= \delta_{B}([f(a_{1}),\dots,f(a_{n})]) & \text{by defn (\ref{defn:delta}) of $\delta_{B}$} \\
-&= \delta_{B} \circ \efcomonad{k}{f}([a_{1},\dots,a_{n}]) & \text{by defn (\ref{defn:efComonadMorphism}) of $\efcomonad{k}{f}$}
+\efcomonad{k}{\efcomonad{k}{f}} \circ \delta_{A}([a_{1},\dots,a_{n}])   &= \efcomonad{k}{\efcomonad{k}{f}}([s_{1},\dots,s_{n}]) & \text{defn (\ref{defn:deltaEF}) $\delta_{A}$} \\
+&= [\efcomonad{k}{f}(s_{1}),\dots,\efcomonad{k}{f}(s_{n})] & \text{defn (\ref{defn:comonadMorphismEF}) $\efcomonad{k}{\efcomonad{k}{f}}$}\\
+&= [[f(a_{1})],\dots,[f(a_{1}),\dots,f(a_{n})]] & \text{defn (\ref{defn:comonadMorphismEF}) $\efcomonad{k}{f}$}\\
+&= \delta_{B}([f(a_{1}),\dots,f(a_{n})]) & \text{defn (\ref{defn:deltaEF}) $\delta_{B}$} \\
+&= \delta_{B} \circ \efcomonad{k}{f}([a_{1},\dots,a_{n}]) & \text{defn (\ref{defn:comonadMorphismEF}) $\efcomonad{k}{f}$}
 \end{align*}
-Hence, the above diagram (\ref{eq:deltaN}) commutes.
+Hence, the above diagram (\ref{eq:deltaNEF}) commutes.
 \end{proof}
-\label{prop:deltaN}
+\label{prop:deltaNEF}
 \end{prop}
 \begin{thm}
 The triple $\langle \efcomonad{k}{},\delta,\epsilon \rangle$ is a comonad.
 \begin{proof}
-By proposition (\ref{prop:deltaN}) and (\ref{prop:epsilonN}), $\delta$ and $\epsilon$ are natural transformation. Hence, $\delta$ and $\epsilon$ are indeed the comultiplication and counit of $\efcomonad{k}{}$. The associative and identity laws remain to be shown. \\
+By proposition (\ref{prop:deltaNEF}) and (\ref{prop:epsilonNEF}), $\delta$ and $\epsilon$ are natural transformation. Hence, $\delta$ and $\epsilon$ are indeed the comultiplication and counit of $\efcomonad{k}{}$. The associative and identity laws remain to be shown. \\
 For associativity, for every $A \in \mathcal{R}(\sigma)$, the following diagram commutes:  
 \begin{equation}
 \bfig \Square[\efcomonad{k}{A}`\efcomonad{k}{\efcomonad{k}{A}}`\efcomonad{k}{\efcomonad{k}{A}}`\efcomonad{k}{\efcomonad{k}{\efcomonad{k}{A}}};\delta_{A}`\delta_{A}`\delta_{\efcomonad{k}{A}}`\efcomonad{k}{\delta_{A}}] \efig 
 \end{equation}
 \begin{align*}
-\delta_{\efcomonad{k}{A}} \circ \delta_{A}([a_{1},\dots,a_{n}])     &= \delta_{\efcomonad{k}{A}}([s_{1},\dots,s_{n}]) & \text{by defn (\ref{defn:delta}) of $\delta_{A}$} \\
-&= [[s_{1}],\dots,[s_{1},\dots,s_{n}]]  & \text{by defn (\ref{defn:delta}) of $\delta_{\efcomonad{k}{A}}$}\\
-&= [\delta_{A}(s_{1}),\dots,\delta_{A}(s_{n})] & \text{by defn (\ref{defn:delta}) of $\delta_{A}$}  \\
-&= \efcomonad{k}{\delta_{A}}([s_{1},\dots,s_{n}]) & \text{by defn (\ref{defn:efComonadMorphism}) of $\efcomonad{k}{\delta_{A}}$}  \\
-&= \efcomonad{k}{\delta_{A}} \circ \delta_{A}([a_{1},\dots,a_{n}]) & \text{by defn (\ref{defn:delta}) of $\delta_{A}$}\\
+\delta_{\efcomonad{k}{A}} \circ \delta_{A}([a_{1},\dots,a_{n}])     &= \delta_{\efcomonad{k}{A}}([s_{1},\dots,s_{n}]) & \text{defn (\ref{defn:deltaEF}) $\delta_{A}$} \\
+&= [[s_{1}],\dots,[s_{1},\dots,s_{n}]]  & \text{defn (\ref{defn:deltaEF}) $\delta_{\efcomonad{k}{A}}$}\\
+&= [\delta_{A}(s_{1}),\dots,\delta_{A}(s_{n})] & \text{defn (\ref{defn:deltaEF}) $\delta_{A}$}  \\
+&= \efcomonad{k}{\delta_{A}}([s_{1},\dots,s_{n}]) & \text{defn (\ref{defn:comonadMorphismEF}) $\efcomonad{k}{\delta_{A}}$}  \\
+&= \efcomonad{k}{\delta_{A}} \circ \delta_{A}([a_{1},\dots,a_{n}]) & \text{defn (\ref{defn:deltaEF}) $\delta_{A}$}\\
 \end{align*}
 For identity, for every $A \in \mathcal{R}(\sigma)$, the following diagram commutes:  
 \begin{equation}
@@ -107,12 +107,12 @@ For identity, for every $A \in \mathcal{R}(\sigma)$, the following diagram commu
 \efig 
 \end{equation}
 \begin{align*}
-\efcomonad{k}{\epsilon_{A}} \circ \delta_{A}([a_{1},\dots,a_{n}]) &= \efcomonad{k}{\epsilon_{A}}([s_{1},\dots,s_{n}]) & \text{by defn (\ref{defn:delta}) of $\delta_{A}$}\\
-&= [\epsilon_{A}(s_{1}),\dots,\epsilon_{A}(s_{n})]  & \text{by defn (\ref{defn:efComonadMorphism}) of $\efcomonad{k}{\epsilon_{A}}$}  \\
-&= [a_{1},\dots,a_{n}] & \text{by defn (\ref{defn:epsilon}) of $\epsilon_{A}$}\\
-&= s_{n} & \text{by defn (\ref{defn:delta}) of $s_{n}$}\\
-&= \epsilon_{\efcomonad{k}{A}}([s_{1},\dots,s_{n}]) & \text{by defn (\ref{defn:epsilon}) of $\epsilon_{\efcomonad{k}{A}}$} \\
-&= \epsilon_{\efcomonad{k}{A}} \circ \delta_{A}([a_{1},\dots,,a_{n}]) & \text{by defn (\ref{defn:delta}) of $\delta_{A}$}
+\efcomonad{k}{\epsilon_{A}} \circ \delta_{A}([a_{1},\dots,a_{n}]) &= \efcomonad{k}{\epsilon_{A}}([s_{1},\dots,s_{n}]) & \text{defn (\ref{defn:deltaEF}) $\delta_{A}$}\\
+&= [\epsilon_{A}(s_{1}),\dots,\epsilon_{A}(s_{n})]  & \text{defn (\ref{defn:comonadMorphismEF}) $\efcomonad{k}{\epsilon_{A}}$}  \\
+&= [a_{1},\dots,a_{n}] & \text{defn (\ref{defn:epsilonEF}) $\epsilon_{A}$}\\
+&= s_{n} & \text{defn (\ref{defn:deltaEF}) $s_{n}$}\\
+&= \epsilon_{\efcomonad{k}{A}}([s_{1},\dots,s_{n}]) & \text{defn (\ref{defn:epsilonEF}) $\epsilon_{\efcomonad{k}{A}}$} \\
+&= \epsilon_{\efcomonad{k}{A}} \circ \delta_{A}([a_{1},\dots,a_{n}]) & \text{defn (\ref{defn:deltaEF}) $\delta_{A}$}
 \end{align*}
 By definition, $\efcomonad{k}{}$ is a comonad.
 \end{proof}
@@ -126,10 +126,10 @@ The inclusion maps form a natural transformation $i^{l,k}:\efcomonad{l}{} \longr
 \bfig \square[\efcomonad{l}{A}`\efcomonad{k}{A}`\efcomonad{l}{B}`\efcomonad{k}{B};i^{l,k}_{A}`\efcomonad{l}{f}`\efcomonad{k}{f}`i^{l,k}_{B}]\efig
 \end{equation}
 \begin{align*}
-\efcomonad{k}{f} \circ i^{l,k}_{A}([a_{1},\dots,a_{n}])     &= \efcomonad{k}{f}([a_{1},\dots,,a_{n}]) & \text{by defn of inclusion}\\
-&= [f(a_{1}),\dots,f(a_{n})] &\text{by defn (\ref{defn:efComonadMorphism}) of $\efcomonad{k}{f}$} \\
-&= i^{l,k}_{B}([f(a_{1}),\dots,f(a_{n})]) & \text{by defn of inclusion} \\ 
-&= i^{l,k}_{B} \circ \efcomonad{l}{f}([a_{1},\dots,a_{n}]) & \text{by defn (\ref{defn:efComonadMorphism}) of $\efcomonad{k}{f}$}
+\efcomonad{k}{f} \circ i^{l,k}_{A}([a_{1},\dots,a_{n}])     &= \efcomonad{k}{f}([a_{1},\dots,,a_{n}]) & \text{inclusion}\\
+&= [f(a_{1}),\dots,f(a_{n})] &\text{defn (\ref{defn:comonadMorphismEF}) $\efcomonad{k}{f}$} \\
+&= i^{l,k}_{B}([f(a_{1}),\dots,f(a_{n})]) & \text{inclusion} \\ 
+&= i^{l,k}_{B} \circ \efcomonad{l}{f}([a_{1},\dots,a_{n}]) & \text{defn (\ref{defn:comonadMorphismEF}) $\efcomonad{k}{f}$}
 \end{align*}
 \end{proof}
 The grading given by these inclusion maps seem to suggest that there is a colimit object capturing the information of $\efcomonad{k}{A}$ for every $k \in \omega$. This is indeed the case. Consider the structure $\efcomonad{\omega}{A}$ with domain $|\efcomonad{\omega}{A}| = \bigcup_{k \in \omega} A^{k}$ where $A^{k}$ is the set of $k$-length sequences of elements in $A$. The structure on $\efcomonad{\omega}{A}$ is similar to the structure given to $\efcomonad{k}{A}$. 
@@ -139,7 +139,7 @@ Let $\omega$ be considered as a poset category under the usual order. The object
 For every $k \in \omega$, define $i^{k}_{A}:\efcomonad{k}{A} \rightarrow \efcomonad{\omega}{A}$ as the inclusion (i.e. $[a_{1},\dots,a_{n}] \mapsto [a_{1},\dots,a_{n}]$ where $n \leq k$). Clearly, the following diagram commutes for all $l,k \in \omega$ with $l \leq k$
 \begin{equation}
 \bfig \Vtriangle[\efcomonad{l}{A}`\efcomonad{k}{A}`\efcomonad{\omega}{A};i^{l,k}_{A}`i^{l}_{A}`i^{k}_{A}]\efig
-\label{eq:omegaColimit}
+\label{eq:omegaColimitEF}
 \end{equation}
 Suppose that there exists a $\sigma$-structure $B$ and for every $l,k \in \omega$ with $l \leq k$, there exist morphisms $f^{l}:\efcomonad{l}{A} \longrightarrow B$, $f^{k}:\efcomonad{k}{A} \longrightarrow B$ such that $f^{l} = f^{k} \circ i^{l,k}$. Consider the morphism $u:\efcomonad{\omega}{A} \longrightarrow B$ given by $[a_{1},\dots,a_{n}] \mapsto f^{n}([a_{1},\dots,a_{n}])$. The following diagram commutes:
 \begin{equation}
@@ -149,14 +149,14 @@ Suppose that there exists a $\sigma$-structure $B$ and for every $l,k \in \omega
     \morphism(1000,500)|r|/{@{>}@/^7pt/}/<-500,-1000>[\efcomonad{k}{A}`B;f^{k}]
     \morphism(500,0)|m|/.>/<0,-500>[\efcomonad{\omega}{A}`B;u]
 \efig
-\label{eq:omegaColimitU}
+\label{eq:omegaColimitUEF}
 \end{equation}
 Moreover, given the conditions on $f^{j}$ for all $j \in \omega$, $u$ is unique. Namely, suppose there exists a morphism $u':\efcomonad{\omega}{A} \longrightarrow B$ such that for all $j \in \omega$, $f^{j} = u' \circ i^{j}_{A}$. Suppose $s = [a_{1},\dots,a_{k}] \in \efcomonad{\omega}{A}$ then for all $j \geq k, s \in \efcomonad{j}{A}$.  
 \begin{align*}
 u(s)    &= f^{k}(s)  & \text{by defn of $u$}\\
-        &= f^{j} \circ i^{k,j}_{A}(s) & \text{by (\ref{eq:omegaColimitU})} \\
+        &= f^{j} \circ i^{k,j}_{A}(s) & \text{by (\ref{eq:omegaColimitUEF})} \\
         &= u' \circ i^{j}_{A} \circ i^{k,j}_{A}(s) & \text{by hypothesis on $u'$}  \\
-        &= u' \circ i^{k}_{A}(s) & \text{by (\ref{eq:omegaColimit})} \\
+        &= u' \circ i^{k}_{A}(s) & \text{by (\ref{eq:omegaColimitEF})} \\
         &= u'(s) & \text{by defn of inclusion} 
 \end{align*}
 Since $u(s) = u'(s)$ for all $s \in \efcomonad{\omega}{A}$, $u = u'$ so $u$ is unique as desired.  
@@ -168,23 +168,23 @@ Let $\Gamma_{k}(A,B) = (A \times B)^{\leq k}$ (i.e. sequences in pairs of elemen
 \begin{defn}
 $S \subseteq \Gamma_{k}(A,B)$ is a \textit{strategy in positional form} if $S$ satisfies the following conditions:
 \begin{enumerate}[label=(S\arabic*),ref=S\arabic*,start=0]
-\item $[] \in S$ \label{eq:S1st}
+\item $\emptySeq \in S$ \label{eq:S1st}
 \item For all $\chi \in S$ with $|\chi| < k$, $a \in A$, there exists a unique $b \in B$ such that $\chi[(a,b)] \in S$ \label{eq:S2nd}
 \item $S$ is reachable: For all $\chi \in S$, there is a chain \label{eq:S3rd}
 $$\chi_{0} \longrightarrow \dots \longrightarrow \chi_{n}$$
-such that $\chi_{0} = []$, $\chi_{n} = \chi$ and $\chi_{i} \in S$ with $|\chi_{i}| = i$ for all $i = 0,\dots,n$. 
+such that $\chi_{0} = \emptySeq$, $\chi_{n} = \chi$ and $\chi_{i} \in S$ with $|\chi_{i}| = i$ for all $i = 0,\dots,n$. 
 \end{enumerate}
 \end{defn}
 \begin{prop}
 If $f:\efcomonad{k}{A} \longrightarrow B$ is a $\sigma$-morphism, then there exists a strategy in positional form $S_{f}$.
 \begin{proof}
 Define
-$$S_{f} = \{\theta_{f}(s) \mid s \in \efcomonad{k}{A}\} \cup \{[]\}$$
+$$S_{f} = \{\theta_{f}(s) \mid s \in \efcomonad{k}{A}\} \cup \{\emptySeq\}$$
 \begin{itemize}
-\item $[] \in S_{f}$, so (\ref{eq:S1st}) is satisfied.
-\item Suppose $\chi \in S_{f}$ with $|\chi| < k$ and $a \in A$. By definition of $S_{f}$ either $\chi = []$ or $\chi = \theta_{f}(s)$ for some $s \in \efcomonad{k}{A}$. In the first case, consider $\theta_{f}([a]) = [(a,b)] \in S$ with $b = f([a])$. In the second case, consider $\chi' = \theta_{f}(s[a])$. Since $|\chi| < k$, the length $|s| = j$ and the length $|s[a]| = j+1 \leq k$. Hence, $s[a]$ is indeed in $\efcomonad{k}{A}$. Therefore, $\chi' \in S_{f}$ and $\chi' = \chi[(a,b)]$ where $b = f(s[a])$.  
-\item Suppose $\chi \in S_{f}$, then $\chi = \theta_{f}(s)$ (the $\chi = []$ case is trivial) for some $s = [a_{1},\dots,a_{n}] \in \efcomonad{k}{A}$. Let $s_{i} = [a_{1}.\dots,a_{i}]$ be the $i$-th element of $\delta_{A}(s) \in \efcomonad{k}{\efcomonad{k}{A}}$, then
-$$ [] \longrightarrow \theta_{f}(s_{1}) \longrightarrow \dots \longrightarrow \theta_{f}(s_{n}) = \chi$$
+\item $\emptySeq \in S_{f}$, so (\ref{eq:S1st}) is satisfied.
+\item Suppose $\chi \in S_{f}$ with $|\chi| < k$ and $a \in A$. By definition of $S_{f}$ either $\chi = \emptySeq$ or $\chi = \theta_{f}(s)$ for some $s \in \efcomonad{k}{A}$. In the first case, consider $\theta_{f}([a]) = [(a,b)] \in S$ with $b = f([a])$. In the second case, consider $\chi' = \theta_{f}(s[a])$. Since $|\chi| < k$, the length $|s| = j$ and the length $|s[a]| = j+1 \leq k$. Hence, $s[a]$ is indeed in $\efcomonad{k}{A}$. Therefore, $\chi' \in S_{f}$ and $\chi' = \chi[(a,b)]$ where $b = f(s[a])$.  
+\item Suppose $\chi \in S_{f}$, then $\chi = \theta_{f}(s)$ (the $\chi = \emptySeq$ case is trivial) for some $s = [a_{1},\dots,a_{n}] \in \efcomonad{k}{A}$. Let $s_{i} = [a_{1}.\dots,a_{i}]$ be the $i$-th element of $\delta_{A}(s) \in \efcomonad{k}{\efcomonad{k}{A}}$, then
+$$ \emptySeq \longrightarrow \theta_{f}(s_{1}) \longrightarrow \dots \longrightarrow \theta_{f}(s_{n}) = \chi$$
 Hence, $S_{f}$ is reachable
 \end{itemize}
 \end{proof}
@@ -210,7 +210,7 @@ Consider the expanded signature $\sigma' = \sigma \cup \{I\}$ with $I$ a binary 
 If $A,B$ are pure $\sigma'$-structures and $f:\efcomonad{k}{A} \rightarrow B$ is a function, then 
 \center{$f:\efcomonad{k}{A} \longrightarrow B$ is a $\sigma'$-morphism if and only if  $f$ is winning for Duplicator in $\efgame{k}{A}{B}$}
 \begin{proof}
-$\Rightarrow$ Suppose $\chi \in S_{f}$, then by definition of $S_{f}$, $\chi = []$ or $\chi = \theta_{f}(s)$ for some $s \in \efcomonad{k}{A}$. If $\chi = []$, then it is vacuously true that $\chi$ is a partial homomorphism (i.e. winning for Duplicator). If $\chi = \theta_{f}(s)$, then there exists some $s \in \efcomonad{k}{A}$ such that $s = [a_{1},\dots,a_{n}]$ where $f([a_{1},\dots,a_{i}]) = b_{i}$ and $\chi = [(a_{1},b_{1}),\dots,(a_{n},b_{n})]$ for all $i = 1,\dots,n$. For brevity, let $s_{i} = [a_{1},\dots,a_{i}] \sqsubseteq s$ (i.e. $s_{i}$ is the $i$-th component of $\delta_{A}(s)$). \\
+$\Rightarrow$ Suppose $\chi \in S_{f}$, then by definition of $S_{f}$, $\chi = \emptySeq$ or $\chi = \theta_{f}(s)$ for some $s \in \efcomonad{k}{A}$. If $\chi = \emptySeq$, then it is vacuously true that $\chi$ is a partial homomorphism (i.e. winning for Duplicator). If $\chi = \theta_{f}(s)$, then there exists some $s \in \efcomonad{k}{A}$ such that $s = [a_{1},\dots,a_{n}]$ where $f([a_{1},\dots,a_{i}]) = b_{i}$ and $\chi = [(a_{1},b_{1}),\dots,(a_{n},b_{n})]$ for all $i = 1,\dots,n$. For brevity, let $s_{i} = [a_{1},\dots,a_{i}] \sqsubseteq s$ (i.e. $s_{i}$ is the $i$-th component of $\delta_{A}(s)$). \\
 Suppose $R \in \sigma$ is a $m$-ary relation symbol, and $i_{1},\dots,i_{m} \in \{1,\dots,n\}$ and $R^{A}(a_{i_{1}},\dots,a_{i_{m}})$, then:
 \begin{align*}
 (a_{i_{1}},\dots,a_{i_{m}}) \in R^{A} &\Rightarrow (\epsilon_{A}(s_{i_{1}}),\dots,\epsilon_{A}(s_{i_{m}})) \in R^{A} & \text{by defn of $\epsilon_{A}$} \\
@@ -237,7 +237,7 @@ $\Leftarrow$ Suppose $(s_{1},\dots,s_{m}) \in R^{\efcomonad{k}{A}}$ for $R \in \
 \end{proof}
 \label{thm:toPositionalFormEF}
 \end{thm}
-Once in terms of positional form, we can complete the proof that $\efcomonad{k}{}$ indeed captures equivalence in $\exists^{+}\mathcal{L}_{\omega,k}$. Essentially, using the positional form, we reporduce the forth part of the Ehrenfreucht-{\Fraisse} theorem conventional in many model-theoretic texts. In particular, the following proof is modification of the proof of \cite[Theorem 3.18]{Libkin2004}. 
+Once in terms of positional form, we can complete the proof that $\efcomonad{k}{}$ indeed captures equivalence in $\exists^{+}\mathcal{L}_{\omega,k}$. Essentially, using the positional form, we reproduce the forth part of the Ehrenfreucht-{\Fraisse} theorem conventional in many model-theoretic texts. In particular, the following proof is modification of the proof of \cite[Theorem 3.18]{Libkin2004}. 
 \begin{prop}
 For all $k \in \omega$, the following are equivalent:
 \begin{enumerate}[label=(\arabic*)$_{k}$]
@@ -246,7 +246,7 @@ For all $k \in \omega$, the following are equivalent:
 \end{enumerate}
 \begin{proof}
 $\Rightarrow$ By recursion on $k$, we construct $S$. \\
-\textit{Base Case:} If $k = 0$, then the let $S = \{[]\}$. The condition that $\varnothing$ is winning for Duplicator, means $A$ and $B$ satisfy the same atomic sentences. \\
+\textit{Base Case:} If $k = 0$, then the let $S = \{\emptySeq\}$. The condition that $\emptySeq$ is winning for Duplicator, means $A$ and $B$ satisfy the same atomic sentences. \\
 \textit{Inductive Step:} Assume for the inductive hypothesis that there exists a strategy in positional form $S_{k} \subseteq \Gamma_{k}(A,B)$ that is winning for Duplicator. By hypothesis, we may also assume that (1)$_{k+1}$ (i.e. that for all $\phi \in \exists^{+}\mathcal{L}_{\omega,k+1}$, $A \vDash \phi \Rightarrow B \vDash \phi$). For every $a \in A$, consider the set of formulas: 
 $$\text{tp}^{k}_{1}(a) := \{\psi(x) \in \exists^{+}\mathcal{L}_{\omega,k}: A,a \vDash\psi(x) \} $$ 
 In model theory literature, this set is called the (existential-positive) rank-$k$ $1$-type of $a \in A$. Since there are only finitely many equivalence classes of formulas of rank-$k$, this type is isolated. That is, there exists a formula $\alpha(x) \in \text{tp}^{k}_{1}(a)$ such that for all $\psi(x) \in \text{tp}^{k}_{1}(a)$, $A,a \vDash \alpha(x) \Rightarrow A,a \vDash \psi(x)$. Consider the sentence $\phi = \exists x \alpha(x)$, clearly $A \vDash \phi$ as $a$ witnesses $x$. Since $\alpha$ is a rank-$k$ type, the sentence $\phi \in \exists^{+}\mathcal{L}_{\omega,k+1}$. By hypothesis (i.e (1)$_{k+1}$) and $A \vDash \phi$, $B \vDash \phi$. Hence, there exists a $b \in B$ corresponding to $a$, such that $B,b \vDash \alpha(x)$.  Let $\chi'_{a} = \chi[a,b]$ for every $\chi \in S$, $a \in A$.  Define
@@ -294,20 +294,22 @@ Recall definition (\ref{defn:equivLogic}) and apply above corollary (\ref{cor:fo
 \label{prop:toSyntaxEF}
 \end{prop}
 \subsection{Equivalence $\mathcal{L}_{\omega,k}$}
-The comonad $\efcomonad{k}{}$ also captures equivalence $\equivL{A}{B}{\mathcal{L}_{\omega,k}}$ in the full $k$-rank fragment of first-order logic. Equivalence in this logic is given by a winning strategy for Duplicator in the symmetric $k$-round EF game. To formalize this in terms of $\sigma$-morphisms, we need winning strategies for Duplicator in the asymmetric game from $A$ to $B$, $f:\efcomonad{k}{A} \longrightarrow B$, and the asymmetric game from $B$ to $A$, $g:\efcomonad{k}{B} \longrightarrow A$, that are `sufficiently compatible', in positional form.  That is, these morphisms must form a back-and-forth system of partial isomorphisms. More precisely, for every pair of pure $\sigma'$-structures $A,B$, the positional forms are posets $\Gamma_{k}(A,B)$ and $\Gamma_{k}(B,A)$ ordered by $\sqsubseteq$. There is a canonical `swap' monotone function $()^{-}:\Gamma_{k}(A,B) \longrightarrow \Gamma_{k}(B,A)$ given by $[(a_{i},b_{i})]^{-} = [(b_{i},a_{i})]$. The condition that $f$ and $g$ are compatible, in positional form, can be phrased as $S_{f}^{-} = S_{g}$ and $S_{g}^{-} = S_{f}$. \\ 
-%This can also be phrased in terms of $f$ and $g$ directly. For $f:\efcomonad{k}{A} \longrightarrow B$, the map $\theta_{f}:\efcomonad{k}{A} \rightarrow \Gamma_{k}(A,B)$ is a monotone function (i.e. $s \sqsubseteq s' \Rightarrow \theta_{f}(s) \subseteq \theta_{f}(s')$) and similarly for $\theta_{g}$. The $\sigma'$-morphisms are compatible if $f^{*} \circ \theta_{g} = \mathsf{swap} \circ \theta_{f}$ and $g^{*} \circ \theta_{f} = \mathsf{swap} \circ \theta_{g}$. 
-To show this result, we modify the proof for (\ref{prop:toSyntaxEF}).  
+The comonad $\efcomonad{k}{}$ also captures equivalence $\equivL{A}{B}{\mathcal{L}_{\omega,k}}$ in the full $k$-rank fragment of first-order logic. Equivalence in this logic is given by a winning strategy for Duplicator in the symmetric $k$-round EF game $\efgameSym{k}{A}{B}$. To formalize this in terms of $\sigma$-morphisms, we need winning strategies for Duplicator in $\efgame{k}{A}{B}$ given by $\sigma'$-morphism $f:\efcomonad{k}{A} \longrightarrow B$, and $\efgame{k}{B}{A}$ given by $\sigma'$-morphism $g:\efcomonad{k}{B} \longrightarrow A$, that are `sufficiently compatible', in positional form.  That is, these morphisms must form a back-and-forth system of partial isomorphisms. More precisely, for every pair of pure $\sigma'$-structures $A,B$, the positional forms are posets $\Gamma_{k}(A,B)$ and $\Gamma_{k}(B,A)$ ordered by $\sqsubseteq$. There is a canonical `swap' monotone function $()^{-}:\Gamma_{k}(A,B) \longrightarrow \Gamma_{k}(B,A)$ given by $[(a_{i},b_{i})]^{-} = [(b_{i},a_{i})]$. The condition that $f$ and $g$ are compatible, in positional form, can be phrased as $S_{f}^{-} = S_{g}$. It follows that $S_{g}^{-} = S_{f}$. 
+\begin{defn}
+A strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ is \textit{winning for Duplicator in $\efgameSym{k}{A}{B}$} if $S$ is winning for Duplicator in $\efgame{k}{A}{B}$ and $S^{-}$ is winning for Duplicator in $\efgame{k}{B}{A}$. Naturally, we can extend this defintion to functions, $f:\efcomonad{k}{A} \longrightarrow B$ is \textit{winning for Duplicator in $\efgameSym{k}{A}{B}$} if $S_{f}$ is winning for Duplicator in $\efgameSym{k}{A}{B}$.
+\end{defn}
+It follows by (\ref{prop:posFormToFEF}), that if $f$ is winning for Duplicator in $\efgameSym{k}{A}{B}$, there exists a function $g:\efcomonad{k}{B} \longrightarrow A$ such that $S_{g}$ is winning for Duplicator in $\efgame{k}{B}{A}$ and $S_{f}^{-} = S_{g}$, so $g$ is winning for Duplicator in $\efgameSym{k}{A}{B}$. This is the right definition to characterize equivalence in $\mathcal{L}_{\omega,k}$. To show this result, we modify the proof for (\ref{prop:toSyntaxEF}).  
 \begin{prop}
 For all $k \in \omega$, the following are equivalent:
 \begin{enumerate}[label=(\arabic*)$_{k}$]
 \item $\equivL{A}{B}{\mathcal{L}_{\omega,k}}$, i.e. for every $\phi \in \mathcal{L}_{\omega,k}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$
-\item There exists a strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ such that $S$ is winning for Duplicator and $S^{-}$ is winning for Duplicator. 
+\item There exists a strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ such that $S$ is winning for Duplicator in $\efgameSym{k}{A}{B}$ 
 \end{enumerate}
 \begin{proof}
 $\Rightarrow$ Repeat the proof for the $\Rightarrow$-direction of proposition (\ref{prop:toSyntaxEF}), but consider the full rank-$k$ 1-type of $a \in A$:
 $$\text{tp}^{k}_{1}(a) := \{\psi(x) \in \mathcal{L}_{\omega,k}: A,a \vDash \psi(x) \} $$ 
 This type is still isolated by a formula $\alpha(x)$ and proceed with the proof using this $\alpha(x)$. \\
-$\Leftarrow$ Repeat the proof for the $\Leftarrow$-direction of proposition (\ref{prop:toSyntaxEF}), but with the additional $\neg$ and $\forall$ cases and modified base case. For the base case, by (\ref{eq:S2nd}) and $S,S^{-}$ winning for Duplicator there exists a partial isomorphism $\chi:a_{i} \mapsto b_{i}$ for $\mathbf{a} = (a_{1},\dots,a_{n})$ and $\mathbf{b} = (b_{1},\dots,b_{n})$. Suppose $R \in \sigma$, then: 
+$\Leftarrow$ We repeat the proof for the $\Leftarrow$-direction of proposition (\ref{prop:toSyntaxEF}), but with the additional $\neg$ and $\forall$ cases and a modified base case. For the base case, by (\ref{eq:S2nd}) and $S,S^{-}$ winning for Duplicator there exists a partial isomorphism $\chi:a_{i} \mapsto b_{i}$ for $\mathbf{a} = (a_{1},\dots,a_{n})$ and $\mathbf{b} = (b_{1},\dots,b_{n})$. Suppose $R \in \sigma$, then: 
 \begin{align*}
 A,\mathbf{a} \vDash R(x_{i_{1}},\dots,x_{i_{m}}) &\Leftrightarrow (a_{i_{1}},\dots,a_{i_{m}}) \in R^{A} \\
 &\Leftrightarrow (b_{i_{1}},\dots,b_{i_{m}}) \in R^{B} & \text{by $\chi$ a partial isomorphism} \\
@@ -332,7 +334,12 @@ A,\mathbf{a} \vDash \psi(\mathbf{x})  &\Rightarrow A,\mathbf{a} \vDash \forall y
 The $\Leftarrow$-direction is similar. Therefore, for all $\psi(\mathbf{x}) \in \mathcal{L}_{\omega,k+1}$ with $n \leq k+1$, there exists $\mathbf{a} \in A^{n}$ and $\mathbf{b} \in B^{n}$ such that $A,\mathbf{a} \vDash \psi(\mathbf{x}) \Leftrightarrow B,\mathbf{b} \vDash \psi(\mathbf{x})$. In particular, for sentences $\phi \in \mathcal{L}_{\omega,k+1}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$, so $\equivL{A}{B}{\mathcal{L}_{\omega,k+1}}$. 
 \end{proof}
 \begin{cor}
-$\equivL{A}{B}{\mathcal{L}_{\omega,k}}$ if and only if there exist $f:\efcomonad{k}{A} \longrightarrow B$, $g:\efcomonad{k}{B} \longrightarrow A$ such that $S_{f} = S_{g}^{-}$ and $S_{g} = S_{f}^{-}$ 
+Suppose $A,B$ are pure $\sigma'$-structures, then the following are equivalent:
+\begin{itemize}
+\item $\equivL{A}{B}{\mathcal{L}_{\omega,k}}$ 
+\item There exists $f:\efcomonad{k}{A} \longrightarrow B$ winning for duplicator in $\efgameSym{k}{A}{B}$ 
+\item There exist $\sigma'$-morphisms $f:\efcomonad{k}{A} \longrightarrow B$, $g:\efcomonad{k}{B} \longrightarrow A$ such that $S_{f} = S_{g}^{-}$ 
+\end{itemize}
 \label{cor:backForthEF}
 \end{cor}
 \end{prop}
@@ -352,14 +359,14 @@ The following are equivalent:
 \end{itemize}
 \label{prop:bijToSyntaxEF}
 \end{prop}
-Our goal is to show that isomorphism in the coKleisli category internalizes $\efgameBij{k}{A}{B}$. Suppose $f:\efcomonad{k}{A} \longrightarrow B$ is a $\sigma$-morphism. For all $s \in \efcomonad{k}{A} \cup \{[]\}$, define the function $\psi_{s}:A \longrightarrow B$ by $a \mapsto f(s[a])$. Using these functions and the following definition we can show that isomorphism in the coKleisli category internalizes $\efgameBij{k}{A}{B}$ and characterizes equivalence in $\mathcal{L}_{\infty,k}(\mathsf{Cnt})$.
+Our goal is to show that isomorphism in the coKleisli category internalizes $\efgameBij{k}{A}{B}$. Suppose $f:\efcomonad{k}{A} \longrightarrow B$ is a $\sigma$-morphism. For all $s \in \efcomonad{k}{A} \cup \{\emptySeq\}$, define the function $\psi_{s}:A \longrightarrow B$ by $a \mapsto f(s[a])$. Using these functions and the following definition we can show that isomorphism in the coKleisli category internalizes $\efgameBij{k}{A}{B}$ and characterizes equivalence in $\mathcal{L}_{\infty,k}(\mathsf{Cnt})$.
 \begin{defn}
-Given $f:\efcomonad{k}{A} \longrightarrow B$, $f$ is \textit{winning for Duplicator in $\efgameBij{k}{A}{B}$} if $\psi_{s}$ bijective for all $s \in \efcomonad{k}{A} \cup \{[]\}$ 
+Given $f:\efcomonad{k}{A} \longrightarrow B$, $f$ is \textit{winning for Duplicator in $\efgameBij{k}{A}{B}$} if $\psi_{s}$ bijective for all $s \in \efcomonad{k}{A} \cup \{\emptySeq\}$ 
 \end{defn}
 \begin{prop}
 $f:\efcomonad{k}{A} \longrightarrow B$ an isomorphism in $\mathcal{K}(\efcomonad{k}{})$ if and only if $f$ is winning for Duplicator in $\efgameBij{k}{A}{B}$  
 \begin{proof}
-$\Rightarrow$ If $f:\efcomonad{k}{A} \longrightarrow B$ is an isomorphism in $\mathcal{K}(\efcomonad{k}{})$, then there exists a $g:\efcomonad{k}{B} \longrightarrow A$ such that $f \circ_{\mathcal{K}} g = \epsilon_{B}$ and $g \circ_{\mathcal{K}} f = \epsilon_{A}$. Suppose $s \in \efcomonad{k}{A} \cup \{[]\}$, then we aim to show that $\psi_{s}:A \longrightarrow B$ is bijective. Let $t = f^{*}(s)$ (or $t = []$ if $s = []$) and define $\phi_{t}:B \longrightarrow A$ by $\phi_{t}(b) = g(t[b])$.   
+$\Rightarrow$ If $f:\efcomonad{k}{A} \longrightarrow B$ is an isomorphism in $\mathcal{K}(\efcomonad{k}{})$, then there exists a $g:\efcomonad{k}{B} \longrightarrow A$ such that $f \circ_{\mathcal{K}} g = \epsilon_{B}$ and $g \circ_{\mathcal{K}} f = \epsilon_{A}$. Suppose $s \in \efcomonad{k}{A} \cup \{\emptySeq\}$, then we aim to show that $\psi_{s}:A \longrightarrow B$ is bijective. Let $t = f^{*}(s)$ (or $t = \emptySeq$ if $s = \emptySeq$) and define $\phi_{t}:B \longrightarrow A$ by $\phi_{t}(b) = g(t[b])$.   
 \begin{align*}
 \phi_{t} \circ \psi_{s}(a) &= \phi_{t}(f(s[a])) \\
 &= g(t[f(s[a]])) \\
@@ -367,11 +374,11 @@ $\Rightarrow$ If $f:\efcomonad{k}{A} \longrightarrow B$ is an isomorphism in $\m
 &= g(f^{*}(s[a])) \\
 &= g \circ_{\mathcal{K}} f(s[a]) \\
 &= \epsilon_{A}(s[a]) \\
-&= a \\
+&= a 
 \end{align*}
 The proof that $\psi_{s} \circ \phi_{t}(b) = b$ is similar. Therefore, $\psi_{s}$ is bijective. \\
 $\Leftarrow$ Let $f:\efcomonad{k}{A} \longrightarrow B$ be the $\sigma$-morphism witnessing Duplicator winning in $\efgameBij{k}{A}{B}$. Define $g^{*}:\efcomonad{k}{B} \longrightarrow \efcomonad{k}{A}$ (i.e. the coextension of $g = \epsilon_{A} \circ g^{*}$) by recursion, up to $k$, on length of $t \in \efcomonad{k}{B}$. \\   
-\textit{Base Case:} Suppose $t = [b]$ for $b \in B$, let $g^{*}([b]) = [\psi_{[]}^{-1}(b)]$.
+\textit{Base Case:} Suppose $t = [b]$ for $b \in B$, let $g^{*}([b]) = [\psi_{\emptySeq}^{-1}(b)]$.
 \textit{Recursion Step:} Assume for $t \in B$ with length $|t| = n < k$ that $g^{*}(t)$ is already defined. Consider $t' = t[b]$ for $b \in B$. Let $g^{*}(t') = g^{*}(t)\psi_{s}^{-1}(b)$ where $s = g^{*}(t) \in \efcomonad{k}{A}$. To complete, the proof, we need to show that $f \circ_{\mathcal{K}} g = \epsilon_{B}$ and $g \circ_{\mathcal{K}} f = \epsilon_{A}$. Suppose $s' = s[a_{n}] = [a_{1},\dots,a_{n}] \in \efcomonad{k}{A}$ and $f(s') = b_{n}$ (i.e. it follows that $\psi_{s}(a_{n}) = b_{n}$) then: 
 \begin{align*}
 g \circ_{\mathcal{K}} f([a_{1},\dots,a_{n}]) &= g \circ \efcomonad{k}{f} \circ \delta_{A}([a_{1},\dots,a_{n}]) \\ 

@@ -117,9 +117,9 @@ Note that guarded depth $\phi$ is less than the quantifier rank of $\phi$ since 
 \begin{defn}
 The \textit{modal fragment} is the guarded fragment restricted to signatures $\sigma$ with relations that have arity at most $2$. 
 \end{defn}
-We will denote the modal fragment of guarded depth $k$ of $\mathcal{L}_{\infty,\omega}$ as $\mathcal{M}^{k}_{\infty,\omega}$.
+We will denote the modal fragment of guarded depth $k$ of $\mathcal{L}_{\infty,\omega}$ as $\mathcal{M}^{k}_{\infty,k}$ and the full modal fragment as $\mathcal{M}_{\infty,\omega}$. 
 The modal fragment is the image of translating modal logic (i.e. propositional logic enriched with modal operators $\amssquare_{i}$ and $\lozenge_{i}$). The semantics of modal logic is a transition system or Kripke structure, where each pair of modal operators (e.g. $\amssquare_{i}$ and $\lozenge_{i}$) has an associated binary accessibility relation and each node in the transition system satisfies a certain set of propositions. In the translation to the modal fragment, the binary relations in $\sigma$ are the accessibilty relations and the unary relations are the propositions. Modal logic, due to it's nice decidability properties and possible worlds interpretation, have found application in many fields of computer science and philosophy. The guarded fragment is the image of translating polymodal logic. Polymodal logic is an generalization of modal logic where accessibility relations are not just binary, but pick out accessibility regions represented by hyperredges. \\~\\    
-In addition to fragments of $\mathcal{L}_{\infty,\omega}$, we will also consider fragments of a extended logic $\mathcal{L}_{\infty,\omega}(\mathsf{Cnt})$. This logic $\mathcal{L}_{\infty,\omega}(\mathsf{Cnt})$ adds counting quantifiers $\exists_{\leq n}x_{j}$, $\exists_{\geq n}x_{j}$ for every $n \in \mathbb{N}$ and variable $x_{j}$. The semantics of $\exists_{\leq n}\phi(x)$ is $A \vDash \exists_{\leq n}x \phi(x)$ if and only if there are at least $n$ elements $a \in A$ such that $A,a \vDash \phi(x)$. We extend the notion of quantifier rank to include counting quantifiers, $\mathsf{qr}(\exists_{\leq n}x\phi(x)) = \mathsf{qr}(\exists_{\geq n}x\phi(x)) = \mathsf{qr}(x) + 1$.  
+In addition to fragments of $\mathcal{L}_{\infty,\omega}$, we will also consider fragments of a extended logic $\mathcal{L}_{\infty,\omega}(\mathsf{Cnt})$. This logic $\mathcal{L}_{\infty,\omega}(\mathsf{Cnt})$ adds counting quantifiers $\exists_{\leq n}x_{j}$, $\exists_{\geq n}x_{j}$ for every $n \in \mathbb{N}$ and variable $x_{j}$. The semantics of $\exists_{\leq n}\phi(x)$ is $A \vDash \exists_{\leq n}x \phi(x)$ if and only if there are at least $n$ elements $a \in A$ such that $A,a \vDash \phi(x)$. The semantics for the other quantifier is defined similarily. We extend the notion of quantifier rank to include counting quantifiers, $\mathsf{qr}(\exists_{\leq n}x\phi(x)) = \mathsf{qr}(\exists_{\geq n}x\phi(x)) = \mathsf{qr}(x) + 1$. Unlike logic without counting, $\mathcal{L}_{\omega,k}(\mathsf{Cnt}) \not= \mathcal{L}_{\infty,k}(\mathsf{Cnt})$. 
 \subsection{Inexpressiblity and Games}
 The primary question, once a logic $\mathcal{L}$ is defined, is to understand what properties of structures can be expressed in $\mathcal{L}$ and what properties are impossible to express in $\mathcal{L}$. In particular, finite model theory is concerned with what properties of \textit{finite} structures can be expressed in a given logic. Although mathematicians have intuitive idea of what `property' means, we will be more explicit:
 \begin{defn}
@@ -131,7 +131,7 @@ where $\mathcal{C}$ is a class of all finite $\sigma$-structures.
 \end{defn}
 Intuitively, $P(A) = 1$ asserts that some property is true of the structure $A$. A logic can express a property when there exists a sentence in the logic that captures all of the structures where the propety holds. 
 \begin{defn}
-Given a logic $\mathcal{L}$, signature $\sigma$ and property $P$ \textit{$P$ is expressible in $\mathcal{L}$ with signature $\sigma$} if there exists a sentence $\phi_{P} \in \mathcal{L}$ such that for all $\sigma$-structures $A$,
+Given a logic $\mathcal{L}$, signature $\sigma$ and property $P$, \textit{$P$ is expressible in $\mathcal{L}$ with signature $\sigma$} if there exists a sentence $\phi_{P} \in \mathcal{L}$ such that for all $\sigma$-structures $A$,
 $$A \vDash \phi_{P} \Leftrightarrow P(A) = 1$$
 \end{defn}
 To prove a property $P$ is not expressible in signature $\sigma$, we need to exhibit two $\sigma$-structures $A$,$B$ which from the perspective of the logic $\mathcal{L}$ are ``equivalent'', but differ by property $P$. Of course, by the definiton of property given, $\cong$ is too strong of an equivalence to show inexpressiblity. For a given logic, we define what it means to be equivalent from the perspective of $\mathcal{L}$.  
@@ -139,7 +139,7 @@ To prove a property $P$ is not expressible in signature $\sigma$, we need to exh
 Two $\sigma$ structures $A,B$ are \textit{equivalent in logic $\mathcal{L}$}, denoted $\equivL{A}{B}{\mathcal{L}}$ if for all sentences $\phi \in \mathcal{L}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$.  
 \label{defn:equivLogic}
 \end{defn}
-Hence, for a property $\mathcal{P}$ to be inexpressible in signature $\sigma$ and logic $\mathcal{L}$, we must find two $\sigma$-structures $A,B$ such that $P(A) = 1$ and $P(B) = 0$ while $\equivL{A}{B}{\mathcal{L}}$. The purpose of ``back-and-forth'' style games in finite and classical model theory is to provide a methodology to prove equivalence in a logic $\mathcal{L}$.  
+Hence, for a property $P$ to be inexpressible in signature $\sigma$ and logic $\mathcal{L}$, we must find two $\sigma$-structures $A,B$ such that $P(A) = 1$ and $P(B) = 0$ while $\equivL{A}{B}{\mathcal{L}}$. The purpose of ``back-and-forth'' style games in finite and classical model theory is to provide a methodology to prove equivalence in a logic $\mathcal{L}$. In fact, these ``back-and-forth'' style games, conversely, can give a structural definition of a logic. Namely, Rossman's theorem \cite{Rossman2008} states that existential-positive logic over the the finite are the properties closed up to equivalence in the asymmetric Ehrenfreuct-{\Fraisse} game. Modal logic over the finite are the properties that are closed up to equivalence in the bisimulation game \cite{Gradel2014}.   
 \section{Category Theory}
 Category theory is the general theory of mathematical structures and structure-preserving relationships between theses structures. 
 \subsection{Definitions}
@@ -181,7 +181,7 @@ Given a signature $\sigma$, the category of $\sigma$-structures with $\sigma$-mo
 \end{exmpl}
 Modulo some set-theoretic issues, the collection of categories themselves $\textbf{Cat}$ can itself be considered a category with morphisms called functors.
 \begin{defn}
-A \textit{functor} $F:\mathcal{C} \longrightarrow \mathcal{D}$ is a map from the objects and morphisms of $\mathcal{C}$ to the objects and morphims of $\mathcal{D}$ such that:
+A \textit{functor} $F:\mathcal{C} \longrightarrow \mathcal{D}$ is a map from the objects and morphisms of $\mathcal{C}$ to the objects and morphisms of $\mathcal{D}$ such that:
 \begin{enumerate}[label=(\arabic*)]
     \item  For every object $A \in \mathcal{C}$, $F(\mathsf{id}_{A}) = \mathsf{id}_{F(A)}$ 
     \item  For morphisms $f:A \longrightarrow B$ and $g:B \longrightarrow C$, $F(g \circ f) = F(g) \circ F(f)$.  
@@ -198,15 +198,15 @@ A functor $F:\mathcal{C} \longrightarrow \mathcal{C}$ from a category to itself 
 \end{defn}
 Given two categories $\mathcal{C}$ and $\mathcal{D}$, we can consider the collection of all functors $F:\mathcal{C} \longrightarrow \mathcal{D}$ as a category itself with morphisms called natural transformations. 
 \begin{defn}
-Suppose $\mathcal{C}$ and $\mathcal{D}$ with functors $F:\mathcal{C} \longrightarrow \mathcal{D}$ such that $G:\mathcal{D} \longrightarrow \mathcal{C}$, then a \textit{natural transformation} $\eta:F \longrightarrow G$ is a collection of $\mathcal{D}$-morphisms $\eta_{A}:F(A) \longrightarrow G(A)$ in $\mathcal{D}$ (called the components are $\eta$) for every $A \in \mathcal{C}$ such that the following diagram commutes for every $\mathcal{C}$-morphism $f:A \longrightarrow B$:
+Suppose $\mathcal{C}$ and $\mathcal{D}$ with functors $F:\mathcal{C} \longrightarrow \mathcal{D}$ such that $G:\mathcal{D} \longrightarrow \mathcal{C}$, then a \textit{natural transformation} $\eta:F \longrightarrow G$ is a collection of $\mathcal{D}$-morphisms $\eta_{A}:F(A) \longrightarrow G(A)$ (called the components are $\eta$) for every $A \in \mathcal{C}$ such that the following diagram commutes for every $\mathcal{C}$-morphism $f:A \longrightarrow B$:
 \begin{equation*}
 \bfig \square[F(A)`G(A)`F(B)`G(B);\eta_{A}`Ff`Gf`\eta_{B}]\efig
 \end{equation*}
 \end{defn}
 \subsection{Comonads}
-The primary focus for this dissertation, as the name suggests, is a certain class of endofunctors with ``nice'' algebraic constructions called comonads. Comonads are dual to the notion of monads. Monads are analogous to the algebraic structure called a monoid; a set with an identity and associative binary operation.
+The primary focus for this dissertation, as the name suggests, is a certain class of endofunctors with ``nice'' algebraic constructions called comonads. Comonads are dual to the notion of monads. Monads are analogous to the algebraic structure called a monoid; a set with an identity and associative binary operation. In fact, monads are monoid objects in the category of endofunctors.
 \begin{defn}
-An endofunctor $\mathbb{F}:\mathcal{C} \rightarrow \mathcal{C}$ is called \textit{comonad} if there exists natural transformations $\epsilon:\mathbb{F} \longrightarrow id_{\mathcal{C}}$ (called the counit) and $\delta:\mathbb{F} \longrightarrow \mathbb{F} \circ \mathbb{F}$ (called the comultiplication) such that the following diagrams commute for all objects $A \in \mathcal{C}$:
+An endofunctor $\mathbb{F}:\mathcal{C} \longrightarrow \mathcal{C}$ is called \textit{comonad} if there exists natural transformations $\epsilon:\mathbb{F} \longrightarrow id_{\mathcal{C}}$ (called the counit) and $\delta:\mathbb{F} \longrightarrow \mathbb{F} \circ \mathbb{F}$ (called the comultiplication) such that the following diagrams commute for all objects $A \in \mathcal{C}$:
 \begin{equation}
 \bfig 
     \Square[\mathbb{F}A`\mathbb{F}\mathbb{F}A`\mathbb{F}\mathbb{F}A`\mathbb{F}\mathbb{F}\mathbb{F}A;\delta_{A}`\delta_{A}`\delta_{\mathbb{F}A}`\mathbb{F}{\delta_{A}}] 
@@ -243,7 +243,7 @@ For every $k \in \omega$, there is the sequences of length $\leq k$ comonad anal
 \label{exmpl:listComonadGraded}
 \end{exmpl}
 \begin{rmrk}
-The comonads we will be studying are similar to the sequences comonad of example (\ref{exmpl:listComonad}) and graded sequences comonad of example (\ref{exmpl:listComonadGraded}). In fact, the forgetful functor from the category of structures $\mathcal{R}(\sigma)$ to sets takes the comonads we will discuss to the sequences or graded sequences comonad. For this reason, we will need some notation for discussing sequences. 
+The comonads we will be studying are similar to the sequences comonad of example (\ref{exmpl:listComonad}) and graded sequences comonad of example (\ref{exmpl:listComonadGraded}). In fact, the forgetful functor from the category of structures $\mathcal{R}(\sigma)$ to \textbf{Set} takes the comonads we will discuss to the sequences or graded sequences comonad. For this reason, we will need some notation for discussing sequences. 
 \end{rmrk}
 \subsection*{Notation for Sequences}
 \begin{defn}

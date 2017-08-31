@@ -5,7 +5,6 @@
 \let\amssquare\square
 \usepackage{amsfonts}
 \usepackage{amsthm}
-\usepackage{fullpage}
 \usepackage{enumitem}
 \usepackage[square,numbers]{natbib}
 \usepackage{extarrows}
@@ -19,11 +18,11 @@
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{lem}[thm]{Lemma}
 \newtheorem{prop}[thm]{Proposition}
-\newtheorem{cor}{Corollary}[thm]
-\newtheorem{clm}{Claim}[thm]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{clm}[thm]{Claim}
 
 \theoremstyle{definition}
-\newtheorem{defn}{Definition}[section]
+\newtheorem{defn}[thm]{Definition}
 
 \theoremstyle{remark}
 \newtheorem*{fact}{Fact}
@@ -36,17 +35,17 @@
 \newcommand{\gcomonad}[2]{{\mathbb{G}_{#1}#2}}
 \newcommand{\bcomonad}[3]{{\mathbb{O}_{#1,#2}#3}}
 
-\newcommand{\pgame}[3]{{\mathsf{P}_{#1}(#2 \rightarrow #3)}}
+\newcommand{\pgame}[3]{{\mathsf{T}_{#1}(#2 \rightarrow #3)}}
 \newcommand{\efgame}[3]{{\mathsf{EF}_{#1}(#2 \rightarrow #3)}}
 \newcommand{\mgame}[3]{{\mathsf{M}_{#1}(#2 \rightarrow #3)}}
 \newcommand{\ggame}[3]{{\mathsf{G}_{#1}(#2 \rightarrow #3)}}
 
-\newcommand{\pgameSym}[3]{{\mathsf{P}_{#1}(#2,#3)}}
+\newcommand{\pgameSym}[3]{{\mathsf{T}_{#1}(#2,#3)}}
 \newcommand{\efgameSym}[3]{{\mathsf{EF}_{#1}(#2,#3)}}
 \newcommand{\mgameSym}[3]{{\mathsf{M}_{#1}(#2,#3)}}
 \newcommand{\ggameSym}[3]{{\mathsf{G}_{#1}(#2,#3)}}
 
-\newcommand{\pgameBij}[3]{{\mathsf{P}^{bij}_{#1}(#2,#3)}}
+\newcommand{\pgameBij}[3]{{\mathsf{T}^{bij}_{#1}(#2,#3)}}
 \newcommand{\efgameBij}[3]{{\mathsf{EF}^{bij}_{#1}(#2,#3)}}
 \newcommand{\mgameBij}[3]{{\mathsf{M}^{bij}_{#1}(#2,#3)}}
 \newcommand{\ggameBij}[3]{{\mathsf{G}^{bij}_{#1}(#2,#3)}}
@@ -54,6 +53,7 @@
 \newcommand{\equivL}[3]{{#1 \equiv #2 \ \mathsf{in}\: #3}} 
 
 \newcommand{\Fraisse}{Fra{\"i}ss{\'e}}
+\newcommand{\emptySeq}{{[\:]}}
 
 \let\oldiota\iota
 \renewcommand{\iota}{\dot{\oldiota}}
