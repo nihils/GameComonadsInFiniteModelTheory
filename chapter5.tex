@@ -210,7 +210,7 @@ $S \subseteq S_{f}$ We must show that for every $\zeta \in S$, there exists a $w
 \end{prop}
 \subsection{Equivalence $\exists^{+}\mathcal{M}_{\omega,k}$}
 \begin{defn}
-A position $\zeta = [(a_{1},b_{1}),\dots,(a_{n},b_{n})] \in \Gamma_{k}(A,B)$ is \textit{winning for Duplicator in $\mgame{k}{A}{B}$} if $\zeta$ a is simulation. That is, for all $i = 2,\dots,n$, $(a_{i-1},a_{i}) \in R_{z}^{A} \Rightarrow (b_{i-1},b_{i}) \in R_{z}^{B}$ for some $R_{z} \in \sigma$ binary and for all $P \in \sigma$ unary $a_{i} \in P_{j} \Rightarrow b_{i} \in P_{j}$. Naturally, we can extend the definition to say that a strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ is \textit{winning for Duplicator in $\mgame{k}{A}{B}$} if for all $\zeta \in S$, $\zeta$ is winning for Duplicator $\mgame{k}{A}{B}$. Function $f:\mcomonad{k}{A} \longrightarrow B$ is \textit{winning for Duplicator $\mgame{k}{A}{B}$} if $S_{f}$ is winning for Duplicator in $\mgame{k}{A}{B}$ 
+A position $\zeta = [(a_{1},b_{1}),\dots,(a_{n},b_{n})] \in \Gamma_{k}(A,B)$ is \textit{winning for Duplicator in $\mgame{k}{A}{B}$} if $\zeta$ a is simulation. That is, for all $i = 2,\dots,n$, $(a_{i-1},a_{i}) \in R_{z}^{A} \Rightarrow (b_{i-1},b_{i}) \in R_{z}^{B}$ for $R_{z} \in \sigma$ whre $z \in [m]$ was the one chosen in (\ref{eq:S2nd}) and for all $P \in \sigma$ unary $a_{i} \in P_{j} \Rightarrow b_{i} \in P_{j}$. Naturally, we can extend the definition to say that a strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ is \textit{winning for Duplicator in $\mgame{k}{A}{B}$} if for all $\zeta \in S$, $\zeta$ is winning for Duplicator $\mgame{k}{A}{B}$. Function $f:\mcomonad{k}{A} \longrightarrow B$ is \textit{winning for Duplicator $\mgame{k}{A}{B}$} if $S_{f}$ is winning for Duplicator in $\mgame{k}{A}{B}$ 
 \end{defn}
 Intuitively, condition (\ref{eq:S2nd}) and winning for Duplicator together form the forth requirement in the back-and-forth definition of bisimulation. With the definition of positional form for the modal fragment in place, the main theorem relating the comonad and equivalence in $\mathcal{M}_{\infty,k}$ can be proved.  
 \begin{thm}
@@ -226,8 +226,13 @@ $\Rightarrow$ Suppose $(v,w) \in R_{i}^{\mcomonad{k}{A}}$ for $R_{i} \in \sigma$
 For all $k \in \omega$, the following are equivalent:
 \begin{enumerate}[label=(\arabic*)$_{k}$]
 \item For every $\phi \in \exists^{+}\mathcal{M}_{\omega,k}$, $A \vDash \phi \Rightarrow B \vDash \phi$
-\item There exists a strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ that is winning for Duplicator 
+\item There exists a strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ that is winning for Duplicator $\mgame{k}{A}{B}$
 \end{enumerate}
+\begin{proof}
+Restating condition (\ref{eq:S2nd}) on $S$ and winning for Duplicator $\mgame{k}{A}{B}$, we have that: \\
+For all $\zeta \in S$ with last position $(a,b)$ and $i \in [m]$ with $(a,a') \in R_{i}^{A}$, there exists a unique $b' \in B$ such that $\zeta' = \zeta[(a',b')] \in S$ and $(b,b') \in R_{i}^{B}$ \\
+This is exactly the forth requirement of a bisimulation. By \cite[Theorem 18]{Barwise1999}, the proposition holds.
+\end{proof}
 \begin{cor}
 There exists a $\sigma$-morphism $f:\mcomonad{k}{A} \longrightarrow B$ if and only if for all $\phi \in \exists^{+}\mathcal{M}_{\omega,k}, A \vDash \phi \Rightarrow B \vDash \phi$
 \begin{proof}
@@ -246,12 +251,38 @@ Recall definition (\ref{defn:equivLogic}) and apply above corollary (\ref{cor:fo
 \end{prop}
 \subsection{Equivalence $\mathcal{M}_{\omega,k}$}
 Just as with the $\efcomonad{k}{}$ comonad, $\mcomonad{k}{}$ can also internalize winning strategies in the bisimulation game $\mgameSym{k}{A}{B}$. That is, given two $\sigma$-structures $A,B$, with $\sigma$-morphisms $f:\mcomonad{k}{A} \longrightarrow B$ and $g:\mcomonad{k}{B} \longrightarrow A$, Duplicator has a winning strategy in $\mgameSym{k}{A}{B}$ if $f$ and $g$ are compatible in positional form. Namely, given the canonical swap function, if $S_{f} = S_{g}^{-}$ and $S_{g} = S_{f}^{-}$, then there exists a bisimulation between $A$ and $B$. To see this $f:\mcomonad{k}{A} \longrightarrow A$ implies that $S_{f}$ is winning $\mgame{k}{A}{B}$ and the forth condition in the simulation from $A$ to $B$ is satisfied. Likewise, $g:\mcomonad{k}{B} \longrightarrow A$ implies that $S_{g}$ is winning in $\mgame{k}{B}{A}$ and the forth condition in the simulation from $B$ to $A$ is satisfied. The condition that $S_{f} = S_{g}^{-}$ means that the forth condition in the simulation from $B$ to $A$ is equivalent to the back condition in the bisimulation from $A$ to $B$. 
+\begin{defn}
+A strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ is \textit{winning for Duplicator in $\mgameSym{k}{A}{B}$} if $S$ is winning for Duplicator in $\mgame{k}{A}{B}$ and $S^{-}$ is winning for Duplicator in $\mgame{k}{B}{A}$. Naturally, we can extend this defintion to functions, $f:\mcomonad{k}{A} \longrightarrow B$ is \textit{winning for Duplicator in $\mgameSym{k}{A}{B}$} if $S_{f}$ is winning for Duplicator in $\mgameSym{k}{A}{B}$.
+\end{defn}
 \begin{prop}
 For all $k \in \omega$, the following are equivalent:
 \begin{enumerate}[label=(\arabic*)$_{k}$]
 \item $\equivL{A}{B}{\mathcal{M}_{\omega,k}}$ 
-\item There exists a winning strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ such that $S$ is winning for Duplicator and $S
-^{-}$ is winning for Duplicator. 
+\item There exists a winning strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ such that $S$ is winning for Duplicator in $\mgameSym{k}{A}{B}$ 
 \end{enumerate}
+\begin{proof}
+In addition to the forth requirement, the condition that $S^{-}$ is winning for Duplicator in $\mgame{k}{B}{A}$ can be restated as:\\
+For all $\zeta \in S^{-}$ with last position $(b,a)$ and $i \in [m]$ with $(b,b') \in R_{i}^{B}$, there exists a unique $b' \in B$ such that $\zeta' = \zeta[(a',b')] \in S$ and $(a,a') \in R_{i}^{B}$ \\
+This is exactly the back requirement in a bisimulation. Moreover, $S$ winning for Duplicator in $\mgame{k}{A}{B}$ means the forth requirement for a bisimulation is satisfied. By \cite[]{Gradel2014}, the proposition holds.
+\end{proof}
+\begin{cor}
+Suppose $A,B$ are $\sigma$-structures, then the following are equivalent:
+\begin{enumerate}[label=(\arabic*)]
+\item $\equivL{A}{B}{\mathcal{M}_{\omega,k}}$ 
+\item There exist $\sigma$-morphisms $f:\mcomonad{k}{A} \longrightarrow B$, $g:\mcomonad{k}{B} \longrightarrow A$ such that $S_{f} = S_{g}^{-}$ 
+\item There exists $f:\mcomonad{k}{A} \longrightarrow B$ winning for Duplicator in $\mgameSym{k}{A}{B}$ 
+\end{enumerate}
+\begin{proof}
+$(1) \Rightarrow (2)$ By proposition (\ref{prop:backForthSyntaxM}), there exists a strategy in positional form $S$ winning for Duplicator in $\mgameSym{k}{A}{B}$. Hence, $S$ winning for Duplicator in $\mgame{k}{A}{B}$ and $S^{-}$ winning for Duplicator in $\mgame{k}{B}{A}$. By theorem (\ref{thm:toPositionalFormM}), there exists $\sigma$-morphisms $f:\mcomonad{k}{A} \longrightarrow B$, $g:\mcomonad{k}{B} \longrightarrow A$ with $S_{f} = S$, and $S^{-} = S_{g}$. \\ 
+$(2) \Rightarrow (3)$ Straightforward from definition of $f$ winning for Duplicator in $\mgameSym{k}{A}{B}$. \\ 
+$(3) \Rightarrow (1)$ By proposition (\ref{prop:backForthSyntaxM}) with $S_{f}$ witnessing $S$.  
+\end{proof}
+\label{cor:backForthM}
+\end{cor}
+\label{prop:backForthSyntaxM}
 \end{prop}
+\begin{rmrk}
+In the case of the $\efcomonad{k}{}$  and $\pcomonad{k}{}$ comonads, the previous chapters showed that isomorphism in the respective coKleisli category characterizes equivalence in the $k$-rank and $k$-variable fragments of $\mathcal{L}_{\infty,\omega}(\mathsf{Cnt})$. Future work needs to be done to understand what isomorphism in the coKleisli category of $\mcomonad{k}{}$ characterizes. In keeping with the theme of cardinality preservation, isomorphism in $\mathcal{K}(\mcomonad{k}{})$ could characterize equivalence in graded modal logic \cite{Rijke2000}. Graded is used in a different sense that the way we use the word to mean grading by modal depth. Graded modal logic has, for every $n \in \omega$ and each accessiblity relation $R_{i}$, a pair of modal operators $\amssquare_{i}^{n}$ and $\lozenge_{i}^{n}p$. The statement $A,a \vDash \amssquare_{i}^{n}p$ states that for all $a_{1},\dots,a_{n}$ such that $R^{A}_{i}(a,a_{j})$, $a_{j} \in P^{A}$. Similarily, the statement $A,a \vDash \lozenge_{i}^{n}p$ states that there exists $a_{1},\dots,a_{n}$ such that $R^{A}_{i}(a,a_{n})$ and $a_{j} \in P^{A}$. Unfortunately, the modified bisimulation game that is used to show invariance under this logic is more complicated than the bijection games that were internalized in the coKleisli categories $\mathcal{K}(\efcomonad{k}{})$ and $\mathcal{K}(\pcomonad{k}{})$.
+\end{rmrk}
 \section{Guarded Unfolding}
+One way natural way to extend the work in this chapter is to investigate the guarded unfolding comonad of depth $k$, which we will denote $\gcomonad{k}{}$, constructed in \cite{Gradel2014}. This is the generalization of $\mcomonad{k}{}$ for the guarded fragment $\mathcal{G}_{\omega,k}$ defined in (\ref{defn:guardedLogic}). Just as with $\mcomonad{k}{}$, this construction is used to show the tree-model property for guarded logic. It would be interesting to prove analogous results showing that $\gcomonad{k}{}$ interalizes the guarded bisimulation game and characterizes equivalence in $\mathcal{G}_{\omega,k}$. 
