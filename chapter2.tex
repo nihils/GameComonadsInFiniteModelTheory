@@ -1,13 +1,13 @@
 \chapter{Background}
 The primary purpose of this chapter is to recall the basic definitions, constructions and results that will be used in the subsequent chapters. This chapter also serves to fix the notation for the standard constructions employed in finite model theory and category theory. For a category-theorist, the first section is an introduction to finite model theory. For a finite model-theorist, the second section is an introduction to category theory and in particular, comonads.   
 \section{Finite Model Theory}
-Model theory studies the relationship between sentences in a logic $\mathcal{L}$ and classes of mathematical structures $\mathcal{C}$ that satisfy these sentences. Sentences are built from non-logical symbols (specified by a signature) and the familar logical symbols (e.g. $\neg,\vee,\wedge,\exists,\forall$). Structures are built from sets that specifiy a domain of objects and interpretations for the symbols in a signature.
+Model theory studies the relationship between sentences in a logic $\mathcal{L}$ and classes of mathematical structures $\mathcal{C}$ that satisfy these sentences. Sentences are built from non-logical symbols (specified by a signature) and the familiar logical symbols (e.g. $\neg,\vee,\wedge,\exists,\forall$). Structures are built from sets that specify a domain of objects and interpretations for the symbols in a signature.
 \subsection{Definitions}
 \begin{defn}
-A \textit{signature} or \textit{vocabulary}, denoted usually with lowercase greek letter $\sigma$, is a set of constant symbols $c_{1},c_{2},\dots$, function symbols $f_{1},f_{2},\dots$, and relation symbols $R_{1},R_{2},\dots$ where every function symbol and relation symbol has an associated arity. 
+A \textit{signature} or \textit{vocabulary}, denoted usually with lowercase Greek letter $\sigma$, is a set of constant symbols $c_{1},c_{2},\dots$, function symbols $f_{1},f_{2},\dots$, and relation symbols $R_{1},R_{2},\dots$ where every function symbol and relation symbol has an associated arity. 
 \end{defn}
 \begin{exmpl}
-The signature for groups can be $\sigma = \{*,^{-1},e\}$ where $*$ is the binary group operation, $^{-1}$ is the unary inverse operation, and $e$ is the constant denoting the idenity in the group. 
+The signature for groups can be $\sigma = \{*,^{-1},e\}$ where $*$ is the binary group operation, $^{-1}$ is the unary inverse operation, and $e$ is the constant denoting the identity in the group. 
 \end{exmpl}
 \begin{defn}
 A signature $\sigma$ is a \textit{relational signature} if it only has relation symbols.
@@ -47,8 +47,8 @@ This also leads to a very fine notion of equivalence between two $\sigma$-struct
 \begin{defn}
 A bijective $\sigma$-morphism $f:A \longrightarrow B$ whose inverse $g:B \longrightarrow A$ is also a $\sigma$-morphism is called an \textit{isomorphism}. Two $\sigma$-structures $A,B$ are \textit{isomorphic}, denoted $A \cong B$, if there exists an isomorphism between them. 
 \end{defn}
-A common simplification in finite model theory texts is to only consider relational signatures. This is a resonable assumption since any function symbol $f$ of arity $k$ can be replaced with relation symbol $R_{f}$ of arity $k+1$ whose intrepretation $R^{A}_{f}$ is the graph of the intrepretation $f^{A}$. Any constant symbol $c$ can be replaced with relation symbol $P_{c}$ of arity $1$ whose interpretation is the singleton $\{c^{A}\}$. Hence, for the rest of this paper we will consider $\sigma$ to be a relational signature.  It should be noted that translations to a relational signature do not preserve measures of formula complexity, such as quantifier rank or number of variables. \\~\\
- The logics we will consider will have countably many variables. Namely, for every $j \in \omega$, there is symbol $x_{j}$ representing a variable. For clarity of presentation, we may use lowercase latin letters (possibly with subscripts) $z,y,w,\dots$ also as variables in our logic, but these can always be replaced with the more formal $x_{j}$ for some $j \in \omega$. Define $[n] := \{1,\dots,n\}$, i.e. the finite segment of the natural numbers.   
+A common simplification in finite model theory texts is to only consider relational signatures. This is a reasonable assumption since any function symbol $f$ of arity $k$ can be replaced with relation symbol $R_{f}$ of arity $k+1$ whose interpretation $R^{A}_{f}$ is the graph of the interpretation $f^{A}$. Any constant symbol $c$ can be replaced with relation symbol $P_{c}$ of arity $1$ whose interpretation is the singleton $\{c^{A}\}$. Hence, for the rest of this paper we will consider $\sigma$ to be a relational signature.  It should be noted that translations to a relational signature do not preserve measures of formula complexity, such as quantifier rank or number of variables. \\~\\
+ The logics we will consider will have countably many variables. Namely, for every $j \in \omega$, there is symbol $x_{j}$ representing a variable. For clarity of presentation, we may use lowercase Latin letters (possibly with subscripts) $z,y,w,\dots$ also as variables in our logic, but these can always be replaced with the more formal $x_{j}$ for some $j \in \omega$. Define $[n] := \{1,\dots,n\}$, i.e. the finite segment of the natural numbers.   
 \begin{defn}
 A \textit{formula} $\phi(\mathbf{x})$ with free variables among $\mathbf{x} = (x_{1},\dots,x_{n})$ is recursively defined as: 
 $$ \phi(\mathbf{x}) ::= x_{i} = x_{j} \mid R_{z}(x_{i_{1}},\dots,x_{i_{k}}) \mid \neg \phi(\mathbf{x}) \mid \bigvee_{j \in J} \phi_{j}(\mathbf{x}) \mid \bigwedge_{j \in J} \phi_{j}(\mathbf{x}) \mid \exists y \phi(y,\mathbf{x}) \mid \forall y \phi(y,\mathbf{x})$$
@@ -58,7 +58,7 @@ with $\{R_{z}\}$ the relation symbols in signature $\sigma$, $i,j,i_{1},\dots,i_
 \begin{defn}
 A \textit{sentence} $\phi$ is a formula with no free variables.
 \end{defn}
-With these defintions in place, we can define the central relationship studied in model theory. Namely, the relation $\vDash$, or `satisfies', between the structures as defined in (\ref{defn:structure}) and formulas as defined in (\ref{defn:formula}).
+With these definitions in place, we can define the central relationship studied in model theory. Namely, the relation $\vDash$, or `satisfies', between the structures as defined in (\ref{defn:structure}) and formulas as defined in (\ref{defn:formula}).
 \begin{defn}
 Given an $\sigma$-structure $A$ with $\mathbf{a} = (a_{1},\dots,a_{n}) \in A^{n}$ and formula $\phi(\mathbf{x})$ with free variables among $\mathbf{x} = (x_{1},\dots,x_{n})$, define $\vDash$ by induction on the complexity on formula $\phi$:
 \begin{align*}
@@ -119,8 +119,8 @@ Note that guarded depth $\phi$ is less than the quantifier rank of $\phi$ since 
 The \textit{modal fragment} is the guarded fragment restricted to signatures $\sigma$ with relations that have arity at most $2$. 
 \end{defn}
 We will denote the modal fragment of guarded depth $k$ of $\mathcal{L}_{\infty,\omega}$ as $\mathcal{M}_{\infty,k}$ and the full modal fragment as $\mathcal{M}_{\infty,\omega}$. 
-The modal fragment is the image of translating modal logic (i.e. propositional logic enriched with modal operators $\amssquare_{i}$ and $\lozenge_{i}$). The semantics of modal logic is a transition system or Kripke structure, where each pair of modal operators (e.g. $\amssquare_{i}$ and $\lozenge_{i}$) has an associated binary accessibility relation and each node in the transition system satisfies a certain set of propositions. In the translation to the modal fragment, the binary relations in $\sigma$ are the accessibilty relations and the unary relations are the propositions. Modal logic, due to it's nice decidability properties and possible worlds interpretation, have found application in many fields of computer science and philosophy. The guarded fragment is the image of translating polymodal logic. Polymodal logic is an generalization of modal logic where accessibility relations are not just binary, but pick out accessibility regions represented by hyperredges. \\~\\    
-In addition to fragments of $\mathcal{L}_{\infty,\omega}$, we will also consider fragments of a extended logic $\mathcal{L}_{\infty,\omega}(\mathsf{Cnt})$. This logic $\mathcal{L}_{\infty,\omega}(\mathsf{Cnt})$ adds counting quantifiers $\exists_{\leq n}x_{j}$, $\exists_{\geq n}x_{j}$ for every $n \in \mathbb{N}$ and variable $x_{j}$. The semantics of $\exists_{\leq n}\phi(x)$ is $A \vDash \exists_{\leq n}x \phi(x)$ if and only if there are at least $n$ elements $a \in A$ such that $A,a \vDash \phi(x)$. The semantics for the other quantifier is defined similarily. We extend the notion of quantifier rank to include counting quantifiers, $\mathsf{qr}(\exists_{\leq n}x\phi(x)) = \mathsf{qr}(\exists_{\geq n}x\phi(x)) = \mathsf{qr}(x) + 1$. Unlike logic without counting, $\mathcal{L}_{\omega,k}(\mathsf{Cnt}) \not= \mathcal{L}_{\infty,k}(\mathsf{Cnt})$. 
+The modal fragment is the image of translating modal logic (i.e. propositional logic enriched with modal operators $\amssquare_{i}$ and $\lozenge_{i}$). The semantics of modal logic is a transition system or Kripke structure, where each pair of modal operators (e.g. $\amssquare_{i}$ and $\lozenge_{i}$) has an associated binary accessibility relation and each node in the transition system satisfies a certain set of propositions. In the translation to the modal fragment, the binary relations in $\sigma$ are the accessibility relations and the unary relations are the propositions. Modal logic, due to it's nice decidability properties and possible worlds interpretation, have found application in many fields of computer science and philosophy. The guarded fragment is the image of translating polymodal logic. Polymodal logic is an generalization of modal logic where accessibility relations are not just binary, but pick out accessibility regions represented by hyperedges. \\~\\    
+In addition to fragments of $\mathcal{L}_{\infty,\omega}$, we will also consider fragments of a extended logic $\mathcal{L}_{\infty,\omega}(\mathsf{Cnt})$. This logic $\mathcal{L}_{\infty,\omega}(\mathsf{Cnt})$ adds counting quantifiers $\exists_{\leq n}x_{j}$, $\exists_{\geq n}x_{j}$ for every $n \in \mathbb{N}$ and variable $x_{j}$. The semantics of $\exists_{\leq n}\phi(x)$ is $A \vDash \exists_{\leq n}x \phi(x)$ if and only if there are at least $n$ elements $a \in A$ such that $A,a \vDash \phi(x)$. The semantics for the other quantifier is defined similarly. We extend the notion of quantifier rank to include counting quantifiers, $\mathsf{qr}(\exists_{\leq n}x\phi(x)) = \mathsf{qr}(\exists_{\geq n}x\phi(x)) = \mathsf{qr}(x) + 1$. Unlike logic without counting, $\mathcal{L}_{\omega,k}(\mathsf{Cnt}) \not= \mathcal{L}_{\infty,k}(\mathsf{Cnt})$. 
 \subsection{Inexpressiblity and Games}
 The primary question, once a logic $\mathcal{L}$ is defined, is to understand what properties of structures can be expressed in $\mathcal{L}$ and what properties are impossible to express in $\mathcal{L}$. In particular, finite model theory is concerned with what properties of \textit{finite} structures can be expressed in a given logic. Although mathematicians have intuitive idea of what `property' means, we will be more explicit:
 \begin{defn}
@@ -130,17 +130,17 @@ such that for $A,B \in \mathcal{C}$:
 $$A \cong B \Rightarrow P(A) = P(B)$$ 
 where $\mathcal{C}$ is a class of all finite $\sigma$-structures.
 \end{defn}
-Intuitively, $P(A) = 1$ asserts that some property is true of the structure $A$. A logic can express a property when there exists a sentence in the logic that captures all of the structures where the propety holds. 
+Intuitively, $P(A) = 1$ asserts that some property is true of the structure $A$. A logic can express a property when there exists a sentence in the logic that captures all of the structures where the property holds. 
 \begin{defn}
 Given a logic $\mathcal{L}$, signature $\sigma$ and property $P$, \textit{$P$ is expressible in $\mathcal{L}$ with signature $\sigma$} if there exists a sentence $\phi_{P} \in \mathcal{L}$ such that for all $\sigma$-structures $A$,
 $$A \vDash \phi_{P} \Leftrightarrow P(A) = 1$$
 \end{defn}
-To prove a property $P$ is not expressible in signature $\sigma$, we need to exhibit two $\sigma$-structures $A$,$B$ which from the perspective of the logic $\mathcal{L}$ are ``equivalent'', but differ by property $P$. Of course, by the definiton of property given, $\cong$ is too strong of an equivalence to show inexpressiblity. For a given logic, we define what it means to be equivalent from the perspective of $\mathcal{L}$.  
+To prove a property $P$ is not expressible in signature $\sigma$, we need to exhibit two $\sigma$-structures $A$,$B$ which from the perspective of the logic $\mathcal{L}$ are ``equivalent'', but differ by property $P$. Of course, by the definition of property given, $\cong$ is too strong of an equivalence to show inexpressiblity. For a given logic, we define what it means to be equivalent from the perspective of $\mathcal{L}$.  
 \begin{defn}
 Two $\sigma$ structures $A,B$ are \textit{equivalent in logic $\mathcal{L}$}, denoted $\equivL{A}{B}{\mathcal{L}}$ if for all sentences $\phi \in \mathcal{L}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$.  
 \label{defn:equivLogic}
 \end{defn}
-Hence, for a property $P$ to be inexpressible in signature $\sigma$ and logic $\mathcal{L}$, we must find two $\sigma$-structures $A,B$ such that $P(A) = 1$ and $P(B) = 0$ while $\equivL{A}{B}{\mathcal{L}}$. The purpose of ``back-and-forth'' style games in finite and classical model theory is to provide a methodology to prove equivalence in a logic $\mathcal{L}$. In fact, these ``back-and-forth'' style games, conversely, can give a structural definition of a logic. Namely, Rossman's theorem \cite{Rossman2008} states that existential-positive logic over the the finite are the properties closed up to equivalence in the asymmetric Ehrenfreuct-{\Fraisse} game. Modal logic over the finite are the properties that are closed up to equivalence in the bisimulation game \cite{Gradel2014}.   
+Hence, for a property $P$ to be inexpressible in signature $\sigma$ and logic $\mathcal{L}$, we must find two $\sigma$-structures $A,B$ such that $P(A) = 1$ and $P(B) = 0$ while $\equivL{A}{B}{\mathcal{L}}$. The purpose of ``back-and-forth'' style games in finite and classical model theory is to provide a methodology to prove equivalence in a logic $\mathcal{L}$. In fact, these ``back-and-forth'' style games, conversely, can give a structural definition of a logic. Namely, Rossman's theorem \cite{Rossman2008} states that existential-positive logic over the the finite are the properties closed up to equivalence in the asymmetric Ehrenfreucht-{\Fraisse} game. Modal logic over the finite are the properties that are closed up to equivalence in the bisimulation game \cite{Gradel2014}.   
 \section{Category Theory}
 Category theory is the general theory of mathematical structures and structure-preserving relationships between theses structures. 
 \subsection{Definitions}
@@ -259,7 +259,7 @@ For some types of sequence, we will need notation for a successor or update oper
 \begin{defn}
 Given two sequences $s,s'$, $s'$ is the \textit{$a$-successor} of $s$ if $s' = s[a]$. We denote this, $s \xlongrightarrow{a} s'$. If $s'$ is the successor of $s$ for some element $a$, then $s \longrightarrow s'$
 \end{defn}
-\subsection{Co-Kleisli Category and Eilenberg-Moore Category}
+\subsection{CoKleisli Category and Eilenberg-Moore Category}
 For every comonad $\mathbb{F}:\mathcal{C} \longrightarrow \mathcal{C}$, there exist two important categories associated with $\mathbb{F}$. The coKleisli category of $\mathbb{F}$ and the category of coalgebras, or Eilenberg-Moore category, of $\mathbb{F}$. 
 \begin{defn}
 The \textit{coKleisli category of $\mathbb{F}$}, denoted $\mathcal{K}(\mathbb{F})$, is a category with:
@@ -308,9 +308,9 @@ The \textit{category of coalgebras of $\mathbb{F}$} or \textit{Eilenberg-Moore c
 The composition law is the same as in $\mathcal{C}$ and the identity on $(A,\alpha)$ is just the $\mathcal{C}$-morphism $\mathsf{id}_{A}:A \longrightarrow A$.
 \end{defn}
 \begin{exmpl}
-For the fixed set comonad $F_{Z}$ in example (\ref{exmpl:fixedSetComonad}), the coalgebras correspond to functions $f:A \longrightarrow Z$. The colgebra $\alpha_{f}:A \longrightarrow Z \times A$, for a function $f:A \longrightarrow Z$, is given by $a \mapsto (f(a),a)$.  
+For the fixed set comonad $F_{Z}$ in example (\ref{exmpl:fixedSetComonad}), the coalgebras correspond to functions $f:A \longrightarrow Z$. The coalgebra $\alpha_{f}:A \longrightarrow Z \times A$, for a function $f:A \longrightarrow Z$, is given by $a \mapsto (f(a),a)$.  
 \end{exmpl}
 \begin{exmpl}
-For the list comonad in example (\ref{exmpl:listComonad}), the coalgebras correspond to tree orders $\leq$ on $A$. The coalgebra $\alpha:A \longrightarrow A^{\omega}$, for a tree order $\leq$, is given by sending $a \in A$ to it's list of $\leq$-predecessers.  
+For the list comonad in example (\ref{exmpl:listComonad}), the coalgebras correspond to tree orders $\leq$ on $A$. The coalgebra $\alpha:A \longrightarrow A^{\omega}$, for a tree order $\leq$, is given by sending $a \in A$ to it's list of $\leq$-predecessors.  
 \end{exmpl}
 The diagrams (\ref{eq:coalgebraLaw}) are analogous to the presentation of group actions. Namely, the diagram on the right is analogous to the action commuting with the group operation. While the diagram on the left is analogous to the identity in the group acting trivially on a set.

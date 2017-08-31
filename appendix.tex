@@ -14,7 +14,7 @@ interface Functor m => Comonad (m : Type -> Type) where
     duplicate : m a -> m (m a)
     duplicate = extend id
 
-    -- coKlesli extension
+    -- coKleisli extension
     extend : (m a -> b) -> m a -> m b
     extend f = map f . duplicate
 \end{verbatim}
