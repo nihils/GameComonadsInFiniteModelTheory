@@ -13,7 +13,7 @@ The following are equivalent:
 \item $\equivL{A}{B}{\mathcal{L}^{k}_{\infty,\omega}}$, i.e. for every $\phi \in \mathcal{L}^{k}_{\infty,\omega}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$
 \end{itemize}
 \end{prop}
-As was the goal with the EF game comonad, our goal is to construct a $\sigma$-structure $\pcomonad{k}{A}$ from a $\sigma$-structure $A$, that ``internalizes'' the asymmetric and symmetric $k$-pebble games in the category $\mathcal{R}(\sigma)$. The construction of $\pcomonad{k}{}$ and all of the results in this chapter were originally discovered in \cite{Abramsky2017}. The paper \cite{Abramsky2017} was the inspiration to develop the other game comonads in this dissertation. We here restate the propositions here to demonstrate the connections and differences with these other comonads.  
+As was the goal with the EF game comonad, our goal is to construct a $\sigma$-structure $\pcomonad{k}{A}$ from a $\sigma$-structure $A$, that ``internalizes'' the asymmetric and symmetric $k$-pebble games in the category $\mathcal{R}(\sigma)$. The construction of $\pcomonad{k}{}$ and all of the results in this chapter were originally discovered in \cite{Abramsky2017}. The paper \cite{Abramsky2017} was the inspiration to develop the other game comonads in this dissertation. We restate the propositions here to demonstrate the connections and differences with these other comonads.  
 \section{Comonad laws}
 Let $A$ be a $\sigma$-structure over relational signature $\sigma$, then for every $k \in \mathbb{N}$ we define a $\sigma$-structure $\pcomonad{k}{A}$. Intuitively, $\pcomonad{k}{A}$ is the structure of the finite $k$-pebblings on $A$. Let the domain of this structure be $|\pcomonad{k}{A}| = ([k] \times A)^{<\omega}$ (i.e. the set of finite sequence of elements in product $[k] \times A$). In order, to define the $\sigma$-structure on $\pcomonad{k}{A}$, a bit more notation is necessary:
 \begin{defn}
@@ -91,7 +91,7 @@ Hence, the above diagram (\ref{eq:deltaNP}) commutes.
 \begin{thm}
 The triple $\langle \pcomonad{k}{},\delta,\epsilon \rangle$ is a comonad.
 \begin{proof}
-By proposition (\ref{prop:deltaNP}) and (\ref{prop:epsilonNP}), $\delta$ and $\epsilon$ are natural transformation. Hence, $\delta$ and $\epsilon$ are indeed the comultiplication and counit of $\pcomonad{k}{}$. The associative and identity laws remain to be shown. \\
+By proposition (\ref{prop:deltaNP}) and (\ref{prop:epsilonNP}), $\delta$ and $\epsilon$ are natural transformations. Hence, $\delta$ and $\epsilon$ are indeed the comultiplication and counit of $\pcomonad{k}{}$. The associative and identity laws remain to be shown. \\
 For associativity, for every $A \in \mathcal{R}(\sigma)$, the following diagram commutes:  
 \begin{equation}
 \bfig \Square[\pcomonad{k}{A}`\pcomonad{k}{\pcomonad{k}{A}}`\pcomonad{k}{\pcomonad{k}{A}}`\pcomonad{k}{\pcomonad{k}{\pcomonad{k}{A}}};\delta_{A}`\delta_{A}`\delta_{\pcomonad{k}{A}}`\pcomonad{k}{\delta_{A}}] \efig 
@@ -189,7 +189,7 @@ $$\gamma_{0} \longrightarrow \dots \longrightarrow \gamma_{n}$$
 such that $\gamma_{0} = \emptySeq$, $\gamma_{n} = \gamma$ and $\gamma_{i} \in S$. 
 \end{enumerate}
 \end{defn}
-Given a function $f:\pcomonad{k}{A} \longrightarrow B$, define $\theta_{f}:\pcomonad{k}{A} \longrightarrow \Gamma_{k}(A,B)$ by $s = [(p_{1},a_{1},\dots,(p_{n},a_{n})] \mapsto \gamma$ with $\gamma$ the partial function from $p_{i_{1}},\dots,p_{i_{n}}$ (the distinct pebbles among $p_{1},\dots,p_{n}$ to the pairs $(a_{i_{1}},b_{i_{1}})$ where $a_{i_{j}}$ is the last element in $s$ pebbled by $p_{i_{j}}$ and $b_{i_{j}}$ is the corresponding element in $f^{*}(s)$. 
+Given a function $f:\pcomonad{k}{A} \longrightarrow B$, define $\theta_{f}:\pcomonad{k}{A} \longrightarrow \Gamma_{k}(A,B)$ by $s = [(p_{1},a_{1},\dots,(p_{n},a_{n})] \mapsto \gamma$ with $\gamma$ the partial function from $p_{i_{1}},\dots,p_{i_{n}}$ (the distinct pebbles among $p_{1},\dots,p_{n}$ to the pairs $(a_{i_{j}},b_{i_{j}})$ where $a_{i_{j}}$ is the last element in $s$ pebbled by $p_{i_{j}}$ and $b_{i_{j}}$ is the corresponding element in $f^{*}(s)$). 
 \begin{prop}[{\cite[Proposition 9]{Abramsky2017}}]
 If $f:\pcomonad{k}{A} \longrightarrow B$ is a $\sigma$-morphism, then there exists a strategy in positional form $S_{f}$.
 \begin{proof}
@@ -218,11 +218,11 @@ If $A,B$ are pure $\sigma'$-structures and $f:\pcomonad{k}{A} \rightarrow B$ is 
 The proof is essentially the same as the one given for (\ref{thm:toPositionalFormEF}). 
 \end{proof}
 \begin{cor}[]
-There exists a $\sigma'$-morphism $f:\efcomonad{k}{A} \longrightarrow B$ if and only if for all $\phi \in \exists^{+}\mathcal{L}_{\omega,k}, A \vDash \phi \Rightarrow B \vDash \phi$
+There exists a $\sigma'$-morphism $f:\pcomonad{k}{A} \longrightarrow B$ if and only if for all $\phi \in \exists^{+}\mathcal{L}_{\omega,k}, A \vDash \phi \Rightarrow B \vDash \phi$
 \label{cor:forthOneP}
 \end{cor}
 \begin{cor}
-There exists $\sigma'$-morphisms $f:\efcomonad{k}{A} \longrightarrow B$, $g:\efcomonad{k}{B} \longrightarrow B$ if and only if $\equivL{A}{B}{\exists^{+}\mathcal{L}_{\omega,k}}$. 
+There exists $\sigma'$-morphisms $f:\pcomonad{k}{A} \longrightarrow B$, $g:\pcomonad{k}{B} \longrightarrow A$ if and only if $\equivL{A}{B}{\exists^{+}\mathcal{L}_{\omega,k}}$. 
 \begin{proof}
 Recall definition (\ref{defn:equivLogic}) and apply above corollary (\ref{cor:forthOneEF}) to $f$ and $g$.  
 \end{proof}
@@ -231,7 +231,7 @@ Recall definition (\ref{defn:equivLogic}) and apply above corollary (\ref{cor:fo
 \label{thm:toPositionalFormP}
 \end{thm}
 \subsection{Equivalence $\mathcal{L}^{k}_{\infty,\omega}$}
-The comonad $\pcomonad{k}{}$ also captures equivalence $\equivL{A}{B}{\mathcal{L}^{k}_{\infty,\omega}}$ in the full $k$-variable fragment of infinitary logic. Just as with the EF game, to formalize a winning strategy for Duplicator in the symmetric $k$-pebbling game $\pgameSym{k}{A}{B}$ we need winning strategies for Duplicator in $\pgame{k}{A}{B}$ given by $\sigma'$-morphism $f:\pcomonad{k}{A} \longrightarrow B$, and $\pgame{k}{B}{A}$ given by $\sigma'$-morphism $\pcomonad{k}{B} \longrightarrow A$ that compatible in positional form. Just as with the EF game, we need to define a `swap' monotone function $()^{-}:\Gamma_{k}(A,B) \longrightarrow \Gamma_{k}(B,A)$. Given $\gamma \in \Gamma_{k}(A,B)$, define $\gamma^{-} \in \Gamma_{k}(B,A)$ such that $\gamma^{-}(p) = (b,a)$ iff $\gamma(p) = (a,b)$. 
+The comonad $\pcomonad{k}{}$ also captures equivalence $\equivL{A}{B}{\mathcal{L}^{k}_{\infty,\omega}}$ in the full $k$-variable fragment of infinitary logic. Just as with the EF game, to formalize a winning strategy for Duplicator in the symmetric $k$-pebbling game $\pgameSym{k}{A}{B}$ we need winning strategies for Duplicator in $\pgame{k}{A}{B}$ given by $\sigma'$-morphism $f:\pcomonad{k}{A} \longrightarrow B$, and $\pgame{k}{B}{A}$ given by $\sigma'$-morphism $\pcomonad{k}{B} \longrightarrow A$ that are compatible in positional form. Just as with the EF game, we need to define a `swap' monotone function $()^{-}:\Gamma_{k}(A,B) \longrightarrow \Gamma_{k}(B,A)$. Given $\gamma \in \Gamma_{k}(A,B)$, define $\gamma^{-} \in \Gamma_{k}(B,A)$ such that $\gamma^{-}(p) = (b,a)$ iff $\gamma(p) = (a,b)$. 
 \begin{defn}
 A strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ is \textit{winning for Duplicator in $\pgameSym{k}{A}{B}$} if $S$ is winning for Duplicator in $\pgame{k}{A}{B}$ and $S^{-}$ is winning for Duplicator in $\pgame{k}{B}{A}$. Naturally, we can extend this definition to functions, $f:\pcomonad{k}{A} \longrightarrow B$ is \textit{winning for Duplicator in $\pgameSym{k}{A}{B}$} if $S_{f}$ is winning for Duplicator in $\pgameSym{k}{A}{B}$.
 \end{defn}
@@ -252,7 +252,7 @@ Since for all $\gamma \in S$ is winning for Duplicator in $\pgame{k}{A}{B}$ and 
 \item There exists $f:\pcomonad{k}{A} \longrightarrow B$ winning for Duplicator in $\pgameSym{k}{A}{B}$ 
 \end{enumerate}
 \begin{proof}
-$(1) \Rightarrow (2)$ By proposition (\ref{prop:backForthSyntaxP}), there exists a strategy in positional form $S$ winning for Duplicator in $\pgameSym{k}{A}{B}$. Hence, $S$ winning for Duplicator in $\pgame{k}{A}{B}$ and $S^{-}$ winning for Duplicator in $\pgame{k}{B}{A}$. By theorem (\ref{thm:toPositionalFormP}), there exists $\sigma'$-morphisms $f:\efcomonad{k}{A} \longrightarrow B$, $g:\efcomonad{k}{B} \longrightarrow A$ with $S_{f} = S$, and $S^{-} = S_{g}$. \\ 
+$(1) \Rightarrow (2)$ By proposition (\ref{prop:backForthSyntaxP}), there exists a strategy in positional form $S$ winning for Duplicator in $\pgameSym{k}{A}{B}$. Hence, $S$ winning for Duplicator in $\pgame{k}{A}{B}$ and $S^{-}$ winning for Duplicator in $\pgame{k}{B}{A}$. By theorem (\ref{thm:toPositionalFormP}), there exists $\sigma'$-morphisms $f:\pcomonad{k}{A} \longrightarrow B$, $g:\pcomonad{k}{B} \longrightarrow A$ with $S_{f} = S$, and $S^{-} = S_{g}$. \\ 
 $(2) \Rightarrow (3)$ Straightforward from definition of $f$ winning for Duplicator in $\pgameSym{k}{A}{B}$. \\ 
 $(3) \Rightarrow (1)$ By proposition (\ref{prop:backForthSyntaxP}) with $S_{f}$ witnessing $S$.  
 \end{proof}
@@ -317,7 +317,7 @@ Let $A$ be finite $\sigma$-structure. There is a bijective correspondence betwee
 \item Chordal completions $\mathcal{C}$ of $\mathcal{G}(A)$ with clique number $k$
 \end{enumerate}
 \begin{proof}
-For the $(1) \Rightarrow (2)$ correspondence, suppose $\alpha:A \longrightarrow \pcomonad{k}{A}$ is a coalgebra. Construct a chordal graph $\mathcal{C}$ with vertices being the elements of $A$. By unpacking (\ref{eq:coalgebraLaw}-left), $\alpha$ gives a tree-order on $A$ where $a \leq a' \Leftrightarrow \alpha(a) \sqsubseteq \alpha(a')$. Choose a root for this tree and let $\leq_{\mathcal{C}}$ be the preorder traversal of the $\leq$-tree order. Let there be an edge $(a,a')$ in $\mathcal{C}$ if $\alpha(a) \sqsubseteq \alpha(a')$ or $\alpha(a) \sqsubseteq \alpha(a')$.   
+For the $(1) \Rightarrow (2)$ correspondence, suppose $\alpha:A \longrightarrow \pcomonad{k}{A}$ is a coalgebra. Construct a chordal graph $\mathcal{C}$ with vertices being the elements of $A$. By unpacking (\ref{eq:coalgebraLaw}-left), $\alpha$ gives a tree-order on $A$ where $a \leq a' \Leftrightarrow \alpha(a) \sqsubseteq \alpha(a')$. Choose a root for this tree and let $\leq_{\mathcal{C}}$ be the preorder traversal of the $\leq$-tree order. Let there be an edge $(a,a')$ in $\mathcal{C}$ if $\alpha(a) \sqsubseteq \alpha(a')$ or $\alpha(a') \sqsubseteq \alpha(a)$.   
 It is clear by construction of $\mathcal{C}$, that $\leq_{\mathcal{C}}$ is a perfect elimination ordering and $\mathcal{C}$ is a chordal graph. Suppose $(a,a')$ is an edge in $\mathcal{G}(A)$, then by the definition of Gaifman graph there exists an $R \in \sigma$ such that $a$ and $a'$ appear in a tuple of $R^{A}$. By $\alpha$ a $\sigma$-morphism, $\alpha(a)$ and $\alpha(a')$ appear in a tuple in $R^{\pcomonad{k}{A}}$. By the interpretation of $R$ on $\pcomonad{k}{A}$, $\alpha(a) \sqsubseteq \alpha(a')$ or $\alpha(a') \sqsubseteq \alpha(a)$. Without loss of generality, assume that $\alpha(a) \sqsubseteq \alpha(a')$. Hence, there is edge $(a,a')$ in $\mathcal{C}$. Therefore, $\mathcal{G}(A)$ is subgraph $\mathcal{C}$. Moreover, since $\alpha(a)$, $\alpha(a')$ appear in the same tuple of some $R^{\pcomonad{k}{A}}$, the pebble index of $a$ in $\alpha(a')$ must not occur in the suffix of $\alpha(a)$ in $\alpha(a')$. It follows that there at most $k$ elements adjacent to $a'$ in $\mathcal{C}$ that are $\leq_{\mathcal{C}}$-predecessors of $a'$. Hence, $\mathcal{C}$ is a chordal completion of $\mathcal{G}(A)$ with clique number $k$. \\~\\
 For the $(2) \Rightarrow (1)$ correspondence, suppose $\mathcal{C}$ is a chordal completion of $\mathcal{G}(A)$ with clique number $k$. By chordal graphs, being perfect graphs, every induced subgraph has clique number equal to its chromatic number (i.e. least number of colours for a valid colouring). In particular, the graph $\mathcal{C}$ itself has a $k$-colouring $i:A \longrightarrow [k]$. By the definition of chordal graph (\ref{defn:chordalGraph}), $\mathcal{C}$ has a perfect elimination ordering $<_{\mathcal{C}}$. Define $\alpha(a) = [(i(a_{1}),a_{1}),\dots,(i(a_{n}),a_{n})]$ where $a_{1},\dots,a_{n}$ are the $\leq_{\mathcal{C}}$-predecessors of $a$ (including $a = a_{n}$ itself) adjacent to $a$ in $\mathcal{C}$. Clearly, by definition the counit law (\ref{eq:coalgebraLaw}-right) is satisfied. Since $\leq_{\mathcal{C}}$ is a linear order, the $\leq_{\mathcal{C}}$-predecessors are unique, so the other coalgebra law (\ref{eq:coalgebraLaw}-left) is satisfied.       
 \end{proof}

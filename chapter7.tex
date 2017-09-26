@@ -1,12 +1,12 @@
 \chapter{Conclusion}
 In this dissertation, we constructed a comonad that internalized the Ehrenfreucht-{\Fraisse} game. We showed the unravelling comonad internalized modal bisimulation games. We also discussed a comonad that internalized the pebbling game. To be more precise, we showed that for any signature $\sigma$, we considered structures $A,B$ in the extended signature $\sigma' = \sigma \cup \{I\}$ with $I$ the identity relation such that: 
 \begin{itemize}
-\item $f:\efcomonad{k}{A} \longrightarrow B$, $g:\efcomonad{k}{B} \longrightarrow B$ are $\sigma'$-morphisms iff Duplicator can win in $\efgame{k}{A}{B}$ and $\efgame{k}{A}{B}$ iff $\equivL{A}{B}{\exists^{+}\mathcal{L}_{\omega,k}}$
+\item $f:\efcomonad{k}{A} \longrightarrow B$, $g:\efcomonad{k}{B} \longrightarrow A$ are $\sigma'$-morphisms iff Duplicator can win in $\efgame{k}{A}{B}$ and $\efgame{k}{A}{B}$ iff $\equivL{A}{B}{\exists^{+}\mathcal{L}_{\omega,k}}$
     \begin{itemize}
         \item Diagram (\ref{eq:arrowSym}) commutes with $f,g$ iff Duplicator can win in $\efgameSym{k}{A}{B}$ iff $\equivL{A}{B}{\mathcal{L}_{\omega,k}}$
         \item $f$ is an isomorphism in $\mathcal{K}(\efcomonad{k}{})$ with inverse $g$ iff Duplicator can win $\efgameBij{k}{A}{B}$ iff $\equivL{A}{B}{\mathcal{L}_{\omega,k}(\mathsf{Cnt})}$
     \end{itemize}
-\item $f:\pcomonad{k}{A} \longrightarrow B$, $g:\pcomonad{k}{B} \longrightarrow B$ is a $\sigma'$-morphism iff Duplicator can win in $\pgame{k}{A}{B}$ and $\pgame{k}{A}{B}$ iff $\equivL{A}{B}{\mathcal{L}^{k}_{\infty,\omega}}$
+\item $f:\pcomonad{k}{A} \longrightarrow B$, $g:\pcomonad{k}{B} \longrightarrow A$ is a $\sigma'$-morphism iff Duplicator can win in $\pgame{k}{A}{B}$ and $\pgame{k}{A}{B}$ iff $\equivL{A}{B}{\mathcal{L}^{k}_{\infty,\omega}}$
     \begin{itemize}
         \item Diagram (\ref{eq:arrowSym}) commutes with $f,g$ iff Duplicator can win in $\pgameSym{k}{A}{B}$ iff $\equivL{A}{B}{\mathcal{L}^{k}_{\infty,\omega}}$
         \item $f$ is an isomorphism in $\mathcal{K}(\efcomonad{k}{})$ with inverse $g$ iff Duplicator can win $\pgameBij{k}{A}{B}$ iff $\equivL{A}{B}{\mathcal{L}^{k}_{\infty,\omega}(\mathsf{Cnt})}$

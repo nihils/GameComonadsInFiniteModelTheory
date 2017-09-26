@@ -87,7 +87,7 @@ Hence, the above diagram (\ref{eq:deltaNEF}) commutes.
 \begin{thm}
 The triple $\langle \efcomonad{k}{},\delta,\epsilon \rangle$ is a comonad.
 \begin{proof}
-By proposition (\ref{prop:deltaNEF}) and (\ref{prop:epsilonNEF}), $\delta$ and $\epsilon$ are natural transformation. Hence, $\delta$ and $\epsilon$ are indeed the comultiplication and counit of $\efcomonad{k}{}$. The associative and identity laws remain to be shown. \\
+By proposition (\ref{prop:deltaNEF}) and (\ref{prop:epsilonNEF}), $\delta$ and $\epsilon$ are natural transformations. Hence, $\delta$ and $\epsilon$ are indeed the comultiplication and counit of $\efcomonad{k}{}$. The associative and identity laws remain to be shown. \\
 For associativity, for every $A \in \mathcal{R}(\sigma)$, the following diagram commutes:  
 \begin{equation}
 \bfig \Square[\efcomonad{k}{A}`\efcomonad{k}{\efcomonad{k}{A}}`\efcomonad{k}{\efcomonad{k}{A}}`\efcomonad{k}{\efcomonad{k}{\efcomonad{k}{A}}};\delta_{A}`\delta_{A}`\delta_{\efcomonad{k}{A}}`\efcomonad{k}{\delta_{A}}] \efig 
@@ -285,7 +285,7 @@ Straightforward from theorem (\ref{thm:toPositionalFormEF}) and proposition (\re
 \label{cor:forthOneEF}
 \end{cor}
 \begin{cor}
-There exists $\sigma'$-morphisms $f:\efcomonad{k}{A} \longrightarrow B$, $g:\efcomonad{k}{B} \longrightarrow B$ if and only if $\equivL{A}{B}{\exists^{+}\mathcal{L}_{\omega,k}}$. 
+There exists $\sigma'$-morphisms $f:\efcomonad{k}{A} \longrightarrow B$, $g:\efcomonad{k}{B} \longrightarrow A$ if and only if $\equivL{A}{B}{\exists^{+}\mathcal{L}_{\omega,k}}$. 
 \begin{proof}
 Recall definition (\ref{defn:equivLogic}) and apply above corollary (\ref{cor:forthOneEF}) to $f$ and $g$.  
 \end{proof}
@@ -375,8 +375,8 @@ $f:\efcomonad{k}{A} \longrightarrow B$ an isomorphism in $\mathcal{K}(\efcomonad
 $\Rightarrow$ If $f:\efcomonad{k}{A} \longrightarrow B$ is an isomorphism in $\mathcal{K}(\efcomonad{k}{})$, then there exists a $g:\efcomonad{k}{B} \longrightarrow A$ such that $f \circ_{\mathcal{K}} g = \epsilon_{B}$ and $g \circ_{\mathcal{K}} f = \epsilon_{A}$. Suppose $s \in \efcomonad{k}{A} \cup \{\emptySeq\}$, then we aim to show that $\psi_{s}:A \longrightarrow B$ is bijective. Let $t = f^{*}(s)$ (or $t = \emptySeq$ if $s = \emptySeq$) and define $\phi_{t}:B \longrightarrow A$ by $\phi_{t}(b) = g(t[b])$.   
 \begin{align*}
 \phi_{t} \circ \psi_{s}(a) &= \phi_{t}(f(s[a])) \\
-&= g(t[f(s[a]])) \\
-&= g(f^{*}(s)[f(s[a]])) \\
+&= g(t[f(s[a])]) \\
+&= g(f^{*}(s)[f(s[a])]) \\
 &= g(f^{*}(s[a])) \\
 &= g \circ_{\mathcal{K}} f(s[a]) \\
 &= \epsilon_{A}(s[a]) \\

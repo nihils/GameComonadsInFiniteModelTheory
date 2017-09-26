@@ -94,7 +94,7 @@ Hence, the above diagram (\ref{eq:deltaNM}) commutes.
 \begin{thm}
 The triple $\langle \mcomonad{k}{},\delta,\epsilon \rangle$ is a comonad.
 \begin{proof}
-By proposition (\ref{prop:deltaNM}) and (\ref{prop:epsilonNM}), $\delta$ and $\epsilon$ are natural transformation. Hence, $\delta$ and $\epsilon$ are indeed the comultiplication and counit of $\mcomonad{k}{}$. The associative and identity laws remain to be shown. \\
+By proposition (\ref{prop:deltaNM}) and (\ref{prop:epsilonNM}), $\delta$ and $\epsilon$ are natural transformations. Hence, $\delta$ and $\epsilon$ are indeed the comultiplication and counit of $\mcomonad{k}{}$. The associative and identity laws remain to be shown. \\
 For associativity, for every $A \in \mathcal{R}(\sigma)$, the following diagram commutes:  
 \begin{equation}
 \bfig \Square[\mcomonad{k}{A}`\mcomonad{k}{\mcomonad{k}{A}}`\mcomonad{k}{\mcomonad{k}{A}}`\mcomonad{k}{\mcomonad{k}{\mcomonad{k}{A}}};\delta_{A}`\delta_{A}`\delta_{\mcomonad{k}{A}}`\mcomonad{k}{\delta_{A}}] \efig 
@@ -197,9 +197,9 @@ Hence, $S_{f}$ is reachable.
 \label{prop:fToPosFormM}
 \end{prop}
 \begin{prop}
-Conversely, for every strategy in positional form $S$ there exists a $f:\efcomonad{k}{A} \rightarrow B$ such that $S = S_{f}$
+Conversely, for every strategy in positional form $S$ there exists a $f:\mcomonad{k}{A} \rightarrow B$ such that $S = S_{f}$
 \begin{proof}
-$S_{f} \subseteq S$ The approach is to construct an appropriate $f$. We construct $f$ by recursion, up to $k$, on the length of a play $w \in \efcomonad{k}{A}$. \\ 
+$S_{f} \subseteq S$ The approach is to construct an appropriate $f$. We construct $f$ by recursion, up to $k$, on the length of a play $w \in \mcomonad{k}{A}$. \\ 
 \textit{Base Case:} Suppose $w = [a]$ for $a \in A$. By (\ref{eq:S1st}), there exists a unique $b$ such that $[(a,b)] \in S$. Let $f(w) = b$. \\
 \textit{Recursive Step:} Assume for the recursion, that $f(w)$ is defined for $|w| = n < 2k+1$ and that $\theta_{f}(w) \in S$. Consider $w' = w[i,a]$ for $(\epsilon_{A}(w),a) \in R_{i}$. By (\ref{eq:S2nd}), there exists a unique $b \in B$ such that $\zeta' = \theta_{f}(w)[(a,b)]$. Let $f(w') = b$. \\
 $S \subseteq S_{f}$ We must show that for every $\zeta \in S$, there exists a $w \in \mcomonad{k}{A}$ such that $\zeta = \theta_{f}(w)$. By induction on reachability sequence of $\zeta$ (obtained via \ref{eq:S3rd}). \\

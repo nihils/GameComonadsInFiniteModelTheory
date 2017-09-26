@@ -110,7 +110,7 @@ $\{R_{w}\}$ the relation symbols in signature $\sigma$ with arity $\not= 1$, $i_
 \end{defn}
 For the guarded fragment, we will a the notion of complexity, similar to quantifier rank, called guarded depth. For a guarded formula $\phi(\mathbf{x})$, $\text{gd}(\phi)$ denotes the guarded depth of $\phi$. This is inductively defined as:   
 \begin{eqnarray*}
-\text{gd}(x_{i} = x_{j}) = \text{qd}(R_{i}(x_{i_{1}},\dots,x_{i_{k}})) = 0 \\
+\text{gd}(x_{i} = x_{j}) = \text{gd}(R_{i}(x_{i_{1}},\dots,x_{i_{k}})) = 0 \\
 \text{gd}(\bigvee_{j \in J} \phi_{j}(\mathbf{x})) = \text{gd}(\bigwedge_{j \in J} \phi_{j}(\mathbf{x}))  = \sup_{j \in J} \text{gd}(\phi_{j}(\mathbf{x})) \\
 \text{gd}(\exists \mathbf{y} (R_{w}(\mathbf{x},\mathbf{y}) \wedge \phi(\mathbf{y},\mathbf{x}))) = \text{gd}(\forall \mathbf{y}(R_{w}(\mathbf{x},\mathbf{y}) \rightarrow \phi(\mathbf{y},\mathbf{x}))) = \text{gd}(\phi(\mathbf{y},\mathbf{x})) + 1 
 \end{eqnarray*}
@@ -140,7 +140,7 @@ To prove a property $P$ is not expressible in signature $\sigma$, we need to exh
 Two $\sigma$ structures $A,B$ are \textit{equivalent in logic $\mathcal{L}$}, denoted $\equivL{A}{B}{\mathcal{L}}$ if for all sentences $\phi \in \mathcal{L}$, $A \vDash \phi \Leftrightarrow B \vDash \phi$.  
 \label{defn:equivLogic}
 \end{defn}
-Hence, for a property $P$ to be inexpressible in signature $\sigma$ and logic $\mathcal{L}$, we must find two $\sigma$-structures $A,B$ such that $P(A) = 1$ and $P(B) = 0$ while $\equivL{A}{B}{\mathcal{L}}$. The purpose of ``back-and-forth'' style games in finite and classical model theory is to provide a methodology to prove equivalence in a logic $\mathcal{L}$. In fact, these ``back-and-forth'' style games, conversely, can give a structural definition of a logic. Namely, Rossman's theorem \cite{Rossman2008} states that existential-positive logic over the the finite are the properties closed up to equivalence in the asymmetric Ehrenfreucht-{\Fraisse} game. Modal logic over the finite are the properties that are closed up to equivalence in the bisimulation game \cite{Gradel2014}.   
+Hence, for a property $P$ to be inexpressible in signature $\sigma$ and logic $\mathcal{L}$, we must find two $\sigma$-structures $A,B$ such that $P(A) = 1$ and $P(B) = 0$ while $\equivL{A}{B}{\mathcal{L}}$. The purpose of ``back-and-forth'' style games in finite and classical model theory is to provide a methodology to prove equivalence in a logic $\mathcal{L}$. In fact, these ``back-and-forth'' style games, conversely, can give a structural definition of a logic. Namely, Rossman's theorem \cite{Rossman2008} states that existential-positive logic over the the finite are the properties invariant in the asymmetric Ehrenfreucht-{\Fraisse} game. Modal logic over the finite are the properties that are invariant in the bisimulation game \cite{Gradel2014}.   
 \section{Category Theory}
 Category theory is the general theory of mathematical structures and structure-preserving relationships between theses structures. 
 \subsection{Definitions}
@@ -207,7 +207,7 @@ Suppose $\mathcal{C}$ and $\mathcal{D}$ with functors $F:\mathcal{C} \longrighta
 \subsection{Comonads}
 The primary focus for this dissertation, as the name suggests, is a certain class of endofunctors with ``nice'' algebraic constructions called comonads. Comonads are dual to the notion of monads. Monads are analogous to the algebraic structure called a monoid; a set with an identity and associative binary operation. In fact, monads are monoid objects in the category of endofunctors.
 \begin{defn}
-An endofunctor $\mathbb{F}:\mathcal{C} \longrightarrow \mathcal{C}$ is called \textit{comonad} if there exists natural transformations $\epsilon:\mathbb{F} \longrightarrow id_{\mathcal{C}}$ (called the counit) and $\delta:\mathbb{F} \longrightarrow \mathbb{F} \circ \mathbb{F}$ (called the comultiplication) such that the following diagrams commute for all objects $A \in \mathcal{C}$:
+An endofunctor $\mathbb{F}:\mathcal{C} \longrightarrow \mathcal{C}$ is called \textit{comonad} if there exists natural transformations $\epsilon:\mathbb{F} \longrightarrow \mathsf{id}_{\mathcal{C}}$ (called the counit) and $\delta:\mathbb{F} \longrightarrow \mathbb{F} \circ \mathbb{F}$ (called the comultiplication) such that the following diagrams commute for all objects $A \in \mathcal{C}$:
 \begin{equation}
 \bfig 
     \Square[\mathbb{F}A`\mathbb{F}\mathbb{F}A`\mathbb{F}\mathbb{F}A`\mathbb{F}\mathbb{F}\mathbb{F}A;\delta_{A}`\delta_{A}`\delta_{\mathbb{F}A}`\mathbb{F}{\delta_{A}}] 
@@ -273,7 +273,7 @@ such that
     \begin{equation}
         \epsilon_{A}:\mathbb{F}A \longrightarrow A
     \end{equation}
-    \item For two $\mathcal{C}$-morphisms $f:\mathbb{F}A \longrightarrow B$ and $g:\mathbb{F}B \longrightarrow C$ (i.e. two $\mathcal{K}(F)$ morphisms) we use the comonad structure to compose them to produce a morphism $g \circ_{\mathcal{K}} f:\mathbb{F}A \longrightarrow C$:
+    \item For two $\mathcal{C}$-morphisms $f:\mathbb{F}A \longrightarrow B$ and $g:\mathbb{F}B \longrightarrow C$ (i.e. two $\mathcal{K}(\mathbb{F})$ morphisms) we use the comonad structure to compose them to produce a morphism $g \circ_{\mathcal{K}} f:\mathbb{F}A \longrightarrow C$:
     \begin{equation} 
         \mathbb{F}A \xlongrightarrow{\delta_{A}} \mathbb{F}\mathbb{F}A \xlongrightarrow{\mathbb{F}f} \mathbb{F}B \xlongrightarrow{g} C 
     \label{eq:coextension}
