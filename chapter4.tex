@@ -208,7 +208,7 @@ This proof is more complicated than (\ref{prop:posFormToFEF}). Namely, $\pcomona
 Let $R(\gamma)$ denote the image of $\gamma$ in $A \times B$.
 \begin{defn}
 A position $\gamma$ is \textit{winning for Duplicator in $\pgame{k}{A}{B}$} if $R(\gamma)$ is a partial $\sigma$-morphism from $A$ to $B$.  
-Naturally, we can extend the definition to say that a strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ is \textit{winning for Duplicator in $\pgame{k}{A}{B}$} if for all $\gamma \in S$, $\gamma$ is winning for Duplicator. Function $f:\efcomonad{k}{A} \longrightarrow B$ is \textit{winning for Duplicator in $\pgame{k}{A}{B}$} if $S_{f}$ is winning for Duplicator in $\pgame{k}{A}{B}$.
+Naturally, we can extend the definition to say that a strategy in positional form $S \subseteq \Gamma_{k}(A,B)$ is \textit{winning for Duplicator in $\pgame{k}{A}{B}$} if for all $\gamma \in S$, $\gamma$ is winning for Duplicator. Function $f:\pcomonad{k}{A} \longrightarrow B$ is \textit{winning for Duplicator in $\pgame{k}{A}{B}$} if $S_{f}$ is winning for Duplicator in $\pgame{k}{A}{B}$.
 \end{defn}
 Just as with the EF game, we have to lift $\sigma$-structures to expanded signature $\sigma' = \sigma \cup \{I\}$ with $I$ a binary relation. Recall that $\sigma'$-structure $A$ is pure if $I$ is just the identity relation. Note that if $A$ is a pure $\sigma'$-structure, then by the definition of $\pcomonad{k}{A}$ as a $\sigma'$-structure, $\pcomonad{k}{A}$ is not a pure $\sigma'$-structure. However, two plays are $I$-related if the same pebble is not on distinct elements. This ensures that $S_{f}$ contains well-defined partial functions.
 \begin{thm}[{\cite[Proposition 10]{Abramsky2017}}]
@@ -218,13 +218,13 @@ If $A,B$ are pure $\sigma'$-structures and $f:\pcomonad{k}{A} \rightarrow B$ is 
 The proof is essentially the same as the one given for (\ref{thm:toPositionalFormEF}). 
 \end{proof}
 \begin{cor}[]
-There exists a $\sigma'$-morphism $f:\pcomonad{k}{A} \longrightarrow B$ if and only if for all $\phi \in \exists^{+}\mathcal{L}_{\omega,k}, A \vDash \phi \Rightarrow B \vDash \phi$
+There exists a $\sigma'$-morphism $f:\pcomonad{k}{A} \longrightarrow B$ if and only if for all $\phi \in \exists^{+}\mathcal{L}^{k}_{\infty,\omega}, A \vDash \phi \Rightarrow B \vDash \phi$
 \label{cor:forthOneP}
 \end{cor}
 \begin{cor}
-There exists $\sigma'$-morphisms $f:\pcomonad{k}{A} \longrightarrow B$, $g:\pcomonad{k}{B} \longrightarrow A$ if and only if $\equivL{A}{B}{\exists^{+}\mathcal{L}_{\omega,k}}$. 
+There exists $\sigma'$-morphisms $f:\pcomonad{k}{A} \longrightarrow B$, $g:\pcomonad{k}{B} \longrightarrow A$ if and only if $\equivL{A}{B}{\exists^{+}\mathcal{L}^{k}_{\infty,\omega}}$. 
 \begin{proof}
-Recall definition (\ref{defn:equivLogic}) and apply above corollary (\ref{cor:forthOneEF}) to $f$ and $g$.  
+Recall definition (\ref{defn:equivLogic}) and apply above corollary (\ref{cor:forthOneP}) to $f$ and $g$.  
 \end{proof}
 \label{cor:forthP}
 \end{cor}
@@ -286,7 +286,7 @@ $f:\pcomonad{k}{A} \longrightarrow B$ is an isomorphism in $\mathcal{K}(\pcomona
 The proof is essentially the same as in (\ref{prop:bijEF}). 
 \end{proof}
 \begin{cor}
-$A,B$ are isomorphic in $\mathcal{K}(\efcomonad{k}{})$ if and only if $\equivL{A}{B}{\mathcal{L}_{\infty,k}(\mathsf{Cnt})}$.
+$A,B$ are isomorphic in $\mathcal{K}(\pcomonad{k}{})$ if and only if $\equivL{A}{B}{\mathcal{L}^{k}_{\infty,\omega}(\mathsf{Cnt})}$.
 \begin{proof}
 Follows from (\ref{prop:bijToSyntaxP}) and (\ref{prop:bijP})
 \end{proof}
